@@ -143,120 +143,126 @@ export default function ContractsPage() {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 15 }}
+      initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4 }}
-      className="space-y-6 max-w-6xl mx-auto"
+      transition={{ duration: 0.3 }}
+      className="space-y-6 max-w-6xl mx-auto font-pixel"
     >
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <div className="flex items-center gap-2 mb-1">
-            <h1 className="text-2xl font-bold text-white">Contract Intelligence</h1>
-            <span className="text-xs bg-red-500/20 text-red-400 px-2.5 py-0.5 rounded-full border border-red-500/30 font-medium">
-              AI Expiry Monitor
+          <div className="flex items-center gap-3">
+            <ShieldAlert className="w-6 h-6 text-white stroke-[2.5]" />
+            <h1 className="text-xl font-pixel-head font-bold text-white font-bloom">CONTRACT INTELLIGENCE</h1>
+            <span className="text-xs font-pixel-code font-bold badge-muted-red px-2.5 py-0.5 uppercase">
+              AI EXPIRY MONITOR
             </span>
           </div>
-          <p className="text-slate-400 text-sm">
-            Autonomous AI tracking for contract deadlines, SLA terms, and renewal notices
+          <p className="text-zinc-400 text-xs font-pixel-code mt-1 uppercase">
+            AUTONOMOUS AI TRACKING FOR CONTRACT DEADLINES, SLA TERMS, AND RENEWAL NOTICES
           </p>
         </div>
-        <button
+        <motion.button
+          whileHover={{ scale: 1.03 }}
           onClick={() => toast.info('New contract intake form opened')}
-          className="flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-sky-500 to-indigo-600 hover:from-sky-600 hover:to-indigo-700 text-white rounded-xl text-sm font-semibold transition-all shadow-lg cursor-pointer"
+          className="pixel-btn-white flex items-center gap-2"
         >
-          <Plus className="w-4 h-4" />
-          Add Contract
-        </button>
+          <Plus className="w-4 h-4 text-black stroke-[3]" />
+          <span>ADD CONTRACT</span>
+        </motion.button>
       </div>
 
       {/* Critical Alert Banner */}
       {expiringCount > 0 && (
         <motion.div
-          initial={{ scale: 0.98, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          className="bg-gradient-to-r from-red-500/20 via-amber-500/15 to-transparent border border-red-500/30 rounded-2xl p-5 flex items-start gap-4 shadow-xl"
+          whileHover={{ scale: 1.01 }}
+          className="pixel-box p-5 animate-pixel-float flex items-start gap-4"
         >
-          <div className="w-10 h-10 rounded-xl bg-red-500/20 flex items-center justify-center flex-shrink-0">
-            <ShieldAlert className="w-6 h-6 text-red-400 animate-pulse" />
-          </div>
+          <ShieldAlert className="w-7 h-7 text-[#fca5a5] flex-shrink-0 stroke-[2.5] mt-1" />
           <div className="flex-1">
             <div className="flex items-center gap-2">
-              <h3 className="font-bold text-white text-sm">
-                AI Expiry Alert: {expiringCount} Contract{expiringCount > 1 ? 's' : ''} Expiring Soon!
+              <h3 className="font-pixel-head text-xs font-bold text-white font-bloom-red">
+                AI EXPIRY ALERT: {expiringCount} CONTRACT{expiringCount > 1 ? 'S' : ''} EXPIRING SOON!
               </h3>
-              <span className="text-[10px] bg-red-500/30 text-red-300 px-2 py-0.5 rounded-full font-bold">
+              <span className="text-[10px] font-pixel-code font-bold badge-muted-red px-2 py-0.5">
                 ACTION REQUIRED
               </span>
             </div>
-            <p className="text-xs text-slate-300 mt-1 leading-relaxed">
-              KMRL AI Contract Intelligence detected contracts nearing expiration. Renewals should be initiated immediately to prevent operational disruptions or financial penalties.
+            <p className="text-xs text-zinc-300 mt-1 font-pixel leading-relaxed">
+              KMRL AI CONTRACT INTELLIGENCE DETECTED CONTRACTS NEARING EXPIRATION. RENEWALS SHOULD BE INITIATED IMMEDIATELY TO PREVENT DISRUPTIONS.
             </p>
           </div>
           <button
             onClick={() => setFilter('expiring')}
-            className="px-4 py-2 bg-red-500/30 hover:bg-red-500/40 text-red-200 border border-red-500/40 rounded-xl text-xs font-semibold transition-colors flex-shrink-0 cursor-pointer"
+            className="pixel-btn-dark text-xs flex-shrink-0"
           >
-            Review Expiring ({expiringCount})
+            REVIEW EXPIRING ({expiringCount})
           </button>
         </motion.div>
       )}
 
       {/* KPI Cards */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <motion.div whileHover={{ y: -2 }} className="bg-[#1f2937] border border-white/[0.06] rounded-2xl p-4">
-          <div className="flex items-center justify-between mb-2">
-            <span className="text-xs text-slate-400">Total Monitored</span>
-            <FileText className="w-4 h-4 text-sky-400" />
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <motion.div whileHover={{ scale: 1.03, y: -4 }} className="pixel-box p-5 animate-pixel-float cursor-pointer">
+          <div className="flex items-center justify-between mb-3 font-pixel-code">
+            <span className="text-xs font-bold text-zinc-300 uppercase">MONITORED</span>
+            <FileText className="w-4 h-4 text-white stroke-[2.5]" />
           </div>
-          <p className="text-2xl font-bold text-white">{contracts.length}</p>
-          <p className="text-[11px] text-slate-500 mt-1">Active vendor agreements</p>
+          <p className="text-3xl font-pixel-head font-extrabold text-white font-bloom">{contracts.length}</p>
+          <p className="text-[10px] font-pixel-code text-zinc-400 mt-1 uppercase">ACTIVE VENDOR SLAS</p>
         </motion.div>
 
-        <motion.div whileHover={{ y: -2 }} className="bg-[#1f2937] border border-red-500/20 rounded-2xl p-4">
-          <div className="flex items-center justify-between mb-2">
-            <span className="text-xs text-red-400 font-medium">Expiring &lt; 60 Days</span>
-            <AlertTriangle className="w-4 h-4 text-red-400" />
+        <motion.div whileHover={{ scale: 1.03, y: -4 }} className="pixel-box p-5 animate-pixel-float float-delay-1 cursor-pointer">
+          <div className="flex items-center justify-between mb-3 font-pixel-code">
+            <span className="text-xs font-bold text-[#fca5a5] uppercase">EXPIRING &lt; 60 DAYS</span>
+            <AlertTriangle className="w-4 h-4 text-[#fca5a5] stroke-[2.5]" />
           </div>
-          <p className="text-2xl font-bold text-red-400">{expiringCount}</p>
-          <p className="text-[11px] text-red-300/70 mt-1">Requires renewal action</p>
+          <p className="text-3xl font-pixel-head font-extrabold text-[#fca5a5] font-bloom-red">{expiringCount}</p>
+          <p className="text-[10px] font-pixel-code text-zinc-400 mt-1 uppercase">REQUIRES RENEWAL</p>
         </motion.div>
 
-        <motion.div whileHover={{ y: -2 }} className="bg-[#1f2937] border border-white/[0.06] rounded-2xl p-4">
-          <div className="flex items-center justify-between mb-2">
-            <span className="text-xs text-slate-400">Total Portfolio Value</span>
-            <Building2 className="w-4 h-4 text-green-400" />
+        <motion.div whileHover={{ scale: 1.03, y: -4 }} className="pixel-box p-5 animate-pixel-float float-delay-2 cursor-pointer">
+          <div className="flex items-center justify-between mb-3 font-pixel-code">
+            <span className="text-xs font-bold text-zinc-300 uppercase">PORTFOLIO VALUE</span>
+            <Building2 className="w-4 h-4 text-white stroke-[2.5]" />
           </div>
-          <p className="text-2xl font-bold text-white">₹ 95.8 Cr</p>
-          <p className="text-[11px] text-slate-500 mt-1">Under active management</p>
+          <p className="text-3xl font-pixel-head font-extrabold text-white font-bloom">₹ 95.8 Cr</p>
+          <p className="text-[10px] font-pixel-code text-zinc-400 mt-1 uppercase">ACTIVE MANAGEMENT</p>
         </motion.div>
 
-        <motion.div whileHover={{ y: -2 }} className="bg-[#1f2937] border border-white/[0.06] rounded-2xl p-4">
-          <div className="flex items-center justify-between mb-2">
-            <span className="text-xs text-slate-400">AI Monitoring Status</span>
-            <Sparkles className="w-4 h-4 text-violet-400" />
+        <motion.div whileHover={{ scale: 1.03, y: -4 }} className="pixel-box p-5 animate-pixel-float float-delay-3 cursor-pointer">
+          <div className="flex items-center justify-between mb-3 font-pixel-code">
+            <span className="text-xs font-bold text-[#6ee7b7] uppercase">AI MONITORING</span>
+            <Sparkles className="w-4 h-4 text-[#6ee7b7] stroke-[2.5]" />
           </div>
-          <p className="text-2xl font-bold text-green-400">100%</p>
-          <p className="text-[11px] text-slate-500 mt-1">Continuous deadline check</p>
+          <p className="text-3xl font-pixel-head font-extrabold text-[#6ee7b7] font-bloom-green">100%</p>
+          <p className="text-[10px] font-pixel-code text-zinc-400 mt-1 uppercase">CONTINUOUS DEADLINE CHECK</p>
         </motion.div>
       </div>
 
       {/* Filter Tabs & Search */}
-      <div className="flex items-center justify-between gap-4 flex-wrap">
+      <div className="flex items-center justify-between gap-4 flex-wrap font-pixel-code">
         <div className="flex gap-2">
           {(['all', 'expiring', 'active'] as const).map((f) => (
             <button
               key={f}
               onClick={() => setFilter(f)}
               className={cn(
-                'px-4 py-2 rounded-xl text-xs font-semibold transition-all border capitalize cursor-pointer',
+                'px-3 py-1.5 border text-xs font-bold uppercase transition-all flex items-center gap-1.5',
                 filter === f
-                  ? 'bg-sky-500/15 text-sky-400 border-sky-500/30'
-                  : 'bg-white/[0.03] text-slate-400 border-white/[0.06] hover:text-white'
+                  ? f === 'expiring'
+                    ? 'pixel-box-pink text-[#f472b6] font-bloom-pink border-[#f472b6]'
+                    : 'bg-white text-black border-white shadow-[2px_2px_0px_0px_#ffffff]'
+                  : f === 'expiring'
+                  ? 'badge-muted-pink font-bloom-pink hover:border-[#f472b6]'
+                  : 'bg-black text-zinc-400 border-zinc-800 hover:border-white hover:text-white'
               )}
             >
-              {f === 'expiring' ? '⚠️ Expiring Soon' : f}
-              <span className="ml-1.5 text-[10px] bg-white/10 px-1.5 py-0.5 rounded-full">
+              <span>{f === 'expiring' ? 'EXPIRING SOON' : f}</span>
+              <span className={cn(
+                'text-[10px] px-1.5 border font-bold',
+                f === 'expiring' ? 'bg-black/50 text-[#f472b6] border-[#f472b6]/40' : 'bg-black text-zinc-300 border-zinc-700'
+              )}>
                 {f === 'all'
                   ? contracts.length
                   : f === 'expiring'
@@ -267,85 +273,85 @@ export default function ContractsPage() {
           ))}
         </div>
 
-        <div className="relative flex-1 max-w-xs">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-slate-500" />
+        <div className="relative flex-1 max-w-xs font-pixel">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-zinc-400 stroke-[2.5]" />
           <input
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            placeholder="Search by vendor, contract title..."
-            className="w-full pl-9 pr-4 py-2 bg-white/[0.04] border border-white/10 rounded-xl text-xs text-white placeholder-slate-500 focus:outline-none focus:border-sky-500/50"
+            placeholder="SEARCH VENDOR, TITLE..."
+            className="w-full pl-9 pr-4 py-2 bg-black border-2 border-zinc-700 text-xs font-pixel text-white placeholder-zinc-500 focus:outline-none focus:border-white uppercase"
           />
         </div>
       </div>
 
       {/* Contract Table */}
-      <div className="bg-[#1f2937]/80 border border-white/[0.06] rounded-2xl overflow-hidden shadow-xl">
+      <div className="pixel-box overflow-hidden">
         <div className="overflow-x-auto">
-          <table className="w-full text-left">
+          <table className="w-full text-left font-pixel">
             <thead>
-              <tr className="border-b border-white/[0.06] text-xs font-medium text-slate-400 uppercase tracking-wide">
-                <th className="px-5 py-4">Contract Title & Vendor</th>
-                <th className="px-4 py-4">Department</th>
-                <th className="px-4 py-4">Value</th>
-                <th className="px-4 py-4">Expiry Date</th>
-                <th className="px-4 py-4">Days Left</th>
-                <th className="px-4 py-4">AI Risk</th>
-                <th className="px-4 py-4 text-right">Actions</th>
+              <tr className="border-b-2 border-[#27272a] bg-black font-pixel-head text-xs font-bold text-zinc-400 uppercase tracking-wider">
+                <th className="px-5 py-4">CONTRACT TITLE & VENDOR</th>
+                <th className="px-4 py-4">DEPARTMENT</th>
+                <th className="px-4 py-4">VALUE</th>
+                <th className="px-4 py-4">EXPIRY DATE</th>
+                <th className="px-4 py-4">DAYS LEFT</th>
+                <th className="px-4 py-4">AI RISK</th>
+                <th className="px-4 py-4 text-right">ACTIONS</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-white/[0.04] text-sm">
+            <tbody className="divide-y-2 divide-[#27272a]">
               {filteredContracts.map((c) => (
                 <motion.tr
                   key={c.id}
-                  whileHover={{ backgroundColor: 'rgba(255,255,255,0.03)' }}
+                  whileHover={{ backgroundColor: 'rgba(255,255,255,0.04)' }}
                   className="transition-colors cursor-pointer"
                   onClick={() => setSelectedContract(c)}
                 >
                   <td className="px-5 py-4">
                     <div>
-                      <p className="font-semibold text-white group-hover:text-sky-300 text-sm">
+                      <p className="font-pixel-head font-bold text-white text-xs group-hover:text-[#6ee7b7] transition-colors font-bloom-subtle">
                         {c.title}
                       </p>
-                      <p className="text-xs text-slate-400 mt-0.5 flex items-center gap-1">
-                        <Building2 className="w-3 h-3 text-slate-500" /> {c.vendor}
+                      <p className="text-xs font-pixel-code text-zinc-400 mt-0.5 flex items-center gap-1 uppercase">
+                        <Building2 className="w-3 h-3 text-zinc-400 stroke-[2]" /> {c.vendor}
                       </p>
                     </div>
                   </td>
                   <td className="px-4 py-4">
-                    <span className="text-xs text-slate-300 bg-white/[0.05] px-2.5 py-1 rounded-lg">
+                    <span className="text-xs font-pixel-code text-white bg-black border border-zinc-700 px-2 py-0.5 uppercase">
                       {c.department}
                     </span>
                   </td>
-                  <td className="px-4 py-4 font-medium text-white text-xs whitespace-nowrap">
+                  <td className="px-4 py-4 font-pixel-code font-bold text-white text-xs whitespace-nowrap">
                     {c.contractValue}
                   </td>
-                  <td className="px-4 py-4 text-xs text-slate-300 whitespace-nowrap">
+                  <td className="px-4 py-4 text-xs font-pixel-code text-zinc-300 whitespace-nowrap">
                     {formatDate(c.expiryDate)}
                   </td>
-                  <td className="px-4 py-4 whitespace-nowrap">
+                  <td className="px-4 py-4 whitespace-nowrap font-pixel-code">
                     <span
                       className={cn(
-                        'px-2.5 py-1 rounded-full text-xs font-bold border flex items-center gap-1 w-fit',
+                        'px-2.5 py-1 text-xs font-bold border uppercase flex items-center gap-1 w-fit',
                         c.daysRemaining <= 14
-                          ? 'bg-red-500/20 text-red-400 border-red-500/30 animate-pulse'
+                          ? 'badge-muted-red font-bloom-red animate-pulse'
                           : c.daysRemaining <= 60
-                          ? 'bg-amber-500/20 text-amber-400 border-amber-500/30'
-                          : 'bg-green-500/20 text-green-400 border-green-500/30'
+                          ? 'badge-muted-amber font-bloom-amber'
+                          : 'badge-muted-green font-bloom-green'
                       )}
                     >
-                      <Clock className="w-3 h-3" />
-                      {c.daysRemaining} days left
+                      <Clock className="w-3.5 h-3.5 stroke-[2.5]" />
+                      {c.daysRemaining} DAYS LEFT
                     </span>
                   </td>
-                  <td className="px-4 py-4">
+                  <td className="px-4 py-4 font-pixel-code">
                     <span
                       className={cn(
-                        'text-[10px] px-2 py-0.5 rounded-full font-bold uppercase border',
+                        'text-[10px] px-2 py-0.5 font-bold uppercase border',
                         c.riskScore === 'critical'
-                          ? 'bg-red-500/20 text-red-400 border-red-500/30'
+                          ? 'badge-muted-red font-bloom-red'
                           : c.riskScore === 'high'
-                          ? 'bg-orange-500/20 text-orange-400 border-orange-500/30'
-                          : 'bg-green-500/20 text-green-400 border-green-500/30'
+                          ? 'badge-muted-amber font-bloom-amber'
+                          : 'badge-muted-green font-bloom-green'
                       )}
                     >
                       {c.riskScore}
@@ -358,13 +364,11 @@ export default function ContractsPage() {
                         handleRenew(c);
                       }}
                       className={cn(
-                        'px-3 py-1.5 rounded-xl text-xs font-semibold transition-all border cursor-pointer',
-                        c.status === 'under_renewal'
-                          ? 'bg-violet-500/20 text-violet-300 border-violet-500/30'
-                          : 'bg-sky-500/15 hover:bg-sky-500/25 text-sky-400 border-sky-500/30'
+                        'pixel-btn-white text-xs',
+                        c.status === 'under_renewal' && 'bg-black text-white border-zinc-700'
                       )}
                     >
-                      {c.status === 'under_renewal' ? 'Renewal Pending' : 'Initiate Renewal'}
+                      {c.status === 'under_renewal' ? 'PENDING' : 'RENEW'}
                     </button>
                   </td>
                 </motion.tr>
@@ -374,60 +378,55 @@ export default function ContractsPage() {
         </div>
       </div>
 
-      {/* Contract AI Inspection Drawer / Modal */}
+      {/* Contract AI Inspection Modal */}
       <AnimatePresence>
         {selectedContract && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4"
-          >
+          <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4 font-pixel">
             <motion.div
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
-              className="bg-[#1f2937] border border-white/10 rounded-2xl p-6 w-full max-w-xl shadow-2xl space-y-5"
+              className="pixel-box p-6 w-full max-w-xl space-y-5 bg-black border-2 border-white"
             >
               <div className="flex items-start justify-between">
                 <div>
-                  <span className="text-xs text-sky-400 font-mono">CONTRACT ID: {selectedContract.id}</span>
-                  <h3 className="font-bold text-white text-lg mt-1">{selectedContract.title}</h3>
-                  <p className="text-xs text-slate-400">{selectedContract.vendor}</p>
+                  <span className="text-xs font-pixel-code text-zinc-400 uppercase">CONTRACT ID: {selectedContract.id}</span>
+                  <h3 className="font-pixel-head font-bold text-white text-sm font-bloom mt-1">{selectedContract.title}</h3>
+                  <p className="text-xs font-pixel-code text-zinc-400 uppercase">{selectedContract.vendor}</p>
                 </div>
                 <button
                   onClick={() => setSelectedContract(null)}
-                  className="text-slate-500 hover:text-white cursor-pointer"
+                  className="text-zinc-400 hover:text-white"
                 >
-                  <X className="w-5 h-5" />
+                  <X className="w-5 h-5 stroke-[2.5]" />
                 </button>
               </div>
 
-              <div className="grid grid-cols-2 gap-3 bg-black/30 p-4 rounded-xl border border-white/[0.06] text-xs">
+              <div className="grid grid-cols-2 gap-3 bg-zinc-900 p-4 border border-zinc-700 text-xs font-pixel-code">
                 <div>
-                  <span className="text-slate-500">Department</span>
-                  <p className="font-semibold text-white mt-0.5">{selectedContract.department}</p>
+                  <span className="text-zinc-400 uppercase">Department</span>
+                  <p className="font-bold text-white uppercase mt-0.5">{selectedContract.department}</p>
                 </div>
                 <div>
-                  <span className="text-slate-500">Contract Value</span>
-                  <p className="font-semibold text-white mt-0.5">{selectedContract.contractValue}</p>
+                  <span className="text-zinc-400 uppercase">Contract Value</span>
+                  <p className="font-bold text-white mt-0.5">{selectedContract.contractValue}</p>
                 </div>
                 <div>
-                  <span className="text-slate-500">Start Date</span>
-                  <p className="font-semibold text-white mt-0.5">{formatDate(selectedContract.startDate)}</p>
+                  <span className="text-zinc-400 uppercase">Start Date</span>
+                  <p className="font-bold text-white mt-0.5">{formatDate(selectedContract.startDate)}</p>
                 </div>
                 <div>
-                  <span className="text-slate-500">Expiry Date</span>
-                  <p className="font-semibold text-red-400 mt-0.5">{formatDate(selectedContract.expiryDate)}</p>
+                  <span className="text-zinc-400 uppercase">Expiry Date</span>
+                  <p className="font-bold text-[#fca5a5] font-bloom-red mt-0.5">{formatDate(selectedContract.expiryDate)}</p>
                 </div>
               </div>
 
-              <div className="bg-gradient-to-br from-violet-500/10 to-indigo-500/5 p-4 rounded-xl border border-violet-500/20 space-y-2">
-                <div className="flex items-center gap-2">
-                  <Sparkles className="w-4 h-4 text-violet-400" />
-                  <h4 className="font-semibold text-white text-xs">AI Extracted Key Clause</h4>
+              <div className="pixel-box p-4 space-y-2 bg-black border-2 border-zinc-700">
+                <div className="flex items-center gap-2 font-pixel-head">
+                  <Sparkles className="w-4 h-4 text-white stroke-[2.5]" />
+                  <h4 className="font-bold text-white text-xs font-bloom">AI EXTRACTED KEY CLAUSE</h4>
                 </div>
-                <p className="text-xs text-slate-300 leading-relaxed font-mono">
+                <p className="text-xs text-zinc-300 leading-relaxed font-pixel-code">
                   "{selectedContract.keyClause}"
                 </p>
               </div>
@@ -435,22 +434,22 @@ export default function ContractsPage() {
               <div className="flex gap-3">
                 <button
                   onClick={() => setSelectedContract(null)}
-                  className="flex-1 py-2.5 rounded-xl border border-white/10 text-slate-400 text-xs font-medium cursor-pointer"
+                  className="pixel-btn-dark flex-1"
                 >
-                  Close
+                  CLOSE
                 </button>
                 <button
                   onClick={() => {
                     handleRenew(selectedContract);
                     setSelectedContract(null);
                   }}
-                  className="flex-1 py-2.5 rounded-xl bg-gradient-to-r from-sky-500 to-indigo-600 text-white text-xs font-semibold cursor-pointer"
+                  className="pixel-btn-white flex-1"
                 >
-                  Initiate Contract Extension
+                  INITIATE EXTENSION
                 </button>
               </div>
             </motion.div>
-          </motion.div>
+          </div>
         )}
       </AnimatePresence>
     </motion.div>

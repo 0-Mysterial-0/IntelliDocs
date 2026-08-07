@@ -23,6 +23,7 @@ import DepartmentsPage from '@/pages/departments/DepartmentsPage';
 import NotificationsPage from '@/pages/notifications/NotificationsPage';
 import SettingsPage from '@/pages/settings/SettingsPage';
 import ContractsPage from '@/pages/contracts/ContractsPage';
+import AgencyShowcasePage from '@/pages/agency/AgencyShowcasePage';
 
 // Error Boundary Class
 interface ErrorBoundaryProps {
@@ -117,8 +118,9 @@ function App() {
         <BrowserRouter>
           <Suspense fallback={<PageLoader />}>
             <Routes>
-              {/* Public routes */}
+              {/* Public & Showcase routes */}
               <Route path="/login" element={<LoginPage />} />
+              <Route path="/agency" element={<AgencyShowcasePage />} />
 
               {/* Protected routes */}
               <Route

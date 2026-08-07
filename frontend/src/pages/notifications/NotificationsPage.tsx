@@ -1,36 +1,27 @@
 import { useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { Bell, CheckCircle, Upload, FileText, AlertTriangle, Info, X, Check } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Bell, CheckCircle, Upload, FileText, AlertTriangle, Info, X, Check, Sparkles } from 'lucide-react';
 import { cn, formatRelativeTime } from '@/lib/utils';
 import { notificationsApi } from '@/lib/api';
 import { toast } from 'sonner';
 
 const MOCK_NOTIFICATIONS = [
-  { id: '1', type: 'upload_complete', title: 'Document Uploaded', message: 'Safety_Inspection_Q1_2024.pdf has been uploaded and OCR processing is complete.', is_read: false, created_at: new Date(Date.now() - 5 * 60000).toISOString() },
-  { id: '2', type: 'approval_request', title: 'Approval Requested', message: 'Arun Kumar has requested your approval for Track Inspection Report - Blue Line.', is_read: false, created_at: new Date(Date.now() - 30 * 60000).toISOString() },
-  { id: '3', type: 'ai_complete', title: 'AI Processing Complete', message: 'AI summarization complete for Tender Document - Signal System Upgrade.', is_read: false, created_at: new Date(Date.now() - 2 * 3600000).toISOString() },
-  { id: '4', type: 'duplicate_detected', title: 'Duplicate Detected', message: 'Possible duplicate found: Revenue_Report_Q2.pdf matches an existing document (92% similarity).', is_read: false, created_at: new Date(Date.now() - 5 * 3600000).toISOString() },
-  { id: '5', type: 'system_alert', title: 'Storage Alert', message: 'Storage usage has reached 75% (52 GB of 100 GB). Consider archiving older documents.', is_read: true, created_at: new Date(Date.now() - 86400000).toISOString() },
-  { id: '6', type: 'approval_request', title: 'Document Approved', message: 'Rajan Menon approved Financial Statement March 2024.', is_read: true, created_at: new Date(Date.now() - 2 * 86400000).toISOString() },
+  { id: '1', type: 'upload_complete', title: 'DOCUMENT UPLOADED', message: 'SAFETY_INSPECTION_Q1_2024.PDF HAS BEEN UPLOADED AND EASYOCR PROCESSING IS COMPLETE.', is_read: false, created_at: new Date(Date.now() - 5 * 60000).toISOString() },
+  { id: '2', type: 'approval_request', title: 'APPROVAL REQUESTED', message: 'ARUN KUMAR HAS REQUESTED YOUR APPROVAL FOR TRACK INSPECTION REPORT - BLUE LINE.', is_read: false, created_at: new Date(Date.now() - 30 * 60000).toISOString() },
+  { id: '3', type: 'ai_complete', title: 'AI PROCESSING COMPLETE', message: 'AI SUMMARIZATION COMPLETE FOR TENDER DOCUMENT - SIGNAL SYSTEM UPGRADE.', is_read: false, created_at: new Date(Date.now() - 2 * 3600000).toISOString() },
+  { id: '4', type: 'duplicate_detected', title: 'DUPLICATE DETECTED', message: 'POSSIBLE DUPLICATE FOUND: REVENUE_REPORT_Q2.PDF MATCHES AN EXISTING DOCUMENT (92% SIMILARITY).', is_read: false, created_at: new Date(Date.now() - 5 * 3600000).toISOString() },
+  { id: '5', type: 'system_alert', title: 'STORAGE ALERT', message: 'STORAGE USAGE HAS REACHED 75% (52 GB OF 100 GB). CONSIDER ARCHIVING OLDER DOCUMENTS.', is_read: true, created_at: new Date(Date.now() - 86400000).toISOString() },
+  { id: '6', type: 'approval_request', title: 'DOCUMENT APPROVED', message: 'RAJAN MENON APPROVED FINANCIAL STATEMENT MARCH 2024.', is_read: true, created_at: new Date(Date.now() - 2 * 86400000).toISOString() },
 ];
 
 function NotifIcon({ type }: { type: string }) {
-  const props = { className: 'w-5 h-5' };
-  if (type === 'upload_complete') return <Upload {...props} className="w-5 h-5 text-sky-400" />;
-  if (type === 'approval_request') return <CheckCircle {...props} className="w-5 h-5 text-green-400" />;
-  if (type === 'ai_complete') return <FileText {...props} className="w-5 h-5 text-violet-400" />;
-  if (type === 'duplicate_detected') return <AlertTriangle {...props} className="w-5 h-5 text-amber-400" />;
-  if (type === 'system_alert') return <AlertTriangle {...props} className="w-5 h-5 text-red-400" />;
-  return <Info {...props} className="w-5 h-5 text-slate-400" />;
+  if (type === 'upload_complete') return <Upload className="w-5 h-5 text-white stroke-[2.5]" />;
+  if (type === 'approval_request') return <CheckCircle className="w-5 h-5 text-[#f472b6] stroke-[2.5]" />;
+  if (type === 'ai_complete') return <FileText className="w-5 h-5 text-white stroke-[2.5]" />;
+  if (type === 'duplicate_detected') return <AlertTriangle className="w-5 h-5 text-[#fde047] stroke-[2.5]" />;
+  if (type === 'system_alert') return <AlertTriangle className="w-5 h-5 text-[#fca5a5] stroke-[2.5]" />;
+  return <Info className="w-5 h-5 text-zinc-400 stroke-[2.5]" />;
 }
-
-const iconBg: Record<string, string> = {
-  upload_complete: 'bg-sky-500/10',
-  approval_request: 'bg-green-500/10',
-  ai_complete: 'bg-violet-500/10',
-  duplicate_detected: 'bg-amber-500/10',
-  system_alert: 'bg-red-500/10',
-};
 
 export default function NotificationsPage() {
   const [notifications, setNotifications] = useState(MOCK_NOTIFICATIONS);
@@ -51,79 +42,89 @@ export default function NotificationsPage() {
   const unreadCount = notifications.filter((n) => !n.is_read).length;
 
   return (
-    <div className="max-w-3xl mx-auto space-y-5">
+    <motion.div
+      initial={{ opacity: 0, y: 12 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.3 }}
+      className="max-w-3xl mx-auto space-y-6 font-pixel"
+    >
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <div className="flex items-center gap-2">
-            <h1 className="text-2xl font-bold text-white">Notifications</h1>
+          <div className="flex items-center gap-3">
+            <Bell className="w-6 h-6 text-white stroke-[2.5]" />
+            <h1 className="text-xl font-pixel-head font-bold text-white font-bloom-pink">NOTIFICATIONS</h1>
             {unreadCount > 0 && (
-              <span className="bg-sky-500 text-white text-xs font-bold px-2 py-0.5 rounded-full">{unreadCount}</span>
+              <span className="badge-muted-pink font-bloom-pink text-xs font-pixel-code font-bold px-2.5 py-0.5 uppercase">{unreadCount} UNREAD</span>
             )}
           </div>
-          <p className="text-slate-400 text-sm mt-1">Stay updated on document activity</p>
+          <p className="text-zinc-400 text-xs font-pixel-code mt-1 uppercase">STAY UPDATED ON KMRL DOCUMENT TELEMETRY</p>
         </div>
         {unreadCount > 0 && (
-          <button onClick={markAllRead} className="flex items-center gap-1.5 text-sm text-sky-400 hover:text-sky-300 transition-colors">
-            <Check className="w-4 h-4" />
-            Mark all read
+          <button onClick={markAllRead} className="pixel-btn-white flex items-center gap-1 text-xs">
+            <Check className="w-4 h-4 stroke-[3]" />
+            <span>MARK ALL READ</span>
           </button>
         )}
       </div>
 
-      {/* Filter */}
-      <div className="flex gap-2">
+      {/* Filter Tabs */}
+      <div className="flex gap-2 font-pixel-code">
         {(['all', 'unread'] as const).map((f) => (
           <button
             key={f}
             onClick={() => setFilter(f)}
             className={cn(
-              'px-4 py-2 rounded-xl text-sm font-medium transition-all border',
-              filter === f ? 'bg-sky-500/15 text-sky-400 border-sky-500/30' : 'bg-white/[0.03] text-slate-400 border-white/[0.06] hover:text-white'
+              'px-3 py-1.5 border text-xs font-bold uppercase transition-all',
+              filter === f
+                ? 'bg-[#f472b6] text-black border-[#f472b6] shadow-[2px_2px_0px_0px_#f472b6]'
+                : 'bg-black text-zinc-400 border-zinc-800 hover:border-white hover:text-white'
             )}
           >
-            {f.charAt(0).toUpperCase() + f.slice(1)}
-            {f === 'unread' && unreadCount > 0 && <span className="ml-1.5 text-xs bg-sky-500/20 text-sky-400 px-1.5 rounded-full">{unreadCount}</span>}
+            {f}
           </button>
         ))}
       </div>
 
-      {/* Notification List */}
-      <div className="space-y-2">
+      {/* Notification List with Shiny Pink Card Styling */}
+      <div className="space-y-4">
         {filtered.length === 0 ? (
-          <div className="text-center py-12">
-            <Bell className="w-12 h-12 mx-auto text-slate-600 mb-3" />
-            <p className="text-slate-400">No {filter} notifications</p>
+          <div className="pixel-box p-12 text-center text-zinc-400 font-pixel-code">
+            <Bell className="w-10 h-10 text-zinc-600 mx-auto mb-3 stroke-[2]" />
+            <p className="font-bold">NO {filter.toUpperCase()} NOTIFICATIONS</p>
           </div>
         ) : (
-          filtered.map((notif) => (
-            <div
+          filtered.map((notif, idx) => (
+            <motion.div
               key={notif.id}
-              className={cn(
-                'flex items-start gap-4 p-4 rounded-2xl border transition-all cursor-pointer group',
-                notif.is_read
-                  ? 'bg-white/[0.02] border-white/[0.04] hover:bg-white/[0.04]'
-                  : 'bg-sky-500/5 border-sky-500/10 hover:border-sky-500/20'
-              )}
+              whileHover={{ scale: 1.01, y: -2 }}
               onClick={() => !notif.is_read && markRead(notif.id)}
+              className={cn(
+                'p-5 flex items-start gap-4 animate-pixel-float cursor-pointer group',
+                idx % 3 === 1 && 'float-delay-1',
+                idx % 3 === 2 && 'float-delay-2',
+                !notif.is_read
+                  ? 'pixel-box-pink'
+                  : 'pixel-box opacity-80 hover:opacity-100'
+              )}
             >
-              <div className={cn('w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0', iconBg[notif.type] || 'bg-slate-500/10')}>
+              <div className="w-10 h-10 border-2 border-white bg-black flex items-center justify-center flex-shrink-0">
                 <NotifIcon type={notif.type} />
               </div>
-              <div className="flex-1 min-w-0">
+              <div className="flex-1 min-w-0 font-pixel">
                 <div className="flex items-start justify-between gap-2">
-                  <p className={cn('text-sm font-semibold', notif.is_read ? 'text-slate-300' : 'text-white')}>{notif.title}</p>
-                  <div className="flex items-center gap-2 flex-shrink-0">
-                    <span className="text-xs text-slate-500">{formatRelativeTime(notif.created_at)}</span>
-                    {!notif.is_read && <div className="w-2 h-2 bg-sky-500 rounded-full flex-shrink-0" />}
+                  <p className={cn('text-xs font-pixel-head font-bold uppercase', notif.is_read ? 'text-zinc-300' : 'text-white font-bloom-pink')}>{notif.title}</p>
+                  <div className="flex items-center gap-2 flex-shrink-0 font-pixel-code">
+                    <span className="text-[10px] text-zinc-400 uppercase">{formatRelativeTime(notif.created_at)}</span>
+                    {!notif.is_read && <span className="w-2.5 h-2.5 bg-[#f472b6] animate-pulse border border-black" />}
                   </div>
                 </div>
-                <p className="text-sm text-slate-400 mt-0.5 leading-relaxed">{notif.message}</p>
+                <p className="text-xs text-zinc-300 mt-1 font-pixel-code leading-relaxed uppercase">{notif.message}</p>
               </div>
-            </div>
+            </motion.div>
           ))
         )}
       </div>
-    </div>
+    </motion.div>
   );
 }

@@ -5,50 +5,41 @@ import {
 } from 'recharts';
 import {
   FileText, Upload, Search, Bot, HardDrive, Clock, ArrowRight, ChevronRight, Zap,
-  ShieldAlert, Copy
+  ShieldAlert, Copy, Activity, Sparkles
 } from 'lucide-react';
 import { cn, formatRelativeTime } from '@/lib/utils';
 import { useAuthStore } from '@/store/authStore';
 import { MOCK_ANALYTICS, MOCK_DOCUMENTS } from '@/data/mockData';
 
 const STAT_CARDS = [
-  { label: 'Total Documents', value: '1,247', icon: FileText, trend: '+12%', color: 'sky' },
-  { label: 'Uploads Today', value: '23', icon: Upload, trend: '+5', color: 'green' },
-  { label: 'Pending Approvals', value: '18', icon: Clock, trend: '3 urgent', color: 'amber', urgent: true },
-  { label: 'Expiring Contracts', value: '3', icon: ShieldAlert, trend: '< 60 days', color: 'red', urgent: true },
-  { label: 'OCR Processed', value: '1,182', icon: Zap, trend: '94.8%', color: 'cyan' },
-  { label: 'Storage Used', value: '48.8 GB', icon: HardDrive, trend: '48%', color: 'sky' },
-  { label: 'Duplicates Flagged', value: '7', icon: Copy, trend: 'Prevented', color: 'amber' },
-  { label: 'AI Summaries', value: '1,089', icon: Bot, trend: '87.3%', color: 'violet' },
+  { label: 'TOTAL DOCUMENTS', value: '1,247', icon: FileText, trend: '+12.4%', metric: 'INDEXED' },
+  { label: 'UPLOADS TODAY', value: '23', icon: Upload, trend: '+5 NEW', metric: 'FILES' },
+  { label: 'PENDING APPROVALS', value: '18', icon: Clock, trend: '3 URGENT', urgent: true, metric: 'ACTION REQ' },
+  { label: 'EXPIRING CONTRACTS', value: '3', icon: ShieldAlert, trend: '< 60 DAYS', urgent: true, metric: 'CRITICAL' },
+  { label: 'OCR PROCESSED', value: '1,182', icon: Zap, trend: '94.8%', metric: 'ACCURACY' },
+  { label: 'STORAGE USED', value: '48.8 GB', icon: HardDrive, trend: '48%', metric: 'ACTIVE' },
+  { label: 'AI DUPLICATES', value: '7', icon: Copy, trend: 'PREVENTED', metric: 'FLAGGED' },
+  { label: 'AI SUMMARIES', value: '1,089', icon: Bot, trend: '87.3%', metric: 'AUTO' },
 ];
 
-const COLOR_MAP: Record<string, string> = {
-  sky: 'bg-sky-500/10 text-sky-400',
-  green: 'bg-green-500/10 text-green-400',
-  amber: 'bg-amber-500/10 text-amber-400',
-  violet: 'bg-violet-500/10 text-violet-400',
-  cyan: 'bg-cyan-500/10 text-cyan-400',
-  red: 'bg-red-500/10 text-red-400',
-};
-
 const QUICK_ACTIONS = [
-  { label: 'Contract Intelligence', desc: 'Monitor deadlines & renewals', icon: ShieldAlert, to: '/contracts', color: 'from-red-500 to-amber-600' },
-  { label: 'Upload Document', desc: 'Drop files for AI processing', icon: Upload, to: '/upload', color: 'from-sky-500 to-sky-600' },
-  { label: 'AI Assistant (RAG)', desc: 'Chat with your documents', icon: Bot, to: '/ai-assistant', color: 'from-violet-500 to-indigo-600' },
-  { label: 'Semantic Search', desc: 'Natural language search', icon: Search, to: '/search', color: 'from-emerald-500 to-green-600' },
+  { label: 'CONTRACT SLA MONITOR', desc: 'MONITOR SLA DEADLINES & RENEWALS', icon: ShieldAlert, to: '/contracts', badge: '3 EXPIRING' },
+  { label: 'UPLOAD STUDIO', desc: 'DROP FILES FOR EASYOCR & AI EXTRACTION', icon: Upload, to: '/upload', badge: 'UPLOAD' },
+  { label: 'AI ASSISTANT (RAG)', desc: 'CHAT WITH KMRL DOCS & GET CITATIONS', icon: Bot, to: '/ai-assistant', badge: 'AI CHAT' },
+  { label: 'PIXEL DEEP SEARCH', desc: 'NATURAL LANGUAGE VECTOR SEARCH', icon: Search, to: '/search', badge: 'SEARCH' },
 ];
 
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.06 }
+    transition: { staggerChildren: 0.08 }
   }
 };
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 15 },
-  visible: { opacity: 1, y: 0 }
+  hidden: { opacity: 0, y: 16 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.35, ease: [0.16, 1, 0.3, 1] } }
 };
 
 export default function DashboardPage() {
@@ -58,10 +49,12 @@ export default function DashboardPage() {
   const CustomTooltip = ({ active, payload, label }: any) => {
     if (!active || !payload?.length) return null;
     return (
-      <div className="bg-[#1f2937] border border-white/10 rounded-xl px-3 py-2 shadow-xl">
-        <p className="text-slate-400 text-xs mb-1">{label}</p>
+      <div className="bg-black border-2 border-white p-3 font-pixel-code shadow-[3px_3px_0px_0px_#ffffff]">
+        <p className="text-zinc-400 text-xs mb-1 uppercase font-bold">{label}</p>
         {payload.map((p: any, i: number) => (
-          <p key={i} className="text-sm font-semibold" style={{ color: p.color }}>{p.name}: {p.value}</p>
+          <p key={i} className="text-sm font-bold text-white font-bloom-subtle">
+            {p.name}: <span className="text-[#6ee7b7] font-bloom-green">{p.value}</span>
+          </p>
         ))}
       </div>
     );
@@ -72,199 +65,282 @@ export default function DashboardPage() {
       variants={containerVariants}
       initial="hidden"
       animate="visible"
-      className="space-y-6"
+      className="space-y-8 max-w-7xl mx-auto font-pixel"
     >
-      {/* Welcome Banner */}
-      <motion.div variants={itemVariants} className="relative bg-gradient-to-br from-sky-500/20 via-indigo-500/10 to-transparent border border-sky-500/20 rounded-2xl p-6 overflow-hidden">
-        <div className="absolute top-0 right-0 w-64 h-64 bg-sky-500/5 rounded-full -translate-y-32 translate-x-32" />
-        <div className="relative">
-          <div className="flex items-center gap-2 mb-1">
-            <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-            <span className="text-xs text-green-400 font-medium">System Online & Active</span>
-          </div>
-          <h2 className="text-xl font-bold text-white">
-            Good morning, {user?.full_name?.split(' ')[0] || 'User'}! 👋
-          </h2>
-          <p className="text-slate-400 text-sm mt-1">KMRL IntelliDocs — AI-powered document intelligence & contract monitoring platform</p>
-          <div className="flex items-center gap-4 mt-4 text-xs text-slate-400 flex-wrap">
-            <span>📄 1,247 documents indexed</span>
-            <span>⚡ EasyOCR Engine: Active</span>
-            <span>🤖 AI Chat & RAG: Online</span>
-            <span>📜 Contract Expiry Monitor: Running</span>
-          </div>
-        </div>
-      </motion.div>
-
-      {/* Contract Expiry & Duplicate Intelligence Alert Row */}
-      <motion.div variants={itemVariants} className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {/* Contract Intelligence Alert */}
-        <div
-          onClick={() => navigate('/contracts')}
-          className="bg-gradient-to-r from-red-500/15 via-amber-500/10 to-transparent border border-red-500/30 rounded-2xl p-4 cursor-pointer hover:border-red-500/50 transition-all flex items-start gap-3 group"
-        >
-          <div className="w-10 h-10 rounded-xl bg-red-500/20 flex items-center justify-center flex-shrink-0">
-            <ShieldAlert className="w-5 h-5 text-red-400 animate-pulse" />
-          </div>
-          <div className="flex-1 min-w-0">
-            <div className="flex items-center justify-between">
-              <h3 className="font-bold text-white text-xs group-hover:text-red-300 transition-colors">
-                Contract Intelligence Alert
-              </h3>
-              <span className="text-[10px] bg-red-500/30 text-red-300 px-2 py-0.5 rounded-full font-bold">
-                3 Expiring
+      {/* Header Pixel Banner */}
+      <motion.div
+        variants={itemVariants}
+        whileHover={{ y: -3 }}
+        className="pixel-box p-6 md:p-8 animate-pixel-float relative cursor-pointer"
+      >
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+          <div className="space-y-2">
+            <div className="flex items-center gap-2">
+              <span className="w-2 h-2 bg-[#6ee7b7] animate-pulse border border-black" />
+              <span className="text-xs font-pixel-head text-[#6ee7b7] font-bloom-green tracking-widest">
+                KMRL ENTERPRISE METRO SYSTEM // ONLINE
               </span>
             </div>
-            <p className="text-xs text-slate-300 mt-1 leading-relaxed line-clamp-2">
-              Rolling Stock Maintenance SLA expires in <strong className="text-red-400">23 days</strong>. IT Infrastructure SLA expires in <strong className="text-red-400">3 days</strong>.
+            <h1 className="text-2xl md:text-4xl font-pixel-head font-bold text-white font-bloom tracking-wider">
+              WELCOME BACK, {user?.full_name?.split(' ')[0] || 'USER'}!
+            </h1>
+            <p className="text-zinc-300 text-xs md:text-sm max-w-2xl font-pixel leading-relaxed">
+              KOCHI METRO RAIL LIMITED — EASYOCR PIXEL ENGINE & AI DOCUMENT INTELLIGENCE HUB.
             </p>
           </div>
-        </div>
 
-        {/* Duplicate Detection Alert */}
-        <div
-          onClick={() => navigate('/search')}
-          className="bg-gradient-to-r from-amber-500/15 via-yellow-500/10 to-transparent border border-amber-500/30 rounded-2xl p-4 cursor-pointer hover:border-amber-500/50 transition-all flex items-start gap-3 group"
-        >
-          <div className="w-10 h-10 rounded-xl bg-amber-500/20 flex items-center justify-center flex-shrink-0">
-            <Copy className="w-5 h-5 text-amber-400" />
-          </div>
-          <div className="flex-1 min-w-0">
-            <div className="flex items-center justify-between">
-              <h3 className="font-bold text-white text-xs group-hover:text-amber-300 transition-colors">
-                AI Duplicate Detection
-              </h3>
-              <span className="text-[10px] bg-amber-500/30 text-amber-300 px-2 py-0.5 rounded-full font-bold">
-                7 Flagged
-              </span>
-            </div>
-            <p className="text-xs text-slate-300 mt-1 leading-relaxed line-clamp-2">
-              Possible duplicate detected: <strong className="text-amber-300">"Revenue_Report_Q2.pdf"</strong> matches an existing file with 94.2% similarity.
-            </p>
-          </div>
-        </div>
-      </motion.div>
-
-      {/* Stats Grid */}
-      <motion.div variants={itemVariants} className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        {STAT_CARDS.map(({ label, value, icon: Icon, trend, color, urgent }) => (
-          <motion.div
-            key={label}
-            whileHover={{ y: -3, transition: { duration: 0.2 } }}
-            className={cn('bg-[#1f2937] border rounded-2xl p-4 hover:border-white/10 transition-all shadow-md', urgent ? 'border-amber-500/20' : 'border-white/[0.06]')}
-          >
-            <div className="flex items-center justify-between mb-3">
-              <div className={cn('w-9 h-9 rounded-xl flex items-center justify-center', COLOR_MAP[color])}>
-                <Icon className="w-4 h-4" />
-              </div>
-              <span className={cn('text-xs px-2 py-0.5 rounded-full', urgent ? 'bg-amber-500/20 text-amber-400' : 'bg-white/5 text-slate-400')}>{trend}</span>
-            </div>
-            <p className="text-xl font-bold text-white">{value}</p>
-            <p className="text-xs text-slate-400 mt-0.5">{label}</p>
-          </motion.div>
-        ))}
-      </motion.div>
-
-      {/* Quick Actions */}
-      <motion.div variants={itemVariants}>
-        <h3 className="text-sm font-semibold text-slate-300 mb-3">Quick Actions</h3>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-          {QUICK_ACTIONS.map(({ label, desc, icon: Icon, to, color }) => (
+          <div className="flex items-center gap-4 flex-wrap">
             <motion.button
-              key={label}
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              onClick={() => navigate(to)}
-              className="group relative bg-white/[0.03] border border-white/[0.06] hover:border-white/10 rounded-2xl p-4 text-left transition-all hover:shadow-lg overflow-hidden cursor-pointer"
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+              onClick={() => navigate('/upload')}
+              className="pixel-btn-white flex items-center gap-2"
             >
-              <div className={cn('absolute inset-0 bg-gradient-to-br opacity-0 group-hover:opacity-5 transition-opacity', color)} />
-              <div className={cn('w-9 h-9 rounded-xl mb-3 flex items-center justify-center bg-gradient-to-br text-white', color)}>
-                <Icon className="w-4 h-4" />
-              </div>
-              <p className="text-sm font-semibold text-white">{label}</p>
-              <p className="text-xs text-slate-500 mt-0.5">{desc}</p>
-              <ChevronRight className="absolute right-4 top-4 w-4 h-4 text-slate-600 group-hover:text-slate-400 transition-colors" />
+              <Upload className="w-4 h-4 text-black stroke-[3]" />
+              <span>UPLOAD FILES</span>
             </motion.button>
+            <motion.button
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+              onClick={() => navigate('/ai-assistant')}
+              className="pixel-btn-dark flex items-center gap-2"
+            >
+              <Bot className="w-4 h-4 text-white stroke-[2.5]" />
+              <span>LAUNCH AI</span>
+            </motion.button>
+          </div>
+        </div>
+      </motion.div>
+
+      {/* Floating Intelligence Alerts */}
+      <motion.div variants={itemVariants} className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* Contract Intelligence */}
+        <motion.div
+          whileHover={{ scale: 1.015, y: -4 }}
+          onClick={() => navigate('/contracts')}
+          className="pixel-box p-5 cursor-pointer animate-pixel-float float-delay-1 group"
+        >
+          <div className="flex items-start gap-4">
+            <ShieldAlert className="w-7 h-7 text-[#fca5a5] flex-shrink-0 stroke-[2.5] mt-1" />
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center justify-between">
+                <h3 className="font-pixel-head text-xs font-bold text-white font-bloom-red group-hover:text-[#fca5a5] transition-colors">
+                  CONTRACT SLA ALERT
+                </h3>
+                <span className="text-[10px] font-pixel-code font-bold badge-muted-red px-2 py-0.5">
+                  3 EXPIRING
+                </span>
+              </div>
+              <p className="text-xs text-zinc-300 mt-2 font-pixel leading-relaxed">
+                ROLLING STOCK SLA EXPIRES IN <strong className="text-[#fca5a5] font-bloom-red">23 DAYS</strong>. IT INFRASTRUCTURE SLA EXPIRES IN <strong className="text-[#fca5a5] font-bloom-red">3 DAYS</strong>.
+              </p>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* AI Duplicate Detection */}
+        <motion.div
+          whileHover={{ scale: 1.015, y: -4 }}
+          onClick={() => navigate('/search')}
+          className="pixel-box p-5 cursor-pointer animate-pixel-float float-delay-2 group"
+        >
+          <div className="flex items-start gap-4">
+            <Copy className="w-7 h-7 text-[#fde047] flex-shrink-0 stroke-[2.5] mt-1" />
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center justify-between">
+                <h3 className="font-pixel-head text-xs font-bold text-white font-bloom-amber group-hover:text-[#fde047] transition-colors">
+                  AI DUPLICATE DETECTED
+                </h3>
+                <span className="text-[10px] font-pixel-code font-bold badge-muted-amber px-2 py-0.5">
+                  7 FLAGGED
+                </span>
+              </div>
+              <p className="text-xs text-zinc-300 mt-2 font-pixel leading-relaxed">
+                DUPLICATE ALERT: <strong className="text-[#fde047] font-bloom-amber">"REVENUE_REPORT_Q2.PDF"</strong> MATCHES EXISTING FILE WITH 94.2% VECTOR SIMILARITY.
+              </p>
+            </div>
+          </div>
+        </motion.div>
+      </motion.div>
+
+      {/* Scroll Animated Telemetry Metrics Grid */}
+      <motion.div variants={itemVariants}>
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-xs font-pixel-head font-bold text-white font-bloom-subtle tracking-widest">
+            SYSTEM TELEMETRY // REAL-TIME METRICS
+          </h2>
+          <span className="text-xs font-pixel-code text-zinc-400">FPS: 60 // PING: 12ms</span>
+        </div>
+
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          {STAT_CARDS.map(({ label, value, icon: Icon, trend, urgent, metric }, idx) => (
+            <motion.div
+              key={label}
+              whileHover={{ scale: 1.03, y: -5 }}
+              transition={{ duration: 0.2 }}
+              className={cn(
+                'pixel-box p-5 animate-pixel-float cursor-pointer',
+                idx % 4 === 1 && 'float-delay-1',
+                idx % 4 === 2 && 'float-delay-2',
+                idx % 4 === 3 && 'float-delay-3',
+                urgent && 'border-[#fde047]/40 shadow-[3px_3px_0px_0px_rgba(253,224,71,0.3)]'
+              )}
+            >
+              <div className="flex items-center justify-between mb-4">
+                <Icon className="w-6 h-6 text-white stroke-[2.5]" />
+                <span className={cn('text-[10px] font-pixel-code font-bold px-2 py-0.5 border', urgent ? 'badge-muted-amber' : 'bg-black text-white border-zinc-700')}>
+                  {trend}
+                </span>
+              </div>
+              <p className="text-3xl font-pixel-head font-extrabold text-white font-bloom tracking-tight">{value}</p>
+              <div className="flex items-center justify-between mt-2 font-pixel-code">
+                <p className="text-xs text-zinc-300 font-bold uppercase tracking-wider">{label}</p>
+                <span className="text-[10px] text-zinc-400 font-bold uppercase">{metric}</span>
+              </div>
+            </motion.div>
           ))}
         </div>
       </motion.div>
 
-      {/* Charts */}
-      <motion.div variants={itemVariants} className="grid grid-cols-1 lg:grid-cols-2 gap-5">
+      {/* Quick Studio Actions */}
+      <motion.div variants={itemVariants}>
+        <h2 className="text-xs font-pixel-head font-bold text-white font-bloom-subtle tracking-widest mb-4">
+          QUICK ACTIONS // PIXEL MODULES
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {QUICK_ACTIONS.map(({ label, desc, icon: Icon, to, badge }, idx) => (
+            <motion.div
+              key={label}
+              whileHover={{ scale: 1.03, y: -4 }}
+              onClick={() => navigate(to)}
+              className={cn(
+                'pixel-box p-5 cursor-pointer animate-pixel-float group hover:bg-zinc-900',
+                idx % 4 === 1 && 'float-delay-1',
+                idx % 4 === 2 && 'float-delay-2',
+                idx % 4 === 3 && 'float-delay-3'
+              )}
+            >
+              <div className="flex items-center justify-between mb-4">
+                <Icon className="w-6 h-6 text-white stroke-[2.5]" />
+                <span className="text-[10px] font-pixel-code font-bold px-2 py-0.5 bg-black text-white border border-zinc-700">
+                  {badge}
+                </span>
+              </div>
+              <h3 className="font-pixel-head font-bold text-white text-xs font-bloom-subtle group-hover:text-[#6ee7b7] transition-colors flex items-center gap-1">
+                {label}
+                <ChevronRight className="w-4 h-4 stroke-[3] group-hover:translate-x-1 transition-transform" />
+              </h3>
+              <p className="text-xs text-zinc-400 mt-2 font-pixel">{desc}</p>
+            </motion.div>
+          ))}
+        </div>
+      </motion.div>
+
+      {/* Charts Grid */}
+      <motion.div variants={itemVariants} className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Uploads Trend */}
-        <div className="bg-[#1f2937] border border-white/[0.06] rounded-2xl p-5 min-h-[220px]">
-          <div className="flex items-center justify-between mb-5">
-            <h3 className="font-semibold text-white text-sm">Document Upload Trend</h3>
-            <span className="text-xs text-green-400 bg-green-500/10 px-2 py-0.5 rounded-full">↑ 27%</span>
+        <div className="pixel-box p-6 min-h-[260px] animate-pixel-float float-delay-1">
+          <div className="flex items-center justify-between mb-6">
+            <div>
+              <h3 className="font-pixel-head font-bold text-white text-sm font-bloom-subtle">DOCUMENT INGESTION TREND</h3>
+              <p className="text-xs font-pixel-code text-zinc-400 mt-0.5 uppercase">MONTHLY VOLUME TELEMETRY</p>
+            </div>
+            <span className="text-xs font-pixel-code font-bold badge-muted-green px-2.5 py-1">
+              ↑ 27% MoM
+            </span>
           </div>
           <div className="w-full h-[180px]">
             <ResponsiveContainer width="100%" height="100%">
               <AreaChart data={MOCK_ANALYTICS.monthly_uploads}>
                 <defs>
-                  <linearGradient id="grad1" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#0ea5e9" stopOpacity={0.3} />
-                    <stop offset="95%" stopColor="#0ea5e9" stopOpacity={0} />
+                  <linearGradient id="pixelGrad1" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="5%" stopColor="#ffffff" stopOpacity={0.35} />
+                    <stop offset="95%" stopColor="#ffffff" stopOpacity={0} />
                   </linearGradient>
                 </defs>
-                <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.04)" />
-                <XAxis dataKey="month" tick={{ fill: '#94a3b8', fontSize: 11 }} axisLine={false} tickLine={false} />
-                <YAxis tick={{ fill: '#94a3b8', fontSize: 11 }} axisLine={false} tickLine={false} />
+                <CartesianGrid strokeDasharray="2 2" stroke="#27272a" />
+                <XAxis dataKey="month" tick={{ fill: '#ffffff', fontSize: 11, fontFamily: 'Silkscreen' }} axisLine={false} tickLine={false} />
+                <YAxis tick={{ fill: '#ffffff', fontSize: 11, fontFamily: 'Silkscreen' }} axisLine={false} tickLine={false} />
                 <Tooltip content={<CustomTooltip />} />
-                <Area type="monotone" dataKey="count" name="Uploads" stroke="#0ea5e9" fill="url(#grad1)" strokeWidth={2} />
+                <Area type="monotone" dataKey="count" name="Uploads" stroke="#ffffff" fill="url(#pixelGrad1)" strokeWidth={2.5} />
               </AreaChart>
             </ResponsiveContainer>
           </div>
         </div>
 
         {/* Category Distribution */}
-        <div className="bg-[#1f2937] border border-white/[0.06] rounded-2xl p-5 min-h-[220px]">
-          <div className="flex items-center justify-between mb-5">
-            <h3 className="font-semibold text-white text-sm">Category Distribution</h3>
+        <div className="pixel-box p-6 min-h-[260px] animate-pixel-float float-delay-2">
+          <div className="flex items-center justify-between mb-6">
+            <div>
+              <h3 className="font-pixel-head font-bold text-white text-sm font-bloom-subtle">DEPARTMENT DISTRIBUTION</h3>
+              <p className="text-xs font-pixel-code text-zinc-400 mt-0.5 uppercase">DOCUMENTS BY DEPARTMENT</p>
+            </div>
+            <span className="text-xs font-pixel-code text-zinc-300 font-bold">6 DEPARTMENTS</span>
           </div>
           <div className="w-full h-[180px]">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={MOCK_ANALYTICS.category_distribution} layout="vertical" margin={{ left: 5 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.04)" horizontal={false} />
-                <XAxis type="number" tick={{ fill: '#94a3b8', fontSize: 11 }} axisLine={false} tickLine={false} />
-                <YAxis dataKey="category" type="category" tick={{ fill: '#94a3b8', fontSize: 11 }} axisLine={false} tickLine={false} width={80} />
+                <CartesianGrid strokeDasharray="2 2" stroke="#27272a" horizontal={false} />
+                <XAxis type="number" tick={{ fill: '#ffffff', fontSize: 11, fontFamily: 'Silkscreen' }} axisLine={false} tickLine={false} />
+                <YAxis dataKey="category" type="category" tick={{ fill: '#ffffff', fontSize: 11, fontFamily: 'Silkscreen' }} axisLine={false} tickLine={false} width={90} />
                 <Tooltip content={<CustomTooltip />} />
-                <Bar dataKey="count" name="Documents" fill="#0ea5e9" radius={[0, 4, 4, 0]} />
+                <Bar dataKey="count" name="Documents" fill="#ffffff" radius={[0, 0, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </div>
         </div>
       </motion.div>
 
-      {/* Recent Documents */}
-      <motion.div variants={itemVariants} className="bg-[#1f2937] border border-white/[0.06] rounded-2xl overflow-hidden shadow-md">
-        <div className="flex items-center justify-between p-5 border-b border-white/[0.04]">
-          <h3 className="font-semibold text-white text-sm">Recent Documents</h3>
-          <button onClick={() => navigate('/documents')} className="flex items-center gap-1 text-xs text-sky-400 hover:text-sky-300">
-            View all <ArrowRight className="w-3 h-3" />
-          </button>
+      {/* Recent Documents Table */}
+      <motion.div variants={itemVariants} className="pixel-box overflow-hidden animate-pixel-float float-delay-3">
+        <div className="flex items-center justify-between p-6 border-b-2 border-[#27272a]">
+          <div>
+            <h3 className="font-pixel-head font-bold text-white text-base font-bloom-subtle">RECENT ENTERPRISE DOCUMENTS</h3>
+            <p className="text-xs font-pixel-code text-zinc-400 mt-0.5 uppercase">LATEST INDEXED FILES</p>
+          </div>
+          <motion.button
+            whileHover={{ scale: 1.03 }}
+            onClick={() => navigate('/documents')}
+            className="pixel-btn-white flex items-center gap-1.5"
+          >
+            <span>VIEW ALL</span>
+            <ArrowRight className="w-4 h-4 stroke-[3]" />
+          </motion.button>
         </div>
-        <div className="divide-y divide-white/[0.04]">
+
+        <div className="divide-y-2 divide-[#27272a]">
           {MOCK_DOCUMENTS.slice(0, 5).map((doc) => (
             <motion.div
               key={doc.id}
-              whileHover={{ backgroundColor: 'rgba(255,255,255,0.03)' }}
-              className="flex items-center gap-3 px-5 py-3.5 cursor-pointer transition-colors group"
+              whileHover={{ backgroundColor: 'rgba(255,255,255,0.04)' }}
               onClick={() => navigate(`/documents/${doc.id}`)}
+              className="flex items-center justify-between px-6 py-4 cursor-pointer transition-colors group"
             >
-              <div className="w-8 h-8 rounded-lg bg-sky-500/10 flex items-center justify-center flex-shrink-0">
-                <FileText className="w-4 h-4 text-sky-400" />
+              <div className="flex items-center gap-4 min-w-0 flex-1">
+                <FileText className="w-6 h-6 text-white stroke-[2.5] flex-shrink-0 group-hover:scale-110 transition-transform" />
+                <div className="min-w-0 font-pixel">
+                  <p className="text-sm font-pixel-head font-bold text-white truncate group-hover:text-[#6ee7b7] transition-colors font-bloom-subtle">
+                    {doc.title}
+                  </p>
+                  <p className="text-xs font-pixel-code text-zinc-400 mt-0.5 uppercase">
+                    {doc.department} · INDEXED {formatRelativeTime(doc.createdAt)}
+                  </p>
+                </div>
               </div>
-              <div className="flex-1 min-w-0">
-                <p className="text-sm font-medium text-white truncate group-hover:text-sky-300 transition-colors">{doc.title}</p>
-                <p className="text-xs text-slate-500">{doc.department} · {formatRelativeTime(doc.createdAt)}</p>
-              </div>
-              <div className="flex items-center gap-2 flex-shrink-0">
-                <span className="text-xs text-slate-500 bg-white/[0.05] px-2 py-0.5 rounded-lg">{doc.category}</span>
-                <span className={cn('text-xs px-2 py-0.5 rounded-full border capitalize', {
-                  'bg-green-500/20 text-green-400 border-green-500/30': doc.status === 'approved',
-                  'bg-yellow-500/20 text-yellow-400 border-yellow-500/30': doc.status === 'pending',
-                  'bg-red-500/20 text-red-400 border-red-500/30': doc.status === 'rejected',
-                  'bg-slate-500/20 text-slate-400 border-slate-500/30': doc.status === 'draft',
-                })}>
+
+              <div className="flex items-center gap-3 flex-shrink-0 ml-4 font-pixel-code">
+                <span className="text-xs font-bold text-white bg-black border-2 border-zinc-700 px-3 py-1 uppercase hidden sm:block">
+                  {doc.category}
+                </span>
+                <span
+                  className={cn(
+                    'text-xs font-bold px-3 py-1 border uppercase',
+                    doc.status === 'approved' && 'badge-muted-green font-bloom-green',
+                    doc.status === 'pending' && 'badge-muted-amber font-bloom-amber',
+                    doc.status === 'rejected' && 'badge-muted-red font-bloom-red',
+                    doc.status === 'draft' && 'bg-black text-zinc-400 border-zinc-700'
+                  )}
+                >
                   {doc.status}
                 </span>
               </div>

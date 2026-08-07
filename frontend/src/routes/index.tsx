@@ -8,8 +8,20 @@ import { AppShell } from '@/components/layout/AppShell';
 
 // Pages
 import LoginPage from '@/pages/auth/LoginPage';
+import HomePage from '@/pages/home/HomePage';
 import DashboardPage from '@/pages/dashboard/DashboardPage';
 import DocumentsPage from '@/pages/documents/DocumentsPage';
+import DocumentDetailPage from '@/pages/documents/DocumentDetailPage';
+import UploadPage from '@/pages/upload/UploadPage';
+import SearchPage from '@/pages/search/SearchPage';
+import AIAssistantPage from '@/pages/ai-assistant/AIAssistantPage';
+import ApprovalsPage from '@/pages/approvals/ApprovalsPage';
+import AnalyticsPage from '@/pages/analytics/AnalyticsPage';
+import ContractsPage from '@/pages/contracts/ContractsPage';
+import UsersPage from '@/pages/users/UsersPage';
+import DepartmentsPage from '@/pages/departments/DepartmentsPage';
+import NotificationsPage from '@/pages/notifications/NotificationsPage';
+import SettingsPage from '@/pages/settings/SettingsPage';
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const { isAuthenticated } = useAuthStore();
@@ -21,20 +33,25 @@ export default function AppRoutes() {
   return (
     <Routes>
       <Route path={ROUTES.login} element={<LoginPage />} />
-      
+
       <Route path="/" element={<ProtectedRoute><AppShell /></ProtectedRoute>}>
-        <Route index element={<Navigate to={ROUTES.dashboard} replace />} />
+        <Route index element={<HomePage />} />
+        <Route path="home" element={<HomePage />} />
         <Route path="dashboard" element={<DashboardPage />} />
         <Route path="documents" element={<DocumentsPage />} />
-        {/* Mocking other routes for completeness */}
-        <Route path="upload" element={<div className="p-8">Upload Page (Scaffolded)</div>} />
-        <Route path="search" element={<div className="p-8">Search Page (Scaffolded)</div>} />
-        <Route path="ai-assistant" element={<div className="p-8">AI Assistant (Scaffolded)</div>} />
-        <Route path="approvals" element={<div className="p-8">Approvals (Scaffolded)</div>} />
-        <Route path="analytics" element={<div className="p-8">Analytics (Scaffolded)</div>} />
-        <Route path="settings" element={<div className="p-8">Settings (Scaffolded)</div>} />
+        <Route path="documents/:id" element={<DocumentDetailPage />} />
+        <Route path="contracts" element={<ContractsPage />} />
+        <Route path="upload" element={<UploadPage />} />
+        <Route path="search" element={<SearchPage />} />
+        <Route path="ai-assistant" element={<AIAssistantPage />} />
+        <Route path="approvals" element={<ApprovalsPage />} />
+        <Route path="analytics" element={<AnalyticsPage />} />
+        <Route path="departments" element={<DepartmentsPage />} />
+        <Route path="notifications" element={<NotificationsPage />} />
+        <Route path="users" element={<UsersPage />} />
+        <Route path="settings" element={<SettingsPage />} />
       </Route>
-      
+
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );

@@ -16,22 +16,14 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
-// Response interceptor - handle 401 for protected routes
+// Response interceptor — just pass errors through.
+// Pages have their own catch blocks with demo fallbacks.
+// Forced logout from here was firing BEFORE page catch blocks could run.
 api.interceptors.response.use(
   (response) => response,
-  (error) => {
-    const url = error.config?.url || '';
-    const isAuthRequest = url.includes('/auth/login') || url.includes('/auth/register');
-    
-    if (error.response?.status === 401 && !isAuthRequest) {
-      localStorage.removeItem('access_token');
-      localStorage.removeItem('refresh_token');
-      localStorage.removeItem('user');
-      window.location.href = '/login';
-    }
-    return Promise.reject(error);
-  }
+  (error) => Promise.reject(error)
 );
+
 
 export default api;
 

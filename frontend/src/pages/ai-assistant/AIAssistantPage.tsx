@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import { Bot, Send, User, X, Sparkles, FileText, Loader2, RefreshCw } from 'lucide-react';
 import { cn, formatRelativeTime } from '@/lib/utils';
 import { chatApi } from '@/lib/api';
@@ -13,12 +14,12 @@ interface Message {
 }
 
 const SUGGESTED_QUESTIONS = [
-  'What are the latest safety inspection findings?',
-  'Summarize the Q1 2024 financial report',
-  'Show me pending tender documents',
-  'What are the HR policy updates this year?',
-  'List documents requiring approval',
-  'What maintenance is scheduled for Blue Line?',
+  'WHAT ARE THE LATEST SAFETY INSPECTION FINDINGS?',
+  'SUMMARIZE THE Q1 2024 FINANCIAL REPORT',
+  'SHOW ME PENDING TENDER DOCUMENTS',
+  'WHAT ARE THE HR POLICY UPDATES THIS YEAR?',
+  'LIST DOCUMENTS REQUIRING APPROVAL',
+  'WHAT MAINTENANCE IS SCHEDULED FOR BLUE LINE?',
 ];
 
 export default function AIAssistantPage() {
@@ -26,7 +27,7 @@ export default function AIAssistantPage() {
     {
       id: 'welcome',
       role: 'assistant',
-      content: "Hello! I'm **IntelliBot**, your AI assistant for KMRL IntelliDocs. I can help you find information in KMRL documents, summarize reports, and answer questions about metro operations. What would you like to know?",
+      content: "HELLO! I'M **INTELLIBOT**, YOUR AI ASSISTANT FOR KMRL INTELLIDOCS. I CAN HELP YOU FIND INFORMATION IN KMRL DOCUMENTS, SUMMARIZE REPORTS, AND ANSWER QUESTIONS ABOUT METRO OPERATIONS. WHAT WOULD YOU LIKE TO KNOW?",
       citations: [],
       timestamp: new Date(),
     },
@@ -67,14 +68,13 @@ export default function AIAssistantPage() {
         },
       ]);
     } catch (err) {
-      // Demo fallback
       setMessages((m) => [
         ...m,
         {
           id: Date.now().toString(),
           role: 'assistant',
-          content: `Based on KMRL IntelliDocs, here's what I found about "${text}": The system contains extensive documentation across Operations, Finance, HR, Maintenance, Legal, and Procurement departments. For specific queries, the documents are indexed and searchable. Please check the Documents section for direct access to files.`,
-          citations: [{ title: 'Operations Manual', document_id: 'demo-1' }, { title: 'Safety Protocols 2024', document_id: 'demo-2' }],
+          content: `BASED ON KMRL INTELLIDOCS, HERE'S WHAT I FOUND ABOUT "${text}": THE SYSTEM CONTAINS EXTENSIVE DOCUMENTATION ACROSS OPERATIONS, FINANCE, HR, MAINTENANCE, LEGAL, AND PROCUREMENT DEPARTMENTS. FOR SPECIFIC QUERIES, THE DOCUMENTS ARE INDEXED AND SEARCHABLE.`,
+          citations: [{ title: 'OPERATIONS MANUAL', document_id: 'demo-1' }, { title: 'SAFETY PROTOCOLS 2024', document_id: 'demo-2' }],
           timestamp: new Date(),
         },
       ]);
@@ -91,7 +91,7 @@ export default function AIAssistantPage() {
     setMessages([{
       id: 'welcome',
       role: 'assistant',
-      content: "Chat cleared! I'm IntelliBot, ready to help you explore KMRL documents. What would you like to know?",
+      content: "CHAT CLEARED! I'M INTELLIBOT, READY TO HELP YOU EXPLORE KMRL DOCUMENTS. WHAT WOULD YOU LIKE TO KNOW?",
       citations: [],
       timestamp: new Date(),
     }]);
@@ -99,27 +99,34 @@ export default function AIAssistantPage() {
   };
 
   const renderContent = (text: string) => {
-    return text.replace(/\*\*(.*?)\*\*/g, '<strong class="text-sky-300">$1</strong>');
+    return text.replace(/\*\*(.*?)\*\*/g, '<strong class="text-white font-bloom-subtle">$1</strong>');
   };
 
   return (
-    <div className="flex flex-col h-[calc(100vh-8rem)]">
+    <motion.div
+      initial={{ opacity: 0, y: 12 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.3 }}
+      className="flex flex-col h-[calc(100vh-8rem)] max-w-6xl mx-auto font-pixel"
+    >
       {/* Header */}
       <div className="flex items-center justify-between mb-4 flex-shrink-0">
         <div>
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-violet-500 to-indigo-600 flex items-center justify-center">
-              <Bot className="w-4 h-4 text-white" />
-            </div>
-            <h1 className="text-xl font-bold text-white">AI Assistant</h1>
-            <span className="text-xs bg-sky-500/20 text-sky-400 px-2 py-0.5 rounded-full border border-sky-500/20">RAG Powered</span>
+          <div className="flex items-center gap-3">
+            <Bot className="w-6 h-6 text-white stroke-[2.5]" />
+            <h1 className="text-xl font-pixel-head font-bold text-white font-bloom">AI ASSISTANT</h1>
+            <span className="text-xs font-pixel-code font-bold badge-muted-green px-2.5 py-0.5 uppercase">RAG POWERED</span>
           </div>
-          <p className="text-slate-400 text-sm mt-1">Ask questions about KMRL documents using natural language</p>
+          <p className="text-zinc-400 text-xs font-pixel-code mt-1 uppercase">ASK QUESTIONS ABOUT KMRL DOCUMENTS USING NATURAL LANGUAGE</p>
         </div>
-        <button onClick={clearChat} className="flex items-center gap-2 px-4 py-2 rounded-xl border border-white/10 text-slate-400 hover:text-white text-sm transition-colors">
+        <motion.button
+          whileHover={{ scale: 1.03 }}
+          onClick={clearChat}
+          className="pixel-btn-dark flex items-center gap-2"
+        >
           <RefreshCw className="w-3.5 h-3.5" />
-          New Chat
-        </button>
+          <span>NEW CHAT</span>
+        </motion.button>
       </div>
 
       {/* Chat Area */}
@@ -127,50 +134,50 @@ export default function AIAssistantPage() {
         {messages.map((msg) => (
           <div key={msg.id} className={cn('flex gap-3', msg.role === 'user' ? 'flex-row-reverse' : '')}>
             <div className={cn(
-              'w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0',
-              msg.role === 'assistant' ? 'bg-gradient-to-br from-violet-500 to-indigo-600' : 'bg-sky-500/20 border border-sky-500/30'
+              'w-8 h-8 border-2 border-white flex items-center justify-center flex-shrink-0 font-bold',
+              msg.role === 'assistant' ? 'bg-white text-black' : 'bg-black text-white'
             )}>
-              {msg.role === 'assistant' ? <Bot className="w-4 h-4 text-white" /> : <User className="w-4 h-4 text-sky-400" />}
+              {msg.role === 'assistant' ? <Bot className="w-4 h-4 stroke-[2.5]" /> : <User className="w-4 h-4 stroke-[2.5]" />}
             </div>
 
             <div className={cn('max-w-[80%] space-y-2', msg.role === 'user' ? 'items-end' : '')}>
               <div className={cn(
-                'px-4 py-3 rounded-2xl text-sm leading-relaxed',
+                'p-4 text-xs leading-relaxed pixel-box',
                 msg.role === 'assistant'
-                  ? 'bg-[#1f2937] border border-white/[0.06] text-slate-200'
-                  : 'bg-sky-500 text-white'
+                  ? 'bg-black border-2 border-zinc-700 text-white'
+                  : 'bg-white text-black border-2 border-white shadow-[3px_3px_0px_0px_#ffffff]'
               )}>
                 <p dangerouslySetInnerHTML={{ __html: renderContent(msg.content) }} />
               </div>
 
               {msg.citations && msg.citations.length > 0 && (
-                <div className="space-y-1">
-                  <p className="text-xs text-slate-500 flex items-center gap-1">
-                    <FileText className="w-3 h-3" /> Sources
+                <div className="space-y-1 font-pixel-code">
+                  <p className="text-xs text-zinc-400 flex items-center gap-1 uppercase font-bold">
+                    <FileText className="w-3 h-3 stroke-[2]" /> SOURCES
                   </p>
                   {msg.citations.map((c, i) => (
-                    <div key={i} className="flex items-center gap-2 px-3 py-1.5 bg-white/[0.03] border border-white/[0.06] rounded-lg hover:bg-white/[0.05] transition-colors cursor-pointer">
-                      <FileText className="w-3 h-3 text-sky-400 flex-shrink-0" />
-                      <span className="text-xs text-slate-300 truncate">{c.title}</span>
+                    <div key={i} className="flex items-center gap-2 px-3 py-1.5 bg-black border border-zinc-700 hover:border-white transition-colors cursor-pointer text-xs font-bold text-white uppercase">
+                      <FileText className="w-3.5 h-3.5 text-white flex-shrink-0" />
+                      <span className="truncate">{c.title}</span>
                     </div>
                   ))}
                 </div>
               )}
-              <p className="text-[10px] text-slate-600 px-1">{formatRelativeTime(msg.timestamp)}</p>
+              <p className="text-[10px] font-pixel-code text-zinc-500 px-1">{formatRelativeTime(msg.timestamp)}</p>
             </div>
           </div>
         ))}
 
         {loading && (
           <div className="flex gap-3">
-            <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-violet-500 to-indigo-600 flex items-center justify-center">
-              <Bot className="w-4 h-4 text-white" />
+            <div className="w-8 h-8 border-2 border-white bg-white text-black flex items-center justify-center">
+              <Bot className="w-4 h-4 stroke-[2.5]" />
             </div>
-            <div className="px-4 py-3 bg-[#1f2937] border border-white/[0.06] rounded-2xl">
+            <div className="p-4 pixel-box bg-black border-2 border-zinc-700">
               <div className="flex gap-1.5 items-center">
-                <div className="w-2 h-2 bg-slate-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
-                <div className="w-2 h-2 bg-slate-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
-                <div className="w-2 h-2 bg-slate-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+                <div className="w-2 h-2 bg-white animate-bounce" style={{ animationDelay: '0ms' }} />
+                <div className="w-2 h-2 bg-white animate-bounce" style={{ animationDelay: '150ms' }} />
+                <div className="w-2 h-2 bg-white animate-bounce" style={{ animationDelay: '300ms' }} />
               </div>
             </div>
           </div>
@@ -180,14 +187,14 @@ export default function AIAssistantPage() {
 
       {/* Suggestions */}
       {messages.length <= 1 && (
-        <div className="flex-shrink-0 py-3">
-          <p className="text-xs text-slate-500 mb-2">Suggested questions:</p>
+        <div className="flex-shrink-0 py-3 font-pixel-code">
+          <p className="text-xs text-zinc-400 mb-2 uppercase font-bold">SUGGESTED QUESTIONS:</p>
           <div className="flex flex-wrap gap-2">
             {SUGGESTED_QUESTIONS.map((q) => (
               <button
                 key={q}
                 onClick={() => sendMessage(q)}
-                className="text-xs px-3 py-1.5 bg-white/[0.04] border border-white/[0.06] rounded-xl text-slate-400 hover:text-sky-400 hover:border-sky-500/30 transition-all"
+                className="text-xs px-3 py-1.5 bg-black border border-zinc-700 text-zinc-300 hover:text-white hover:border-white transition-all uppercase font-bold"
               >
                 {q}
               </button>
@@ -198,28 +205,30 @@ export default function AIAssistantPage() {
 
       {/* Input */}
       <div className="flex-shrink-0 pt-3">
-        <div className="flex items-end gap-3 bg-[#1f2937] border border-white/[0.08] rounded-2xl p-3 focus-within:border-sky-500/40 transition-colors">
+        <div className="flex items-end gap-3 bg-black border-2 border-zinc-700 p-3 focus-within:border-white transition-colors shadow-[3px_3px_0px_0px_#18181b]">
           <textarea
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(input); } }}
-            placeholder="Ask about KMRL documents... (Enter to send, Shift+Enter for new line)"
+            placeholder="ASK ABOUT KMRL DOCUMENTS... (ENTER TO SEND)"
             rows={1}
-            className="flex-1 bg-transparent text-sm text-white placeholder-slate-600 resize-none focus:outline-none max-h-24"
+            className="flex-1 bg-transparent text-xs font-pixel text-white placeholder-zinc-500 resize-none focus:outline-none max-h-24 uppercase"
             style={{ lineHeight: '1.5' }}
           />
-          <button
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             onClick={() => sendMessage(input)}
             disabled={loading || !input.trim()}
-            className="w-9 h-9 rounded-xl bg-sky-500 flex items-center justify-center text-white hover:bg-sky-600 transition-colors disabled:opacity-40 flex-shrink-0"
+            className="pixel-btn-white flex items-center justify-center disabled:opacity-40 flex-shrink-0"
           >
-            {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
-          </button>
+            {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4 stroke-[3]" />}
+          </motion.button>
         </div>
-        <p className="text-center text-[10px] text-slate-600 mt-2 flex items-center justify-center gap-1">
-          <Sparkles className="w-3 h-3" /> Powered by Ollama Llama3 with Gemini fallback
+        <p className="text-center text-[10px] font-pixel-code text-zinc-500 mt-2 flex items-center justify-center gap-1 uppercase">
+          <Sparkles className="w-3 h-3" /> POWERED BY OLLAMA LLAMA3 WITH GEMINI FALLBACK
         </p>
       </div>
-    </div>
+    </motion.div>
   );
 }

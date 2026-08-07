@@ -1,10 +1,10 @@
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import { useAuthStore } from '@/store/authStore';
 import {
   LayoutDashboard, FileText, Upload, Search, Bot, CheckSquare,
   BarChart3, Users, Building2, Bell, Settings, ChevronLeft, ChevronRight,
-  Train, LogOut, Shield
+  Train, LogOut, Shield, Sparkles
 } from 'lucide-react';
 
 interface SidebarProps {
@@ -13,23 +13,24 @@ interface SidebarProps {
 }
 
 const navItems = [
-  { to: '/dashboard', icon: LayoutDashboard, label: 'Dashboard', roles: ['admin', 'manager', 'employee'] },
-  { to: '/documents', icon: FileText, label: 'Documents', roles: ['admin', 'manager', 'employee'] },
-  { to: '/contracts', icon: Shield, label: 'Contract Intelligence', roles: ['admin', 'manager', 'employee'], badge: '3 Expiring' },
-  { to: '/upload', icon: Upload, label: 'Upload', roles: ['admin', 'manager', 'employee'] },
-  { to: '/search', icon: Search, label: 'Search', roles: ['admin', 'manager', 'employee'] },
-  { to: '/ai-assistant', icon: Bot, label: 'AI Assistant', roles: ['admin', 'manager', 'employee'] },
-  { to: '/approvals', icon: CheckSquare, label: 'Approvals', roles: ['admin', 'manager', 'employee'] },
-  { to: '/analytics', icon: BarChart3, label: 'Analytics', roles: ['admin', 'manager'] },
-  { to: '/departments', icon: Building2, label: 'Departments', roles: ['admin', 'manager', 'employee'] },
-  { to: '/notifications', icon: Bell, label: 'Notifications', roles: ['admin', 'manager', 'employee'] },
-  { to: '/users', icon: Users, label: 'Users', roles: ['admin'] },
-  { to: '/settings', icon: Settings, label: 'Settings', roles: ['admin', 'manager', 'employee'] },
+  { to: '/dashboard', icon: LayoutDashboard, label: 'DASHBOARD', roles: ['admin', 'manager', 'employee'] },
+  { to: '/documents', icon: FileText, label: 'DOCUMENTS', roles: ['admin', 'manager', 'employee'] },
+  { to: '/contracts', icon: Shield, label: 'CONTRACTS', roles: ['admin', 'manager', 'employee'], badge: '3 EXP' },
+  { to: '/upload', icon: Upload, label: 'UPLOAD DOCUMENTS', roles: ['admin', 'manager', 'employee'] },
+  { to: '/search', icon: Search, label: 'SEARCH', roles: ['admin', 'manager', 'employee'] },
+  { to: '/ai-assistant', icon: Bot, label: 'AI ASSISTANT', roles: ['admin', 'manager', 'employee'], isAi: true },
+  { to: '/approvals', icon: CheckSquare, label: 'APPROVALS', roles: ['admin', 'manager', 'employee'] },
+  { to: '/analytics', icon: BarChart3, label: 'ANALYTICS', roles: ['admin', 'manager'] },
+  { to: '/departments', icon: Building2, label: 'DEPARTMENTS', roles: ['admin', 'manager', 'employee'] },
+  { to: '/notifications', icon: Bell, label: 'NOTIFICATIONS', roles: ['admin', 'manager', 'employee'] },
+  { to: '/users', icon: Users, label: 'USERS', roles: ['admin'] },
+  { to: '/settings', icon: Settings, label: 'SETTINGS', roles: ['admin', 'manager', 'employee'] },
 ];
 
 export function Sidebar({ collapsed, onToggle }: SidebarProps) {
   const { user, logout } = useAuthStore();
   const location = useLocation();
+  const navigate = useNavigate();
 
   const visibleItems = navItems.filter(
     (item) => !user || item.roles.includes(user.role)
@@ -38,26 +39,27 @@ export function Sidebar({ collapsed, onToggle }: SidebarProps) {
   return (
     <aside
       className={cn(
-        'flex flex-col h-full bg-[#111827] border-r border-white/[0.06] sidebar-transition relative z-20',
-        collapsed ? 'w-16' : 'w-64'
+        'flex flex-col h-full bg-[#09090b] border-r-2 border-[#27272a] sidebar-transition relative z-20 font-pixel-head',
+        collapsed ? 'w-20' : 'w-72'
       )}
     >
-      {/* Logo */}
-      <div className="flex items-center gap-3 px-4 py-5 border-b border-white/[0.06]">
-        <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-sky-500 to-indigo-600 flex items-center justify-center flex-shrink-0 shadow-lg">
-          <Train className="w-5 h-5 text-white" />
-        </div>
+      {/* Brand Header -> Redirects to Home Page */}
+      <NavLink
+        to="/"
+        className="flex items-center gap-3.5 px-4 py-5 border-b-2 border-[#27272a] cursor-pointer group hover:bg-zinc-900 transition-colors"
+      >
+        <Train className="w-7 h-7 text-white stroke-[2.5] flex-shrink-0 animate-pixel-float group-hover:scale-110 transition-transform" />
         {!collapsed && (
           <div className="overflow-hidden">
-            <p className="text-sm font-bold text-white leading-tight">IntelliDocs</p>
-            <p className="text-[10px] text-slate-400">KMRL</p>
+            <p className="text-sm font-bold text-white font-bloom tracking-wider group-hover:text-[#6ee7b7] transition-colors">INTELLIDOCS</p>
+            <p className="text-[10px] font-pixel-code text-[#a1a1aa] uppercase tracking-widest mt-0.5">KMRL METRO PIXEL v2</p>
           </div>
         )}
-      </div>
+      </NavLink>
 
-      {/* Nav */}
-      <nav className="flex-1 py-3 px-2 overflow-y-auto space-y-1">
-        {visibleItems.map(({ to, icon: Icon, label, badge }) => {
+      {/* Navigation */}
+      <nav className="flex-1 py-4 px-3 overflow-y-auto space-y-1.5 font-pixel">
+        {visibleItems.map(({ to, icon: Icon, label, badge, isAi }) => {
           const isActive = location.pathname === to || location.pathname.startsWith(to + '/');
           return (
             <NavLink
@@ -65,18 +67,19 @@ export function Sidebar({ collapsed, onToggle }: SidebarProps) {
               to={to}
               title={collapsed ? label : undefined}
               className={cn(
-                'flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-150 group relative',
+                'flex items-center gap-3 px-3 py-2.5 rounded-none text-xs font-bold transition-all duration-150 group relative border-2',
                 isActive
-                  ? 'bg-sky-500/15 text-sky-400 border border-sky-500/20'
-                  : 'text-slate-400 hover:text-slate-200 hover:bg-white/[0.04]'
+                  ? 'bg-white text-black border-white shadow-[3px_3px_0px_0px_#ffffff]'
+                  : 'text-zinc-400 border-transparent hover:text-white hover:bg-zinc-900 hover:border-zinc-700'
               )}
             >
-              <Icon className={cn('w-5 h-5 flex-shrink-0', isActive ? 'text-sky-400' : 'text-slate-500 group-hover:text-slate-300')} />
+              <Icon className={cn('w-4 h-4 flex-shrink-0 stroke-[2.5]', isActive ? 'text-black' : 'text-zinc-400 group-hover:text-white', isAi && !isActive && 'text-green-400')} />
               {!collapsed && (
                 <>
-                  <span className="truncate flex-1">{label}</span>
+                  <span className={cn('truncate flex-1 tracking-wider', isActive && 'font-bloom')}>{label}</span>
+                  {isAi && <Sparkles className="w-3.5 h-3.5 text-green-400 animate-pulse" />}
                   {badge && (
-                    <span className="text-[10px] bg-red-500/20 text-red-400 border border-red-500/30 px-1.5 py-0.5 rounded-full font-bold">
+                    <span className="text-[9px] bg-red-500/20 text-red-400 border border-red-500/40 px-1.5 py-0.5 font-pixel-code font-bold">
                       {badge}
                     </span>
                   )}
@@ -87,34 +90,33 @@ export function Sidebar({ collapsed, onToggle }: SidebarProps) {
         })}
       </nav>
 
-      {/* User */}
-      <div className="p-3 border-t border-white/[0.06]">
+      {/* Footer - Clean Log Out Button Only */}
+      <div className="p-3 border-t-2 border-[#27272a]">
         {!collapsed ? (
-          <div className="flex items-center gap-3 px-2 py-2">
-            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-sky-500 to-indigo-500 flex items-center justify-center text-white text-xs font-bold flex-shrink-0">
-              {user?.full_name?.split(' ').map((n) => n[0]).join('').slice(0, 2) ?? 'U'}
-            </div>
-            <div className="flex-1 min-w-0">
-              <p className="text-xs font-semibold text-slate-200 truncate">{user?.full_name}</p>
-              <p className="text-[10px] text-slate-500 capitalize">{user?.role}</p>
-            </div>
-            <button onClick={logout} className="text-slate-500 hover:text-red-400 transition-colors p-1 rounded-lg">
-              <LogOut className="w-4 h-4" />
-            </button>
-          </div>
+          <button
+            onClick={logout}
+            className="pixel-btn-dark w-full flex items-center justify-center gap-2 hover:bg-zinc-900 border-zinc-700"
+          >
+            <LogOut className="w-4 h-4 stroke-[2.5]" />
+            <span>LOG OUT</span>
+          </button>
         ) : (
-          <button onClick={logout} className="w-full flex justify-center py-2 text-slate-500 hover:text-red-400 transition-colors">
-            <LogOut className="w-5 h-5" />
+          <button
+            onClick={logout}
+            title="LOG OUT"
+            className="w-full flex justify-center py-2.5 bg-black border-2 border-zinc-700 text-zinc-400 hover:text-white hover:border-white transition-colors"
+          >
+            <LogOut className="w-4 h-4 stroke-[2.5]" />
           </button>
         )}
       </div>
 
-      {/* Toggle */}
+      {/* Toggle Button */}
       <button
         onClick={onToggle}
-        className="absolute -right-3 top-[72px] w-6 h-6 bg-[#1f2937] border border-white/10 rounded-full flex items-center justify-center text-slate-400 hover:text-white transition-colors shadow-lg"
+        className="absolute -right-4 top-[72px] w-7 h-7 bg-[#09090b] border-2 border-white text-white flex items-center justify-center shadow-[2px_2px_0px_0px_#ffffff] hover:scale-110 transition-transform"
       >
-        {collapsed ? <ChevronRight className="w-3 h-3" /> : <ChevronLeft className="w-3 h-3" />}
+        {collapsed ? <ChevronRight className="w-4 h-4" /> : <ChevronLeft className="w-4 h-4" />}
       </button>
     </aside>
   );
