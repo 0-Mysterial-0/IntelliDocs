@@ -283,8 +283,8 @@ export default function LoginPage() {
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder="ADMIN@KMRL.IN"
-                    className="w-full px-4 py-2.5 bg-black border-2 border-zinc-700 text-xs font-pixel text-white placeholder-zinc-500 focus:outline-none focus:border-white uppercase shadow-[2px_2px_0px_0px_#18181b]"
+                    placeholder="admin@kmrl.in"
+                    className="w-full px-4 py-2.5 bg-black border-2 border-zinc-700 text-xs font-pixel text-white placeholder-zinc-500 focus:outline-none focus:border-white shadow-[2px_2px_0px_0px_#18181b]"
                   />
                 </div>
 
@@ -296,7 +296,7 @@ export default function LoginPage() {
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       placeholder="••••••••"
-                      className="w-full px-4 py-2.5 bg-black border-2 border-zinc-700 text-xs font-pixel text-white placeholder-zinc-500 focus:outline-none focus:border-white uppercase pr-10 shadow-[2px_2px_0px_0px_#18181b]"
+                      className="w-full px-4 py-2.5 bg-black border-2 border-zinc-700 text-xs font-pixel text-white placeholder-zinc-500 focus:outline-none focus:border-white pr-10 shadow-[2px_2px_0px_0px_#18181b]"
                     />
                     <button
                       type="button"
@@ -374,8 +374,8 @@ export default function LoginPage() {
                     type="text"
                     value={signUpName}
                     onChange={(e) => setSignUpName(e.target.value)}
-                    placeholder="E.G. SURESH PRABHU"
-                    className="w-full px-4 py-2.5 bg-black border-2 border-zinc-700 text-xs font-pixel text-white placeholder-zinc-500 focus:outline-none focus:border-white uppercase shadow-[2px_2px_0px_0px_#18181b]"
+                    placeholder="e.g. Suresh Prabhu"
+                    className="w-full px-4 py-2.5 bg-black border-2 border-zinc-700 text-xs font-pixel text-white placeholder-zinc-500 focus:outline-none focus:border-white shadow-[2px_2px_0px_0px_#18181b]"
                   />
                 </div>
 
@@ -385,8 +385,8 @@ export default function LoginPage() {
                     type="email"
                     value={signUpEmail}
                     onChange={(e) => setSignUpEmail(e.target.value)}
-                    placeholder="USER@KMRL.IN"
-                    className="w-full px-4 py-2.5 bg-black border-2 border-zinc-700 text-xs font-pixel text-white placeholder-zinc-500 focus:outline-none focus:border-white uppercase shadow-[2px_2px_0px_0px_#18181b]"
+                    placeholder="user@kmrl.in"
+                    className="w-full px-4 py-2.5 bg-black border-2 border-zinc-700 text-xs font-pixel text-white placeholder-zinc-500 focus:outline-none focus:border-white shadow-[2px_2px_0px_0px_#18181b]"
                   />
                 </div>
 
@@ -396,8 +396,8 @@ export default function LoginPage() {
                     type="password"
                     value={signUpPassword}
                     onChange={(e) => setSignUpPassword(e.target.value)}
-                    placeholder="CREATE PASSWORD"
-                    className="w-full px-4 py-2.5 bg-black border-2 border-zinc-700 text-xs font-pixel text-white placeholder-zinc-500 focus:outline-none focus:border-white uppercase shadow-[2px_2px_0px_0px_#18181b]"
+                    placeholder="••••••••"
+                    className="w-full px-4 py-2.5 bg-black border-2 border-zinc-700 text-xs font-pixel text-white placeholder-zinc-500 focus:outline-none focus:border-white shadow-[2px_2px_0px_0px_#18181b]"
                   />
                 </div>
 

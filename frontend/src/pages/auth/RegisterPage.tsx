@@ -143,9 +143,9 @@ export default function RegisterPage() {
                 type="text"
                 value={fullName}
                 onChange={(e) => setFullName(e.target.value)}
-                placeholder="E.G. SURESH PRABHU"
+                placeholder="e.g. Suresh Prabhu"
                 required
-                className="w-full px-4 py-2.5 bg-black border-2 border-zinc-700 text-xs font-pixel text-white placeholder-zinc-500 focus:outline-none focus:border-white uppercase shadow-[2px_2px_0px_0px_#18181b]"
+                className="w-full px-4 py-2.5 bg-black border-2 border-zinc-700 text-xs font-pixel text-white placeholder-zinc-500 focus:outline-none focus:border-white shadow-[2px_2px_0px_0px_#18181b]"
               />
             </div>
 
@@ -155,9 +155,9 @@ export default function RegisterPage() {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="YOUR.NAME@KMRL.IN"
+                placeholder="your.name@kmrl.in"
                 required
-                className="w-full px-4 py-2.5 bg-black border-2 border-zinc-700 text-xs font-pixel text-white placeholder-zinc-500 focus:outline-none focus:border-white uppercase shadow-[2px_2px_0px_0px_#18181b]"
+                className="w-full px-4 py-2.5 bg-black border-2 border-zinc-700 text-xs font-pixel text-white placeholder-zinc-500 focus:outline-none focus:border-white shadow-[2px_2px_0px_0px_#18181b]"
               />
             </div>
 
@@ -170,7 +170,7 @@ export default function RegisterPage() {
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
                   required
-                  className="w-full px-4 py-2.5 bg-black border-2 border-zinc-700 text-xs font-pixel text-white placeholder-zinc-500 focus:outline-none focus:border-white uppercase pr-10 shadow-[2px_2px_0px_0px_#18181b]"
+                  className="w-full px-4 py-2.5 bg-black border-2 border-zinc-700 text-xs font-pixel text-white placeholder-zinc-500 focus:outline-none focus:border-white pr-10 shadow-[2px_2px_0px_0px_#18181b]"
                 />
                 <button type="button" onClick={() => setShowPassword((v) => !v)} className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-white">
                   {showPassword ? <EyeOff className="w-4 h-4 stroke-[2.5]" /> : <Eye className="w-4 h-4 stroke-[2.5]" />}
