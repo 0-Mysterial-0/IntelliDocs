@@ -66,7 +66,7 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#000000] flex font-pixel text-white selection:bg-white selection:text-black relative">
+    <div className="min-h-[100dvh] bg-[#000000] flex flex-col md:flex-row font-pixel text-white selection:bg-white selection:text-black relative overflow-y-auto">
       <CursorFollower />
 
       {/* Left Panel - Branding */}
@@ -121,7 +121,7 @@ export default function RegisterPage() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="flex-1 flex items-center justify-center p-6 lg:p-12 bg-[#000000]"
+        className="flex-1 flex items-center justify-center p-4 sm:p-6 lg:p-12 bg-[#000000] min-h-[100dvh] md:min-h-0"
       >
         <div className="w-full max-w-sm">
           {/* Mobile Logo */}

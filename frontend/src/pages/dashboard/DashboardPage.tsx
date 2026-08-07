@@ -113,7 +113,7 @@ export default function DashboardPage() {
       </motion.div>
 
       {/* Floating Intelligence Alerts */}
-      <motion.div variants={itemVariants} className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <motion.div variants={itemVariants} className="grid grid-cols-1 sm:grid-cols-2 gap-6">
         {/* Contract Intelligence */}
         <motion.div
           whileHover={{ scale: 1.015, y: -4 }}
@@ -172,7 +172,7 @@ export default function DashboardPage() {
           <span className="text-xs font-pixel-code text-zinc-400">FPS: 60 // PING: 12ms</span>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
           {STAT_CARDS.map(({ label, value, icon: Icon, trend, urgent, metric }, idx) => (
             <motion.div
               key={label}
@@ -207,7 +207,7 @@ export default function DashboardPage() {
         <h2 className="text-xs font-pixel-head font-bold text-white font-bloom-subtle tracking-widest mb-4">
           QUICK ACTIONS // PIXEL MODULES
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {QUICK_ACTIONS.map(({ label, desc, icon: Icon, to, badge }, idx) => (
             <motion.div
               key={label}

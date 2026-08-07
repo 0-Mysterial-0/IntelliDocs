@@ -59,7 +59,7 @@ export default function DocumentsPage() {
       className="space-y-6 max-w-7xl mx-auto font-pixel"
     >
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-wrap items-center justify-between gap-2">
         <div>
           <h1 className="text-2xl font-pixel-head font-bold text-white font-bloom">ENTERPRISE DOCUMENTS</h1>
           <p className="text-zinc-400 text-xs font-pixel-code mt-1 uppercase">{docs.length} OF {allDocs.length} INDEXED FILES</p>

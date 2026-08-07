@@ -238,3 +238,79 @@ svg, img {
 .sidebar-transition {
   transition: width 0.2s ease-in-out;
 }
+
+/* ─── MOBILE-FIRST RESPONSIVE OVERRIDES ────────────────────────────────────── */
+
+/* Touch-friendly tap targets */
+@media (max-width: 768px) {
+  .pixel-btn-white,
+  .pixel-btn-dark {
+    min-height: 44px;
+    padding: 10px 14px;
+    font-size: 0.7rem;
+  }
+
+  /* Disable heavy box shadows on mobile for perf */
+  .pixel-box {
+    box-shadow: 2px 2px 0px 0px #18181b;
+  }
+  .pixel-box:hover {
+    transform: none;
+    box-shadow: 3px 3px 0px 0px #ffffff;
+  }
+
+  /* Prevent horizontal overflow on mobile */
+  main {
+    overflow-x: hidden;
+    word-break: break-word;
+  }
+
+  /* Readable font sizes on small screens */
+  .font-pixel-head {
+    letter-spacing: 0.02em;
+  }
+
+  /* Allow text wrapping in tables and cards */
+  .truncate {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: unset;
+  }
+}
+
+/* Very small phones (under 400px) */
+@media (max-width: 400px) {
+  h1, .text-2xl, .text-3xl, .text-4xl {
+    font-size: 1.2rem !important;
+    line-height: 1.4 !important;
+  }
+  h2, .text-xl {
+    font-size: 1rem !important;
+  }
+
+  .pixel-btn-white,
+  .pixel-btn-dark {
+    padding: 8px 10px;
+    font-size: 0.65rem;
+  }
+}
+
+/* Tablet (641–1023px) */
+@media (min-width: 641px) and (max-width: 1023px) {
+  .pixel-box:hover {
+    transform: translateY(-2px);
+  }
+}
+
+/* Mobile Bottom Nav safe area */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  .mobile-safe-bottom {
+    padding-bottom: calc(env(safe-area-inset-bottom) + 4px);
+  }
+}
+
+/* Print media - hide interactive elements */
+@media print {
+  .pixel-box:hover { transform: none; }
+  header, aside, nav { display: none; }
+}

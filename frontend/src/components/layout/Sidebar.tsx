@@ -1,6 +1,7 @@
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import { useAuthStore } from '@/store/authStore';
+import { useContractsStore } from '@/store/contractsStore';
 import {
   LayoutDashboard, FileText, Upload, Search, Bot, CheckSquare,
   BarChart3, Users, Building2, Bell, Settings, ChevronLeft, ChevronRight,
@@ -15,7 +16,7 @@ interface SidebarProps {
 const navItems = [
   { to: '/dashboard', icon: LayoutDashboard, label: 'DASHBOARD', roles: ['admin', 'manager', 'employee'] },
   { to: '/documents', icon: FileText, label: 'DOCUMENTS', roles: ['admin', 'manager', 'employee'] },
-  { to: '/contracts', icon: Shield, label: 'CONTRACTS', roles: ['admin', 'manager', 'employee'], badge: '3 EXP' },
+  { to: '/contracts', icon: Shield, label: 'CONTRACTS', roles: ['admin', 'manager', 'employee'], badge: null as null },
   { to: '/upload', icon: Upload, label: 'UPLOAD DOCUMENTS', roles: ['admin', 'manager', 'employee'] },
   { to: '/search', icon: Search, label: 'SEARCH', roles: ['admin', 'manager', 'employee'] },
   { to: '/ai-assistant', icon: Bot, label: 'AI ASSISTANT', roles: ['admin', 'manager', 'employee'], isAi: true },
@@ -31,6 +32,8 @@ export function Sidebar({ collapsed, onToggle }: SidebarProps) {
   const { user, logout } = useAuthStore();
   const location = useLocation();
   const navigate = useNavigate();
+  const contractsStore = useContractsStore();
+  const expiringCount = contractsStore.expiringCount();
 
   const visibleItems = navItems.filter(
     (item) => !user || item.roles.includes(user.role)
@@ -78,9 +81,9 @@ export function Sidebar({ collapsed, onToggle }: SidebarProps) {
                 <>
                   <span className={cn('truncate flex-1 tracking-wider', isActive && 'font-bloom')}>{label}</span>
                   {isAi && <Sparkles className="w-3.5 h-3.5 text-green-400 animate-pulse" />}
-                  {badge && (
+                  {to === '/contracts' && expiringCount > 0 && (
                     <span className="text-[9px] bg-red-500/20 text-red-400 border border-red-500/40 px-1.5 py-0.5 font-pixel-code font-bold">
-                      {badge}
+                      {expiringCount} EXP
                     </span>
                   )}
                 </>

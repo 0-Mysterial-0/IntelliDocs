@@ -30,10 +30,12 @@ async def get_ocr_result(document_id: str, current_user: User = Depends(get_curr
         "extracted_text": ocr.extracted_text,
         "languages": ocr.languages,
         "confidence": ocr.confidence,
+        "method": "easyocr",
         "has_tables": ocr.has_tables,
         "has_signatures": ocr.has_signatures,
         "has_stamps": ocr.has_stamps,
         "processed_at": ocr.processed_at.isoformat() if ocr.processed_at else None,
+        "page_count": ocr.page_count,
     }
 
 

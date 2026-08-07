@@ -23,6 +23,7 @@ import UsersPage from '@/pages/users/UsersPage';
 import DepartmentsPage from '@/pages/departments/DepartmentsPage';
 import NotificationsPage from '@/pages/notifications/NotificationsPage';
 import SettingsPage from '@/pages/settings/SettingsPage';
+import OcrViewerPage from '@/pages/ocr/OcrViewerPage';
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const { isAuthenticated } = useAuthStore();
@@ -52,6 +53,8 @@ export default function AppRoutes() {
         <Route path="notifications" element={<NotificationsPage />} />
         <Route path="users" element={<UsersPage />} />
         <Route path="settings" element={<SettingsPage />} />
+        <Route path="ocr/:id" element={<OcrViewerPage />} />
+        <Route path="ocr" element={<OcrViewerPage />} />
       </Route>
 
       <Route path="*" element={<Navigate to="/" replace />} />

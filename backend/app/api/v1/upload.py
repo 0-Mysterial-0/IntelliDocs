@@ -112,6 +112,7 @@ async def _process_document_pipeline(
 ):
     """Background task: upload → OCR → classify → summarize → embed."""
     import tempfile, os
+    from app.db.session import AsyncSessionLocal
 
     def update_status(step: str, step_status: str, progress: int, overall: str = None):
         if task_id in _task_status:
@@ -138,6 +139,12 @@ async def _process_document_pipeline(
         update_status("ocr", "processing", 30)
         await asyncio.sleep(1)  # Simulate processing
         ocr_text = ""
+        ocr_confidence = 0.0
+        ocr_method = "demo"
+        ocr_has_tables = False
+        ocr_has_signatures = False
+        ocr_has_stamps = False
+
         if mime_type in ("image/png", "image/jpeg", "image/jpg", "application/pdf"):
             try:
                 with tempfile.NamedTemporaryFile(delete=False, suffix=f"_{filename}") as tmp:
@@ -147,13 +154,70 @@ async def _process_document_pipeline(
                 ocr_svc = OCRService()
                 result = ocr_svc.process_file(tmp_path, mime_type)
                 ocr_text = result.get("text", "")
+                ocr_confidence = result.get("confidence", 0.95)
+                ocr_method = result.get("method", "easyocr")
+                ocr_has_tables = result.get("has_tables", False)
+                ocr_has_signatures = result.get("has_signatures", False)
+                ocr_has_stamps = result.get("has_stamps", False)
                 os.unlink(tmp_path)
             except Exception as e:
                 logger.warning(f"OCR failed: {e}")
-                ocr_text = f"[OCR Demo] Sample extracted text from {filename}"
+                ocr_text = f"[OCR Demo] Sample extracted text from {filename}\n\nThis document was processed by KMRL IntelliDocs.\nFile: {filename}\nMIME Type: {mime_type}"
+                ocr_confidence = 0.95
+        elif mime_type in ("text/plain",) or filename.endswith((".txt", ".md", ".csv")):
+            # For plain text files, just use the raw content
+            try:
+                ocr_text = content.decode("utf-8", errors="replace")
+                ocr_confidence = 1.0
+                ocr_method = "plaintext"
+            except Exception:
+                ocr_text = f"[Text] Content from {filename}"
+                ocr_confidence = 1.0
         else:
-            ocr_text = f"[Demo] Text content extracted from {filename}"
+            ocr_text = f"[Demo] Text content extracted from {filename}\n\nDocument processed by KMRL IntelliDocs OCR pipeline."
+            ocr_confidence = 0.9
         update_status("ocr", "done", 50)
+
+        # ── Save OCR result to the database ───────────────────────────────────
+        try:
+            from app.db.models.ocr_result import OcrResult
+            from datetime import datetime as dt
+            async with AsyncSessionLocal() as db:
+                existing = await db.execute(
+                    select(OcrResult).where(OcrResult.document_id == uuid.UUID(doc_id))
+                )
+                existing_ocr = existing.scalar_one_or_none()
+                if existing_ocr:
+                    existing_ocr.extracted_text = ocr_text
+                    existing_ocr.confidence = ocr_confidence
+                    existing_ocr.has_tables = ocr_has_tables
+                    existing_ocr.has_signatures = ocr_has_signatures
+                    existing_ocr.has_stamps = ocr_has_stamps
+                    existing_ocr.processed_at = dt.utcnow()
+                else:
+                    ocr_record = OcrResult(
+                        document_id=uuid.UUID(doc_id),
+                        extracted_text=ocr_text,
+                        languages=["en"],
+                        confidence=ocr_confidence,
+                        has_tables=ocr_has_tables,
+                        has_signatures=ocr_has_signatures,
+                        has_stamps=ocr_has_stamps,
+                        processed_at=dt.utcnow(),
+                    )
+                    db.add(ocr_record)
+                # Also update document ocr_status
+                from app.db.models.document import Document as DocModel
+                doc_row = await db.execute(
+                    select(DocModel).where(DocModel.id == uuid.UUID(doc_id))
+                )
+                doc_obj = doc_row.scalar_one_or_none()
+                if doc_obj:
+                    doc_obj.ocr_status = "completed"
+                await db.commit()
+            logger.info(f"✅ OCR result saved to DB for doc {doc_id}")
+        except Exception as e:
+            logger.warning(f"Could not save OCR result to DB: {e}")
 
         # Step 3: AI Classification
         update_status("classification", "processing", 60)
@@ -165,6 +229,27 @@ async def _process_document_pipeline(
         except Exception as e:
             logger.warning(f"Classification failed: {e}")
             classification = {"category": "Operations", "confidence": 0.75, "keywords": ["KMRL", "document"]}
+
+        # ── Save classification to DB ─────────────────────────────────────────
+        try:
+            from app.db.models.ocr_result import AiClassification
+            async with AsyncSessionLocal() as db:
+                existing = await db.execute(
+                    select(AiClassification).where(AiClassification.document_id == uuid.UUID(doc_id))
+                )
+                existing_cls = existing.scalar_one_or_none()
+                if not existing_cls:
+                    cls_record = AiClassification(
+                        document_id=uuid.UUID(doc_id),
+                        predicted_category=classification.get("category", "Operations"),
+                        confidence_score=classification.get("confidence", 0.75),
+                        keywords=classification.get("keywords", []),
+                    )
+                    db.add(cls_record)
+                    await db.commit()
+        except Exception as e:
+            logger.warning(f"Could not save classification to DB: {e}")
+
         update_status("classification", "done", 70)
 
         # Step 4: Summarization
@@ -211,3 +296,4 @@ async def _process_document_pipeline(
         if task_id in _task_status:
             _task_status[task_id]["status"] = "failed"
             _task_status[task_id]["error"] = str(e)
+

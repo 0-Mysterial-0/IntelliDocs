@@ -68,6 +68,11 @@ export const uploadApi = {
   getStatus: (taskId: string) => api.get(`/upload/${taskId}/status`),
 };
 
+// OCR API
+export const ocrApi = {
+  getResult: (documentId: string) => api.get(`/ocr/${documentId}`),
+};
+
 // Analytics API
 export const analyticsApi = {
   dashboard: () => api.get('/analytics/dashboard'),

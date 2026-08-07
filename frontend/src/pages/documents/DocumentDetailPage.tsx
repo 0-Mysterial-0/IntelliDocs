@@ -1,40 +1,70 @@
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
-  ArrowLeft, FileText, Download, Star, Trash2, Clock, User, Eye,
-  MessageSquare, Copy, Search, Check, FileDown, Sparkles, AlertCircle
+  ArrowLeft, FileText, Copy, Search, Check, FileDown, Sparkles, Scan, X, Loader2
 } from 'lucide-react';
-import { cn, formatDate, formatBytes, formatRelativeTime } from '@/lib/utils';
+import { cn, formatDate, formatBytes } from '@/lib/utils';
 import { MOCK_DOCUMENTS } from '@/data/mockData';
+import { useUploadedDocsStore } from '@/store/uploadedDocsStore';
+import { ocrApi } from '@/lib/api';
+import api from '@/lib/api';
 import { toast } from 'sonner';
 
 export default function DocumentDetailPage() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { uploadedDocs } = useUploadedDocsStore();
 
-  const doc = MOCK_DOCUMENTS.find((d) => d.id === id) || MOCK_DOCUMENTS[0];
+  const allDocs = [...uploadedDocs, ...MOCK_DOCUMENTS];
+  const doc = allDocs.find((d) => d.id === id) || allDocs[0];
 
   const [copiedText, setCopiedText] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [activeTab, setActiveTab] = useState<'text' | 'summary' | 'comments'>('text');
+  const [backendOcrText, setBackendOcrText] = useState<string | null>(null);
+  const [summaryOpen, setSummaryOpen] = useState(false);
+  const [summaryLoading, setSummaryLoading] = useState(false);
+  const [summaryData, setSummaryData] = useState<{
+    executive_summary: string;
+    key_points: string[];
+    action_items: string[];
+    risk_level: string;
+    responsible_department: string;
+    keywords: string[];
+  } | null>(null);
 
-  const fullText = doc.extractedText || `KOCHI METRO RAIL LIMITED
-Corporate Office: Metro Bhavan, Ernakulam, Kochi - 682017
+  // Try to fetch real OCR text from the backend
+  useEffect(() => {
+    if (!id) return;
+    ocrApi.getResult(id)
+      .then((res) => {
+        if (res.data?.extracted_text?.trim()) {
+          setBackendOcrText(res.data.extracted_text);
+        }
+      })
+      .catch(() => { /* backend offline or not processed — use local fallback */ });
+  }, [id]);
+
+  // Use backend OCR text if available, then local stored text, then fallback
+  const fullText = backendOcrText
+    || doc.extractedText
+    || `KOCHI METRO RAIL LIMITED (KMRL)
+CORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017
 
 DOCUMENT TITLE: ${doc.title}
-DEPARTMENT: ${doc.department}
-CATEGORY: ${doc.category}
+DEPARTMENT: ${doc.department || 'OPERATIONS'}
+CATEGORY: ${doc.category || 'GENERAL'}
 DATE OF PROCESSING: ${formatDate(doc.createdAt)}
 STATUS: ${doc.status.toUpperCase()}
 
 1. GENERAL SUMMARY
-This document has been processed by KMRL IntelliDocs OCR and AI Classification Pipeline. The extracted text below represents the converted body content of the uploaded document file (${doc.title}).
+This document has been processed by KMRL IntelliDocs EasyOCR and AI Classification Pipeline. The extracted text below represents the body content of the uploaded document (${doc.title}).
 
 2. DETAILS & SPECIFICATIONS
 - Priority Level: ${doc.priority.toUpperCase()}
-- Storage Reference: demo/${doc.title.toLowerCase().replace(/\s+/g, '_')}.pdf
-- File Size: ${formatBytes(doc.fileSize)}
+- Storage Reference: storage/${doc.title.toLowerCase().replace(/\s+/g, '_')}
+- File Size: ${formatBytes(doc.fileSize || 0)}
 - Uploaded By: ${doc.uploadedBy}
 
 3. CONTENT BODY
@@ -60,6 +90,52 @@ CONFIDENTIALITY NOTICE: This document contains proprietary information of Kochi 
     document.body.removeChild(element);
     toast.success('Text file downloaded!');
   };
+
+  const handleSummarise = useCallback(async () => {
+    setSummaryOpen(true);
+    if (summaryData) return;
+    setSummaryLoading(true);
+    try {
+      const resp = await api.post('/chat/summarize', {
+        document_id: id || doc.id,
+        text: fullText.slice(0, 4000),
+      });
+      if (resp.data?.executive_summary) {
+        setSummaryData(resp.data);
+        setSummaryLoading(false);
+        return;
+      }
+    } catch { /* backend offline — use local fallback */ }
+
+    await new Promise((r) => setTimeout(r, 800));
+    const words = fullText.split(/\s+/).filter(Boolean);
+    const wordCount = words.length;
+    const sentences = fullText.split(/[.!?]+/).filter((s) => s.trim().length > 20);
+    const preview = sentences.slice(0, 4).join('. ').trim();
+    const caps = [...new Set(words.filter((w) => /^[A-Z][a-zA-Z]{3,}/.test(w)))].slice(0, 8);
+
+    setSummaryData({
+      executive_summary: preview || `"${doc.title}" is a ${doc.category} document from the ${doc.department} department, uploaded by ${doc.uploadedBy}. Status: ${doc.status.toUpperCase()}. Priority: ${doc.priority.toUpperCase()}. Contains ${wordCount} words.${doc.description ? ' ' + doc.description : ''}`,
+      key_points: [
+        `Category: ${doc.category}`,
+        `Status: ${doc.status.toUpperCase()} | Priority: ${doc.priority.toUpperCase()}`,
+        `Uploaded by ${doc.uploadedBy} (${doc.department})`,
+        `Word count: ${wordCount} words`,
+        doc.ocrStatus ? `OCR Status: ${doc.ocrStatus}` : 'OCR processing may be pending',
+      ],
+      action_items: [
+        doc.status === 'pending' ? 'Pending executive review and approval' : 'Document has been approved',
+        'Distribute to relevant department heads',
+        'Ensure compliance with KMRL internal policies',
+      ],
+      risk_level: doc.priority,
+      responsible_department: doc.department || 'Operations',
+      keywords: caps.length ? caps : ['KMRL', doc.category, doc.department],
+    });
+    setSummaryLoading(false);
+  }, [id, doc, fullText, summaryData]);
+
+
 
   const getSearchMatchCount = () => {
     if (!searchTerm.trim()) return 0;
@@ -126,25 +202,43 @@ CONFIDENTIALITY NOTICE: This document contains proprietary information of Kochi 
           </div>
         </div>
 
-        <div className="flex gap-2 flex-shrink-0 font-pixel-code">
+        <div className="flex gap-2 flex-shrink-0 font-pixel-code flex-wrap">
+          {/* AI SUMMARISE — primary CTA */}
+          <motion.button
+            whileHover={{ scale: 1.03 }}
+            onClick={handleSummarise}
+            className="pixel-btn-white text-xs flex items-center gap-1.5"
+            title="Generate AI executive summary of this document"
+          >
+            <Sparkles className="w-4 h-4 stroke-[2.5]" />
+            <span>SUMMARISE</span>
+          </motion.button>
+          <motion.button
+            whileHover={{ scale: 1.03 }}
+            onClick={() => navigate(`/ocr/${id || doc.id}`)}
+            className="pixel-btn-dark text-xs flex items-center gap-1.5"
+            title="Open full-screen OCR text viewer"
+          >
+            <Scan className="w-4 h-4 stroke-[2.5]" />
+            <span>OCR</span>
+          </motion.button>
           <motion.button
             whileHover={{ scale: 1.03 }}
             onClick={handleCopyText}
-            className="pixel-btn-white text-xs flex items-center gap-1.5"
-            title="Copy entire document text"
+            className="pixel-btn-dark text-xs flex items-center gap-1.5"
           >
-            {copiedText ? <Check className="w-4 h-4 text-black stroke-[3]" /> : <Copy className="w-4 h-4 stroke-[2.5]" />}
-            <span>{copiedText ? 'COPIED!' : 'COPY TEXT'}</span>
+            {copiedText ? <Check className="w-4 h-4 stroke-[3]" /> : <Copy className="w-4 h-4 stroke-[2.5]" />}
+            <span>{copiedText ? 'COPIED!' : 'COPY'}</span>
           </motion.button>
           <button
             onClick={handleDownloadTxt}
             className="pixel-btn-dark text-xs flex items-center gap-1.5"
-            title="Download converted text file"
           >
             <FileDown className="w-4 h-4 stroke-[2.5]" />
-            <span>DOWNLOAD .TXT</span>
+            <span>.TXT</span>
           </button>
         </div>
+
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -183,7 +277,7 @@ CONFIDENTIALITY NOTICE: This document contains proprietary information of Kochi 
                   : 'border-transparent text-zinc-400 hover:text-white'
               )}
             >
-              <MessageSquare className="w-4 h-4 stroke-[2.5]" /> COMMENTS (2)
+              <MessageSquare className="w-4 h-4 stroke-[2.5]" /> COMMENTS
             </button>
           </div>
 
@@ -213,6 +307,17 @@ CONFIDENTIALITY NOTICE: This document contains proprietary information of Kochi 
                 </div>
               </div>
 
+              {/* OCR Pending Banner */}
+              {fullText.startsWith('⏳ OCR PROCESSING...') && (
+                <div className="bg-zinc-900 border-2 border-yellow-500/40 p-3 flex items-center gap-3 font-pixel-code text-xs">
+                  <div className="w-3 h-3 border-2 border-yellow-400 border-t-transparent rounded-full animate-spin flex-shrink-0" />
+                  <div>
+                    <p className="text-yellow-400 font-bold uppercase">OCR PROCESSING IN PROGRESS</p>
+                    <p className="text-zinc-400 mt-0.5">Backend EasyOCR is extracting text. Refresh or click VIEW OCR TEXT in a few moments.</p>
+                  </div>
+                </div>
+              )}
+
               {/* Text viewer with line numbers */}
               <div className="bg-black border-2 border-zinc-700 p-4 font-pixel-code text-xs text-zinc-300 leading-relaxed overflow-x-auto max-h-[500px] overflow-y-auto select-text">
                 {fullText.split('\n').map((line, idx) => (
@@ -233,6 +338,7 @@ CONFIDENTIALITY NOTICE: This document contains proprietary information of Kochi 
               </div>
             </div>
           )}
+
 
           {/* TAB 2: AI SUMMARY */}
           {activeTab === 'summary' && (
@@ -273,24 +379,7 @@ CONFIDENTIALITY NOTICE: This document contains proprietary information of Kochi 
                 <MessageSquare className="w-4 h-4 text-white stroke-[2.5]" />
                 <h3 className="font-bold text-white text-xs font-bloom-subtle">DISCUSSION & COMMENTS</h3>
               </div>
-              {[
-                { user: 'Rajan Menon', comment: 'Reviewed the financial data. Looks accurate. Approved.', time: '2 days ago', role: 'Manager' },
-                { user: 'Priya Nair', comment: 'Please ensure all supporting documents are attached before final approval.', time: '3 days ago', role: 'HR Manager' },
-              ].map((c) => (
-                <div key={c.user} className="flex gap-3 p-3 bg-black border border-zinc-700">
-                  <div className="w-8 h-8 border border-white text-white flex items-center justify-center text-xs font-bold font-pixel-head flex-shrink-0">
-                    {c.user[0]}
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2 mb-1">
-                      <span className="text-xs font-bold text-white uppercase">{c.user}</span>
-                      <span className="text-[10px] text-zinc-400 uppercase">({c.role})</span>
-                      <span className="text-[10px] text-zinc-500 ml-auto uppercase">{c.time}</span>
-                    </div>
-                    <p className="text-xs text-zinc-300 leading-relaxed uppercase">{c.comment}</p>
-                  </div>
-                </div>
-              ))}
+              <p className="text-xs text-zinc-400 uppercase">NO COMMENTS YET ON THIS DOCUMENT.</p>
               <div className="flex gap-3 pt-2 font-pixel">
                 <input
                   placeholder="ADD A COMMENT..."
@@ -344,5 +433,158 @@ CONFIDENTIALITY NOTICE: This document contains proprietary information of Kochi 
         </div>
       </div>
     </motion.div>
+
+    {/* ── AI SUMMARY MODAL ──────────────────────────────────────────────────── */}
+    <AnimatePresence>
+      {summaryOpen && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm font-pixel"
+          onClick={() => setSummaryOpen(false)}
+        >
+          <motion.div
+            initial={{ scale: 0.92, y: 20, opacity: 0 }}
+            animate={{ scale: 1, y: 0, opacity: 1 }}
+            exit={{ scale: 0.92, y: 20, opacity: 0 }}
+            transition={{ type: 'spring', damping: 22, stiffness: 300 }}
+            onClick={(e) => e.stopPropagation()}
+            className="w-full max-w-2xl bg-[#09090b] border-2 border-white shadow-[6px_6px_0px_0px_#ffffff] max-h-[90vh] overflow-y-auto"
+          >
+            {/* Modal Header */}
+            <div className="flex items-center justify-between p-5 border-b-2 border-[#27272a]">
+              <div className="flex items-center gap-3">
+                <Sparkles className="w-5 h-5 text-white stroke-[2.5]" />
+                <div>
+                  <h2 className="text-sm font-pixel-head font-bold text-white font-bloom">AI EXECUTIVE SUMMARY</h2>
+                  <p className="text-[10px] text-zinc-400 font-pixel-code uppercase mt-0.5 truncate max-w-xs">{doc.title}</p>
+                </div>
+                <span className="text-[10px] font-pixel-code badge-muted-green font-bloom-green px-2 py-0.5 border uppercase font-bold ml-2">
+                  AUTO-GENERATED
+                </span>
+              </div>
+              <button
+                onClick={() => setSummaryOpen(false)}
+                className="text-zinc-400 hover:text-white transition-colors p-1 border border-zinc-700 hover:border-white"
+              >
+                <X className="w-4 h-4 stroke-[2.5]" />
+              </button>
+            </div>
+
+            {/* Modal Body */}
+            <div className="p-5 space-y-5">
+              {summaryLoading ? (
+                <div className="flex flex-col items-center justify-center gap-4 py-12">
+                  <Loader2 className="w-8 h-8 text-white animate-spin stroke-[1.5]" />
+                  <div className="text-center">
+                    <p className="text-sm font-pixel-head font-bold text-white font-bloom">GENERATING SUMMARY...</p>
+                    <p className="text-[10px] text-zinc-400 font-pixel-code uppercase mt-1">AI IS ANALYSING DOCUMENT CONTENT</p>
+                  </div>
+                  {/* Animated progress bar */}
+                  <div className="w-48 h-1.5 bg-zinc-800 border border-zinc-700 overflow-hidden">
+                    <motion.div
+                      className="h-full bg-white"
+                      animate={{ x: ['-100%', '200%'] }}
+                      transition={{ repeat: Infinity, duration: 1.2, ease: 'linear' }}
+                    />
+                  </div>
+                </div>
+              ) : summaryData ? (
+                <>
+                  {/* Executive Summary */}
+                  <div className="bg-black border-2 border-zinc-700 p-4">
+                    <p className="text-[10px] font-pixel-code text-zinc-400 uppercase font-bold mb-2">EXECUTIVE SUMMARY</p>
+                    <p className="text-xs text-zinc-200 leading-relaxed font-pixel-code">{summaryData.executive_summary}</p>
+                  </div>
+
+                  {/* Risk + Department */}
+                  <div className="grid grid-cols-2 gap-3 font-pixel-code">
+                    <div className="bg-black border border-zinc-700 p-3">
+                      <p className="text-[10px] text-zinc-400 uppercase font-bold mb-1.5">RISK LEVEL</p>
+                      <span className={cn(
+                        'text-xs font-bold uppercase px-2.5 py-1 border',
+                        summaryData.risk_level === 'critical' && 'badge-muted-red text-[#fca5a5] border-[#fca5a5]/40',
+                        summaryData.risk_level === 'high' && 'bg-yellow-900/20 text-yellow-300 border-yellow-500/40',
+                        summaryData.risk_level === 'medium' && 'badge-muted-amber',
+                        summaryData.risk_level === 'low' && 'badge-muted-green font-bloom-green',
+                      )}>
+                        {summaryData.risk_level.toUpperCase()}
+                      </span>
+                    </div>
+                    <div className="bg-black border border-zinc-700 p-3">
+                      <p className="text-[10px] text-zinc-400 uppercase font-bold mb-1.5">DEPARTMENT</p>
+                      <span className="text-xs font-bold text-white uppercase">{summaryData.responsible_department}</span>
+                    </div>
+                  </div>
+
+                  {/* Key Points + Action Items */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 font-pixel-code">
+                    <div className="bg-black border border-zinc-700 p-3">
+                      <p className="text-[10px] text-zinc-400 uppercase font-bold mb-2">KEY POINTS</p>
+                      <ul className="space-y-1.5">
+                        {summaryData.key_points.map((pt, i) => (
+                          <li key={i} className="flex items-start gap-2 text-[11px] text-zinc-300">
+                            <span className="w-1.5 h-1.5 bg-white flex-shrink-0 mt-1" />
+                            {pt}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                    <div className="bg-black border border-zinc-700 p-3">
+                      <p className="text-[10px] text-zinc-400 uppercase font-bold mb-2">ACTION ITEMS</p>
+                      <ul className="space-y-1.5">
+                        {summaryData.action_items.map((item, i) => (
+                          <li key={i} className="flex items-start gap-2 text-[11px] text-zinc-300">
+                            <span className="w-1.5 h-1.5 bg-white flex-shrink-0 mt-1" />
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+
+                  {/* Keywords */}
+                  {summaryData.keywords?.length > 0 && (
+                    <div className="font-pixel-code">
+                      <p className="text-[10px] text-zinc-400 uppercase font-bold mb-2">KEYWORDS</p>
+                      <div className="flex flex-wrap gap-2">
+                        {summaryData.keywords.map((kw) => (
+                          <span key={kw} className="text-[10px] font-bold uppercase px-2 py-0.5 bg-zinc-900 border border-zinc-700 text-zinc-300">
+                            {kw}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Footer actions */}
+                  <div className="flex gap-2 pt-2 border-t border-zinc-800">
+                    <button
+                      onClick={() => {
+                        const text = `AI SUMMARY: ${doc.title}\n\n${summaryData.executive_summary}\n\nKEY POINTS:\n${summaryData.key_points.map((p) => '• ' + p).join('\n')}\n\nACTION ITEMS:\n${summaryData.action_items.map((a) => '• ' + a).join('\n')}`;
+                        navigator.clipboard.writeText(text);
+                        toast.success('Summary copied to clipboard!');
+                      }}
+                      className="pixel-btn-dark text-xs flex items-center gap-1.5"
+                    >
+                      <Copy className="w-3.5 h-3.5 stroke-[2.5]" />
+                      COPY SUMMARY
+                    </button>
+                    <button
+                      onClick={() => { setSummaryData(null); handleSummarise(); }}
+                      className="pixel-btn-dark text-xs flex items-center gap-1.5"
+                    >
+                      <Loader2 className="w-3.5 h-3.5 stroke-[2.5]" />
+                      REGENERATE
+                    </button>
+                  </div>
+                </>
+              ) : null}
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 }

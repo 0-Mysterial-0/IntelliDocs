@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   FileText, Clock, AlertTriangle, ShieldAlert,
@@ -6,6 +6,7 @@ import {
 } from 'lucide-react';
 import { cn, formatDate } from '@/lib/utils';
 import { toast } from 'sonner';
+import { useContractsStore } from '@/store/contractsStore';
 
 interface Contract {
   id: string;
@@ -114,6 +115,7 @@ export default function ContractsPage() {
   const [filter, setFilter] = useState<'all' | 'expiring' | 'active'>('all');
   const [search, setSearch] = useState('');
   const [selectedContract, setSelectedContract] = useState<Contract | null>(null);
+  const contractsStore = useContractsStore();
 
   const filteredContracts = contracts.filter((c) => {
     const matchSearch =
@@ -134,11 +136,13 @@ export default function ContractsPage() {
 
   const handleRenew = (c: Contract) => {
     toast.success(`Renewal workflow initiated for "${c.title}"`);
+    const updated = { ...c, status: 'under_renewal' as const };
     setContracts((prev) =>
-      prev.map((item) =>
-        item.id === c.id ? { ...item, status: 'under_renewal' } : item
-      )
+      prev.map((item) => item.id === c.id ? updated : item)
     );
+    // Sync to store so sidebar badge drops immediately
+    contractsStore.updateContract(c.id, { status: 'under_renewal' });
+    if (selectedContract?.id === c.id) setSelectedContract(updated);
   };
 
   return (

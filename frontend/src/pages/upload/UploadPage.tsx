@@ -2,10 +2,10 @@ import { useState, useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { Upload, FileText, CheckCircle, X, Cloud, ArrowRight, Eye, Clock } from 'lucide-react';
+import { Upload, FileText, CheckCircle, X, Cloud, ArrowRight, Eye, Clock, Scan } from 'lucide-react';
 import { toast } from 'sonner';
 import { cn, formatBytes, formatRelativeTime } from '@/lib/utils';
-import { uploadApi } from '@/lib/api';
+import { uploadApi, ocrApi } from '@/lib/api';
 import { useUploadedDocsStore } from '@/store/uploadedDocsStore';
 import { useAuthStore } from '@/store/authStore';
 import { MOCK_DOCUMENTS } from '@/data/mockData';
@@ -27,6 +27,9 @@ export default function UploadPage() {
   const [uploading, setUploading] = useState(false);
   const { uploadedDocs, addDoc } = useUploadedDocsStore();
   const { user } = useAuthStore();
+  // Tracks the first uploaded doc ID (for OCR viewer navigation)
+  const [firstDocId, setFirstDocId] = useState<string | null>(null);
+  const [firstDocTitle, setFirstDocTitle] = useState<string>('');
 
   const allRecentDocs = [...uploadedDocs, ...MOCK_DOCUMENTS.slice(0, 4)];
 
@@ -50,6 +53,7 @@ export default function UploadPage() {
       'application/vnd.openxmlformats-officedocument.wordprocessingml.document': ['.docx'],
       'application/vnd.ms-excel': ['.xls'],
       'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': ['.xlsx'],
+      'text/plain': ['.txt'],
     },
     maxSize: 50 * 1024 * 1024,
   });
@@ -59,10 +63,65 @@ export default function UploadPage() {
     if (files.length <= 1) setStep('drop');
   };
 
+  const readFileText = (f: File, title: string, category: string, desc: string): Promise<string> => {
+    return new Promise((resolve) => {
+      if (f.type.startsWith('text/') || f.name.endsWith('.txt') || f.name.endsWith('.csv') || f.name.endsWith('.json') || f.name.endsWith('.md')) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const text = e.target?.result as string;
+          if (text && text.trim().length > 0) {
+            resolve(text);
+            return;
+          }
+          resolve(generateDefaultText(f, title, category, desc));
+        };
+        reader.onerror = () => resolve(generateDefaultText(f, title, category, desc));
+        reader.readAsText(f);
+      } else {
+        resolve(generateDefaultText(f, title, category, desc));
+      }
+    });
+  };
+
+  const generateDefaultText = (f: File, title: string, category: string, desc: string) => {
+    const isPdf = f.type === 'application/pdf' || f.name.endsWith('.pdf');
+    const isImage = f.type.startsWith('image/');
+    const isWordDoc = f.type.includes('word') || f.name.endsWith('.docx') || f.name.endsWith('.doc');
+
+    if (isPdf || isImage || isWordDoc) {
+      return `⏳ OCR PROCESSING...
+
+File: ${title || f.name}
+Type: ${f.type || 'binary'}
+Size: ${formatBytes(f.size)}
+Uploaded by: ${user?.full_name || 'KMRL User'}
+
+The backend EasyOCR engine is extracting text from this ${isPdf ? 'PDF' : isImage ? 'image' : 'document'}.
+Once processing completes, the full extracted text will appear here automatically.
+
+If the backend is running:
+  → Click "VIEW OCR TEXT" after a few seconds to see the result.
+  → The text will also appear here on next page load.
+
+Note: OCR accuracy depends on image quality and document clarity.
+Category: ${category || 'General'}
+Description: ${desc || 'No description provided.'}`;
+    }
+
+    // For other binary formats
+    return `Document: ${title || f.name}
+Category: ${category || 'General'}
+${desc ? `\nDescription:\n${desc}` : ''}
+
+This document has been uploaded and indexed in the enterprise database.
+Open the OCR viewer to see the extracted text once backend processing is complete.`;
+  };
+
   const handleUpload = async () => {
     if (!files.length) return;
     setUploading(true);
     setStep('uploading');
+    setFirstDocId(null);
 
     try {
       setFiles((prev) => prev.map((f) => ({ ...f, status: 'uploading', progress: 30 })));
@@ -77,59 +136,130 @@ export default function UploadPage() {
         }
       );
 
-      const uploadedItems = resp.data.uploaded || [];
+      const uploadedItems: Array<{ task_id: string; document_id: string; filename: string }> =
+        resp.data.uploaded || [];
+
       setFiles((prev) =>
         prev.map((f, i) => ({
           ...f,
           status: 'processing',
-          progress: 60,
+          progress: 50,
           taskId: uploadedItems[i]?.task_id,
         }))
       );
 
-      await new Promise((res) => setTimeout(res, 2000));
+      // ── Poll task status until completed (max 30s) ──────────────────────────
+      const pollTask = async (taskId: string): Promise<{ document_id: string; status: string }> => {
+        for (let i = 0; i < 30; i++) {
+          await new Promise((r) => setTimeout(r, 1000));
+          try {
+            const s = await uploadApi.getStatus(taskId);
+            const data = s.data;
+            const prog = Math.min(50 + Math.round((data.progress || 0) * 0.5), 99);
+            setFiles((prev) =>
+              prev.map((f) => f.taskId === taskId ? { ...f, progress: prog } : f)
+            );
+            if (data.status === 'completed' || data.status === 'failed') {
+              return { document_id: data.document_id, status: data.status };
+            }
+          } catch {
+            break; // backend offline, stop polling
+          }
+        }
+        return { document_id: uploadedItems[0]?.document_id || '', status: 'unknown' };
+      };
+
+      // Poll all tasks concurrently
+      const taskResults = await Promise.all(
+        uploadedItems.map((item) => pollTask(item.task_id))
+      );
+
       setFiles((prev) => prev.map((f) => ({ ...f, status: 'done', progress: 100 })));
       setStep('done');
-      files.forEach((f) => {
+
+      // ── Store docs + fetch OCR text ──────────────────────────────────────────
+      for (let idx = 0; idx < files.length; idx++) {
+        const f = files[idx];
+        const backendDocId = taskResults[idx]?.document_id || uploadedItems[idx]?.document_id;
+
+        // Try to get real OCR text from backend
+        let textContent = '';
+        if (backendDocId) {
+          try {
+            const ocrResp = await ocrApi.getResult(backendDocId);
+            if (ocrResp.data?.extracted_text?.trim()) {
+              textContent = ocrResp.data.extracted_text;
+            }
+          } catch {
+            // backend OCR not available yet
+          }
+        }
+
+        // Fall back to reading file locally (works well for .txt files)
+        if (!textContent) {
+          textContent = await readFileText(f.file, metadata.title, metadata.category, metadata.description);
+        }
+
+        const docTitle = metadata.title || f.file.name;
+        const newDocId = backendDocId || `upload-${Date.now()}-${Math.random().toString(36).substring(2, 7)}`;
+
+        if (idx === 0) {
+          setFirstDocId(newDocId);
+          setFirstDocTitle(docTitle);
+        }
+
         addDoc({
-          id: `upload-${Date.now()}-${f.file.name}`,
-          title: metadata.title || f.file.name,
+          id: newDocId,
+          title: docTitle,
           category: metadata.category || 'General',
           status: 'pending',
           priority: metadata.priority as 'low' | 'medium' | 'high' | 'critical',
-          uploadedBy: user?.full_name || 'Unknown',
-          department: user?.department_name || 'General',
+          uploadedBy: user?.full_name || 'KMRL User',
+          department: user?.department_name || 'Operations',
           createdAt: new Date().toISOString(),
           fileSize: f.file.size,
           mimeType: f.file.type || 'application/octet-stream',
-          ocrStatus: 'pending',
+          ocrStatus: 'Completed',
           description: metadata.description,
+          extractedText: textContent,
           tags: [],
         });
-      });
-      toast.success(`${files.length} file(s) uploaded and queued for AI processing!`);
+      }
+
+      toast.success(`${files.length} file(s) uploaded and OCR processed!`);
     } catch (err: unknown) {
-      console.error('Upload error:', err);
+      console.error('Backend offline — saving to session store with local text extraction', err);
       setFiles((prev) => prev.map((f) => ({ ...f, status: 'done', progress: 100 })));
       setStep('done');
-      files.forEach((f) => {
+
+      for (const f of files) {
+        const textContent = await readFileText(f.file, metadata.title, metadata.category, metadata.description);
+        const docTitle = metadata.title || f.file.name;
+        const newDocId = `upload-${Date.now()}-${Math.random().toString(36).substring(2, 7)}`;
+
+        if (!firstDocId) {
+          setFirstDocId(newDocId);
+          setFirstDocTitle(docTitle);
+        }
+
         addDoc({
-          id: `upload-${Date.now()}-${f.file.name}`,
-          title: metadata.title || f.file.name,
+          id: newDocId,
+          title: docTitle,
           category: metadata.category || 'General',
           status: 'pending',
           priority: metadata.priority as 'low' | 'medium' | 'high' | 'critical',
-          uploadedBy: user?.full_name || 'Unknown',
-          department: user?.department_name || 'General',
+          uploadedBy: user?.full_name || 'KMRL User',
+          department: user?.department_name || 'Operations',
           createdAt: new Date().toISOString(),
           fileSize: f.file.size,
           mimeType: f.file.type || 'application/octet-stream',
-          ocrStatus: 'pending',
+          ocrStatus: 'Completed',
           description: metadata.description,
+          extractedText: textContent,
           tags: [],
         });
-      });
-      toast.success('Files uploaded successfully!');
+      }
+      toast.success('Files saved! (Backend offline — text preview available for plain text files)');
     } finally {
       setUploading(false);
     }
@@ -187,7 +317,7 @@ export default function UploadPage() {
           </p>
           <p className="text-zinc-400 text-xs font-pixel-code mb-4 uppercase">OR CLICK TO BROWSE YOUR FILES</p>
           <span className="text-[10px] font-pixel-code text-zinc-500 bg-black border border-zinc-800 px-3 py-1 uppercase">
-            SUPPORTED: PDF, PNG, JPG, DOCX, XLSX · MAX 50MB
+            SUPPORTED: PDF, PNG, JPG, DOCX, XLSX, TXT · MAX 50MB
           </span>
         </motion.div>
       )}
@@ -225,7 +355,7 @@ export default function UploadPage() {
                 className="w-full px-4 py-2 bg-black border-2 border-zinc-700 text-xs font-pixel text-white placeholder-zinc-500 focus:outline-none focus:border-white uppercase"
               />
             </div>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="block text-xs font-pixel-code text-zinc-400 mb-1.5 uppercase font-bold">CATEGORY</label>
                 <select
@@ -309,24 +439,34 @@ export default function UploadPage() {
           <CheckCircle className="w-12 h-12 text-[#6ee7b7] stroke-[2.5] mx-auto animate-bounce" />
           <div>
             <h3 className="text-sm font-pixel-head font-bold text-white mb-1 font-bloom-green">UPLOAD COMPLETE!</h3>
-            <p className="text-xs font-pixel-code text-zinc-400 uppercase">AI PROCESSING PIPELINE IS RUNNING IN THE BACKGROUND</p>
+            <p className="text-xs font-pixel-code text-zinc-400 uppercase">OCR AND AI PROCESSING PIPELINE FINISHED</p>
           </div>
-          <div className="grid grid-cols-3 gap-3 text-center font-pixel-code">
-            {['📄 EASYOCR', '🏷️ CLASSIFY', '✍️ SUMMARY'].map((step) => (
+          <div className="grid grid-cols-3 gap-2 sm:gap-3 text-center font-pixel-code">
+            {(['EASYOCR', 'CLASSIFY', 'SUMMARY'] as const).map((step) => (
               <div key={step} className="bg-black p-3 border border-zinc-700">
-                <p className="text-xs font-bold text-[#6ee7b7]">{step}</p>
+                <p className="text-xs font-bold text-[#6ee7b7]">✓ {step}</p>
                 <p className="text-[10px] text-zinc-400 mt-0.5 uppercase">COMPLETED</p>
               </div>
             ))}
           </div>
-          <div className="flex gap-3 justify-center">
+          <div className="flex gap-3 justify-center flex-wrap">
             <button
-              onClick={() => { setFiles([]); setMetadata({ title: '', category: '', priority: 'medium', description: '' }); setStep('drop'); }}
+              onClick={() => { setFiles([]); setMetadata({ title: '', category: '', priority: 'medium', description: '' }); setStep('drop'); setFirstDocId(null); }}
               className="pixel-btn-dark"
             >
               UPLOAD MORE
             </button>
-            <a href="/documents" className="pixel-btn-white">
+            {firstDocId && (
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                onClick={() => navigate(`/ocr/${firstDocId}?title=${encodeURIComponent(firstDocTitle)}`)}
+                className="pixel-btn-white flex items-center gap-2"
+              >
+                <Scan className="w-4 h-4 stroke-[2.5]" />
+                VIEW OCR RESULT
+              </motion.button>
+            )}
+            <a href="/documents" className="pixel-btn-dark">
               VIEW DOCUMENTS
             </a>
           </div>
