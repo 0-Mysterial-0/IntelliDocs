@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <rect width="64" height="64" rx="12" fill="#09090b" stroke="#ffffff" stroke-width="3"/>
+  <!-- KMRL Metro Rake Silhouette -->
+  <path d="M16 16 H48 V38 H16 Z" fill="#18181b" stroke="#6ee7b7" stroke-width="3" stroke-linejoin="round"/>
+  <!-- Metro Headlight Windows -->
+  <rect x="20" y="22" width="10" height="8" fill="#6ee7b7"/>
+  <rect x="34" y="22" width="10" height="8" fill="#6ee7b7"/>
+  <circle cx="24" cy="33" r="2.5" fill="#ffffff"/>
+  <circle cx="40" cy="33" r="2.5" fill="#ffffff"/>
+  <!-- Metro Track / Rail -->
+  <line x1="12" y1="46" x2="52" y2="46" stroke="#ffffff" stroke-width="3"/>
+  <line x1="20" y1="46" x2="16" y2="54" stroke="#ffffff" stroke-width="3"/>
+  <line x1="44" y1="46" x2="48" y2="54" stroke="#ffffff" stroke-width="3"/>
+  <!-- AI Sparkle Icon -->
+  <path d="M48 8 L50 12 L54 14 L50 16 L48 20 L46 16 L42 14 L46 12 Z" fill="#6ee7b7"/>
+</svg>
