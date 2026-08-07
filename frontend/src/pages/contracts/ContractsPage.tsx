@@ -7,10 +7,13 @@ import {
 import { cn, formatDate } from '@/lib/utils';
 import { toast } from 'sonner';
 import { useContractsStore } from '@/store/contractsStore';
+import { useAuthStore } from '@/store/authStore';
 import { MOCK_CONTRACTS, MockContract } from '@/data/mockData';
 
 export default function ContractsPage() {
+  const { user } = useAuthStore();
   const { contracts: storeContracts, renewContract } = useContractsStore();
+  const canApproveContract = user?.role === 'manager' || user?.role === 'admin';
   const [search, setSearch] = useState('');
   const [activeTab, setActiveTab] = useState<'all' | 'expiring' | 'pending' | 'renewal'>('all');
   const [contractList, setContractList] = useState<MockContract[]>(
@@ -221,12 +224,18 @@ export default function ContractsPage() {
               </span>
 
               {c.status === 'expiring_soon' && (
-                <button
-                  onClick={() => handleRenew(c.id, c.title)}
-                  className="pixel-btn-white text-[10px] py-1 px-2.5 flex items-center gap-1"
-                >
-                  <RefreshCw className="w-3 h-3 text-black animate-spin" style={{ animationDuration: '3s' }} /> INITIATE RENEWAL
-                </button>
+                canApproveContract ? (
+                  <button
+                    onClick={() => handleRenew(c.id, c.title)}
+                    className="pixel-btn-white text-[10px] py-1 px-2.5 flex items-center gap-1"
+                  >
+                    <RefreshCw className="w-3 h-3 text-black animate-spin" style={{ animationDuration: '3s' }} /> INITIATE RENEWAL
+                  </button>
+                ) : (
+                  <span className="text-[10px] text-amber-300 font-bold bg-amber-950/40 border border-amber-500/40 px-2 py-0.5 uppercase">
+                    MANAGER APPROVAL REQ
+                  </span>
+                )
               )}
 
               {c.status === 'under_renewal' && (

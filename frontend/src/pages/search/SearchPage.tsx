@@ -4,6 +4,7 @@ import { Search, Filter, Sparkles, X, FileText, Copy, Check, Zap, AlertTriangle,
 import { cn } from '@/lib/utils';
 import { searchApi } from '@/lib/api';
 import { useDocumentsStore } from '@/store/documentsStore';
+import { useAuthStore } from '@/store/authStore';
 import { toast } from 'sonner';
 import { useNavigate } from 'react-router-dom';
 
@@ -25,7 +26,9 @@ const CATEGORIES = ['All', 'Finance', 'HR', 'Operations', 'Maintenance', 'Legal'
 
 export default function SearchPage() {
   const navigate = useNavigate();
+  const { user } = useAuthStore();
   const { documents, deleteDocument } = useDocumentsStore();
+  const canDeleteDocs = user?.role === 'manager' || user?.role === 'admin';
 
   const [query, setQuery] = useState('');
   const [searchMode, setSearchMode] = useState<'semantic' | 'content' | 'duplicates'>('semantic');
@@ -465,7 +468,7 @@ export default function SearchPage() {
                         <Eye className="w-3 h-3 text-black" /> VIEW ORIGINAL
                       </button>
 
-                      {result.isDuplicate && (
+                      {result.isDuplicate && canDeleteDocs && (
                         <button
                           onClick={(e) => handleDeleteDuplicate(e, result.document_id, result.title)}
                           className="bg-red-600 hover:bg-red-700 text-white font-bold text-[10px] py-1 px-2 border border-red-400 flex items-center gap-1 shadow-[2px_2px_0px_0px_#7f1d1d]"

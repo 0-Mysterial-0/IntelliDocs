@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-  ArrowLeft, FileText, Copy, Search, Check, FileDown, Sparkles, Scan, X, Loader2, MessageSquare, User, Clock, Eye
+  ArrowLeft, FileText, Copy, Search, Check, FileDown, Sparkles, Scan, X, Loader2, MessageSquare, User, Clock, Eye, Trash2
 } from 'lucide-react';
 import { cn, formatDate, formatBytes, formatRelativeTime, getDocumentOcrConfidence, getActualOcrConvertedPercentage } from '@/lib/utils';
 import { MOCK_DOCUMENTS } from '@/data/mockData';
@@ -337,6 +337,20 @@ CONFIDENTIALITY NOTICE: This document contains proprietary information of Kochi 
             <FileDown className="w-4 h-4 stroke-[2.5]" />
             <span>.TXT</span>
           </button>
+          {(user?.role === 'manager' || user?.role === 'admin') && (
+            <button
+              onClick={() => {
+                useDocumentsStore.getState().deleteDocument(doc.id);
+                toast.success(`Document "${doc.title}" deleted!`);
+                navigate('/documents');
+              }}
+              className="bg-red-600 hover:bg-red-700 text-white font-bold text-xs py-1.5 px-3 border border-red-400 flex items-center gap-1.5 shadow-[2px_2px_0px_0px_#7f1d1d]"
+              title="Manager/Admin Delete Document"
+            >
+              <Trash2 className="w-4 h-4 text-white stroke-[2.5]" />
+              <span>DELETE</span>
+            </button>
+          )}
         </div>
 
       </div>

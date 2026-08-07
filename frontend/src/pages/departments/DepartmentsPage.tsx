@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Building2, Users, FileText, Plus, X } from 'lucide-react';
+import { Building2, Users, FileText, Plus, X, Trash2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useAuthStore } from '@/store/authStore';
 import { toast } from 'sonner';
@@ -147,8 +147,22 @@ export default function DepartmentsPage() {
                     width: `${Math.min(100, Math.round((dept.documents / Math.max(...departments.map(d => d.documents), 1)) * 100))}%`,
                   }}
                 />
+            {/* Admin Delete Action */}
+            {isAdmin && (
+              <div className="mt-3 pt-2 border-t border-zinc-800 flex justify-end">
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setDepartments((prev) => prev.filter((d) => d.id !== dept.id));
+                    toast.success(`Department "${dept.name}" deleted!`);
+                  }}
+                  className="bg-red-600 hover:bg-red-700 text-white font-bold text-[10px] py-1 px-2 border border-red-400 flex items-center gap-1 shadow-[2px_2px_0px_0px_#7f1d1d]"
+                  title="Admin Delete Department"
+                >
+                  <Trash2 className="w-3 h-3 text-white" /> DELETE DEPT
+                </button>
               </div>
-            </div>
+            )}
           </motion.div>
         ))}
       </div>

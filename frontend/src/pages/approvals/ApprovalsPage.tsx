@@ -160,21 +160,27 @@ export default function ApprovalsPage() {
                 </div>
               )}
 
-              {approval.status === 'pending' && user?.role !== 'employee' && (
-                <div className="flex gap-3 pt-1 font-pixel-code">
-                  <button
-                    onClick={() => setCommentModal({ id: approval.id, action: 'approve' })}
-                    className="pixel-btn-white flex-1 flex items-center justify-center gap-1.5 text-xs"
-                  >
-                    <CheckCircle className="w-4 h-4 stroke-[3]" /> APPROVE
-                  </button>
-                  <button
-                    onClick={() => setCommentModal({ id: approval.id, action: 'reject' })}
-                    className="pixel-btn-dark flex-1 flex items-center justify-center gap-1.5 text-xs text-[#fca5a5] border-[#fca5a5]/40"
-                  >
-                    <XCircle className="w-4 h-4 stroke-[3]" /> REJECT
-                  </button>
-                </div>
+              {approval.status === 'pending' && (
+                user?.role === 'manager' || user?.role === 'admin' ? (
+                  <div className="flex gap-3 pt-1 font-pixel-code">
+                    <button
+                      onClick={() => setCommentModal({ id: approval.id, action: 'approve' })}
+                      className="pixel-btn-white flex-1 flex items-center justify-center gap-1.5 text-xs"
+                    >
+                      <CheckCircle className="w-4 h-4 stroke-[3]" /> APPROVE
+                    </button>
+                    <button
+                      onClick={() => setCommentModal({ id: approval.id, action: 'reject' })}
+                      className="pixel-btn-dark flex-1 flex items-center justify-center gap-1.5 text-xs text-[#fca5a5] border-[#fca5a5]/40"
+                    >
+                      <XCircle className="w-4 h-4 stroke-[3]" /> REJECT
+                    </button>
+                  </div>
+                ) : (
+                  <div className="p-2 bg-amber-950/20 border border-amber-500/30 text-amber-300 font-pixel-code text-[11px] font-bold uppercase text-center">
+                    🔒 MANAGER / ADMIN APPROVAL AUTHORITY REQUIRED
+                  </div>
+                )
               )}
             </motion.div>
           ))
