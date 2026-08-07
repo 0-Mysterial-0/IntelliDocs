@@ -56,7 +56,7 @@ export default function RevokeContractsPage() {
     if (e) e.preventDefault();
     if (passwordInput.trim() === 'password') {
       if (user) {
-        useAuthStore.getState().setUser({ ...user, role: 'manager' });
+        useAuthStore.getState().updateUser({ role: 'manager' });
       } else {
         useAuthStore.getState().setAuth(
           {
@@ -75,7 +75,7 @@ export default function RevokeContractsPage() {
       setShowPasswordModal(false);
       setPasswordInput('');
     } else {
-      toast.error('Invalid security password! Hint: Enter "password"');
+      toast.error('Invalid security password!');
     }
   };
 
@@ -93,7 +93,7 @@ export default function RevokeContractsPage() {
             <ShieldAlert className="w-5 h-5 text-amber-400 stroke-[2.5] flex-shrink-0" />
             <div>
               <p className="text-xs font-bold text-white uppercase">EMPLOYEE VIEW MODE</p>
-              <p className="text-[10px] text-amber-300 uppercase">REVOCATION REQUIRES MANAGER SECURITY PASSWORD ("password")</p>
+              <p className="text-[10px] text-amber-300 uppercase">REVOCATION REQUIRES MANAGER SECURITY PASSWORD</p>
             </div>
           </div>
           <button
@@ -245,11 +245,10 @@ export default function RevokeContractsPage() {
                   type="password"
                   value={passwordInput}
                   onChange={(e) => setPasswordInput(e.target.value)}
-                  placeholder='ENTER "password"'
+                  placeholder='ENTER MANAGER PASSWORD'
                   autoFocus
                   className="w-full bg-black border-2 border-zinc-700 p-3 text-xs text-white placeholder-zinc-600 font-pixel focus:outline-none uppercase"
                 />
-                <p className="text-[10px] text-zinc-400">SECURITY HINT: TYPE <strong className="text-white font-bold">password</strong> TO VERIFY MANAGER AUTHORITY.</p>
               </div>
 
               <div className="flex gap-3 pt-2">
