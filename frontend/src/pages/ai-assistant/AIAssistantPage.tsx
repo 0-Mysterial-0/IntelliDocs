@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Bot, Send, User, Sparkles, FileText, Plus, MessageSquare, ChevronRight } from 'lucide-react';
+import { Bot, Send, User, FileText, Plus, MessageSquare, ChevronRight } from 'lucide-react';
 import { cn, formatRelativeTime } from '@/lib/utils';
 import { chatApi } from '@/lib/api';
 import { toast } from 'sonner';
@@ -35,6 +35,12 @@ const SUGGESTED_QUESTIONS = [
   'WHAT ARE THE HR POLICY UPDATES THIS YEAR?',
   'LIST DOCUMENTS REQUIRING APPROVAL',
   'WHAT MAINTENANCE IS SCHEDULED FOR BLUE LINE?',
+  'WHAT IS THE STATUS OF WATER METRO EXPANSION?',
+  'SHOW ME ROLLING STOCK MAINTENANCE SCHEDULES',
+  'WHAT ARE THE KMRL IT & CYBERSECURITY PROTOCOLS?',
+  'HOW DO I APPLY FOR STATION KIOSK ADVERTISING?',
+  'WHAT ARE THE CONTRACT RENEWAL TERMS FOR ALSTOM?',
+  'SHOW ME THE MUTTOM DEPOT SOLAR POWER TENDER',
 ];
 
 // ── Unique Conversation Histories per Side Chat Session ───────────────────────
@@ -135,7 +141,7 @@ const SESSION_MESSAGES: Record<string, Message[]> = {
   ],
 };
 
-// ── Specific Hardcoded Q&A Responses ──────────────────────────────────────────
+// ── Expanded Hardcoded Q&A Responses ──────────────────────────────────────────
 const HARDCODED_ANSWERS: Record<string, { answer: string; citations: { title: string; document_id: string }[] }> = {
   'WHAT ARE THE LATEST SAFETY INSPECTION FINDINGS?': {
     answer: "Based on the Q2 2024 Safety Audit Report for Kochi Metro Rail Limited:\n\n1. **Track Infrastructure**: All 25.6 km of Line 1 (Aluva to Petta) passed acoustic emission testing with **99.4% track integrity**.\n2. **Emergency Braking Systems**: Automatic Train Control (ATC) brake distance tests met 100% compliance standards across Alstom Metropolis rakes.\n3. **Station Fire Safety**: Escalator emergency cutoffs and fire suppression systems at Edapally and Maharajas College stations verified compliant.\n4. **Action Item**: Scheduled preventative maintenance on traction power substation 3 by end of month.",
@@ -178,6 +184,42 @@ const HARDCODED_ANSWERS: Record<string, { answer: string; citations: { title: st
       { title: 'LINE 1 MAINTENANCE SCHEDULE Q3', document_id: 'doc-010' },
     ],
   },
+  'WHAT IS THE STATUS OF WATER METRO EXPANSION?': {
+    answer: "Water Metro Phase 2 Project Status:\n\n1. **Active Routes**: 5 Operational corridors connecting Vyttila, Fort Kochi, High Court, Bolgatty, and South Chittoor.\n2. **Fleet Addition**: 6 new electric-hybrid boats commissioned by Cochin Shipyard Limited (CSL).\n3. **Ridership Milestone**: Crossings exceeded 1.5 Million passengers with 99.1% on-time departure rate.",
+    citations: [
+      { title: 'WATER METRO PHASE 2 EXPANSION REPORT', document_id: 'doc-011' },
+    ],
+  },
+  'SHOW ME ROLLING STOCK MAINTENANCE SCHEDULES': {
+    answer: "Rolling Stock Inspection & Maintenance Timetable:\n\n- **Daily Inspection (A-Check)**: Performed nightly at Muttom Depot for all 25 trainsets.\n- **Bi-Weekly Service (B-Check)**: Pantograph carbon strip inspection and wheel flange wear gauge checks.\n- **Major Overhaul (C-Check)**: Trainset RS-04 currently undergoing bogie overhaul at Workshop Bay 2.",
+    citations: [
+      { title: 'MUTTOM DEPOT MAINTENANCE TIMETABLE', document_id: 'doc-012' },
+    ],
+  },
+  'WHAT ARE THE KMRL IT & CYBERSECURITY PROTOCOLS?': {
+    answer: "KMRL Information Security Standard Operating Procedures:\n\n1. **Multi-Factor Authentication (MFA)**: Mandatory for all portal logins and remote VPN connections.\n2. **Data Encryption**: AES-256 encryption enforced for document storage and TLS 1.3 for API data in transit.\n3. **Audit Compliance**: ISO 27001 annual security compliance audit completed in June 2024.",
+    citations: [
+      { title: 'KMRL IT & CYBERSECURITY POLICY 2024', document_id: 'doc-013' },
+    ],
+  },
+  'HOW DO I APPLY FOR STATION KIOSK ADVERTISING?': {
+    answer: "Procedure for Non-Farebox Station Commercial Kiosk Allotment:\n\n1. **Application Submission**: Submit commercial proposal under Open E-Tender Portal Ref KMRL/COMM/2024.\n2. **Eligible Stations**: MG Road, Edapally, Aluva, and High Court Water Metro Terminal.\n3. **License Period**: 3 Years fixed term with 10% annual escalation clause.",
+    citations: [
+      { title: 'STATION COMMERCIAL ALLOTMENT POLICY', document_id: 'doc-014' },
+    ],
+  },
+  'WHAT ARE THE CONTRACT RENEWAL TERMS FOR ALSTOM?': {
+    answer: "Contract SLA Terms for Alstom Rolling Stock Maintenance:\n\n1. **Renewal Deadline**: August 30, 2024.\n2. **Mandatory Notice**: 60 days advance written notification.\n3. **Penalty Terms**: ₹ 2 Lakhs/day for delay in SLA agreement finalization beyond expiry date.",
+    citations: [
+      { title: 'ALSTOM SLA CONTRACT TERMS', document_id: 'cnt-01' },
+    ],
+  },
+  'SHOW ME THE MUTTOM DEPOT SOLAR POWER TENDER': {
+    answer: "Muttom Depot Solar PV Installation Details:\n\n- **Project Scope**: Design, supply, installation & commissioning of 3.2 MW Rooftop Solar PV System.\n- **Estimated Cost**: ₹ 4.80 Crores.\n- **Bid Opening Date**: August 25, 2024.\n- **Target Energy Generation**: 4.2 Million Units (kWh) per annum to offset depot auxiliary power requirements.",
+    citations: [
+      { title: 'MUTTOM SOLAR TENDER NIT', document_id: 'doc-003' },
+    ],
+  },
 };
 
 export default function AIAssistantPage() {
@@ -193,10 +235,21 @@ export default function AIAssistantPage() {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
+  // Robust fuzzy matching for hardcoded answers
+  const findHardcodedQA = (query: string) => {
+    const norm = query.toLowerCase().replace(/[^a-z0-9]/g, '');
+    for (const [key, data] of Object.entries(HARDCODED_ANSWERS)) {
+      const normKey = key.toLowerCase().replace(/[^a-z0-9]/g, '');
+      if (norm === normKey || norm.includes(normKey) || normKey.includes(norm)) {
+        return data;
+      }
+    }
+    return null;
+  };
+
   const sendMessage = async (text: string) => {
-    if (!text.trim() || loading) return;
+    if (!text || !text.trim()) return;
     const cleanText = text.trim();
-    const upperText = cleanText.toUpperCase();
 
     const userMsg: Message = {
       id: Date.now().toString(),
@@ -204,74 +257,76 @@ export default function AIAssistantPage() {
       content: cleanText,
       timestamp: new Date(),
     };
+
     setMessages((m) => [...m, userMsg]);
     setInput('');
     setLoading(true);
 
-    // ── 1. Check Hello Detection ─────────────────────────────────────────────
-    const isHello = /^(hello|hi|hey|hello sir|hi sir|good morning|good afternoon|good evening)/i.test(cleanText);
-    if (isHello) {
-      await new Promise((r) => setTimeout(r, 400));
-      setMessages((m) => [
-        ...m,
-        {
-          id: Date.now().toString(),
-          role: 'assistant',
-          content: 'Hello sir, how can we help you?',
-          citations: [],
-          timestamp: new Date(),
-          showQuickQuestions: true, // Display interactive hardcoded question buttons underneath!
-        },
-      ]);
-      setLoading(false);
-      return;
-    }
-
-    // ── 2. Check Specific Hardcoded Q&A Match ─────────────────────────────────
-    const matchedQA = HARDCODED_ANSWERS[upperText];
-    if (matchedQA) {
-      await new Promise((r) => setTimeout(r, 500));
-      setMessages((m) => [
-        ...m,
-        {
-          id: Date.now().toString(),
-          role: 'assistant',
-          content: matchedQA.answer,
-          citations: matchedQA.citations,
-          timestamp: new Date(),
-        },
-      ]);
-      setLoading(false);
-      return;
-    }
-
-    // ── 3. Fallback to API / RAG Engine ──────────────────────────────────────
     try {
-      const resp = await chatApi.sendMessage(cleanText, sessionId);
-      const data = resp.data;
-      setSessionId(data.session_id);
-      setMessages((m) => [
-        ...m,
-        {
-          id: data.message_id || Date.now().toString(),
-          role: 'assistant',
-          content: data.message,
-          citations: data.citations || [],
-          timestamp: new Date(data.created_at || Date.now()),
-        },
-      ]);
-    } catch {
-      setMessages((m) => [
-        ...m,
-        {
-          id: Date.now().toString(),
-          role: 'assistant',
-          content: `BASED ON KMRL INTELLIDOCS, HERE'S WHAT I FOUND ABOUT "${upperText}": THE SYSTEM CONTAINS EXTENSIVE DOCUMENTATION ACROSS OPERATIONS, FINANCE, HR, MAINTENANCE, LEGAL, AND PROCUREMENT DEPARTMENTS. ALL RECORDS ARE INDEXED AND RETRIEVABLE.`,
-          citations: [{ title: 'OPERATIONS MANUAL', document_id: 'demo-1' }, { title: 'SAFETY PROTOCOLS 2024', document_id: 'demo-2' }],
-          timestamp: new Date(),
-        },
-      ]);
+      // ── 1. Check Hello Detection ─────────────────────────────────────────────
+      const isHello = /^(hello|hi|hey|hello sir|hi sir|good morning|good afternoon|good evening)/i.test(cleanText);
+      if (isHello) {
+        await new Promise((r) => setTimeout(r, 350));
+        setMessages((m) => [
+          ...m,
+          {
+            id: Date.now().toString(),
+            role: 'assistant',
+            content: 'Hello sir, how can we help you?',
+            citations: [],
+            timestamp: new Date(),
+            showQuickQuestions: true, // Render quick question buttons underneath!
+          },
+        ]);
+        return;
+      }
+
+      // ── 2. Check Hardcoded Q&A Match ─────────────────────────────────────────
+      const matchedQA = findHardcodedQA(cleanText);
+      if (matchedQA) {
+        await new Promise((r) => setTimeout(r, 450));
+        setMessages((m) => [
+          ...m,
+          {
+            id: Date.now().toString(),
+            role: 'assistant',
+            content: matchedQA.answer,
+            citations: matchedQA.citations,
+            timestamp: new Date(),
+          },
+        ]);
+        return;
+      }
+
+      // ── 3. Fallback to API / RAG Engine ──────────────────────────────────────
+      try {
+        const resp = await chatApi.sendMessage(cleanText, sessionId);
+        const data = resp.data;
+        setSessionId(data.session_id);
+        setMessages((m) => [
+          ...m,
+          {
+            id: data.message_id || Date.now().toString(),
+            role: 'assistant',
+            content: data.message,
+            citations: data.citations || [],
+            timestamp: new Date(data.created_at || Date.now()),
+          },
+        ]);
+      } catch {
+        setMessages((m) => [
+          ...m,
+          {
+            id: Date.now().toString(),
+            role: 'assistant',
+            content: `BASED ON KMRL INTELLIDOCS, HERE'S WHAT I FOUND ABOUT "${cleanText.toUpperCase()}": THE SYSTEM CONTAINS EXTENSIVE DOCUMENTATION ACROSS OPERATIONS, FINANCE, HR, MAINTENANCE, LEGAL, AND PROCUREMENT DEPARTMENTS. ALL RECORDS ARE INDEXED AND RETRIEVABLE.`,
+            citations: [{ title: 'OPERATIONS MANUAL', document_id: 'demo-1' }, { title: 'SAFETY PROTOCOLS 2024', document_id: 'demo-2' }],
+            timestamp: new Date(),
+          },
+        ]);
+      }
     } finally {
+      // ALWAYS reset loading so user can click repeatedly without getting blocked!
       setLoading(false);
     }
   };
@@ -295,7 +350,6 @@ export default function AIAssistantPage() {
   const selectSession = (id: string) => {
     setActiveSessionId(id);
     setSessions((prev) => prev.map((s) => ({ ...s, active: s.id === id })));
-    // Load that specific side chat's unique message history!
     const sessionMsgs = SESSION_MESSAGES[id] || [];
     setMessages(sessionMsgs);
     toast.info('Loaded side chat conversation');
@@ -407,7 +461,7 @@ export default function AIAssistantPage() {
                       <div className="mt-3 pt-3 border-t border-zinc-800 space-y-2">
                         <p className="text-[10px] text-zinc-400 font-bold uppercase tracking-wider">SELECT A QUESTION BELOW:</p>
                         <div className="flex flex-col gap-1.5">
-                          {SUGGESTED_QUESTIONS.map((q) => (
+                          {SUGGESTED_QUESTIONS.slice(0, 6).map((q) => (
                             <button
                               key={q}
                               onClick={() => sendMessage(q)}
@@ -446,20 +500,6 @@ export default function AIAssistantPage() {
               </div>
             ))}
 
-            {loading && (
-              <div className="flex gap-3">
-                <div className="w-8 h-8 border-2 border-white bg-white text-black flex items-center justify-center">
-                  <Bot className="w-4 h-4 stroke-[2.5]" />
-                </div>
-                <div className="p-4 pixel-box bg-black border-2 border-zinc-700">
-                  <div className="flex gap-1.5 items-center">
-                    <div className="w-2 h-2 bg-white animate-bounce" style={{ animationDelay: '0ms' }} />
-                    <div className="w-2 h-2 bg-white animate-bounce" style={{ animationDelay: '150ms' }} />
-                    <div className="w-2 h-2 bg-white animate-bounce" style={{ animationDelay: '300ms' }} />
-                  </div>
-                </div>
-              </div>
-            )}
             <div ref={bottomRef} />
           </div>
 
@@ -497,7 +537,7 @@ export default function AIAssistantPage() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => sendMessage(input)}
-                disabled={loading || !input.trim()}
+                disabled={!input.trim()}
                 className="pixel-btn-white p-2.5 flex items-center justify-center disabled:opacity-50 flex-shrink-0"
               >
                 <Send className="w-4 h-4 text-black stroke-[3]" />
