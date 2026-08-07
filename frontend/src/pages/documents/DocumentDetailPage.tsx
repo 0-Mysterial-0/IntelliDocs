@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import {
   ArrowLeft, FileText, Copy, Search, Check, FileDown, Sparkles, Scan, X, Loader2, MessageSquare, User, Clock, Eye
 } from 'lucide-react';
-import { cn, formatDate, formatBytes } from '@/lib/utils';
+import { cn, formatDate, formatBytes, formatRelativeTime } from '@/lib/utils';
 import { MOCK_DOCUMENTS } from '@/data/mockData';
 import { useUploadedDocsStore } from '@/store/uploadedDocsStore';
 import { ocrApi } from '@/lib/api';
