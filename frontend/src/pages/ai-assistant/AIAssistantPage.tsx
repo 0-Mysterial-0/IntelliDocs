@@ -286,14 +286,7 @@ export default function AIAssistantPage() {
     setSessions((prev) => [newSess, ...prev.map((s) => ({ ...s, active: false }))]);
     setActiveSessionId(newSessId);
 
-    const initMsgs: Message[] = [{
-      id: 'welcome',
-      role: 'assistant',
-      content: "Hello sir, how can we help you?",
-      showQuickQuestions: true,
-      citations: [],
-      timestamp: new Date(),
-    }];
+    const initMsgs: Message[] = [];
     SESSION_MESSAGES[newSessId] = initMsgs;
     setMessages(initMsgs);
     toast.success('New chat session started');
@@ -303,16 +296,7 @@ export default function AIAssistantPage() {
     setActiveSessionId(id);
     setSessions((prev) => prev.map((s) => ({ ...s, active: s.id === id })));
     // Load that specific side chat's unique message history!
-    const sessionMsgs = SESSION_MESSAGES[id] || [
-      {
-        id: `welcome-${id}`,
-        role: 'assistant',
-        content: "Hello sir, how can we help you?",
-        showQuickQuestions: true,
-        citations: [],
-        timestamp: new Date(),
-      },
-    ];
+    const sessionMsgs = SESSION_MESSAGES[id] || [];
     setMessages(sessionMsgs);
     toast.info('Loaded side chat conversation');
   };
@@ -388,7 +372,19 @@ export default function AIAssistantPage() {
         {/* Right Active Chat Main View */}
         <div className="flex-1 flex flex-col min-w-0 min-h-0 bg-[#000000]">
           {/* Chat Messages Stream */}
-          <div className="flex-1 overflow-y-auto space-y-4 min-h-0 pr-1">
+          <div className="flex-1 overflow-y-auto space-y-4 min-h-0 pr-1 flex flex-col">
+            {messages.length === 0 && (
+              <div className="flex-1 flex flex-col items-center justify-center p-8 text-center font-pixel-code space-y-3 my-auto">
+                <div className="w-10 h-10 border-2 border-white bg-black flex items-center justify-center">
+                  <Bot className="w-5 h-5 text-white stroke-[2.5]" />
+                </div>
+                <div className="space-y-1">
+                  <h3 className="font-pixel-head font-bold text-white text-xs font-bloom">NEW CHAT SESSION STARTED</h3>
+                  <p className="text-zinc-400 text-xs uppercase max-w-md">ASK A QUESTION OR CHOOSE FROM THE SUGGESTED QUESTIONS BELOW TO BEGIN.</p>
+                </div>
+              </div>
+            )}
+
             {messages.map((msg) => (
               <div key={msg.id} className={cn('flex gap-3', msg.role === 'user' ? 'justify-end' : 'justify-start')}>
                 {msg.role === 'assistant' && (
@@ -468,7 +464,7 @@ export default function AIAssistantPage() {
           </div>
 
           {/* Suggestions at bottom if conversation is brand new */}
-          {messages.length <= 1 && (
+          {messages.length === 0 && (
             <div className="flex-shrink-0 py-3 font-pixel-code">
               <p className="text-xs text-zinc-400 mb-2 uppercase font-bold">SUGGESTED QUESTIONS:</p>
               <div className="flex flex-wrap gap-2">
