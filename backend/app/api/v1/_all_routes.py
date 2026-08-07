@@ -19,10 +19,19 @@ from app.db.models.department import Department
 # ─────────────────────────────────────────────────────────────────────────────
 router_ocr = APIRouter(prefix="/ocr")
 
+def _safe_uuid(val: str) -> Optional[uuid.UUID]:
+    try:
+        return uuid.UUID(val)
+    except (ValueError, TypeError):
+        return None
+
 @router_ocr.get("/{document_id}")
 async def get_ocr_result(document_id: str, current_user: User = Depends(get_current_active_user), db: AsyncSession = Depends(get_db)):
     from app.db.models.ocr_result import OcrResult
-    result = await db.execute(select(OcrResult).where(OcrResult.document_id == uuid.UUID(document_id)))
+    u_id = _safe_uuid(document_id)
+    if not u_id:
+        return {"status": "pending", "message": "OCR not yet processed"}
+    result = await db.execute(select(OcrResult).where(OcrResult.document_id == u_id))
     ocr = result.scalar_one_or_none()
     if not ocr:
         return {"status": "pending", "message": "OCR not yet processed"}
@@ -47,7 +56,10 @@ router_classification = APIRouter(prefix="/classification")
 @router_classification.get("/{document_id}")
 async def get_classification(document_id: str, current_user: User = Depends(get_current_active_user), db: AsyncSession = Depends(get_db)):
     from app.db.models.ocr_result import AiClassification
-    result = await db.execute(select(AiClassification).where(AiClassification.document_id == uuid.UUID(document_id)))
+    u_id = _safe_uuid(document_id)
+    if not u_id:
+        return {"status": "pending", "message": "Classification not yet processed"}
+    result = await db.execute(select(AiClassification).where(AiClassification.document_id == u_id))
     cls = result.scalar_one_or_none()
     if not cls:
         return {"status": "pending", "message": "Classification not yet processed"}
@@ -61,8 +73,11 @@ async def get_classification(document_id: str, current_user: User = Depends(get_
 @router_classification.post("/{document_id}/override")
 async def override_classification(document_id: str, request: Request, current_user: User = Depends(get_current_active_user), db: AsyncSession = Depends(get_db)):
     from app.db.models.ocr_result import AiClassification
+    u_id = _safe_uuid(document_id)
+    if not u_id:
+        raise HTTPException(status_code=404, detail="Document classification not found")
     body = await request.json()
-    result = await db.execute(select(AiClassification).where(AiClassification.document_id == uuid.UUID(document_id)))
+    result = await db.execute(select(AiClassification).where(AiClassification.document_id == u_id))
     cls = result.scalar_one_or_none()
     if cls:
         cls.manual_override = body.get("category")
@@ -78,7 +93,10 @@ router_summarization = APIRouter(prefix="/summarization")
 @router_summarization.get("/{document_id}")
 async def get_summary(document_id: str, current_user: User = Depends(get_current_active_user), db: AsyncSession = Depends(get_db)):
     from app.db.models.ocr_result import AiSummary
-    result = await db.execute(select(AiSummary).where(AiSummary.document_id == uuid.UUID(document_id)))
+    u_id = _safe_uuid(document_id)
+    if not u_id:
+        return {"status": "pending", "message": "Summary not yet generated"}
+    result = await db.execute(select(AiSummary).where(AiSummary.document_id == u_id))
     summary = result.scalar_one_or_none()
     if not summary:
         return {"status": "pending", "message": "Summary not yet generated"}

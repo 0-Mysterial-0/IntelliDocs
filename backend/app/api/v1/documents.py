@@ -117,12 +117,23 @@ async def list_documents(
     }
 
 
+def _safe_uuid(val: str) -> Optional[uuid.UUID]:
+    try:
+        return uuid.UUID(val)
+    except (ValueError, TypeError):
+        return None
+
+
 @router.get("/{document_id}")
 async def get_document(
     document_id: str,
     current_user: User = Depends(get_current_active_user),
     db: AsyncSession = Depends(get_db),
 ):
+    u_id = _safe_uuid(document_id)
+    if not u_id:
+        raise HTTPException(status_code=404, detail="Document not found")
+
     result = await db.execute(
         select(Document).options(
             selectinload(Document.uploader),
@@ -131,7 +142,7 @@ async def get_document(
             selectinload(Document.ocr_result),
             selectinload(Document.ai_classification),
             selectinload(Document.ai_summary),
-        ).where(Document.id == uuid.UUID(document_id))
+        ).where(Document.id == u_id)
     )
     doc = result.scalar_one_or_none()
     if not doc:
@@ -176,7 +187,10 @@ async def update_document(
     current_user: User = Depends(get_current_active_user),
     db: AsyncSession = Depends(get_db),
 ):
-    result = await db.execute(select(Document).where(Document.id == uuid.UUID(document_id)))
+    u_id = _safe_uuid(document_id)
+    if not u_id:
+        raise HTTPException(status_code=404, detail="Document not found")
+    result = await db.execute(select(Document).where(Document.id == u_id))
     doc = result.scalar_one_or_none()
     if not doc:
         raise HTTPException(status_code=404, detail="Document not found")
@@ -197,7 +211,10 @@ async def delete_document(
     current_user: User = Depends(get_current_active_user),
     db: AsyncSession = Depends(get_db),
 ):
-    result = await db.execute(select(Document).where(Document.id == uuid.UUID(document_id)))
+    u_id = _safe_uuid(document_id)
+    if not u_id:
+        raise HTTPException(status_code=404, detail="Document not found")
+    result = await db.execute(select(Document).where(Document.id == u_id))
     doc = result.scalar_one_or_none()
     if not doc:
         raise HTTPException(status_code=404, detail="Document not found")
@@ -211,7 +228,10 @@ async def toggle_favorite(
     current_user: User = Depends(get_current_active_user),
     db: AsyncSession = Depends(get_db),
 ):
-    result = await db.execute(select(Document).where(Document.id == uuid.UUID(document_id)))
+    u_id = _safe_uuid(document_id)
+    if not u_id:
+        raise HTTPException(status_code=404, detail="Document not found")
+    result = await db.execute(select(Document).where(Document.id == u_id))
     doc = result.scalar_one_or_none()
     if not doc:
         raise HTTPException(status_code=404, detail="Document not found")
@@ -226,7 +246,10 @@ async def archive_document(
     current_user: User = Depends(get_current_active_user),
     db: AsyncSession = Depends(get_db),
 ):
-    result = await db.execute(select(Document).where(Document.id == uuid.UUID(document_id)))
+    u_id = _safe_uuid(document_id)
+    if not u_id:
+        raise HTTPException(status_code=404, detail="Document not found")
+    result = await db.execute(select(Document).where(Document.id == u_id))
     doc = result.scalar_one_or_none()
     if not doc:
         raise HTTPException(status_code=404, detail="Document not found")
@@ -241,7 +264,10 @@ async def restore_document(
     current_user: User = Depends(get_current_active_user),
     db: AsyncSession = Depends(get_db),
 ):
-    result = await db.execute(select(Document).where(Document.id == uuid.UUID(document_id)))
+    u_id = _safe_uuid(document_id)
+    if not u_id:
+        raise HTTPException(status_code=404, detail="Document not found")
+    result = await db.execute(select(Document).where(Document.id == u_id))
     doc = result.scalar_one_or_none()
     if not doc:
         raise HTTPException(status_code=404, detail="Document not found")
@@ -258,9 +284,12 @@ async def get_versions(
     db: AsyncSession = Depends(get_db),
 ):
     from app.db.models.approval import DocumentVersion
+    u_id = _safe_uuid(document_id)
+    if not u_id:
+        return []
     result = await db.execute(
         select(DocumentVersion)
-        .where(DocumentVersion.document_id == uuid.UUID(document_id))
+        .where(DocumentVersion.document_id == u_id)
         .order_by(DocumentVersion.version_number.desc())
     )
     versions = result.scalars().all()
@@ -284,10 +313,13 @@ async def get_comments(
     db: AsyncSession = Depends(get_db),
 ):
     from app.db.models.approval import Comment
+    u_id = _safe_uuid(document_id)
+    if not u_id:
+        return []
     result = await db.execute(
         select(Comment)
         .options(selectinload(Comment.user))
-        .where(Comment.document_id == uuid.UUID(document_id))
+        .where(Comment.document_id == u_id)
         .order_by(Comment.created_at.asc())
     )
     comments = result.scalars().all()
@@ -312,13 +344,17 @@ async def add_comment(
     db: AsyncSession = Depends(get_db),
 ):
     from app.db.models.approval import Comment
+    u_id = _safe_uuid(document_id)
+    if not u_id:
+        raise HTTPException(status_code=404, detail="Document not found")
     body = await request.json()
+    parent_uuid = _safe_uuid(body.get("parent_id")) if body.get("parent_id") else None
     comment = Comment(
         id=uuid.uuid4(),
-        document_id=uuid.UUID(document_id),
+        document_id=u_id,
         user_id=current_user.id,
         content=body.get("content", ""),
-        parent_id=uuid.UUID(body["parent_id"]) if body.get("parent_id") else None,
+        parent_id=parent_uuid,
     )
     db.add(comment)
     await db.commit()
