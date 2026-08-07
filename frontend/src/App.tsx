@@ -23,6 +23,7 @@ import DepartmentsPage from '@/pages/departments/DepartmentsPage';
 import NotificationsPage from '@/pages/notifications/NotificationsPage';
 import SettingsPage from '@/pages/settings/SettingsPage';
 import ContractsPage from '@/pages/contracts/ContractsPage';
+import RevokeContractsPage from '@/pages/contracts/RevokeContractsPage';
 import AgencyShowcasePage from '@/pages/agency/AgencyShowcasePage';
 
 // Error Boundary Class
@@ -136,6 +137,7 @@ function App() {
                 <Route path="documents" element={<DocumentsPage />} />
                 <Route path="documents/:id" element={<DocumentDetailPage />} />
                 <Route path="contracts" element={<ContractsPage />} />
+                <Route path="revoke-contracts" element={<RevokeContractsPage />} />
                 <Route path="upload" element={<UploadPage />} />
                 <Route path="search" element={<SearchPage />} />
                 <Route path="ai-assistant" element={<AIAssistantPage />} />
