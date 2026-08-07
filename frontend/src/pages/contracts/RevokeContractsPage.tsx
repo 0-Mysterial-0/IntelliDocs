@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   ShieldAlert, Building2, Search, User, Clock, CheckCircle2,
-  X, AlertTriangle, MessageSquare, Ban, Check
+  X, AlertTriangle, MessageSquare, Ban, Check, Lock, KeyRound
 } from 'lucide-react';
 import { cn, formatDate } from '@/lib/utils';
 import { toast } from 'sonner';
@@ -18,6 +18,10 @@ export default function RevokeContractsPage() {
   const [search, setSearch] = useState('');
   const [selectedContract, setSelectedContract] = useState<ExtendedMockContract | null>(null);
   const [revocationReason, setRevocationReason] = useState('');
+
+  // Password verification modal state
+  const [showPasswordModal, setShowPasswordModal] = useState(false);
+  const [passwordInput, setPasswordInput] = useState('');
 
   const contractList = storeContracts && storeContracts.length > 0 ? storeContracts : MOCK_CONTRACTS;
 
@@ -41,24 +45,39 @@ export default function RevokeContractsPage() {
 
   const handleConfirmRevoke = () => {
     if (!selectedContract) return;
-    const revokerName = user?.full_name || 'Authorized Manager';
+    const revokerName = user?.full_name || 'Rajan Menon (Manager)';
     revokeContract(selectedContract.id, revokerName, revocationReason);
     toast.error(`Contract "${selectedContract.title}" has been REVOKED and CANCELLED!`);
     setSelectedContract(null);
     setRevocationReason('');
   };
 
-  if (!isManagerOrAdmin) {
-    return (
-      <div className="pixel-box p-12 text-center text-zinc-400 font-pixel-code max-w-2xl mx-auto my-12">
-        <ShieldAlert className="w-12 h-12 text-amber-400 mx-auto mb-4 stroke-[2]" />
-        <h2 className="text-sm font-pixel-head font-bold text-white uppercase font-bloom">RESTRICTED EXECUTIVE ACCESS</h2>
-        <p className="text-xs text-amber-300 mt-2 uppercase">
-          ONLY MANAGERS AND ADMINISTRATORS HAVE AUTHORITY TO REVOKE ACTIVE KMRL CONTRACT SLAS.
-        </p>
-      </div>
-    );
-  }
+  const handlePasswordSubmit = (e?: React.FormEvent) => {
+    if (e) e.preventDefault();
+    if (passwordInput.trim() === 'password') {
+      if (user) {
+        useAuthStore.getState().setUser({ ...user, role: 'manager' });
+      } else {
+        useAuthStore.getState().setAuth(
+          {
+            id: 'user-manager',
+            email: 'rajan.menon@kmrl.in',
+            full_name: 'Rajan Menon',
+            role: 'manager',
+            department_name: 'Finance',
+            is_active: true,
+            is_verified: true,
+          },
+          'mock-token-manager-2024'
+        );
+      }
+      toast.success('Security password verified! Manager executive authority activated.');
+      setShowPasswordModal(false);
+      setPasswordInput('');
+    } else {
+      toast.error('Invalid security password! Hint: Enter "password"');
+    }
+  };
 
   return (
     <motion.div
@@ -67,6 +86,26 @@ export default function RevokeContractsPage() {
       transition={{ duration: 0.3 }}
       className="space-y-6 max-w-7xl mx-auto font-pixel"
     >
+      {/* Role Banner for Employees */}
+      {!isManagerOrAdmin && (
+        <div className="p-4 bg-amber-950/40 border-2 border-amber-500/60 font-pixel-code flex items-center justify-between gap-4 flex-wrap">
+          <div className="flex items-center gap-3">
+            <ShieldAlert className="w-5 h-5 text-amber-400 stroke-[2.5] flex-shrink-0" />
+            <div>
+              <p className="text-xs font-bold text-white uppercase">EMPLOYEE VIEW MODE</p>
+              <p className="text-[10px] text-amber-300 uppercase">REVOCATION REQUIRES MANAGER SECURITY PASSWORD ("password")</p>
+            </div>
+          </div>
+          <button
+            onClick={() => setShowPasswordModal(true)}
+            className="pixel-btn-white text-xs py-1.5 px-3 flex items-center gap-1.5"
+          >
+            <Lock className="w-3.5 h-3.5 text-black stroke-[2.5]" />
+            <span>⚡ UNLOCK MANAGER ROLE</span>
+          </button>
+        </div>
+      )}
+
       {/* Header */}
       <div>
         <div className="flex items-center gap-3">
@@ -160,7 +199,13 @@ export default function RevokeContractsPage() {
                 </div>
 
                 <button
-                  onClick={() => setSelectedContract(c)}
+                  onClick={() => {
+                    if (!isManagerOrAdmin) {
+                      setShowPasswordModal(true);
+                    } else {
+                      setSelectedContract(c);
+                    }
+                  }}
                   className="w-full bg-red-600 hover:bg-red-700 text-white font-bold text-xs py-2 px-3 border border-red-400 flex items-center justify-center gap-1.5 shadow-[2px_2px_0px_0px_#7f1d1d] uppercase transition-all"
                 >
                   <Ban className="w-4 h-4 text-white stroke-[2.5]" />
@@ -169,6 +214,61 @@ export default function RevokeContractsPage() {
               </div>
             </div>
           ))}
+        </div>
+      )}
+
+      {/* Security Password Verification Modal */}
+      {showPasswordModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-sm font-pixel p-4">
+          <div className="pixel-box p-6 w-full max-w-md bg-black border-2 border-white space-y-5">
+            <div className="flex items-center justify-between border-b border-zinc-800 pb-3">
+              <div className="flex items-center gap-3">
+                <KeyRound className="w-5 h-5 text-amber-400 stroke-[2.5]" />
+                <div>
+                  <h2 className="text-sm font-pixel-head font-bold text-white uppercase font-bloom">
+                    SECURITY PASSWORD VERIFICATION
+                  </h2>
+                  <p className="text-[10px] text-zinc-400 font-pixel-code">ENTER MANAGER SECURITY PASSWORD TO UNLOCK</p>
+                </div>
+              </div>
+              <button onClick={() => setShowPasswordModal(false)} className="text-zinc-400 hover:text-white">
+                <X className="w-5 h-5 stroke-[2.5]" />
+              </button>
+            </div>
+
+            <form onSubmit={handlePasswordSubmit} className="space-y-4 font-pixel-code text-xs">
+              <div className="space-y-2">
+                <label className="block text-[10px] text-zinc-300 font-bold uppercase flex items-center gap-1">
+                  <Lock className="w-3.5 h-3.5 text-zinc-400" /> MANAGER / ADMIN PASSWORD:
+                </label>
+                <input
+                  type="password"
+                  value={passwordInput}
+                  onChange={(e) => setPasswordInput(e.target.value)}
+                  placeholder='ENTER "password"'
+                  autoFocus
+                  className="w-full bg-black border-2 border-zinc-700 p-3 text-xs text-white placeholder-zinc-600 font-pixel focus:outline-none uppercase"
+                />
+                <p className="text-[10px] text-zinc-400">SECURITY HINT: TYPE <strong className="text-white font-bold">password</strong> TO VERIFY MANAGER AUTHORITY.</p>
+              </div>
+
+              <div className="flex gap-3 pt-2">
+                <button
+                  type="button"
+                  onClick={() => setShowPasswordModal(false)}
+                  className="flex-1 pixel-btn-dark text-xs py-2 px-4"
+                >
+                  CANCEL
+                </button>
+                <button
+                  type="submit"
+                  className="flex-1 pixel-btn-white text-xs py-2 px-4 flex items-center justify-center gap-1.5"
+                >
+                  <Check className="w-4 h-4 stroke-[3]" /> VERIFY & UNLOCK
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
       )}
 
