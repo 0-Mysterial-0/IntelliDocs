@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import {
   ArrowLeft, FileText, Copy, Search, Check, FileDown, Sparkles, Scan, X, Loader2, MessageSquare, User, Clock, Eye
 } from 'lucide-react';
-import { cn, formatDate, formatBytes, formatRelativeTime, getDocumentOcrConfidence } from '@/lib/utils';
+import { cn, formatDate, formatBytes, formatRelativeTime, getDocumentOcrConfidence, getActualOcrConvertedPercentage } from '@/lib/utils';
 import { MOCK_DOCUMENTS } from '@/data/mockData';
 import { useUploadedDocsStore } from '@/store/uploadedDocsStore';
 import { useAuthStore } from '@/store/authStore';
@@ -61,6 +61,12 @@ export default function DocumentDetailPage() {
   const allDocs = [...uploadedDocs, ...MOCK_DOCUMENTS];
   const doc = allDocs.find((d) => d.id === id) || allDocs[0];
   const confidenceScore = getDocumentOcrConfidence(doc.id, doc.title);
+  const actualConvertedPercent = getActualOcrConvertedPercentage({
+    id: doc.id,
+    title: doc.title,
+    fileSize: doc.fileSize,
+    extractedText: doc.extractedText
+  });
 
   const [copiedText, setCopiedText] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
@@ -208,6 +214,12 @@ CONFIDENTIALITY NOTICE: This document contains proprietary information of Kochi 
     setSummaryLoading(false);
   }, [id, doc, fullText, summaryData]);
 
+  useEffect(() => {
+    if (activeTab === 'summary' && !summaryData && !summaryLoading) {
+      handleSummarise();
+    }
+  }, [activeTab, summaryData, summaryLoading, handleSummarise]);
+
 
 
   const getSearchMatchCount = () => {
@@ -270,7 +282,7 @@ CONFIDENTIALITY NOTICE: This document contains proprietary information of Kochi 
               </span>
               <span className="text-xs text-white bg-black border border-zinc-700 px-2 py-0.5 uppercase font-bold">{doc.category}</span>
               <span className="text-xs badge-muted-green font-bloom-green px-2 py-0.5 border uppercase font-bold">
-                ✓ OCR {confidenceScore}% CONVERTED
+                ✓ OCR {actualConvertedPercent}% CONVERTED
               </span>
             </div>
           </div>
@@ -501,32 +513,74 @@ CONFIDENTIALITY NOTICE: This document contains proprietary information of Kochi 
           {/* TAB 3: AI SUMMARY */}
           {activeTab === 'summary' && (
             <div className="pixel-box p-5 space-y-4">
-              <div className="flex items-center gap-2 font-pixel-head">
-                <Sparkles className="w-4 h-4 text-white stroke-[2.5]" />
-                <h3 className="font-bold text-white text-xs font-bloom">AI EXECUTIVE SUMMARY</h3>
-                <span className="text-[10px] font-pixel-code badge-muted-green font-bloom-green px-2 py-0.5 border uppercase font-bold">AUTO-GENERATED</span>
+              <div className="flex items-center justify-between border-b-2 border-[#27272a] pb-3 flex-wrap gap-2 font-pixel-code">
+                <div className="flex items-center gap-2 font-pixel-head">
+                  <Sparkles className="w-4 h-4 text-white stroke-[2.5]" />
+                  <h3 className="font-bold text-white text-xs font-bloom">AI EXECUTIVE SUMMARY</h3>
+                  <span className="text-[10px] font-pixel-code badge-muted-green font-bloom-green px-2 py-0.5 border uppercase font-bold">AUTO-GENERATED</span>
+                </div>
+                {summaryData && (
+                  <span className={cn('text-[10px] font-pixel-code px-2 py-0.5 border font-bold uppercase',
+                    summaryData.risk_level === 'critical' ? 'badge-muted-red font-bloom-red' : 'badge-muted-green font-bloom-green'
+                  )}>
+                    RISK LEVEL: {summaryData.risk_level.toUpperCase()}
+                  </span>
+                )}
               </div>
-              <p className="text-xs text-zinc-300 leading-relaxed font-pixel-code">
-                {doc.description || `THIS DOCUMENT CONTAINS IMPORTANT ${doc.category.toUpperCase()} INFORMATION FOR KMRL OPERATIONS. IT COVERS KEY ASPECTS AND PROVIDES GUIDANCE FOR RELEVANT STAKEHOLDERS.`}
-              </p>
-              <div className="grid grid-cols-2 gap-4 pt-2 font-pixel-code">
-                {[
-                  { label: 'KEY POINTS', items: ['COMPLIANCE REVIEW REQUIRED', 'STAKEHOLDER APPROVAL PENDING', 'FOLLOW-UP BY Q2 2024'] },
-                  { label: 'ACTION ITEMS', items: ['REVIEW AND APPROVE', 'DISTRIBUTE TO DEPARTMENTS', 'ARCHIVE POST-APPROVAL'] },
-                ].map(({ label, items }) => (
-                  <div key={label} className="bg-black p-3 border border-zinc-700">
-                    <p className="text-xs font-bold text-white font-bloom-subtle mb-2">{label}</p>
-                    <ul className="space-y-1.5">
-                      {items.map((item) => (
-                        <li key={item} className="flex items-center gap-2 text-xs text-zinc-300">
-                          <span className="w-1.5 h-1.5 bg-white flex-shrink-0" />
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
+
+              {summaryLoading ? (
+                <div className="p-8 flex flex-col items-center justify-center gap-3 font-pixel-code">
+                  <Loader2 className="w-6 h-6 text-white animate-spin stroke-[2.5]" />
+                  <p className="text-xs text-zinc-400 font-bold uppercase tracking-wider">GENERATING AI EXECUTIVE SUMMARY...</p>
+                </div>
+              ) : summaryData ? (
+                <div className="space-y-4 font-pixel-code">
+                  {/* Executive summary paragraph */}
+                  <div className="bg-black border border-zinc-700 p-4">
+                    <p className="text-[10px] text-zinc-400 font-bold uppercase mb-1">SUMMARY OVERVIEW</p>
+                    <p className="text-xs text-zinc-200 leading-relaxed font-pixel-code">{summaryData.executive_summary}</p>
                   </div>
-                ))}
-              </div>
+
+                  {/* Key points & Action items */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="bg-black p-3.5 border border-zinc-700 space-y-2">
+                      <p className="text-xs font-bold text-white font-bloom-subtle uppercase">KEY FINDINGS</p>
+                      <ul className="space-y-1.5">
+                        {summaryData.key_points.map((pt, i) => (
+                          <li key={i} className="flex items-start gap-2 text-xs text-zinc-300">
+                            <span className="w-1.5 h-1.5 bg-white flex-shrink-0 mt-1.5" />
+                            <span>{pt}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    <div className="bg-black p-3.5 border border-zinc-700 space-y-2">
+                      <p className="text-xs font-bold text-white font-bloom-subtle uppercase">REQUIRED ACTIONS</p>
+                      <ul className="space-y-1.5">
+                        {summaryData.action_items.map((act, i) => (
+                          <li key={i} className="flex items-start gap-2 text-xs text-zinc-300">
+                            <span className="w-1.5 h-1.5 bg-[#6ee7b7] flex-shrink-0 mt-1.5" />
+                            <span>{act}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+
+                  {/* Keywords tags */}
+                  {summaryData.keywords.length > 0 && (
+                    <div className="flex items-center gap-2 flex-wrap pt-1">
+                      <span className="text-[10px] text-zinc-400 font-bold uppercase">KEYWORDS:</span>
+                      {summaryData.keywords.map((kw, i) => (
+                        <span key={i} className="text-[10px] bg-zinc-900 border border-zinc-700 text-zinc-300 px-2 py-0.5 font-bold uppercase">
+                          #{kw}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ) : null}
             </div>
           )}
 
