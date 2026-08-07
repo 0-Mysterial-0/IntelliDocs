@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-  ArrowLeft, FileText, Copy, Search, Check, FileDown, Sparkles, Scan, X, Loader2
+  ArrowLeft, FileText, Copy, Search, Check, FileDown, Sparkles, Scan, X, Loader2, MessageSquare
 } from 'lucide-react';
 import { cn, formatDate, formatBytes } from '@/lib/utils';
 import { MOCK_DOCUMENTS } from '@/data/mockData';
