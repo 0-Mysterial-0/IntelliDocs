@@ -63,8 +63,6 @@ export default function DocumentDetailPage() {
     }
   };
 
-  const allDocs = [...uploadedDocs, ...MOCK_DOCUMENTS];
-  const doc = allDocs.find((d) => d.id === id) || allDocs[0];
   const confidenceScore = getDocumentOcrConfidence(doc.id, doc.title);
   const actualConvertedPercent = getActualOcrConvertedPercentage({
     id: doc.id,
