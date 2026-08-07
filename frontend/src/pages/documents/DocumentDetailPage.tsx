@@ -161,7 +161,8 @@ CONFIDENTIALITY NOTICE: This document contains proprietary information of Kochi 
   };
 
   return (
-    <motion.div
+    <>
+      <motion.div
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3 }}
@@ -586,5 +587,6 @@ CONFIDENTIALITY NOTICE: This document contains proprietary information of Kochi 
         </motion.div>
       )}
     </AnimatePresence>
+    </>
   );
 }
