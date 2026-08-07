@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useAuthStore } from '@/store/authStore';
+import { useRegisteredUsersStore } from '@/store/registeredUsersStore';
 import { authApi } from '@/lib/api';
 import { Train, Eye, EyeOff, UserPlus, Shield, ArrowRight, CheckCircle2 } from 'lucide-react';
 import { toast } from 'sonner';
@@ -37,32 +38,31 @@ export default function RegisterPage() {
       });
 
       if (resp?.data?.access_token) {
-        const { access_token, refresh_token, user } = resp.data;
-        setAuth(user, access_token, refresh_token);
-        toast.success(`Account created successfully! Welcome, ${user.full_name}!`);
+        toast.success(`Account created successfully for ${fullName}! Please sign in now.`);
         setLoading(false);
-        navigate('/dashboard');
+        navigate('/login?tab=signin');
         return;
       }
     } catch (err: any) {
-      const msg = err?.response?.data?.detail || 'Backend offline, activating instant registration session...';
-      console.log('Backend auth message:', msg);
+      console.log('Backend offline or dev fallback...');
     }
 
-    // 2. Instant fallback session for demo mode
-    const mockUser = {
-      id: `user-${Date.now()}`,
-      email: email.toLowerCase().trim(),
-      full_name: fullName,
-      role: role,
-      is_active: true,
-      is_verified: true,
-    };
-
-    setAuth(mockUser, 'kmrl-jwt-token-' + Date.now(), 'kmrl-refresh-token');
-    toast.success(`Account registered! Welcome to KMRL IntelliDocs, ${mockUser.full_name}!`);
-    setLoading(false);
-    navigate('/dashboard');
+    // 2. Persistent store registration
+    try {
+      useRegisteredUsersStore.getState().registerUser({
+        email: email.toLowerCase().trim(),
+        passwordHash: password,
+        fullName: fullName.trim(),
+        role: role,
+        department: 'Operations',
+      });
+      toast.success(`Account created successfully for ${fullName}! Please sign in with your credentials.`);
+      setLoading(false);
+      navigate('/login?tab=signin');
+    } catch (err: any) {
+      toast.error(err.message || 'Failed to create account');
+      setLoading(false);
+    }
   };
 
   return (

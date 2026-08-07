@@ -1,9 +1,10 @@
 import { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useAuthStore } from '@/store/authStore';
+import { useRegisteredUsersStore } from '@/store/registeredUsersStore';
 import { authApi } from '@/lib/api';
-import { Train, Eye, EyeOff, Sparkles, Shield, Search, Bot, ArrowRight, CheckCircle2, UserPlus } from 'lucide-react';
+import { Train, Eye, EyeOff, Sparkles, Shield, Search, Bot, ArrowRight, CheckCircle2, UserPlus, LogIn } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { toast } from 'sonner';
 import { CursorFollower } from '@/components/common/CursorFollower';
@@ -22,24 +23,48 @@ const FEATURES = [
 ];
 
 export default function LoginPage() {
+  const [searchParams] = useSearchParams();
+  const initialTab = searchParams.get('tab') === 'signup' ? 'signup' : 'signin';
+  const [activeTab, setActiveTab] = useState<'signin' | 'signup'>(initialTab);
+
+  // Sign In state
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  // Sign Up state
+  const [signUpName, setSignUpName] = useState('');
+  const [signUpEmail, setSignUpEmail] = useState('');
+  const [signUpPassword, setSignUpPassword] = useState('');
+  const [signUpRole, setSignUpRole] = useState<'employee' | 'manager' | 'admin'>('employee');
+
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
-  const { setAuth } = useAuthStore();
 
+  const { setAuth } = useAuthStore();
+  const { validateCredentials, registerUser } = useRegisteredUsersStore();
   const navigate = useNavigate();
 
+  // ── STRICT SIGN IN VALIDATION ──────────────────────────────────────────────
   const handleLogin = async (e?: React.FormEvent, overrideEmail?: string, overridePassword?: string) => {
     if (e) e.preventDefault();
 
-    const loginEmail = (overrideEmail || email || 'admin@kmrl.in').trim();
-    const loginPassword = overridePassword || password || 'kmrl@2024';
+    const targetEmail = (overrideEmail || email).trim();
+    const targetPassword = overridePassword || password;
+
+    if (!targetEmail) {
+      toast.error('Please enter your email address!');
+      return;
+    }
+    if (!targetPassword) {
+      toast.error('Please enter your password!');
+      return;
+    }
 
     setLoading(true);
 
+    // 1. Try FastAPI real backend endpoint if online
     try {
-      const resp = await authApi.login(loginEmail, loginPassword);
+      const resp = await authApi.login(targetEmail, targetPassword);
       if (resp?.data?.access_token) {
         const { access_token, refresh_token, user } = resp.data;
         setAuth(user, access_token, refresh_token);
@@ -48,33 +73,23 @@ export default function LoginPage() {
         navigate('/dashboard');
         return;
       }
-    } catch (err) {
-      console.log('Backend auth offline or invalid credentials, activating instant fallback session...');
+    } catch {
+      // Backend offline or local verification fallback
     }
 
-    const matchedDemo = DEMO_USERS.find((u) => u.email.toLowerCase() === loginEmail.toLowerCase());
-
-    const role = matchedDemo
-      ? matchedDemo.role
-      : loginEmail.includes('admin')
-      ? 'admin'
-      : loginEmail.includes('manager')
-      ? 'manager'
-      : 'employee';
-
-    const name = matchedDemo
-      ? matchedDemo.name
-      : loginEmail
-          .split('@')[0]
-          .split('.')
-          .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
-          .join(' ');
+    // 2. Strict Local Registered Users Verification
+    const validatedUser = validateCredentials(targetEmail, targetPassword);
+    if (!validatedUser) {
+      toast.error('Invalid email or password! Please check your credentials or create a new account.');
+      setLoading(false);
+      return; // DO NOT REDIRECT!
+    }
 
     const mockUser = {
-      id: `user-${Date.now()}`,
-      email: loginEmail,
-      full_name: name || 'KMRL User',
-      role: role as 'admin' | 'manager' | 'employee',
+      id: validatedUser.id,
+      email: validatedUser.email,
+      full_name: validatedUser.fullName,
+      role: validatedUser.role,
       is_active: true,
       is_verified: true,
     };
@@ -83,6 +98,48 @@ export default function LoginPage() {
     toast.success(`Welcome back, ${mockUser.full_name}!`);
     setLoading(false);
     navigate('/dashboard');
+  };
+
+  // ── SIGN UP HANDLER ────────────────────────────────────────────────────────
+  const handleSignUp = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!signUpName.trim()) {
+      toast.error('Please enter your full name');
+      return;
+    }
+    if (!signUpEmail.trim()) {
+      toast.error('Please enter your email address');
+      return;
+    }
+    if (!signUpPassword || signUpPassword.length < 4) {
+      toast.error('Password must be at least 4 characters long');
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      registerUser({
+        email: signUpEmail.trim().toLowerCase(),
+        passwordHash: signUpPassword,
+        fullName: signUpName.trim(),
+        role: signUpRole,
+        department: 'Operations',
+      });
+
+      toast.success(`Account created for ${signUpName}! Please sign in now.`);
+      setEmail(signUpEmail.trim().toLowerCase());
+      setPassword(signUpPassword);
+      setActiveTab('signin');
+      setSignUpName('');
+      setSignUpEmail('');
+      setSignUpPassword('');
+    } catch (err: any) {
+      toast.error(err.message || 'Failed to create account');
+    } finally {
+      setLoading(false);
+    }
   };
 
   const quickLogin = (u: typeof DEMO_USERS[0]) => {
@@ -95,7 +152,7 @@ export default function LoginPage() {
     <div className="min-h-[100dvh] bg-[#000000] flex flex-col md:flex-row font-pixel text-white selection:bg-white selection:text-black relative overflow-y-auto">
       <CursorFollower />
 
-      {/* Left Panel - Branding & Floating Pixel Cards */}
+      {/* Left Panel - Branding */}
       <motion.div
         initial={{ opacity: 0, x: -20 }}
         animate={{ opacity: 1, x: 0 }}
@@ -166,7 +223,7 @@ export default function LoginPage() {
         </div>
       </motion.div>
 
-      {/* Right Panel - Pixel Login Form */}
+      {/* Right Panel - Tabbed Auth Form */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -175,7 +232,7 @@ export default function LoginPage() {
       >
         <div className="w-full max-w-sm">
           {/* Mobile Logo */}
-          <div className="flex items-center gap-3 mb-8 lg:hidden">
+          <div className="flex items-center gap-3 mb-6 lg:hidden">
             <Train className="w-7 h-7 text-white stroke-[2.5]" />
             <div>
               <p className="font-pixel-head font-bold text-white font-bloom">INTELLIDOCS</p>
@@ -183,115 +240,206 @@ export default function LoginPage() {
             </div>
           </div>
 
-          {/* Auth Tab Switcher */}
-          <div className="flex border-b-2 border-zinc-800 mb-6 font-pixel-code items-center justify-between">
-            <span className="pb-2 text-xs font-bold text-white border-b-2 border-white font-bloom-subtle uppercase">
-              SIGN IN
-            </span>
-            <Link
-              to="/register"
-              className="pb-2 text-xs font-bold text-zinc-400 hover:text-white transition-colors flex items-center gap-1.5 uppercase"
+          {/* ── INTERACTIVE TAB SWITCHER (SIGN IN vs SIGN UP) ───────────────── */}
+          <div className="flex border-b-2 border-zinc-800 mb-6 font-pixel-code">
+            <button
+              type="button"
+              onClick={() => setActiveTab('signin')}
+              className={cn(
+                'flex-1 py-2.5 text-xs font-bold uppercase transition-all flex items-center justify-center gap-2 border-b-2',
+                activeTab === 'signin'
+                  ? 'text-white border-white bg-zinc-900'
+                  : 'text-zinc-500 border-transparent hover:text-zinc-300'
+              )}
+            >
+              <LogIn className="w-3.5 h-3.5 stroke-[2.5]" />
+              <span>SIGN IN</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => setActiveTab('signup')}
+              className={cn(
+                'flex-1 py-2.5 text-xs font-bold uppercase transition-all flex items-center justify-center gap-2 border-b-2',
+                activeTab === 'signup'
+                  ? 'text-white border-white bg-zinc-900'
+                  : 'text-zinc-500 border-transparent hover:text-zinc-300'
+              )}
             >
               <UserPlus className="w-3.5 h-3.5 stroke-[2.5]" />
-              <span>CREATE ACCOUNT / SIGN UP →</span>
-            </Link>
-          </div>
-
-          <h2 className="text-xl font-pixel-head font-bold text-white font-bloom mb-1">WELCOME BACK 👾</h2>
-          <p className="text-zinc-400 text-xs font-pixel-code uppercase mb-6">SIGN IN TO YOUR KMRL INTELLIDOCS ACCOUNT</p>
-
-          {/* Prominent Registration Banner Box */}
-          <div className="bg-zinc-900 border-2 border-white p-3 flex items-center justify-between font-pixel-code text-xs mb-5 shadow-[3px_3px_0px_0px_#ffffff]">
-            <div>
-              <p className="font-bold text-white uppercase">DON'T HAVE AN ACCOUNT?</p>
-              <p className="text-[10px] text-zinc-400 uppercase">Register new KMRL user account</p>
-            </div>
-            <Link to="/register" className="pixel-btn-white text-[11px] py-1 px-3 flex-shrink-0 flex items-center gap-1">
               <span>SIGN UP</span>
-              <ArrowRight className="w-3 h-3 stroke-[3]" />
-            </Link>
+            </button>
           </div>
 
-          <form onSubmit={(e) => handleLogin(e)} className="space-y-4 font-pixel-code">
+          {/* ── TAB 1: SIGN IN FORM ────────────────────────────────────────── */}
+          {activeTab === 'signin' && (
             <div>
-              <label className="block text-xs font-bold text-zinc-400 mb-1.5 uppercase">EMAIL ADDRESS</label>
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="ADMIN@KMRL.IN"
-                className="w-full px-4 py-2.5 bg-black border-2 border-zinc-700 text-xs font-pixel text-white placeholder-zinc-500 focus:outline-none focus:border-white uppercase shadow-[2px_2px_0px_0px_#18181b]"
-              />
-            </div>
+              <h2 className="text-xl font-pixel-head font-bold text-white font-bloom mb-1">WELCOME BACK</h2>
+              <p className="text-zinc-400 text-xs font-pixel-code uppercase mb-5">SIGN IN TO YOUR KMRL INTELLIDOCS ACCOUNT</p>
 
+              <form onSubmit={handleLogin} className="space-y-4 font-pixel-code">
+                <div>
+                  <label className="block text-xs font-bold text-zinc-400 mb-1.5 uppercase">EMAIL ADDRESS</label>
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="ADMIN@KMRL.IN"
+                    className="w-full px-4 py-2.5 bg-black border-2 border-zinc-700 text-xs font-pixel text-white placeholder-zinc-500 focus:outline-none focus:border-white uppercase shadow-[2px_2px_0px_0px_#18181b]"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold text-zinc-400 mb-1.5 uppercase">PASSWORD</label>
+                  <div className="relative">
+                    <input
+                      type={showPassword ? 'text' : 'password'}
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      placeholder="••••••••"
+                      className="w-full px-4 py-2.5 bg-black border-2 border-zinc-700 text-xs font-pixel text-white placeholder-zinc-500 focus:outline-none focus:border-white uppercase pr-10 shadow-[2px_2px_0px_0px_#18181b]"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword((v) => !v)}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-white"
+                    >
+                      {showPassword ? <EyeOff className="w-4 h-4 stroke-[2.5]" /> : <Eye className="w-4 h-4 stroke-[2.5]" />}
+                    </button>
+                  </div>
+                </div>
+
+                <motion.button
+                  whileHover={{ scale: 1.02 }}
+                  type="submit"
+                  disabled={loading}
+                  className="pixel-btn-white w-full py-3 flex items-center justify-center gap-2 mt-2"
+                >
+                  {loading ? (
+                    <div className="w-4 h-4 border-2 border-black border-t-transparent rounded-full animate-spin" />
+                  ) : (
+                    <>
+                      <span>SIGN IN</span> <ArrowRight className="w-4 h-4 stroke-[3]" />
+                    </>
+                  )}
+                </motion.button>
+              </form>
+
+              {/* Quick Switch to Sign Up */}
+              <div className="mt-4 pt-3 border-t border-zinc-800 text-center font-pixel-code">
+                <button
+                  onClick={() => setActiveTab('signup')}
+                  className="text-xs text-zinc-400 hover:text-white uppercase font-bold"
+                >
+                  DON'T HAVE AN ACCOUNT? <span className="underline text-white ml-1">CREATE ACCOUNT NOW →</span>
+                </button>
+              </div>
+
+              {/* 1-Click Demo Login */}
+              <div className="flex items-center gap-3 my-5 font-pixel-code">
+                <div className="flex-1 h-0.5 bg-zinc-800" />
+                <span className="text-[10px] text-zinc-400 font-bold uppercase">1-CLICK DEMO LOGIN</span>
+                <div className="flex-1 h-0.5 bg-zinc-800" />
+              </div>
+
+              <div className="space-y-2 font-pixel-code">
+                {DEMO_USERS.map((u) => (
+                  <button
+                    key={u.role}
+                    type="button"
+                    onClick={() => quickLogin(u)}
+                    disabled={loading}
+                    className="w-full flex items-center gap-3 p-2.5 bg-black border-2 border-zinc-700 hover:border-white transition-all cursor-pointer group shadow-[2px_2px_0px_0px_#18181b]"
+                  >
+                    <span className={cn('px-2 py-0.5 border text-[10px] font-bold uppercase', u.badge)}>{u.label}</span>
+                    <span className="text-zinc-300 group-hover:text-white transition-colors truncate text-xs">{u.email}</span>
+                    <span className="ml-auto text-[10px] text-zinc-500 flex items-center gap-1 font-bold">
+                      1-CLICK <CheckCircle2 className="w-3.5 h-3.5 text-[#6ee7b7] opacity-0 group-hover:opacity-100 transition-opacity stroke-[2.5]" />
+                    </span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* ── TAB 2: SIGN UP FORM ────────────────────────────────────────── */}
+          {activeTab === 'signup' && (
             <div>
-              <label className="block text-xs font-bold text-zinc-400 mb-1.5 uppercase">PASSWORD</label>
-              <div className="relative">
-                <input
-                  type={showPassword ? 'text' : 'password'}
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder="••••••••"
-                  className="w-full px-4 py-2.5 bg-black border-2 border-zinc-700 text-xs font-pixel text-white placeholder-zinc-500 focus:outline-none focus:border-white uppercase pr-10 shadow-[2px_2px_0px_0px_#18181b]"
-                />
-                <button type="button" onClick={() => setShowPassword((v) => !v)} className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-white">
-                  {showPassword ? <EyeOff className="w-4 h-4 stroke-[2.5]" /> : <Eye className="w-4 h-4 stroke-[2.5]" />}
+              <h2 className="text-xl font-pixel-head font-bold text-white font-bloom mb-1">CREATE ACCOUNT</h2>
+              <p className="text-zinc-400 text-xs font-pixel-code uppercase mb-5">REGISTER YOUR NEW KMRL ENTERPRISE USER</p>
+
+              <form onSubmit={handleSignUp} className="space-y-3.5 font-pixel-code">
+                <div>
+                  <label className="block text-xs font-bold text-zinc-400 mb-1 uppercase">FULL NAME</label>
+                  <input
+                    type="text"
+                    value={signUpName}
+                    onChange={(e) => setSignUpName(e.target.value)}
+                    placeholder="E.G. SURESH PRABHU"
+                    className="w-full px-4 py-2.5 bg-black border-2 border-zinc-700 text-xs font-pixel text-white placeholder-zinc-500 focus:outline-none focus:border-white uppercase shadow-[2px_2px_0px_0px_#18181b]"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold text-zinc-400 mb-1 uppercase">EMAIL ADDRESS</label>
+                  <input
+                    type="email"
+                    value={signUpEmail}
+                    onChange={(e) => setSignUpEmail(e.target.value)}
+                    placeholder="USER@KMRL.IN"
+                    className="w-full px-4 py-2.5 bg-black border-2 border-zinc-700 text-xs font-pixel text-white placeholder-zinc-500 focus:outline-none focus:border-white uppercase shadow-[2px_2px_0px_0px_#18181b]"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold text-zinc-400 mb-1 uppercase">PASSWORD</label>
+                  <input
+                    type="password"
+                    value={signUpPassword}
+                    onChange={(e) => setSignUpPassword(e.target.value)}
+                    placeholder="CREATE PASSWORD"
+                    className="w-full px-4 py-2.5 bg-black border-2 border-zinc-700 text-xs font-pixel text-white placeholder-zinc-500 focus:outline-none focus:border-white uppercase shadow-[2px_2px_0px_0px_#18181b]"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold text-zinc-400 mb-1 uppercase">ROLE</label>
+                  <select
+                    value={signUpRole}
+                    onChange={(e) => setSignUpRole(e.target.value as any)}
+                    className="w-full px-4 py-2.5 bg-black border-2 border-zinc-700 text-xs font-pixel text-white focus:outline-none focus:border-white uppercase shadow-[2px_2px_0px_0px_#18181b]"
+                  >
+                    <option value="employee">EMPLOYEE (VIEW & UPLOAD)</option>
+                    <option value="manager">MANAGER (APPROVALS & ANALYTICS)</option>
+                    <option value="admin">ADMIN (FULL ACCESS)</option>
+                  </select>
+                </div>
+
+                <motion.button
+                  whileHover={{ scale: 1.02 }}
+                  type="submit"
+                  disabled={loading}
+                  className="pixel-btn-white w-full py-3 flex items-center justify-center gap-2 mt-3"
+                >
+                  {loading ? (
+                    <div className="w-4 h-4 border-2 border-black border-t-transparent rounded-full animate-spin" />
+                  ) : (
+                    <>
+                      <span>CREATE ACCOUNT</span> <UserPlus className="w-4 h-4 stroke-[2.5]" />
+                    </>
+                  )}
+                </motion.button>
+              </form>
+
+              <div className="mt-4 pt-3 border-t border-zinc-800 text-center font-pixel-code">
+                <button
+                  onClick={() => setActiveTab('signin')}
+                  className="text-xs text-zinc-400 hover:text-white uppercase font-bold"
+                >
+                  ALREADY HAVE AN ACCOUNT? <span className="underline text-white ml-1">SIGN IN HERE →</span>
                 </button>
               </div>
             </div>
-
-            <motion.button
-              whileHover={{ scale: 1.02 }}
-              type="submit"
-              disabled={loading}
-              className="pixel-btn-white w-full py-3 flex items-center justify-center gap-2 mt-2"
-            >
-              {loading ? (
-                <div className="w-4 h-4 border-2 border-black border-t-transparent rounded-full animate-spin" />
-              ) : (
-                <>
-                  <span>SIGN IN</span> <ArrowRight className="w-4 h-4 stroke-[3]" />
-                </>
-              )}
-            </motion.button>
-          </form>
-
-          {/* Divider */}
-          <div className="flex items-center gap-3 my-6 font-pixel-code">
-            <div className="flex-1 h-0.5 bg-zinc-800" />
-            <span className="text-[10px] text-zinc-400 font-bold uppercase">1-CLICK DEMO LOGIN</span>
-            <div className="flex-1 h-0.5 bg-zinc-800" />
-          </div>
-
-          {/* Quick Demo Buttons */}
-          <div className="space-y-2.5 font-pixel-code">
-            {DEMO_USERS.map((u) => (
-              <motion.button
-                key={u.role}
-                whileHover={{ scale: 1.02, y: -2 }}
-                type="button"
-                onClick={() => quickLogin(u)}
-                disabled={loading}
-                className="w-full flex items-center gap-3 p-3 bg-black border-2 border-zinc-700 hover:border-white transition-all cursor-pointer group shadow-[2px_2px_0px_0px_#18181b]"
-              >
-                <span className={cn('px-2 py-0.5 border text-[10px] font-bold uppercase', u.badge)}>{u.label}</span>
-                <span className="text-zinc-300 group-hover:text-white transition-colors truncate text-xs">{u.email}</span>
-                <span className="ml-auto text-[10px] text-zinc-500 flex items-center gap-1 font-bold">
-                  1-CLICK <CheckCircle2 className="w-3.5 h-3.5 text-[#6ee7b7] opacity-0 group-hover:opacity-100 transition-opacity stroke-[2.5]" />
-                </span>
-              </motion.button>
-            ))}
-          </div>
-          {/* Sign Up Link */}
-          <div className="mt-6 pt-4 border-t-2 border-zinc-800 text-center font-pixel-code">
-            <p className="text-xs text-zinc-400 uppercase">NEED AN ACCOUNT?</p>
-            <Link
-              to="/register"
-              className="inline-block text-xs font-bold text-white hover:text-[#6ee7b7] font-bloom-subtle mt-1 uppercase underline underline-offset-4"
-            >
-              CREATE ACCOUNT / SIGN UP →
-            </Link>
-          </div>
+          )}
 
           <p className="text-center text-[10px] font-pixel-code text-zinc-500 mt-6 uppercase">
             KMRL INTELLIDOCS · KOCHI METRO RAIL LIMITED
