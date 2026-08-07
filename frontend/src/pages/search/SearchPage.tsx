@@ -453,16 +453,6 @@ export default function SearchPage() {
                   </div>
 
                   <div className="flex flex-col items-end gap-2 flex-shrink-0 font-pixel-code">
-                    {result.similarityScore ? (
-                      <span className="text-xs px-2.5 py-0.5 font-bold bg-amber-400 text-black border border-amber-300 uppercase">
-                        {result.similarityScore}% SIMILARITY
-                      </span>
-                    ) : (
-                      <span className="text-xs px-2.5 py-0.5 font-bold badge-muted-green font-bloom-green uppercase">
-                        {Math.round(result.score * 100)}% MATCH
-                      </span>
-                    )}
-
                     <div className="flex items-center gap-1 flex-wrap justify-end">
                       <button
                         onClick={(e) => {

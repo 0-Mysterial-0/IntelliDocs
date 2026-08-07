@@ -57,35 +57,35 @@ export default function SettingsPage() {
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3 }}
-      className="max-w-4xl mx-auto font-pixel"
+      className="max-w-5xl mx-auto font-pixel w-full"
     >
       <div className="mb-6">
         <h1 className="text-xl font-pixel-head font-bold text-white font-bloom">SYSTEM CONFIGURATION</h1>
         <p className="text-zinc-400 text-xs font-pixel-code mt-1 uppercase">CONFIGURE KMRL INTELLIDOCS AI, STORAGE, AND SECURITY SETTINGS</p>
       </div>
 
-      <div className="flex gap-6">
-        {/* Sidebar */}
-        <div className="w-48 flex-shrink-0 space-y-2 font-pixel-code">
+      <div className="flex flex-col md:flex-row gap-4 md:gap-6 w-full">
+        {/* Sidebar Tabs */}
+        <div className="w-full md:w-48 flex-shrink-0 flex md:flex-col gap-2 font-pixel-code overflow-x-auto pb-1 md:pb-0">
           {sections.map(({ id, label, icon: Icon }) => (
             <button
               key={id}
               onClick={() => setActiveSection(id)}
               className={cn(
-                'w-full flex items-center gap-3 px-4 py-3 border text-xs font-bold transition-all text-left uppercase',
+                'flex-1 md:flex-none flex items-center justify-center md:justify-start gap-2.5 px-3 py-2.5 md:py-3 border text-xs font-bold transition-all text-center md:text-left uppercase whitespace-nowrap',
                 activeSection === id
-                  ? 'bg-white text-black border-white shadow-[3px_3px_0px_0px_#ffffff]'
+                  ? 'bg-white text-black border-white shadow-[2px_2px_0px_0px_#ffffff]'
                   : 'bg-black text-zinc-400 border-zinc-800 hover:border-white hover:text-white'
               )}
             >
-              <Icon className="w-4 h-4 stroke-[2.5]" />
-              {label}
+              <Icon className="w-4 h-4 stroke-[2.5] flex-shrink-0" />
+              <span>{label}</span>
             </button>
           ))}
         </div>
 
         {/* Content */}
-        <div className="flex-1 space-y-5">
+        <div className="flex-1 space-y-5 min-w-0">
           {activeSection === 'ai' && (
             <>
               <div className="pixel-box p-5 space-y-5 animate-pixel-float">
