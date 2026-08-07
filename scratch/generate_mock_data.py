@@ -72,6 +72,81 @@ for i in range(1, 81):
         'isExpiring': is_exp
     })
 
+def generate_1500_word_document(doc_id, title, cat, emp, st, pr, i):
+    dept = emp['department']
+    officer = emp['fullName']
+    email = emp['email']
+    cid = emp['assignedContractId']
+    
+    sec1 = f"""1. EXECUTIVE DIRECTIVE & STATUTORY COMPLIANCE OBLIGATIONS
+This administrative and operational telemetry directive (Document Reference: KMRL/{cat.upper()}/2024/{str(i).zfill(3)}) is formally promulgated by Kochi Metro Rail Limited (KMRL) under the governance of the Metro Railways (Operation and Maintenance) Act, 2002, and subsequent operational directives issued by the Ministry of Housing and Urban Affairs (MoHUA), Government of India. The primary mandate of this directive is to establish rigorous operational standards, safety audit protocols, and financial stewardship guidelines for the {cat} Directorate across all 25 elevated and underground metro stations along the Aluva to Petta corridor (Phase 1) and the Water Metro feeder routes.
+
+As designated Officer-in-Charge, {officer} ({dept} Department, Email: {email}) is entrusted with enforcing adherence to these protocol specifications. All technical specifications, equipment tolerances, and maintenance intervals delineated herein have been cross-verified against Research Designs and Standards Organisation (RDSO) guidelines, Indian Railways Standards (IRS), and International Electrotechnical Commission (IEC) norms. Contract SLA Reference {cid} applies directly to all vendor deliverables mandated under this report.
+
+The scope of this document encompasses comprehensive engineering reviews, risk assessments, environmental impact evaluations, and fiscal allocations. Compliance audits must be conducted bi-weekly, with non-conformance telemetry automatically escalated to the KMRL Executive Committee and Safety Commissioner. Failure to satisfy designated threshold criteria mandates immediate remedial interventions within a strictly enforced 4-hour operational window."""
+
+    sec2 = f"""2. TECHNICAL ARCHITECTURE & SYSTEM TELEMETRY AUDIT
+2.1 TRACK & INFRASTRUCTURE HARDWARE MONITORING
+The physical infrastructure comprising 28.2 route-kilometers of dual-gauge ballastless track bed, elevated viaduct piers (P-101 through P-890), prestressed concrete U-girders, and turnouts at Muttom Yard underwent exhaustive structural health evaluations. Ultrasonic Flaw Detection (UFD) testing was executed along 100% of continuous welded rail (CWR) sections using multi-channel digital flaw detectors. Rail head wear profile measurements indicated an average vertical wear of 0.34 mm and lateral wear of 0.21 mm, well below the maximum permissible threshold of 3.0 mm.
+
+2.2 TRACTION POWER & OVERHEAD EQUIPMENT (OHE) TELEMETRY
+Power distribution across the 750V DC third-rail traction system was audited via Supervisory Control and Data Acquisition (SCADA) telemetry from the Command & Control Centre at Metro Bhavan. Substation transformers located at Aluva, Kalamassery, Edapally, Palarivattom, Ernakulam South, and Petta recorded an average voltage stability factor of 99.82%. Oil insulation breakdown voltage (BDV) tests yielded values exceeding 68 kV, demonstrating optimal dielectric strength. Harmonic distortion levels on 33 kV auxiliary supply lines remained below 1.8%, satisfying CEA grid connection codes.
+
+2.3 AUTOMATIC TRAIN CONTROL (ATC) & SIGNALING TELEMETRY
+The Communication-Based Train Control (CBTC) signaling architecture, utilizing redundant bi-directional radio transmission units (ZCAU) installed along the guideway, achieved a 99.994% packet delivery success rate. Signal propagation delay across all 18 Alstom Metropolis 4-car trainsets averaged 1.8 milliseconds. On-board Automatic Train Protection (ATP) units performed self-diagnostic routines during every terminal turnaround, reporting zero critical fail-safe dropouts over 1,440 consecutive revenue service hours.
+
+2.4 PLATFORM SCREEN DOORS (PSD) & STATION AUTOMATION
+All 480 motor-driven glass barrier doors across 20 stations were subjected to door leaf alignment checks, obstacle detection sensitivity tests, and emergency manual release audits. Door opening and closing synchronization times measured 2.8 seconds and 3.2 seconds respectively, with obstacle detection sensors detecting obstructions as small as 10 mm. Emergency egress plunger switches located at platform ends were manually actuated during non-revenue testing cycles, successfully triggering immediate train hold interlocks at the OCC master console."""
+
+    sec3 = f"""3. MAINTENANCE PROTOCOLS, SAFETY AUDITS & RISK MITIGATION
+3.1 PREVENTATIVE MAINTENANCE SCHEDULE & OVERHAUL CYCLES
+Preventative maintenance activities for rolling stock, traction systems, and station facilities are categorized into daily pre-service inspections, 5,000 km weekly checks, 30,000 km quarterly overhauls, and 120,000 km annual major overhaul programs. Trainset RS-{(i%18)+1} completed its 30,000 km quarterly overhaul at Muttom Depot Workshop Bay 3. Key interventions included:
+- Wheel profile re-truing on the CNC under-floor wheel lathe to restore flange height and thickness to standard UIC-510 profiles.
+- Primary and secondary air spring rubber element inspect-and-replace routines.
+- HVAC compressor refrigerant leakage check utilizing halogen leak detectors, followed by cabin HEPA filter replacement.
+- Passenger saloon emergency call button (PECU) acoustic clarity and latency validation.
+
+3.2 CYBERSECURITY & IT NETWORK AUDIT (ISO 27001 STANDARDS)
+The Enterprise Information & Communication Technology (ICT) infrastructure, incorporating the Automatic Fare Collection (AFC) ticketing network, station CCTV surveillance arrays, and KMRL IntelliDocs document management server clusters, underwent an ISO 27001 security audit. Vulnerability assessments and penetration testing (VAPT) conducted on external firewalls identified zero high-severity vulnerabilities. Network segmentation protocols effectively isolate operational signaling networks (OT) from corporate administrative networks (IT), mitigating malware propagation risks.
+
+3.3 ENVIRONMENTAL, HEALTH & SAFETY (EHS) METRICS
+Occupational health and safety audits conducted across maintenance depots recorded zero Lost Time Injuries (LTI) over the preceding 365 calendar days. Noise level mapping conducted inside passenger saloons during maximum speed operations (80 km/h) yielded average sound pressure readings of 63.8 dBA, significantly lower than the international transit threshold of 75 dBA. Station indoor air quality monitors recorded PM2.5 concentrations below 35 µg/m³, sustained by high-efficiency filtration units in underground station concourses."""
+
+    sec4 = f"""4. FINANCIAL AUDIT, SLA PENALTIES & CONTRACTUAL OBLIGATIONS
+4.1 CAPITAL & OPERATIONAL EXPENDITURE ANALYSIS
+Financial telemetry for the current audit period reflects a total operational expenditure of ₹ {random.randint(25, 95) * 100000} allocated across preventive maintenance contracts, energy tariffs, vendor retainers, and staff operational allowances. A detailed budget breakdown is structured as follows:
+- Track Infrastructure Maintenance & Rail Grinding: ₹ {random.randint(10, 30) * 100000}
+- Rolling Stock Fleet Servicing & Component Replacement: ₹ {random.randint(15, 40) * 100000}
+- Traction Energy Charges (KSEB Bulk Supply Tariff): ₹ {random.randint(20, 50) * 100000}
+- IT Network & Software Licensing (KMRL IntelliDocs RAG Engine): ₹ {random.randint(5, 15) * 100000}
+
+4.2 VENDOR PERFORMANCE & LIQUIDATED DAMAGES CLAUSES
+Service Level Agreements (SLAs) under vendor contract {cid} mandate strict compliance with key performance indicators (KPIs). Failure to adhere to turnaround timelines triggers automated penalty deductions:
+- Unscheduled train cancellation due to vendor maintenance defect: Penalty of ₹ 2,000,000 per instance.
+- Delay in emergency response beyond 60 minutes: Liquidated damages of ₹ 50,000 per hour of delay.
+- Failure to maintain 98.5% equipment availability threshold: 2% deduction from quarterly invoice value.
+During the preceding operational quarter, Vendor Partner {chr(65 + (i % 26))} Ltd achieved a KPI compliance score of 99.4%, resulting in full invoice authorization without penalty deductions."""
+
+    sec5 = f"""5. ACTIONABLE DIRECTIVES & EXECUTIVE SIGN-OFF
+5.1 IMMEDIATE ACTIONABLE MANDATES
+1. Execute mandatory track alignment verification along the Edapally-Palarivattom curve during the scheduled non-revenue maintenance window (01:15 AM - 04:00 AM) on the 18th of this month.
+2. Complete software patch deployment (v4.2.1) across all Automatic Fare Collection (AFC) gates to enable enhanced QR code reader sensitivity.
+3. Submit updated EHS compliance documentation for Muttom Depot Solar PV arrays to the Kerala State Electricity Board (KSEB) Inspectorate.
+4. Renew vendor SLA contract {cid} prior to the 60-day advance notice window to guarantee uninterrupted technical support.
+
+5.2 AUTHORIZATION & DOCUMENT CONTROL
+Document ID: {doc_id}
+Document Title: {title}
+Category: {cat.upper()} | Department: {dept.upper()}
+Assigned Officer: {officer} ({email})
+Processing Date: 2024-0{((i % 6) + 1):02d}-15T10:00:00Z
+KMRL IntelliDocs EasyOCR Pipeline Status: VERIFIED & INDEXED (100% CONFIDENCE)
+
+AUTHORIZED BY ORDER OF THE MANAGING DIRECTOR & EXECUTIVE BOARD
+KOCHI METRO RAIL LIMITED — METRO BHAVAN, ERNAKULAM"""
+
+    return f"{sec1}\n\n{sec2}\n\n{sec3}\n\n{sec4}\n\n{sec5}"
+
 comment_templates = {
   'Safety': [
     "I have reviewed the acoustic track emission data on the Aluva to Petta line. Sensor readings on section {sec} are well within RDSO thresholds.",
@@ -205,28 +280,8 @@ for i in range(1, 201):
     st = statuses[(i - 1) % len(statuses)]
     pr = priorities[(i - 1) % len(priorities)]
     
-    text_body = f"""KOCHI METRO RAIL LIMITED (KMRL)
-CORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017
-{cat.upper()} DIRECTORATE · DOCUMENT REF: KMRL/{cat.upper()}/2024/{str(i).zfill(3)}
-
-1. EXECUTIVE SUMMARY & BACKGROUND
-This official document details the {cat.lower()} protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: {emp['fullName']} ({emp['department']} Department, Email: {emp['email']}). Contract Reference: {emp['assignedContractId']}.
-
-2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT
-- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.
-- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.
-- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.
-
-3. FINANCIAL & CONTRACTUAL IMPLICATIONS
-- Budget Allocation: Projected annual outlay for this operational activity is estimated at ₹ {random.randint(10, 60) * 100000}.
-- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of ₹ 50,000 per violation.
-
-4. ACTIONABLE DIRECTIVES & APPROVAL STATUS
-- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).
-- Directive 2: Submit bi-weekly compliance telemetry logs to {emp['department']} Directorate.
-
-RECORD AUTHORIZED BY: {emp['fullName'].upper()} (KMRL INTELLIDOCS)
-STATUS: {st.upper()} · PRIORITY: {pr.upper()}"""
+    text_body = generate_1500_word_document(doc_id, title, cat, emp, st, pr, i)
+    word_count = len(text_body.split())
 
     # Generate 5 to 10 unique comments for this specific document
     doc_comments = []
@@ -252,7 +307,6 @@ STATUS: {st.upper()} · PRIORITY: {pr.upper()}"""
             boat=f"0{((i + c_idx) % 6) + 1}"
         )
         
-        # Add document specific contextual suffix so every single comment is 100% unique to this doc
         unique_text = f"{formatted_comment} (Ref: {doc_id} / Log #{c_idx + 1})"
         
         doc_comments.append({
@@ -274,28 +328,32 @@ STATUS: {st.upper()} · PRIORITY: {pr.upper()}"""
         'uploadedBy': emp['fullName'],
         'department': emp['department'],
         'createdAt': f"2024-0{((i % 6) + 1):02d}-15T10:00:00Z",
-        'fileSize': random.randint(500000, 3500000),
+        'fileSize': len(text_body.encode('utf-8')),
         'mimeType': 'application/pdf',
         'ocrStatus': 'Completed',
-        'description': f"Official {cat} document for KMRL operations. Assigned to {emp['fullName']}.",
+        'description': f"Official 5-section {cat} operational audit directive for KMRL operations. Assigned to {emp['fullName']}. Word count: {word_count} words.",
         'extractedText': text_body,
         'aiSummary': {
-            'executiveSummary': f"Executive Overview of {title}: Fully processed and verified under KMRL {cat.upper()} Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: {emp['fullName']}.",
+            'executiveSummary': f"Comprehensive Executive Directive for '{title}': Evaluated under KMRL {cat.upper()} Protocols and MoHUA transit safety standards. Audit confirms 99.82% traction voltage stability, 99.994% CBTC signaling telemetry, and zero critical safety defects across 28.2 route-kilometers. Total operational budget allocation stands at ₹ {(i * 3) + 45} Lakhs under Contract SLA {emp['assignedContractId']}. Assigned Officer: {emp['fullName']}.",
             'keyFindings': [
-                f"1. Operational Telemetry: {cat} parameters verified compliant with RDSO standards.",
-                f"2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
-                f"3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+                f"1. Statutory Governance: Full compliance with Metro Railways O&M Act 2002 and RDSO engineering norms.",
+                f"2. Infrastructure Health: Ultrasonic flaw detection confirms rail wear within 0.34 mm tolerance across all 25 stations.",
+                f"3. Traction & SCADA Telemetry: 750V DC power sub-stations operating at 99.82% efficiency with zero outages.",
+                f"4. Signaling & Automation: CBTC radio transmission packet delivery verified at 99.994% accuracy.",
+                f"5. Financial & Vendor Audit: Vendor SLA {emp['assignedContractId']} cleared with zero liquidated damage penalties."
             ],
             'actionItems': [
-                f"Complete preventative maintenance window for {emp['department']} department by end of month.",
-                f"Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+                f"Execute scheduled rail alignment check on Section {(i % 12) + 1} during non-revenue maintenance window.",
+                f"Deploy AFC gate firmware patch v4.2.1 across all 120 station turnstiles by month-end.",
+                f"Submit EHS compliance logs for Muttom Depot Solar PV system to KSEB Inspectorate.",
+                f"Initiate SLA contract renewal for {emp['assignedContractId']} within 60-day notice window."
             ],
             'riskLevel': 'Low' if pr in ['low', 'medium'] else ('High' if pr == 'high' else 'Critical'),
             'department': emp['department'],
-            'tags': [cat.lower(), emp['department'].lower(), 'kmrl', '2024']
+            'tags': [cat.lower(), emp['department'].lower(), 'kmrl-intellidocs', 'rdso-certified', '2024-audit']
         },
         'comments': doc_comments,
-        'tags': [cat.lower(), emp['department'].lower(), 'kmrl', '2024'],
+        'tags': [cat.lower(), emp['department'].lower(), 'kmrl-intellidocs', 'rdso-certified', '2024-audit'],
         'isDuplicate': is_dup,
         'duplicateOfId': orig_id if is_dup else None,
         'duplicateOfTitle': f"{base_t} #{orig_index} (ORIGINAL)" if is_dup else None,
@@ -336,7 +394,7 @@ for i in range(1, 21):
         'link': f"/documents/doc-{str(i).zfill(3)}"
     })
 
-mock_content = f"""// Realistic KMRL IntelliDocs mock data - 80 Employees, 200 Documents with 5-10 Unique Comments each, 80 Contracts, 25 Approvals, 20 Notifications
+mock_content = f"""// Realistic KMRL IntelliDocs mock data - 80 Employees, 200 Documents (1000-2000 words each), 80 Contracts, 25 Approvals, 20 Notifications
 
 export interface MockComment {{
   id: string;
@@ -489,4 +547,4 @@ target_path = os.path.join(os.path.dirname(__file__), '../frontend/src/data/mock
 with open(target_path, 'w', encoding='utf-8') as f:
     f.write(mock_content)
 
-print("PYTHON GENERATED ALL 200 DOCUMENTS WITH 5-10 UNIQUE COMMENTS EACH!")
+print("PYTHON GENERATED ALL 200 DOCUMENTS WITH 1000-2000 WORDS EACH AND UPDATED AI SUMMARIES!")
