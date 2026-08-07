@@ -1,0 +1,220 @@
+
+
+services:
+  # ── Frontend (React + Vite) ───────────────────────────────────────────────
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: kmrl_frontend
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    environment:
+      - VITE_API_URL=http://localhost:8000
+      - VITE_APP_NAME=KMRL IntelliDocs
+    depends_on:
+      - backend
+    networks:
+      - kmrl_network
+    restart: unless-stopped
+
+  # ── Backend (FastAPI) ─────────────────────────────────────────────────────
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: kmrl_backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app
+      - document_uploads:/app/uploads
+    environment:
+      - DATABASE_URL=postgresql+asyncpg://postgres:kmrl_secure_password@postgres:5432/kmrl_intellidocs
+      - SECRET_KEY=kmrl-intellidocs-super-secret-jwt-key-2024-enterprise
+      - ALGORITHM=HS256
+      - ACCESS_TOKEN_EXPIRE_MINUTES=30
+      - REFRESH_TOKEN_EXPIRE_DAYS=7
+      - MINIO_ENDPOINT=minio:9000
+      - MINIO_ACCESS_KEY=minioadmin
+      - MINIO_SECRET_KEY=minioadmin123
+      - MINIO_BUCKET=kmrl-documents
+      - MINIO_SECURE=false
+      - CHROMA_HOST=chromadb
+      - CHROMA_PORT=8000
+      - OLLAMA_HOST=http://ollama:11434
+      - OLLAMA_MODEL=llama3
+      - OLLAMA_EMBED_MODEL=nomic-embed-text
+      - USE_OLLAMA=true
+      - USE_GEMINI_FALLBACK=true
+      - GEMINI_API_KEY=${GEMINI_API_KEY:-}
+      - GEMINI_MODEL=gemini-1.5-flash
+      - CORS_ORIGINS=["http://localhost:5173","http://localhost:3000","http://frontend:5173"]
+      - DEBUG=true
+      - APP_NAME=KMRL IntelliDocs
+      - REDIS_URL=redis://redis:6379/0
+    depends_on:
+      postgres:
+        condition: service_healthy
+      minio:
+        condition: service_healthy
+      chromadb:
+        condition: service_started
+      redis:
+        condition: service_healthy
+    networks:
+      - kmrl_network
+    restart: unless-stopped
+
+  # ── PostgreSQL 16 ─────────────────────────────────────────────────────────
+  postgres:
+    image: postgres:16-alpine
+    container_name: kmrl_postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: kmrl_secure_password
+      POSTGRES_DB: kmrl_intellidocs
+      PGDATA: /var/lib/postgresql/data/pgdata
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./infra/init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d kmrl_intellidocs"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    networks:
+      - kmrl_network
+    restart: unless-stopped
+
+  # ── ChromaDB (Vector Store) ───────────────────────────────────────────────
+  # Note: Internal port is 8000, exposed as 8001 to avoid conflict with backend
+  chromadb:
+    image: chromadb/chroma:latest
+    container_name: kmrl_chromadb
+    ports:
+      - "8001:8000"
+    volumes:
+      - chroma_data:/chroma/chroma
+    environment:
+      - IS_PERSISTENT=TRUE
+      - ALLOW_RESET=TRUE
+      - CHROMA_SERVER_HTTP_PORT=8000
+    networks:
+      - kmrl_network
+    restart: unless-stopped
+
+  # ── Ollama (LLM - Llama 3) ────────────────────────────────────────────────
+  ollama:
+    image: ollama/ollama:latest
+    container_name: kmrl_ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    networks:
+      - kmrl_network
+    restart: unless-stopped
+    # Uncomment for NVIDIA GPU support:
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: all
+    #           capabilities: [gpu]
+
+  # ── Ollama Init (pull models on first run) ────────────────────────────────
+  ollama-setup:
+    image: ollama/ollama:latest
+    container_name: kmrl_ollama_setup
+    depends_on:
+      - ollama
+    entrypoint: >
+      sh -c "
+        echo 'Waiting for Ollama to be ready...' &&
+        sleep 10 &&
+        OLLAMA_HOST=http://ollama:11434 ollama pull llama3 &&
+        OLLAMA_HOST=http://ollama:11434 ollama pull nomic-embed-text &&
+        echo 'Models pulled successfully!'
+      "
+    networks:
+      - kmrl_network
+    restart: "no"
+
+  # ── MinIO (Local S3 Object Storage) ──────────────────────────────────────
+  minio:
+    image: minio/minio:latest
+    container_name: kmrl_minio
+    command: server /data --console-address ":9001"
+    ports:
+      - "9000:9000"    # API
+      - "9001:9001"    # Console UI
+    volumes:
+      - minio_data:/data
+    environment:
+      - MINIO_ROOT_USER=minioadmin
+      - MINIO_ROOT_PASSWORD=minioadmin123
+    healthcheck:
+      test: ["CMD", "mc", "ready", "local"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+    networks:
+      - kmrl_network
+    restart: unless-stopped
+
+  # ── MinIO Init (create bucket on first run) ───────────────────────────────
+  minio-setup:
+    image: minio/mc:latest
+    container_name: kmrl_minio_setup
+    depends_on:
+      minio:
+        condition: service_healthy
+    entrypoint: >
+      sh -c "
+        mc alias set local http://minio:9000 minioadmin minioadmin123 &&
+        mc mb --ignore-existing local/kmrl-documents &&
+        mc anonymous set download local/kmrl-documents &&
+        echo 'MinIO bucket created!'
+      "
+    networks:
+      - kmrl_network
+    restart: "no"
+
+  # ── Redis (Caching + Rate Limiting) ──────────────────────────────────────
+  redis:
+    image: redis:7-alpine
+    container_name: kmrl_redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    command: redis-server --appendonly yes
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+    networks:
+      - kmrl_network
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  chroma_data:
+  ollama_data:
+  minio_data:
+  redis_data:
+  document_uploads:
+
+networks:
+  kmrl_network:
+    driver: bridge

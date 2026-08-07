@@ -1,0 +1,35 @@
+version: "3.9"
+
+# Development overrides - hot reload, exposed ports, volume mounts
+services:
+  frontend:
+    build:
+      target: development
+    command: npm run dev -- --host 0.0.0.0
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+
+  backend:
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload --log-level debug
+    volumes:
+      - ./backend:/app
+    environment:
+      - DEBUG=true
+
+  postgres:
+    ports:
+      - "5432:5432"
+
+  chromadb:
+    ports:
+      - "8001:8000"
+
+  minio:
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+
+  redis:
+    ports:
+      - "6379:6379"
