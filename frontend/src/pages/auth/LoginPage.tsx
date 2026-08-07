@@ -3,7 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useAuthStore } from '@/store/authStore';
 import { authApi } from '@/lib/api';
-import { Train, Eye, EyeOff, Sparkles, Shield, Search, Bot, ArrowRight, CheckCircle2 } from 'lucide-react';
+import { Train, Eye, EyeOff, Sparkles, Shield, Search, Bot, ArrowRight, CheckCircle2, UserPlus } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { toast } from 'sonner';
 import { CursorFollower } from '@/components/common/CursorFollower';
@@ -183,8 +183,34 @@ export default function LoginPage() {
             </div>
           </div>
 
+          {/* Auth Tab Switcher */}
+          <div className="flex border-b-2 border-zinc-800 mb-6 font-pixel-code items-center justify-between">
+            <span className="pb-2 text-xs font-bold text-white border-b-2 border-white font-bloom-subtle uppercase">
+              SIGN IN
+            </span>
+            <Link
+              to="/register"
+              className="pb-2 text-xs font-bold text-zinc-400 hover:text-white transition-colors flex items-center gap-1.5 uppercase"
+            >
+              <UserPlus className="w-3.5 h-3.5 stroke-[2.5]" />
+              <span>CREATE ACCOUNT / SIGN UP →</span>
+            </Link>
+          </div>
+
           <h2 className="text-xl font-pixel-head font-bold text-white font-bloom mb-1">WELCOME BACK 👾</h2>
           <p className="text-zinc-400 text-xs font-pixel-code uppercase mb-6">SIGN IN TO YOUR KMRL INTELLIDOCS ACCOUNT</p>
+
+          {/* Prominent Registration Banner Box */}
+          <div className="bg-zinc-900 border-2 border-white p-3 flex items-center justify-between font-pixel-code text-xs mb-5 shadow-[3px_3px_0px_0px_#ffffff]">
+            <div>
+              <p className="font-bold text-white uppercase">DON'T HAVE AN ACCOUNT?</p>
+              <p className="text-[10px] text-zinc-400 uppercase">Register new KMRL user account</p>
+            </div>
+            <Link to="/register" className="pixel-btn-white text-[11px] py-1 px-3 flex-shrink-0 flex items-center gap-1">
+              <span>SIGN UP</span>
+              <ArrowRight className="w-3 h-3 stroke-[3]" />
+            </Link>
+          </div>
 
           <form onSubmit={(e) => handleLogin(e)} className="space-y-4 font-pixel-code">
             <div>
