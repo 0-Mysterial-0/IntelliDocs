@@ -125,20 +125,23 @@ All policies outlined herein are subject to official revision and compliance aud
     return () => clearTimeout(timer);
   }, [id, doc]);
 
-  // Use backend OCR text if available, then local stored text, then fallback
-  const fullText = backendOcrText
-    || doc.extractedText
-    || `KOCHI METRO RAIL LIMITED (KMRL)
-CORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017
+  // Use backend OCR text if available, then local stored text, then fallback (sanitizing binary PDF syntax)
+  const rawText = backendOcrText || doc.extractedText || '';
+  const isBinaryPdfJunk = rawText.startsWith('%PDF') || rawText.includes('endstream') || rawText.includes('xref');
 
-DOCUMENT TITLE: ${doc.title}
-DEPARTMENT: ${doc.department || 'OPERATIONS'}
-CATEGORY: ${doc.category || 'GENERAL'}
+  const fullText = (!isBinaryPdfJunk && rawText.trim().length > 0)
+    ? rawText
+    : `KOCHI METRO RAIL LIMITED (KMRL)
+METRO BHAVAN, ERNAKULAM, KOCHI - 682017
+
+DOCUMENT TITLE: ${doc.title.toUpperCase()}
+DEPARTMENT: ${(doc.department || 'OPERATIONS').toUpperCase()}
+CATEGORY: ${doc.category.toUpperCase()}
 DATE OF PROCESSING: ${formatDate(doc.createdAt)}
 STATUS: ${doc.status.toUpperCase()}
 
 1. GENERAL SUMMARY
-This document has been processed by KMRL IntelliDocs EasyOCR and AI Classification Pipeline. The extracted text below represents the body content of the uploaded document (${doc.title}).
+This document (${doc.title}) has been processed by KMRL IntelliDocs EasyOCR and AI Classification Pipeline.
 
 2. DETAILS & SPECIFICATIONS
 - Priority Level: ${doc.priority.toUpperCase()}

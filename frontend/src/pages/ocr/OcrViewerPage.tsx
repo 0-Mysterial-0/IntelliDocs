@@ -77,16 +77,21 @@ export default function OcrViewerPage() {
       // 2. Fall back to target document from local store or mock data
       const targetDoc = (id ? allDocs.find((d) => d.id === id) : null) || doc || allDocs[0];
       if (targetDoc) {
-        const text = targetDoc.extractedText || targetDoc.description || `KOCHI METRO RAIL LIMITED (KMRL)
-DOCUMENT TITLE: ${targetDoc.title}
-DEPARTMENT: ${targetDoc.department || 'OPERATIONS'}
-CATEGORY: ${targetDoc.category || 'GENERAL'}
+        const raw = targetDoc.extractedText || '';
+        const isPdfJunk = raw.startsWith('%PDF') || raw.includes('endstream') || raw.includes('xref');
 
-1. EXECUTIVE SUMMARY
+        const text = (!isPdfJunk && raw.trim().length > 0)
+          ? raw
+          : `KOCHI METRO RAIL LIMITED (KMRL)
+DOCUMENT TITLE: ${targetDoc.title.toUpperCase()}
+DEPARTMENT: ${(targetDoc.department || 'OPERATIONS').toUpperCase()}
+CATEGORY: ${(targetDoc.category || 'GENERAL').toUpperCase()}
+
+1. EXECUTIVE SUMMARY & IDENTIFICATION
 This document (${targetDoc.title}) has been processed by KMRL IntelliDocs OCR Engine.
 
 2. CONTENT BODY
-Official operational procedures and administrative records for Kochi Metro Rail Limited.`;
+${targetDoc.description || 'Official operational procedures and administrative records for Kochi Metro Rail Limited.'}`;
 
         const dynamicConfidence = getDocumentOcrConfidence(targetDoc.id, targetDoc.title);
         setOcrText(text);
