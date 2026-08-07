@@ -45,7 +45,7 @@ export default function AppRoutes() {
         <Route path="documents" element={<DocumentsPage />} />
         <Route path="documents/:id" element={<DocumentDetailPage />} />
         <Route path="contracts" element={<ContractsPage />} />
-        <Route path="contracts/revoke" element={<RevokeContractsPage />} />
+        <Route path="revoke-contracts" element={<RevokeContractsPage />} />
         <Route path="upload" element={<UploadPage />} />
         <Route path="search" element={<SearchPage />} />
         <Route path="ai-assistant" element={<AIAssistantPage />} />

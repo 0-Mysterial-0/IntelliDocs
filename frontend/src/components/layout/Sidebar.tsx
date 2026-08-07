@@ -18,7 +18,7 @@ const navItems = [
   { to: '/documents', icon: FileText, label: 'DOCUMENTS', roles: ['admin', 'manager', 'employee'] },
   { to: '/upload', icon: Upload, label: 'UPLOAD DOCUMENTS', roles: ['admin', 'manager', 'employee'] },
   { to: '/contracts', icon: Shield, label: 'CONTRACTS', roles: ['admin', 'manager', 'employee'], badge: null as null },
-  { to: '/contracts/revoke', icon: Ban, label: 'REVOKE CONTRACT', roles: ['admin', 'manager'] },
+  { to: '/revoke-contracts', icon: Ban, label: 'REVOKE CONTRACT', roles: ['admin', 'manager'] },
   { to: '/approvals', icon: CheckSquare, label: 'APPROVALS', roles: ['admin', 'manager', 'employee'] },
   { to: '/search', icon: Search, label: 'SEARCH', roles: ['admin', 'manager', 'employee'] },
   { to: '/ai-assistant', icon: Bot, label: 'AI ASSISTANT', roles: ['admin', 'manager', 'employee'], isAi: true },
@@ -64,7 +64,7 @@ export function Sidebar({ collapsed, onToggle }: SidebarProps) {
       {/* Navigation */}
       <nav className="flex-1 py-4 px-3 overflow-y-auto space-y-1.5 font-pixel">
         {visibleItems.map(({ to, icon: Icon, label, badge, isAi }) => {
-          const isActive = location.pathname === to || location.pathname.startsWith(to + '/');
+          const isActive = location.pathname === to || (to !== '/' && to !== '/contracts' && location.pathname.startsWith(to + '/'));
           return (
             <NavLink
               key={to}
