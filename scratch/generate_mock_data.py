@@ -139,6 +139,21 @@ STATUS: {st.upper()} · PRIORITY: {pr.upper()}"""
         'ocrStatus': 'Completed',
         'description': f"Official {cat} document for KMRL operations. Assigned to {emp['fullName']}.",
         'extractedText': text_body,
+        'aiSummary': {
+            'executiveSummary': f"Executive Overview of {title}: Fully processed and verified under KMRL {cat.upper()} Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: {emp['fullName']}.",
+            'keyFindings': [
+                f"1. Operational Telemetry: {cat} parameters verified compliant with RDSO standards.",
+                f"2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+                f"3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+            ],
+            'actionItems': [
+                f"Complete preventative maintenance window for {emp['department']} department by end of month.",
+                f"Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+            ],
+            'riskLevel': 'Low' if pr in ['low', 'medium'] else ('High' if pr == 'high' else 'Critical'),
+            'department': emp['department'],
+            'tags': [cat.lower(), emp['department'].lower(), 'kmrl', '2024']
+        },
         'tags': [cat.lower(), emp['department'].lower(), 'kmrl', '2024'],
         'isDuplicate': is_dup,
         'duplicateOfId': orig_id if is_dup else None,
@@ -180,7 +195,7 @@ for i in range(1, 21):
         'link': f"/documents/doc-{str(i).zfill(3)}"
     })
 
-mock_content = f"""// Realistic KMRL IntelliDocs mock data - 80 Employees, 200 Documents, 80 Contracts, 25 Approvals, 20 Notifications
+mock_content = f"""// Realistic KMRL IntelliDocs mock data - 80 Employees, 200 Documents with OCR + AI Summaries, 80 Contracts, 25 Approvals, 20 Notifications
 
 export interface MockDocument {{
   id: string;
@@ -196,6 +211,14 @@ export interface MockDocument {{
   ocrStatus: string;
   description?: string;
   extractedText?: string;
+  aiSummary?: {{
+    executiveSummary: string;
+    keyFindings: string[];
+    actionItems: string[];
+    riskLevel: string;
+    department: string;
+    tags: string[];
+  }};
   tags?: string[];
   isDuplicate?: boolean;
   duplicateOfId?: string;
@@ -262,10 +285,56 @@ export const MOCK_CONTRACTS: MockContract[] = {json.dumps(contracts, indent=2)};
 export const MOCK_DOCUMENTS: MockDocument[] = {json.dumps(documents, indent=2)};
 export const MOCK_APPROVALS: MockApproval[] = {json.dumps(approvals, indent=2)};
 export const MOCK_NOTIFICATIONS: MockNotification[] = {json.dumps(notifications, indent=2)};
+
+export const MOCK_ANALYTICS = {{
+  total_documents: 200,
+  uploads_today: 23,
+  pending_approvals: 18,
+  duplicate_documents: 20,
+  ocr_processed: 194,
+  ai_processed: 188,
+  storage_used_bytes: 52_428_800_000,
+  storage_total_bytes: 107_374_182_400,
+  active_users: 80,
+  monthly_uploads: [
+    {{ month: 'Mar', count: 24 }},
+    {{ month: 'Apr', count: 32 }},
+    {{ month: 'May', count: 41 }},
+    {{ month: 'Jun', count: 52 }},
+    {{ month: 'Jul', count: 68 }},
+    {{ month: 'Aug', count: 200 }},
+  ],
+  category_distribution: [
+    {{ category: 'Finance', count: 20 }},
+    {{ category: 'Operations', count: 20 }},
+    {{ category: 'HR', count: 20 }},
+    {{ category: 'Safety', count: 20 }},
+    {{ category: 'Legal', count: 20 }},
+    {{ category: 'Procurement', count: 20 }},
+    {{ category: 'Maintenance', count: 20 }},
+    {{ category: 'Engineering', count: 20 }},
+    {{ category: 'Water Metro', count: 20 }},
+    {{ category: 'IT', count: 20 }},
+  ],
+  department_activity: [
+    {{ department: 'Operations', documents: 20, storage_gb: 12.3 }},
+    {{ department: 'Finance', documents: 20, storage_gb: 8.7 }},
+    {{ department: 'HR', documents: 20, storage_gb: 5.2 }},
+    {{ department: 'Maintenance', documents: 20, storage_gb: 7.1 }},
+    {{ department: 'Legal', documents: 20, storage_gb: 4.5 }},
+    {{ department: 'Procurement', documents: 20, storage_gb: 14.8 }},
+  ],
+  approval_stats: {{ total: 25, approved: 15, rejected: 3, pending: 7, avg_decision_hours: 4.2 }},
+  recent_activity: [
+    {{ user: 'Rajan Menon', action: 'Approved', document: 'Financial Statement Q2', time: '2 min ago' }},
+    {{ user: 'Priya Nair', action: 'Uploaded', document: 'HR Policy Update', time: '15 min ago' }},
+    {{ user: 'Arun Kumar', action: 'Commented on', document: 'Maintenance Schedule', time: '1 hr ago' }},
+  ],
+}};
 """
 
 target_path = os.path.join(os.path.dirname(__file__), '../frontend/src/data/mockData.ts')
 with open(target_path, 'w', encoding='utf-8') as f:
     f.write(mock_content)
 
-print("PYTHON GENERATED mockData.ts SUCCESSFULLY!")
+print("PYTHON GENERATED ALL 200 DOCUMENTS WITH OCR AND AI SUMMARY SUCCESSFULLY!")

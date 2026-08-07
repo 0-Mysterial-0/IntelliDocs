@@ -1,4 +1,4 @@
-// Realistic KMRL IntelliDocs mock data - 80 Employees, 200 Documents, 80 Contracts, 25 Approvals, 20 Notifications
+// Realistic KMRL IntelliDocs mock data - 80 Employees, 200 Documents with OCR + AI Summaries, 80 Contracts, 25 Approvals, 20 Notifications
 
 export interface MockDocument {
   id: string;
@@ -14,6 +14,14 @@ export interface MockDocument {
   ocrStatus: string;
   description?: string;
   extractedText?: string;
+  aiSummary?: {
+    executiveSummary: string;
+    keyFindings: string[];
+    actionItems: string[];
+    riskLevel: string;
+    department: string;
+    tags: string[];
+  };
   tags?: string[];
   isDuplicate?: boolean;
   duplicateOfId?: string;
@@ -1046,7 +1054,7 @@ export const MOCK_CONTRACTS: MockContract[] = [
     "department": "Operations",
     "assignedEmployeeName": "Arun Kumar",
     "assignedEmployeeEmail": "arun.kumar@kmrl.in",
-    "valueAmount": 1600000,
+    "valueAmount": 7100000,
     "startDate": "2023-09-01",
     "expiryDate": "2025-06-30",
     "status": "active",
@@ -1061,7 +1069,7 @@ export const MOCK_CONTRACTS: MockContract[] = [
     "department": "Maintenance",
     "assignedEmployeeName": "Priya Nair",
     "assignedEmployeeEmail": "priya.nair@kmrl.in",
-    "valueAmount": 7100000,
+    "valueAmount": 7800000,
     "startDate": "2023-09-01",
     "expiryDate": "2025-06-30",
     "status": "active",
@@ -1076,7 +1084,7 @@ export const MOCK_CONTRACTS: MockContract[] = [
     "department": "Finance",
     "assignedEmployeeName": "Rajan Menon",
     "assignedEmployeeEmail": "rajan.menon@kmrl.in",
-    "valueAmount": 2200000,
+    "valueAmount": 3500000,
     "startDate": "2023-09-01",
     "expiryDate": "2025-06-30",
     "status": "active",
@@ -1091,7 +1099,7 @@ export const MOCK_CONTRACTS: MockContract[] = [
     "department": "HR",
     "assignedEmployeeName": "Suresh Prabhu",
     "assignedEmployeeEmail": "suresh.prabhu@kmrl.in",
-    "valueAmount": 9200000,
+    "valueAmount": 5100000,
     "startDate": "2023-09-01",
     "expiryDate": "2025-06-30",
     "status": "active",
@@ -1106,7 +1114,7 @@ export const MOCK_CONTRACTS: MockContract[] = [
     "department": "Legal",
     "assignedEmployeeName": "Ananya Sharma",
     "assignedEmployeeEmail": "ananya.sharma@kmrl.in",
-    "valueAmount": 4700000,
+    "valueAmount": 2900000,
     "startDate": "2023-09-01",
     "expiryDate": "2024-08-30",
     "status": "expiring_soon",
@@ -1121,7 +1129,7 @@ export const MOCK_CONTRACTS: MockContract[] = [
     "department": "Procurement",
     "assignedEmployeeName": "Deepak Verma",
     "assignedEmployeeEmail": "deepak.verma@kmrl.in",
-    "valueAmount": 4700000,
+    "valueAmount": 7500000,
     "startDate": "2023-09-01",
     "expiryDate": "2025-06-30",
     "status": "active",
@@ -1136,7 +1144,7 @@ export const MOCK_CONTRACTS: MockContract[] = [
     "department": "Safety",
     "assignedEmployeeName": "Rajesh Iyer",
     "assignedEmployeeEmail": "rajesh.iyer@kmrl.in",
-    "valueAmount": 5100000,
+    "valueAmount": 9800000,
     "startDate": "2023-09-01",
     "expiryDate": "2025-06-30",
     "status": "pending_approval",
@@ -1151,7 +1159,7 @@ export const MOCK_CONTRACTS: MockContract[] = [
     "department": "Engineering",
     "assignedEmployeeName": "Sunita Pillai",
     "assignedEmployeeEmail": "sunita.pillai@kmrl.in",
-    "valueAmount": 6700000,
+    "valueAmount": 3100000,
     "startDate": "2023-09-01",
     "expiryDate": "2025-06-30",
     "status": "active",
@@ -1166,7 +1174,7 @@ export const MOCK_CONTRACTS: MockContract[] = [
     "department": "IT",
     "assignedEmployeeName": "Vivek Swaminathan",
     "assignedEmployeeEmail": "vivek.swaminathan@kmrl.in",
-    "valueAmount": 2200000,
+    "valueAmount": 3700000,
     "startDate": "2023-09-01",
     "expiryDate": "2025-06-30",
     "status": "under_renewal",
@@ -1181,7 +1189,7 @@ export const MOCK_CONTRACTS: MockContract[] = [
     "department": "Water Metro",
     "assignedEmployeeName": "Lakshmi Nambiar",
     "assignedEmployeeEmail": "lakshmi.nambiar@kmrl.in",
-    "valueAmount": 2600000,
+    "valueAmount": 1800000,
     "startDate": "2023-09-01",
     "expiryDate": "2024-08-30",
     "status": "expiring_soon",
@@ -1196,7 +1204,7 @@ export const MOCK_CONTRACTS: MockContract[] = [
     "department": "Operations",
     "assignedEmployeeName": "Manoj Panicker",
     "assignedEmployeeEmail": "manoj.panicker@kmrl.in",
-    "valueAmount": 9800000,
+    "valueAmount": 6000000,
     "startDate": "2023-09-01",
     "expiryDate": "2025-06-30",
     "status": "active",
@@ -1211,7 +1219,7 @@ export const MOCK_CONTRACTS: MockContract[] = [
     "department": "Maintenance",
     "assignedEmployeeName": "Divya Kurup",
     "assignedEmployeeEmail": "divya.kurup@kmrl.in",
-    "valueAmount": 3600000,
+    "valueAmount": 5900000,
     "startDate": "2023-09-01",
     "expiryDate": "2025-06-30",
     "status": "active",
@@ -1226,7 +1234,7 @@ export const MOCK_CONTRACTS: MockContract[] = [
     "department": "Finance",
     "assignedEmployeeName": "Karthik Sundaram",
     "assignedEmployeeEmail": "karthik.sundaram@kmrl.in",
-    "valueAmount": 3300000,
+    "valueAmount": 6300000,
     "startDate": "2023-09-01",
     "expiryDate": "2025-06-30",
     "status": "active",
@@ -1241,7 +1249,7 @@ export const MOCK_CONTRACTS: MockContract[] = [
     "department": "HR",
     "assignedEmployeeName": "Meera Joshi",
     "assignedEmployeeEmail": "meera.joshi@kmrl.in",
-    "valueAmount": 10000000,
+    "valueAmount": 9100000,
     "startDate": "2023-09-01",
     "expiryDate": "2025-06-30",
     "status": "pending_approval",
@@ -1256,7 +1264,7 @@ export const MOCK_CONTRACTS: MockContract[] = [
     "department": "Legal",
     "assignedEmployeeName": "Amit Chakraborty",
     "assignedEmployeeEmail": "amit.chakraborty@kmrl.in",
-    "valueAmount": 7800000,
+    "valueAmount": 8500000,
     "startDate": "2023-09-01",
     "expiryDate": "2024-08-30",
     "status": "expiring_soon",
@@ -1271,7 +1279,7 @@ export const MOCK_CONTRACTS: MockContract[] = [
     "department": "Procurement",
     "assignedEmployeeName": "Neha Gupta",
     "assignedEmployeeEmail": "neha.gupta@kmrl.in",
-    "valueAmount": 7600000,
+    "valueAmount": 7200000,
     "startDate": "2023-09-01",
     "expiryDate": "2025-06-30",
     "status": "active",
@@ -1286,7 +1294,7 @@ export const MOCK_CONTRACTS: MockContract[] = [
     "department": "Safety",
     "assignedEmployeeName": "Rahul Bhattacharya",
     "assignedEmployeeEmail": "rahul.bhattacharya@kmrl.in",
-    "valueAmount": 6800000,
+    "valueAmount": 9700000,
     "startDate": "2023-09-01",
     "expiryDate": "2025-06-30",
     "status": "active",
@@ -1301,7 +1309,7 @@ export const MOCK_CONTRACTS: MockContract[] = [
     "department": "Engineering",
     "assignedEmployeeName": "Shalini Varma",
     "assignedEmployeeEmail": "shalini.varma@kmrl.in",
-    "valueAmount": 9000000,
+    "valueAmount": 8600000,
     "startDate": "2023-09-01",
     "expiryDate": "2025-06-30",
     "status": "under_renewal",
@@ -1316,7 +1324,7 @@ export const MOCK_CONTRACTS: MockContract[] = [
     "department": "IT",
     "assignedEmployeeName": "Gautam Deshmukh",
     "assignedEmployeeEmail": "gautam.deshmukh@kmrl.in",
-    "valueAmount": 9200000,
+    "valueAmount": 5900000,
     "startDate": "2023-09-01",
     "expiryDate": "2025-06-30",
     "status": "active",
@@ -1331,7 +1339,7 @@ export const MOCK_CONTRACTS: MockContract[] = [
     "department": "Water Metro",
     "assignedEmployeeName": "Vikram Bhat",
     "assignedEmployeeEmail": "vikram.bhat@kmrl.in",
-    "valueAmount": 9300000,
+    "valueAmount": 1600000,
     "startDate": "2023-09-01",
     "expiryDate": "2024-08-30",
     "status": "expiring_soon",
@@ -1346,7 +1354,7 @@ export const MOCK_CONTRACTS: MockContract[] = [
     "department": "Operations",
     "assignedEmployeeName": "Harish Kulkarni",
     "assignedEmployeeEmail": "harish.kulkarni@kmrl.in",
-    "valueAmount": 3600000,
+    "valueAmount": 8700000,
     "startDate": "2023-09-01",
     "expiryDate": "2025-06-30",
     "status": "pending_approval",
@@ -1361,7 +1369,7 @@ export const MOCK_CONTRACTS: MockContract[] = [
     "department": "Maintenance",
     "assignedEmployeeName": "Pooja Saxena",
     "assignedEmployeeEmail": "pooja.saxena@kmrl.in",
-    "valueAmount": 7200000,
+    "valueAmount": 2500000,
     "startDate": "2023-09-01",
     "expiryDate": "2025-06-30",
     "status": "active",
@@ -1376,7 +1384,7 @@ export const MOCK_CONTRACTS: MockContract[] = [
     "department": "Finance",
     "assignedEmployeeName": "Sandeep Raghavan",
     "assignedEmployeeEmail": "sandeep.raghavan@kmrl.in",
-    "valueAmount": 4000000,
+    "valueAmount": 7100000,
     "startDate": "2023-09-01",
     "expiryDate": "2025-06-30",
     "status": "active",
@@ -1391,7 +1399,7 @@ export const MOCK_CONTRACTS: MockContract[] = [
     "department": "HR",
     "assignedEmployeeName": "Ritu Hegde",
     "assignedEmployeeEmail": "ritu.hegde@kmrl.in",
-    "valueAmount": 9000000,
+    "valueAmount": 3600000,
     "startDate": "2023-09-01",
     "expiryDate": "2025-06-30",
     "status": "active",
@@ -1406,7 +1414,7 @@ export const MOCK_CONTRACTS: MockContract[] = [
     "department": "Legal",
     "assignedEmployeeName": "Vijay Chawla",
     "assignedEmployeeEmail": "vijay.chawla@kmrl.in",
-    "valueAmount": 9600000,
+    "valueAmount": 4700000,
     "startDate": "2023-09-01",
     "expiryDate": "2024-08-30",
     "status": "expiring_soon",
@@ -1421,7 +1429,7 @@ export const MOCK_CONTRACTS: MockContract[] = [
     "department": "Procurement",
     "assignedEmployeeName": "Sneha Roy",
     "assignedEmployeeEmail": "sneha.roy@kmrl.in",
-    "valueAmount": 6600000,
+    "valueAmount": 2300000,
     "startDate": "2023-09-01",
     "expiryDate": "2025-06-30",
     "status": "active",
@@ -1436,7 +1444,7 @@ export const MOCK_CONTRACTS: MockContract[] = [
     "department": "Safety",
     "assignedEmployeeName": "Nikhil Naik",
     "assignedEmployeeEmail": "nikhil.naik@kmrl.in",
-    "valueAmount": 3800000,
+    "valueAmount": 5100000,
     "startDate": "2023-09-01",
     "expiryDate": "2025-06-30",
     "status": "under_renewal",
@@ -1451,7 +1459,7 @@ export const MOCK_CONTRACTS: MockContract[] = [
     "department": "Engineering",
     "assignedEmployeeName": "Anjali Shenoy",
     "assignedEmployeeEmail": "anjali.shenoy@kmrl.in",
-    "valueAmount": 6400000,
+    "valueAmount": 8900000,
     "startDate": "2023-09-01",
     "expiryDate": "2025-06-30",
     "status": "pending_approval",
@@ -1466,7 +1474,7 @@ export const MOCK_CONTRACTS: MockContract[] = [
     "department": "IT",
     "assignedEmployeeName": "Mahesh Pandey",
     "assignedEmployeeEmail": "mahesh.pandey@kmrl.in",
-    "valueAmount": 10000000,
+    "valueAmount": 2100000,
     "startDate": "2023-09-01",
     "expiryDate": "2025-06-30",
     "status": "active",
@@ -1481,7 +1489,7 @@ export const MOCK_CONTRACTS: MockContract[] = [
     "department": "Water Metro",
     "assignedEmployeeName": "Kavita Mishra",
     "assignedEmployeeEmail": "kavita.mishra@kmrl.in",
-    "valueAmount": 9400000,
+    "valueAmount": 6200000,
     "startDate": "2023-09-01",
     "expiryDate": "2024-08-30",
     "status": "expiring_soon",
@@ -1496,7 +1504,7 @@ export const MOCK_CONTRACTS: MockContract[] = [
     "department": "Operations",
     "assignedEmployeeName": "Siddharth Reddy",
     "assignedEmployeeEmail": "siddharth.reddy@kmrl.in",
-    "valueAmount": 6500000,
+    "valueAmount": 6700000,
     "startDate": "2023-09-01",
     "expiryDate": "2025-06-30",
     "status": "active",
@@ -1511,7 +1519,7 @@ export const MOCK_CONTRACTS: MockContract[] = [
     "department": "Maintenance",
     "assignedEmployeeName": "Bhavna Rao",
     "assignedEmployeeEmail": "bhavna.rao@kmrl.in",
-    "valueAmount": 5300000,
+    "valueAmount": 7300000,
     "startDate": "2023-09-01",
     "expiryDate": "2025-06-30",
     "status": "active",
@@ -1526,7 +1534,7 @@ export const MOCK_CONTRACTS: MockContract[] = [
     "department": "Finance",
     "assignedEmployeeName": "Rohan Chaudhary",
     "assignedEmployeeEmail": "rohan.chaudhary@kmrl.in",
-    "valueAmount": 6100000,
+    "valueAmount": 6500000,
     "startDate": "2023-09-01",
     "expiryDate": "2025-06-30",
     "status": "active",
@@ -1541,7 +1549,7 @@ export const MOCK_CONTRACTS: MockContract[] = [
     "department": "HR",
     "assignedEmployeeName": "Swati Singhal",
     "assignedEmployeeEmail": "swati.singhal@kmrl.in",
-    "valueAmount": 8200000,
+    "valueAmount": 4600000,
     "startDate": "2023-09-01",
     "expiryDate": "2025-06-30",
     "status": "active",
@@ -1556,7 +1564,7 @@ export const MOCK_CONTRACTS: MockContract[] = [
     "department": "Legal",
     "assignedEmployeeName": "Alok Kapur",
     "assignedEmployeeEmail": "alok.kapur@kmrl.in",
-    "valueAmount": 2400000,
+    "valueAmount": 7500000,
     "startDate": "2023-09-01",
     "expiryDate": "2024-08-30",
     "status": "expiring_soon",
@@ -1571,7 +1579,7 @@ export const MOCK_CONTRACTS: MockContract[] = [
     "department": "Procurement",
     "assignedEmployeeName": "Monica Aggarwal",
     "assignedEmployeeEmail": "monica.aggarwal@kmrl.in",
-    "valueAmount": 6300000,
+    "valueAmount": 7000000,
     "startDate": "2023-09-01",
     "expiryDate": "2025-06-30",
     "status": "under_renewal",
@@ -1586,7 +1594,7 @@ export const MOCK_CONTRACTS: MockContract[] = [
     "department": "Safety",
     "assignedEmployeeName": "Varun Dutta",
     "assignedEmployeeEmail": "varun.dutta@kmrl.in",
-    "valueAmount": 7400000,
+    "valueAmount": 9600000,
     "startDate": "2023-09-01",
     "expiryDate": "2025-06-30",
     "status": "active",
@@ -1601,7 +1609,7 @@ export const MOCK_CONTRACTS: MockContract[] = [
     "department": "Engineering",
     "assignedEmployeeName": "Preeti Banerjee",
     "assignedEmployeeEmail": "preeti.banerjee@kmrl.in",
-    "valueAmount": 3900000,
+    "valueAmount": 8300000,
     "startDate": "2023-09-01",
     "expiryDate": "2025-06-30",
     "status": "active",
@@ -1616,7 +1624,7 @@ export const MOCK_CONTRACTS: MockContract[] = [
     "department": "IT",
     "assignedEmployeeName": "Abhishek Ghosh",
     "assignedEmployeeEmail": "abhishek.ghosh@kmrl.in",
-    "valueAmount": 5400000,
+    "valueAmount": 3500000,
     "startDate": "2023-09-01",
     "expiryDate": "2025-06-30",
     "status": "active",
@@ -1631,7 +1639,7 @@ export const MOCK_CONTRACTS: MockContract[] = [
     "department": "Water Metro",
     "assignedEmployeeName": "Shruti Sen",
     "assignedEmployeeEmail": "shruti.sen@kmrl.in",
-    "valueAmount": 8400000,
+    "valueAmount": 8800000,
     "startDate": "2023-09-01",
     "expiryDate": "2024-08-30",
     "status": "expiring_soon",
@@ -1646,7 +1654,7 @@ export const MOCK_CONTRACTS: MockContract[] = [
     "department": "Operations",
     "assignedEmployeeName": "Tarun Kumar",
     "assignedEmployeeEmail": "tarun.kumar41@kmrl.in",
-    "valueAmount": 1900000,
+    "valueAmount": 2500000,
     "startDate": "2023-09-01",
     "expiryDate": "2025-06-30",
     "status": "active",
@@ -1661,7 +1669,7 @@ export const MOCK_CONTRACTS: MockContract[] = [
     "department": "Maintenance",
     "assignedEmployeeName": "Archana Nair",
     "assignedEmployeeEmail": "archana.nair42@kmrl.in",
-    "valueAmount": 7700000,
+    "valueAmount": 6600000,
     "startDate": "2023-09-01",
     "expiryDate": "2025-06-30",
     "status": "pending_approval",
@@ -1676,7 +1684,7 @@ export const MOCK_CONTRACTS: MockContract[] = [
     "department": "Finance",
     "assignedEmployeeName": "Kiran Menon",
     "assignedEmployeeEmail": "kiran.menon43@kmrl.in",
-    "valueAmount": 6800000,
+    "valueAmount": 9700000,
     "startDate": "2023-09-01",
     "expiryDate": "2025-06-30",
     "status": "active",
@@ -1691,7 +1699,7 @@ export const MOCK_CONTRACTS: MockContract[] = [
     "department": "HR",
     "assignedEmployeeName": "Nisha Prabhu",
     "assignedEmployeeEmail": "nisha.prabhu44@kmrl.in",
-    "valueAmount": 7300000,
+    "valueAmount": 7100000,
     "startDate": "2023-09-01",
     "expiryDate": "2025-06-30",
     "status": "active",
@@ -1706,7 +1714,7 @@ export const MOCK_CONTRACTS: MockContract[] = [
     "department": "Legal",
     "assignedEmployeeName": "Aravind Sharma",
     "assignedEmployeeEmail": "aravind.sharma45@kmrl.in",
-    "valueAmount": 4600000,
+    "valueAmount": 3800000,
     "startDate": "2023-09-01",
     "expiryDate": "2024-08-30",
     "status": "expiring_soon",
@@ -1721,7 +1729,7 @@ export const MOCK_CONTRACTS: MockContract[] = [
     "department": "Procurement",
     "assignedEmployeeName": "Geetha Verma",
     "assignedEmployeeEmail": "geetha.verma46@kmrl.in",
-    "valueAmount": 9300000,
+    "valueAmount": 3400000,
     "startDate": "2023-09-01",
     "expiryDate": "2025-06-30",
     "status": "active",
@@ -1736,7 +1744,7 @@ export const MOCK_CONTRACTS: MockContract[] = [
     "department": "Safety",
     "assignedEmployeeName": "Prashanth Iyer",
     "assignedEmployeeEmail": "prashanth.iyer47@kmrl.in",
-    "valueAmount": 1700000,
+    "valueAmount": 9800000,
     "startDate": "2023-09-01",
     "expiryDate": "2025-06-30",
     "status": "active",
@@ -1751,7 +1759,7 @@ export const MOCK_CONTRACTS: MockContract[] = [
     "department": "Engineering",
     "assignedEmployeeName": "Sridevi Pillai",
     "assignedEmployeeEmail": "sridevi.pillai48@kmrl.in",
-    "valueAmount": 5000000,
+    "valueAmount": 2600000,
     "startDate": "2023-09-01",
     "expiryDate": "2025-06-30",
     "status": "active",
@@ -1766,7 +1774,7 @@ export const MOCK_CONTRACTS: MockContract[] = [
     "department": "IT",
     "assignedEmployeeName": "Jayesh Swaminathan",
     "assignedEmployeeEmail": "jayesh.swaminathan49@kmrl.in",
-    "valueAmount": 3400000,
+    "valueAmount": 9700000,
     "startDate": "2023-09-01",
     "expiryDate": "2025-06-30",
     "status": "pending_approval",
@@ -1781,7 +1789,7 @@ export const MOCK_CONTRACTS: MockContract[] = [
     "department": "Water Metro",
     "assignedEmployeeName": "Radhika Nambiar",
     "assignedEmployeeEmail": "radhika.nambiar50@kmrl.in",
-    "valueAmount": 2700000,
+    "valueAmount": 8300000,
     "startDate": "2023-09-01",
     "expiryDate": "2024-08-30",
     "status": "expiring_soon",
@@ -1796,7 +1804,7 @@ export const MOCK_CONTRACTS: MockContract[] = [
     "department": "Operations",
     "assignedEmployeeName": "Praveen Panicker",
     "assignedEmployeeEmail": "praveen.panicker51@kmrl.in",
-    "valueAmount": 7400000,
+    "valueAmount": 6500000,
     "startDate": "2023-09-01",
     "expiryDate": "2025-06-30",
     "status": "active",
@@ -1811,7 +1819,7 @@ export const MOCK_CONTRACTS: MockContract[] = [
     "department": "Maintenance",
     "assignedEmployeeName": "Asha Kurup",
     "assignedEmployeeEmail": "asha.kurup52@kmrl.in",
-    "valueAmount": 8900000,
+    "valueAmount": 2300000,
     "startDate": "2023-09-01",
     "expiryDate": "2025-06-30",
     "status": "active",
@@ -1826,7 +1834,7 @@ export const MOCK_CONTRACTS: MockContract[] = [
     "department": "Finance",
     "assignedEmployeeName": "Girish Sundaram",
     "assignedEmployeeEmail": "girish.sundaram53@kmrl.in",
-    "valueAmount": 4000000,
+    "valueAmount": 4900000,
     "startDate": "2023-09-01",
     "expiryDate": "2025-06-30",
     "status": "active",
@@ -1841,7 +1849,7 @@ export const MOCK_CONTRACTS: MockContract[] = [
     "department": "HR",
     "assignedEmployeeName": "Vandana Joshi",
     "assignedEmployeeEmail": "vandana.joshi54@kmrl.in",
-    "valueAmount": 8900000,
+    "valueAmount": 3900000,
     "startDate": "2023-09-01",
     "expiryDate": "2025-06-30",
     "status": "under_renewal",
@@ -1856,7 +1864,7 @@ export const MOCK_CONTRACTS: MockContract[] = [
     "department": "Legal",
     "assignedEmployeeName": "Venkatesh Chakraborty",
     "assignedEmployeeEmail": "venkatesh.chakraborty55@kmrl.in",
-    "valueAmount": 8800000,
+    "valueAmount": 6900000,
     "startDate": "2023-09-01",
     "expiryDate": "2024-08-30",
     "status": "expiring_soon",
@@ -1871,7 +1879,7 @@ export const MOCK_CONTRACTS: MockContract[] = [
     "department": "Procurement",
     "assignedEmployeeName": "Deepika Gupta",
     "assignedEmployeeEmail": "deepika.gupta56@kmrl.in",
-    "valueAmount": 6300000,
+    "valueAmount": 6800000,
     "startDate": "2023-09-01",
     "expiryDate": "2025-06-30",
     "status": "pending_approval",
@@ -1886,7 +1894,7 @@ export const MOCK_CONTRACTS: MockContract[] = [
     "department": "Safety",
     "assignedEmployeeName": "Manish Bhattacharya",
     "assignedEmployeeEmail": "manish.bhattacharya57@kmrl.in",
-    "valueAmount": 5900000,
+    "valueAmount": 6200000,
     "startDate": "2023-09-01",
     "expiryDate": "2025-06-30",
     "status": "active",
@@ -1901,7 +1909,7 @@ export const MOCK_CONTRACTS: MockContract[] = [
     "department": "Engineering",
     "assignedEmployeeName": "Reshma Varma",
     "assignedEmployeeEmail": "reshma.varma58@kmrl.in",
-    "valueAmount": 6500000,
+    "valueAmount": 5600000,
     "startDate": "2023-09-01",
     "expiryDate": "2025-06-30",
     "status": "active",
@@ -1916,7 +1924,7 @@ export const MOCK_CONTRACTS: MockContract[] = [
     "department": "IT",
     "assignedEmployeeName": "Nitin Deshmukh",
     "assignedEmployeeEmail": "nitin.deshmukh59@kmrl.in",
-    "valueAmount": 2700000,
+    "valueAmount": 7000000,
     "startDate": "2023-09-01",
     "expiryDate": "2025-06-30",
     "status": "active",
@@ -1931,7 +1939,7 @@ export const MOCK_CONTRACTS: MockContract[] = [
     "department": "Water Metro",
     "assignedEmployeeName": "Reena Bhat",
     "assignedEmployeeEmail": "reena.bhat60@kmrl.in",
-    "valueAmount": 8500000,
+    "valueAmount": 9100000,
     "startDate": "2023-09-01",
     "expiryDate": "2024-08-30",
     "status": "expiring_soon",
@@ -1946,7 +1954,7 @@ export const MOCK_CONTRACTS: MockContract[] = [
     "department": "Operations",
     "assignedEmployeeName": "Satish Kulkarni",
     "assignedEmployeeEmail": "satish.kulkarni61@kmrl.in",
-    "valueAmount": 4000000,
+    "valueAmount": 2000000,
     "startDate": "2023-09-01",
     "expiryDate": "2025-06-30",
     "status": "active",
@@ -1961,7 +1969,7 @@ export const MOCK_CONTRACTS: MockContract[] = [
     "department": "Maintenance",
     "assignedEmployeeName": "Smita Saxena",
     "assignedEmployeeEmail": "smita.saxena62@kmrl.in",
-    "valueAmount": 9900000,
+    "valueAmount": 2900000,
     "startDate": "2023-09-01",
     "expiryDate": "2025-06-30",
     "status": "active",
@@ -1976,7 +1984,7 @@ export const MOCK_CONTRACTS: MockContract[] = [
     "department": "Finance",
     "assignedEmployeeName": "Dinesh Raghavan",
     "assignedEmployeeEmail": "dinesh.raghavan63@kmrl.in",
-    "valueAmount": 2200000,
+    "valueAmount": 9300000,
     "startDate": "2023-09-01",
     "expiryDate": "2025-06-30",
     "status": "pending_approval",
@@ -1991,7 +1999,7 @@ export const MOCK_CONTRACTS: MockContract[] = [
     "department": "HR",
     "assignedEmployeeName": "Anitha Hegde",
     "assignedEmployeeEmail": "anitha.hegde64@kmrl.in",
-    "valueAmount": 2400000,
+    "valueAmount": 8900000,
     "startDate": "2023-09-01",
     "expiryDate": "2025-06-30",
     "status": "active",
@@ -2006,7 +2014,7 @@ export const MOCK_CONTRACTS: MockContract[] = [
     "department": "Legal",
     "assignedEmployeeName": "Ashok Chawla",
     "assignedEmployeeEmail": "ashok.chawla65@kmrl.in",
-    "valueAmount": 10000000,
+    "valueAmount": 3200000,
     "startDate": "2023-09-01",
     "expiryDate": "2024-08-30",
     "status": "expiring_soon",
@@ -2021,7 +2029,7 @@ export const MOCK_CONTRACTS: MockContract[] = [
     "department": "Procurement",
     "assignedEmployeeName": "Sangeetha Roy",
     "assignedEmployeeEmail": "sangeetha.roy66@kmrl.in",
-    "valueAmount": 8500000,
+    "valueAmount": 4800000,
     "startDate": "2023-09-01",
     "expiryDate": "2025-06-30",
     "status": "active",
@@ -2036,7 +2044,7 @@ export const MOCK_CONTRACTS: MockContract[] = [
     "department": "Safety",
     "assignedEmployeeName": "Biju Naik",
     "assignedEmployeeEmail": "biju.naik67@kmrl.in",
-    "valueAmount": 3700000,
+    "valueAmount": 2000000,
     "startDate": "2023-09-01",
     "expiryDate": "2025-06-30",
     "status": "active",
@@ -2051,7 +2059,7 @@ export const MOCK_CONTRACTS: MockContract[] = [
     "department": "Engineering",
     "assignedEmployeeName": "Bindu Shenoy",
     "assignedEmployeeEmail": "bindu.shenoy68@kmrl.in",
-    "valueAmount": 3600000,
+    "valueAmount": 2200000,
     "startDate": "2023-09-01",
     "expiryDate": "2025-06-30",
     "status": "active",
@@ -2066,7 +2074,7 @@ export const MOCK_CONTRACTS: MockContract[] = [
     "department": "IT",
     "assignedEmployeeName": "Vinod Pandey",
     "assignedEmployeeEmail": "vinod.pandey69@kmrl.in",
-    "valueAmount": 10000000,
+    "valueAmount": 7400000,
     "startDate": "2023-09-01",
     "expiryDate": "2025-06-30",
     "status": "active",
@@ -2081,7 +2089,7 @@ export const MOCK_CONTRACTS: MockContract[] = [
     "department": "Water Metro",
     "assignedEmployeeName": "Sujatha Mishra",
     "assignedEmployeeEmail": "sujatha.mishra70@kmrl.in",
-    "valueAmount": 1800000,
+    "valueAmount": 8100000,
     "startDate": "2023-09-01",
     "expiryDate": "2024-08-30",
     "status": "expiring_soon",
@@ -2096,7 +2104,7 @@ export const MOCK_CONTRACTS: MockContract[] = [
     "department": "Operations",
     "assignedEmployeeName": "Sudhir Reddy",
     "assignedEmployeeEmail": "sudhir.reddy71@kmrl.in",
-    "valueAmount": 7500000,
+    "valueAmount": 2800000,
     "startDate": "2023-09-01",
     "expiryDate": "2025-06-30",
     "status": "active",
@@ -2111,7 +2119,7 @@ export const MOCK_CONTRACTS: MockContract[] = [
     "department": "Maintenance",
     "assignedEmployeeName": "Chitra Rao",
     "assignedEmployeeEmail": "chitra.rao72@kmrl.in",
-    "valueAmount": 3000000,
+    "valueAmount": 2200000,
     "startDate": "2023-09-01",
     "expiryDate": "2025-06-30",
     "status": "under_renewal",
@@ -2126,7 +2134,7 @@ export const MOCK_CONTRACTS: MockContract[] = [
     "department": "Finance",
     "assignedEmployeeName": "Ramesh Chaudhary",
     "assignedEmployeeEmail": "ramesh.chaudhary73@kmrl.in",
-    "valueAmount": 3900000,
+    "valueAmount": 8600000,
     "startDate": "2023-09-01",
     "expiryDate": "2025-06-30",
     "status": "active",
@@ -2141,7 +2149,7 @@ export const MOCK_CONTRACTS: MockContract[] = [
     "department": "HR",
     "assignedEmployeeName": "Leela Singhal",
     "assignedEmployeeEmail": "leela.singhal74@kmrl.in",
-    "valueAmount": 6700000,
+    "valueAmount": 5300000,
     "startDate": "2023-09-01",
     "expiryDate": "2025-06-30",
     "status": "active",
@@ -2156,7 +2164,7 @@ export const MOCK_CONTRACTS: MockContract[] = [
     "department": "Legal",
     "assignedEmployeeName": "Unnikrishnan Kapur",
     "assignedEmployeeEmail": "unnikrishnan.kapur75@kmrl.in",
-    "valueAmount": 2400000,
+    "valueAmount": 5000000,
     "startDate": "2023-09-01",
     "expiryDate": "2024-08-30",
     "status": "expiring_soon",
@@ -2171,7 +2179,7 @@ export const MOCK_CONTRACTS: MockContract[] = [
     "department": "Procurement",
     "assignedEmployeeName": "Jayanthi Aggarwal",
     "assignedEmployeeEmail": "jayanthi.aggarwal76@kmrl.in",
-    "valueAmount": 5500000,
+    "valueAmount": 8000000,
     "startDate": "2023-09-01",
     "expiryDate": "2025-06-30",
     "status": "active",
@@ -2186,7 +2194,7 @@ export const MOCK_CONTRACTS: MockContract[] = [
     "department": "Safety",
     "assignedEmployeeName": "Subhash Dutta",
     "assignedEmployeeEmail": "subhash.dutta77@kmrl.in",
-    "valueAmount": 8400000,
+    "valueAmount": 2100000,
     "startDate": "2023-09-01",
     "expiryDate": "2025-06-30",
     "status": "pending_approval",
@@ -2201,7 +2209,7 @@ export const MOCK_CONTRACTS: MockContract[] = [
     "department": "Engineering",
     "assignedEmployeeName": "Mini Banerjee",
     "assignedEmployeeEmail": "mini.banerjee78@kmrl.in",
-    "valueAmount": 3400000,
+    "valueAmount": 1900000,
     "startDate": "2023-09-01",
     "expiryDate": "2025-06-30",
     "status": "active",
@@ -2216,7 +2224,7 @@ export const MOCK_CONTRACTS: MockContract[] = [
     "department": "IT",
     "assignedEmployeeName": "Sanosh Ghosh",
     "assignedEmployeeEmail": "sanosh.ghosh79@kmrl.in",
-    "valueAmount": 4700000,
+    "valueAmount": 2900000,
     "startDate": "2023-09-01",
     "expiryDate": "2025-06-30",
     "status": "active",
@@ -2231,7 +2239,7 @@ export const MOCK_CONTRACTS: MockContract[] = [
     "department": "Water Metro",
     "assignedEmployeeName": "Latha Sen",
     "assignedEmployeeEmail": "latha.sen80@kmrl.in",
-    "valueAmount": 8400000,
+    "valueAmount": 5600000,
     "startDate": "2023-09-01",
     "expiryDate": "2024-08-30",
     "status": "expiring_soon",
@@ -2249,11 +2257,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Arun Kumar",
     "department": "Operations",
     "createdAt": "2024-002-15T10:00:00Z",
-    "fileSize": 2045520,
+    "fileSize": 2380199,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Safety document for KMRL operations. Assigned to Arun Kumar.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nSAFETY DIRECTORATE \u00b7 DOCUMENT REF: KMRL/SAFETY/2024/001\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the safety protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Arun Kumar (Operations Department, Email: arun.kumar@kmrl.in). Contract Reference: CNT-2024-001.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 3800000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Operations Directorate.\n\nRECORD AUTHORIZED BY: ARUN KUMAR (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nSAFETY DIRECTORATE \u00b7 DOCUMENT REF: KMRL/SAFETY/2024/001\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the safety protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Arun Kumar (Operations Department, Email: arun.kumar@kmrl.in). Contract Reference: CNT-2024-001.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 4400000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Operations Directorate.\n\nRECORD AUTHORIZED BY: ARUN KUMAR (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Safety Audit & Track Inspection Report #1: Fully processed and verified under KMRL SAFETY Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Arun Kumar.",
+      "keyFindings": [
+        "1. Operational Telemetry: Safety parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Operations department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "Operations",
+      "tags": [
+        "safety",
+        "operations",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "safety",
       "operations",
@@ -2276,11 +2304,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Priya Nair",
     "department": "Maintenance",
     "createdAt": "2024-003-15T10:00:00Z",
-    "fileSize": 1200027,
+    "fileSize": 1128277,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Operations document for KMRL operations. Assigned to Priya Nair.",
     "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nOPERATIONS DIRECTORATE \u00b7 DOCUMENT REF: KMRL/OPERATIONS/2024/002\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the operations protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Priya Nair (Maintenance Department, Email: priya.nair@kmrl.in). Contract Reference: CNT-2024-002.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 1400000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Maintenance Directorate.\n\nRECORD AUTHORIZED BY: PRIYA NAIR (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Rolling Stock Preventive Maintenance Protocol #2: Fully processed and verified under KMRL OPERATIONS Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Priya Nair.",
+      "keyFindings": [
+        "1. Operational Telemetry: Operations parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Maintenance department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "Maintenance",
+      "tags": [
+        "operations",
+        "maintenance",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "operations",
       "maintenance",
@@ -2303,11 +2351,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Rajan Menon",
     "department": "Finance",
     "createdAt": "2024-004-15T10:00:00Z",
-    "fileSize": 1787819,
+    "fileSize": 1885002,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Finance document for KMRL operations. Assigned to Rajan Menon.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nFINANCE DIRECTORATE \u00b7 DOCUMENT REF: KMRL/FINANCE/2024/003\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the finance protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Rajan Menon (Finance Department, Email: rajan.menon@kmrl.in). Contract Reference: CNT-2024-003.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 4300000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Finance Directorate.\n\nRECORD AUTHORIZED BY: RAJAN MENON (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nFINANCE DIRECTORATE \u00b7 DOCUMENT REF: KMRL/FINANCE/2024/003\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the finance protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Rajan Menon (Finance Department, Email: rajan.menon@kmrl.in). Contract Reference: CNT-2024-003.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 3500000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Finance Directorate.\n\nRECORD AUTHORIZED BY: RAJAN MENON (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Q1 Quarterly Financial Audit & Revenue Breakdown #3: Fully processed and verified under KMRL FINANCE Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Rajan Menon.",
+      "keyFindings": [
+        "1. Operational Telemetry: Finance parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Finance department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "High",
+      "department": "Finance",
+      "tags": [
+        "finance",
+        "finance",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "finance",
       "finance",
@@ -2330,11 +2398,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Suresh Prabhu",
     "department": "HR",
     "createdAt": "2024-005-15T10:00:00Z",
-    "fileSize": 3274676,
+    "fileSize": 2674287,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official HR document for KMRL operations. Assigned to Suresh Prabhu.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nHR DIRECTORATE \u00b7 DOCUMENT REF: KMRL/HR/2024/004\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the hr protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Suresh Prabhu (HR Department, Email: suresh.prabhu@kmrl.in). Contract Reference: CNT-2024-004.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 2700000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to HR Directorate.\n\nRECORD AUTHORIZED BY: SURESH PRABHU (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nHR DIRECTORATE \u00b7 DOCUMENT REF: KMRL/HR/2024/004\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the hr protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Suresh Prabhu (HR Department, Email: suresh.prabhu@kmrl.in). Contract Reference: CNT-2024-004.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 5000000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to HR Directorate.\n\nRECORD AUTHORIZED BY: SURESH PRABHU (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of HR Employee Benefit Policy & Night Shift Allowance #4: Fully processed and verified under KMRL HR Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Suresh Prabhu.",
+      "keyFindings": [
+        "1. Operational Telemetry: HR parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for HR department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Critical",
+      "department": "HR",
+      "tags": [
+        "hr",
+        "hr",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "hr",
       "hr",
@@ -2357,11 +2445,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Ananya Sharma",
     "department": "Legal",
     "createdAt": "2024-006-15T10:00:00Z",
-    "fileSize": 1328801,
+    "fileSize": 2879502,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Maintenance document for KMRL operations. Assigned to Ananya Sharma.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nMAINTENANCE DIRECTORATE \u00b7 DOCUMENT REF: KMRL/MAINTENANCE/2024/005\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the maintenance protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Ananya Sharma (Legal Department, Email: ananya.sharma@kmrl.in). Contract Reference: CNT-2024-005.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 5000000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Legal Directorate.\n\nRECORD AUTHORIZED BY: ANANYA SHARMA (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nMAINTENANCE DIRECTORATE \u00b7 DOCUMENT REF: KMRL/MAINTENANCE/2024/005\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the maintenance protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Ananya Sharma (Legal Department, Email: ananya.sharma@kmrl.in). Contract Reference: CNT-2024-005.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 2700000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Legal Directorate.\n\nRECORD AUTHORIZED BY: ANANYA SHARMA (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Water Metro Phase 2 Electric Boat SLA #5: Fully processed and verified under KMRL MAINTENANCE Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Ananya Sharma.",
+      "keyFindings": [
+        "1. Operational Telemetry: Maintenance parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Legal department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "Legal",
+      "tags": [
+        "maintenance",
+        "legal",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "maintenance",
       "legal",
@@ -2384,11 +2492,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Deepak Verma",
     "department": "Procurement",
     "createdAt": "2024-001-15T10:00:00Z",
-    "fileSize": 686859,
+    "fileSize": 978642,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Legal document for KMRL operations. Assigned to Deepak Verma.",
     "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nLEGAL DIRECTORATE \u00b7 DOCUMENT REF: KMRL/LEGAL/2024/006\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the legal protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Deepak Verma (Procurement Department, Email: deepak.verma@kmrl.in). Contract Reference: CNT-2024-006.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 5100000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Procurement Directorate.\n\nRECORD AUTHORIZED BY: DEEPAK VERMA (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Automatic Fare Collection (AFC) QR Upgrade Tender #6: Fully processed and verified under KMRL LEGAL Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Deepak Verma.",
+      "keyFindings": [
+        "1. Operational Telemetry: Legal parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Procurement department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "Procurement",
+      "tags": [
+        "legal",
+        "procurement",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "legal",
       "procurement",
@@ -2411,11 +2539,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Rajesh Iyer",
     "department": "Safety",
     "createdAt": "2024-002-15T10:00:00Z",
-    "fileSize": 2553588,
+    "fileSize": 1459710,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Procurement document for KMRL operations. Assigned to Rajesh Iyer.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nPROCUREMENT DIRECTORATE \u00b7 DOCUMENT REF: KMRL/PROCUREMENT/2024/007\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the procurement protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Rajesh Iyer (Safety Department, Email: rajesh.iyer@kmrl.in). Contract Reference: CNT-2024-007.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 5000000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Safety Directorate.\n\nRECORD AUTHORIZED BY: RAJESH IYER (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nPROCUREMENT DIRECTORATE \u00b7 DOCUMENT REF: KMRL/PROCUREMENT/2024/007\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the procurement protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Rajesh Iyer (Safety Department, Email: rajesh.iyer@kmrl.in). Contract Reference: CNT-2024-007.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 1700000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Safety Directorate.\n\nRECORD AUTHORIZED BY: RAJESH IYER (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Overhead Equipment (OHE) Traction Maintenance Schedule #7: Fully processed and verified under KMRL PROCUREMENT Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Rajesh Iyer.",
+      "keyFindings": [
+        "1. Operational Telemetry: Procurement parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Safety department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "High",
+      "department": "Safety",
+      "tags": [
+        "procurement",
+        "safety",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "procurement",
       "safety",
@@ -2438,11 +2586,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Sunita Pillai",
     "department": "Engineering",
     "createdAt": "2024-003-15T10:00:00Z",
-    "fileSize": 1701425,
+    "fileSize": 3087793,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Engineering document for KMRL operations. Assigned to Sunita Pillai.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nENGINEERING DIRECTORATE \u00b7 DOCUMENT REF: KMRL/ENGINEERING/2024/008\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the engineering protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Sunita Pillai (Engineering Department, Email: sunita.pillai@kmrl.in). Contract Reference: CNT-2024-008.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 3100000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Engineering Directorate.\n\nRECORD AUTHORIZED BY: SUNITA PILLAI (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nENGINEERING DIRECTORATE \u00b7 DOCUMENT REF: KMRL/ENGINEERING/2024/008\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the engineering protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Sunita Pillai (Engineering Department, Email: sunita.pillai@kmrl.in). Contract Reference: CNT-2024-008.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 4700000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Engineering Directorate.\n\nRECORD AUTHORIZED BY: SUNITA PILLAI (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Muttom Depot Solar PV Rooftop Installation Bid #8: Fully processed and verified under KMRL ENGINEERING Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Sunita Pillai.",
+      "keyFindings": [
+        "1. Operational Telemetry: Engineering parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Engineering department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Critical",
+      "department": "Engineering",
+      "tags": [
+        "engineering",
+        "engineering",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "engineering",
       "engineering",
@@ -2465,11 +2633,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Vivek Swaminathan",
     "department": "IT",
     "createdAt": "2024-004-15T10:00:00Z",
-    "fileSize": 3368874,
+    "fileSize": 2970938,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Water Metro document for KMRL operations. Assigned to Vivek Swaminathan.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nWATER METRO DIRECTORATE \u00b7 DOCUMENT REF: KMRL/WATER METRO/2024/009\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the water metro protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Vivek Swaminathan (IT Department, Email: vivek.swaminathan@kmrl.in). Contract Reference: CNT-2024-009.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 4000000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to IT Directorate.\n\nRECORD AUTHORIZED BY: VIVEK SWAMINATHAN (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nWATER METRO DIRECTORATE \u00b7 DOCUMENT REF: KMRL/WATER METRO/2024/009\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the water metro protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Vivek Swaminathan (IT Department, Email: vivek.swaminathan@kmrl.in). Contract Reference: CNT-2024-009.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 4500000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to IT Directorate.\n\nRECORD AUTHORIZED BY: VIVEK SWAMINATHAN (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Station Housekeeping & Sanitation Operations SLA #9: Fully processed and verified under KMRL WATER METRO Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Vivek Swaminathan.",
+      "keyFindings": [
+        "1. Operational Telemetry: Water Metro parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for IT department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "IT",
+      "tags": [
+        "water metro",
+        "it",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "water metro",
       "it",
@@ -2492,11 +2680,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Lakshmi Nambiar",
     "department": "Water Metro",
     "createdAt": "2024-005-15T10:00:00Z",
-    "fileSize": 2869300,
+    "fileSize": 1249593,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official IT document for KMRL operations. Assigned to Lakshmi Nambiar.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nIT DIRECTORATE \u00b7 DOCUMENT REF: KMRL/IT/2024/010\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the it protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Lakshmi Nambiar (Water Metro Department, Email: lakshmi.nambiar@kmrl.in). Contract Reference: CNT-2024-010.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 4000000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Water Metro Directorate.\n\nRECORD AUTHORIZED BY: LAKSHMI NAMBIAR (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nIT DIRECTORATE \u00b7 DOCUMENT REF: KMRL/IT/2024/010\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the it protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Lakshmi Nambiar (Water Metro Department, Email: lakshmi.nambiar@kmrl.in). Contract Reference: CNT-2024-010.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 3000000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Water Metro Directorate.\n\nRECORD AUTHORIZED BY: LAKSHMI NAMBIAR (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of IT Network & Cybersecurity Vulnerability Audit #10: Fully processed and verified under KMRL IT Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Lakshmi Nambiar.",
+      "keyFindings": [
+        "1. Operational Telemetry: IT parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Water Metro department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "Water Metro",
+      "tags": [
+        "it",
+        "water metro",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "it",
       "water metro",
@@ -2519,11 +2727,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Manoj Panicker",
     "department": "Operations",
     "createdAt": "2024-006-15T10:00:00Z",
-    "fileSize": 1635804,
+    "fileSize": 649874,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Safety document for KMRL operations. Assigned to Manoj Panicker.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nSAFETY DIRECTORATE \u00b7 DOCUMENT REF: KMRL/SAFETY/2024/011\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the safety protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Manoj Panicker (Operations Department, Email: manoj.panicker@kmrl.in). Contract Reference: CNT-2024-011.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 5300000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Operations Directorate.\n\nRECORD AUTHORIZED BY: MANOJ PANICKER (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nSAFETY DIRECTORATE \u00b7 DOCUMENT REF: KMRL/SAFETY/2024/011\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the safety protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Manoj Panicker (Operations Department, Email: manoj.panicker@kmrl.in). Contract Reference: CNT-2024-011.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 4400000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Operations Directorate.\n\nRECORD AUTHORIZED BY: MANOJ PANICKER (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Safety Audit & Track Inspection Report #11: Fully processed and verified under KMRL SAFETY Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Manoj Panicker.",
+      "keyFindings": [
+        "1. Operational Telemetry: Safety parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Operations department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "High",
+      "department": "Operations",
+      "tags": [
+        "safety",
+        "operations",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "safety",
       "operations",
@@ -2546,11 +2774,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Divya Kurup",
     "department": "Maintenance",
     "createdAt": "2024-001-15T10:00:00Z",
-    "fileSize": 1379516,
+    "fileSize": 2711499,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Operations document for KMRL operations. Assigned to Divya Kurup.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nOPERATIONS DIRECTORATE \u00b7 DOCUMENT REF: KMRL/OPERATIONS/2024/012\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the operations protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Divya Kurup (Maintenance Department, Email: divya.kurup@kmrl.in). Contract Reference: CNT-2024-012.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 2600000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Maintenance Directorate.\n\nRECORD AUTHORIZED BY: DIVYA KURUP (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nOPERATIONS DIRECTORATE \u00b7 DOCUMENT REF: KMRL/OPERATIONS/2024/012\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the operations protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Divya Kurup (Maintenance Department, Email: divya.kurup@kmrl.in). Contract Reference: CNT-2024-012.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 4600000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Maintenance Directorate.\n\nRECORD AUTHORIZED BY: DIVYA KURUP (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Rolling Stock Preventive Maintenance Protocol #12: Fully processed and verified under KMRL OPERATIONS Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Divya Kurup.",
+      "keyFindings": [
+        "1. Operational Telemetry: Operations parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Maintenance department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Critical",
+      "department": "Maintenance",
+      "tags": [
+        "operations",
+        "maintenance",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "operations",
       "maintenance",
@@ -2573,11 +2821,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Karthik Sundaram",
     "department": "Finance",
     "createdAt": "2024-002-15T10:00:00Z",
-    "fileSize": 952890,
+    "fileSize": 569140,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Finance document for KMRL operations. Assigned to Karthik Sundaram.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nFINANCE DIRECTORATE \u00b7 DOCUMENT REF: KMRL/FINANCE/2024/013\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the finance protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Karthik Sundaram (Finance Department, Email: karthik.sundaram@kmrl.in). Contract Reference: CNT-2024-013.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 3500000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Finance Directorate.\n\nRECORD AUTHORIZED BY: KARTHIK SUNDARAM (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nFINANCE DIRECTORATE \u00b7 DOCUMENT REF: KMRL/FINANCE/2024/013\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the finance protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Karthik Sundaram (Finance Department, Email: karthik.sundaram@kmrl.in). Contract Reference: CNT-2024-013.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 1200000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Finance Directorate.\n\nRECORD AUTHORIZED BY: KARTHIK SUNDARAM (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Q1 Quarterly Financial Audit & Revenue Breakdown #13: Fully processed and verified under KMRL FINANCE Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Karthik Sundaram.",
+      "keyFindings": [
+        "1. Operational Telemetry: Finance parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Finance department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "Finance",
+      "tags": [
+        "finance",
+        "finance",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "finance",
       "finance",
@@ -2600,11 +2868,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Meera Joshi",
     "department": "HR",
     "createdAt": "2024-003-15T10:00:00Z",
-    "fileSize": 683596,
+    "fileSize": 2817400,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official HR document for KMRL operations. Assigned to Meera Joshi.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nHR DIRECTORATE \u00b7 DOCUMENT REF: KMRL/HR/2024/014\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the hr protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Meera Joshi (HR Department, Email: meera.joshi@kmrl.in). Contract Reference: CNT-2024-014.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 4300000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to HR Directorate.\n\nRECORD AUTHORIZED BY: MEERA JOSHI (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nHR DIRECTORATE \u00b7 DOCUMENT REF: KMRL/HR/2024/014\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the hr protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Meera Joshi (HR Department, Email: meera.joshi@kmrl.in). Contract Reference: CNT-2024-014.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 4900000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to HR Directorate.\n\nRECORD AUTHORIZED BY: MEERA JOSHI (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of HR Employee Benefit Policy & Night Shift Allowance #14: Fully processed and verified under KMRL HR Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Meera Joshi.",
+      "keyFindings": [
+        "1. Operational Telemetry: HR parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for HR department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "HR",
+      "tags": [
+        "hr",
+        "hr",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "hr",
       "hr",
@@ -2627,11 +2915,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Amit Chakraborty",
     "department": "Legal",
     "createdAt": "2024-004-15T10:00:00Z",
-    "fileSize": 1244264,
+    "fileSize": 2516134,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Maintenance document for KMRL operations. Assigned to Amit Chakraborty.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nMAINTENANCE DIRECTORATE \u00b7 DOCUMENT REF: KMRL/MAINTENANCE/2024/015\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the maintenance protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Amit Chakraborty (Legal Department, Email: amit.chakraborty@kmrl.in). Contract Reference: CNT-2024-015.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 1700000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Legal Directorate.\n\nRECORD AUTHORIZED BY: AMIT CHAKRABORTY (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nMAINTENANCE DIRECTORATE \u00b7 DOCUMENT REF: KMRL/MAINTENANCE/2024/015\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the maintenance protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Amit Chakraborty (Legal Department, Email: amit.chakraborty@kmrl.in). Contract Reference: CNT-2024-015.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 2400000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Legal Directorate.\n\nRECORD AUTHORIZED BY: AMIT CHAKRABORTY (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Water Metro Phase 2 Electric Boat SLA #15: Fully processed and verified under KMRL MAINTENANCE Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Amit Chakraborty.",
+      "keyFindings": [
+        "1. Operational Telemetry: Maintenance parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Legal department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "High",
+      "department": "Legal",
+      "tags": [
+        "maintenance",
+        "legal",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "maintenance",
       "legal",
@@ -2654,11 +2962,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Neha Gupta",
     "department": "Procurement",
     "createdAt": "2024-005-15T10:00:00Z",
-    "fileSize": 729112,
+    "fileSize": 2365450,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Legal document for KMRL operations. Assigned to Neha Gupta.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nLEGAL DIRECTORATE \u00b7 DOCUMENT REF: KMRL/LEGAL/2024/016\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the legal protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Neha Gupta (Procurement Department, Email: neha.gupta@kmrl.in). Contract Reference: CNT-2024-016.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 3000000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Procurement Directorate.\n\nRECORD AUTHORIZED BY: NEHA GUPTA (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nLEGAL DIRECTORATE \u00b7 DOCUMENT REF: KMRL/LEGAL/2024/016\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the legal protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Neha Gupta (Procurement Department, Email: neha.gupta@kmrl.in). Contract Reference: CNT-2024-016.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 4100000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Procurement Directorate.\n\nRECORD AUTHORIZED BY: NEHA GUPTA (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Automatic Fare Collection (AFC) QR Upgrade Tender #16: Fully processed and verified under KMRL LEGAL Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Neha Gupta.",
+      "keyFindings": [
+        "1. Operational Telemetry: Legal parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Procurement department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Critical",
+      "department": "Procurement",
+      "tags": [
+        "legal",
+        "procurement",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "legal",
       "procurement",
@@ -2681,11 +3009,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Rahul Bhattacharya",
     "department": "Safety",
     "createdAt": "2024-006-15T10:00:00Z",
-    "fileSize": 2519572,
+    "fileSize": 2725438,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Procurement document for KMRL operations. Assigned to Rahul Bhattacharya.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nPROCUREMENT DIRECTORATE \u00b7 DOCUMENT REF: KMRL/PROCUREMENT/2024/017\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the procurement protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Rahul Bhattacharya (Safety Department, Email: rahul.bhattacharya@kmrl.in). Contract Reference: CNT-2024-017.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 3100000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Safety Directorate.\n\nRECORD AUTHORIZED BY: RAHUL BHATTACHARYA (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nPROCUREMENT DIRECTORATE \u00b7 DOCUMENT REF: KMRL/PROCUREMENT/2024/017\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the procurement protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Rahul Bhattacharya (Safety Department, Email: rahul.bhattacharya@kmrl.in). Contract Reference: CNT-2024-017.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 4000000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Safety Directorate.\n\nRECORD AUTHORIZED BY: RAHUL BHATTACHARYA (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Overhead Equipment (OHE) Traction Maintenance Schedule #17: Fully processed and verified under KMRL PROCUREMENT Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Rahul Bhattacharya.",
+      "keyFindings": [
+        "1. Operational Telemetry: Procurement parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Safety department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "Safety",
+      "tags": [
+        "procurement",
+        "safety",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "procurement",
       "safety",
@@ -2708,11 +3056,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Shalini Varma",
     "department": "Engineering",
     "createdAt": "2024-001-15T10:00:00Z",
-    "fileSize": 2405689,
+    "fileSize": 1245742,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Engineering document for KMRL operations. Assigned to Shalini Varma.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nENGINEERING DIRECTORATE \u00b7 DOCUMENT REF: KMRL/ENGINEERING/2024/018\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the engineering protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Shalini Varma (Engineering Department, Email: shalini.varma@kmrl.in). Contract Reference: CNT-2024-018.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 3500000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Engineering Directorate.\n\nRECORD AUTHORIZED BY: SHALINI VARMA (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nENGINEERING DIRECTORATE \u00b7 DOCUMENT REF: KMRL/ENGINEERING/2024/018\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the engineering protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Shalini Varma (Engineering Department, Email: shalini.varma@kmrl.in). Contract Reference: CNT-2024-018.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 1700000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Engineering Directorate.\n\nRECORD AUTHORIZED BY: SHALINI VARMA (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Muttom Depot Solar PV Rooftop Installation Bid #18: Fully processed and verified under KMRL ENGINEERING Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Shalini Varma.",
+      "keyFindings": [
+        "1. Operational Telemetry: Engineering parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Engineering department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "Engineering",
+      "tags": [
+        "engineering",
+        "engineering",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "engineering",
       "engineering",
@@ -2735,11 +3103,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Gautam Deshmukh",
     "department": "IT",
     "createdAt": "2024-002-15T10:00:00Z",
-    "fileSize": 2373972,
+    "fileSize": 686681,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Water Metro document for KMRL operations. Assigned to Gautam Deshmukh.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nWATER METRO DIRECTORATE \u00b7 DOCUMENT REF: KMRL/WATER METRO/2024/019\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the water metro protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Gautam Deshmukh (IT Department, Email: gautam.deshmukh@kmrl.in). Contract Reference: CNT-2024-019.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 1200000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to IT Directorate.\n\nRECORD AUTHORIZED BY: GAUTAM DESHMUKH (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nWATER METRO DIRECTORATE \u00b7 DOCUMENT REF: KMRL/WATER METRO/2024/019\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the water metro protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Gautam Deshmukh (IT Department, Email: gautam.deshmukh@kmrl.in). Contract Reference: CNT-2024-019.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 5900000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to IT Directorate.\n\nRECORD AUTHORIZED BY: GAUTAM DESHMUKH (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Station Housekeeping & Sanitation Operations SLA #19: Fully processed and verified under KMRL WATER METRO Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Gautam Deshmukh.",
+      "keyFindings": [
+        "1. Operational Telemetry: Water Metro parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for IT department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "High",
+      "department": "IT",
+      "tags": [
+        "water metro",
+        "it",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "water metro",
       "it",
@@ -2762,11 +3150,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Vikram Bhat",
     "department": "Water Metro",
     "createdAt": "2024-003-15T10:00:00Z",
-    "fileSize": 1146092,
+    "fileSize": 1576889,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official IT document for KMRL operations. Assigned to Vikram Bhat.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nIT DIRECTORATE \u00b7 DOCUMENT REF: KMRL/IT/2024/020\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the it protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Vikram Bhat (Water Metro Department, Email: vikram.bhat@kmrl.in). Contract Reference: CNT-2024-020.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 5200000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Water Metro Directorate.\n\nRECORD AUTHORIZED BY: VIKRAM BHAT (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nIT DIRECTORATE \u00b7 DOCUMENT REF: KMRL/IT/2024/020\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the it protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Vikram Bhat (Water Metro Department, Email: vikram.bhat@kmrl.in). Contract Reference: CNT-2024-020.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 3500000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Water Metro Directorate.\n\nRECORD AUTHORIZED BY: VIKRAM BHAT (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of IT Network & Cybersecurity Vulnerability Audit #20: Fully processed and verified under KMRL IT Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Vikram Bhat.",
+      "keyFindings": [
+        "1. Operational Telemetry: IT parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Water Metro department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Critical",
+      "department": "Water Metro",
+      "tags": [
+        "it",
+        "water metro",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "it",
       "water metro",
@@ -2789,11 +3197,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Harish Kulkarni",
     "department": "Operations",
     "createdAt": "2024-004-15T10:00:00Z",
-    "fileSize": 1979253,
+    "fileSize": 3332868,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Safety document for KMRL operations. Assigned to Harish Kulkarni.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nSAFETY DIRECTORATE \u00b7 DOCUMENT REF: KMRL/SAFETY/2024/021\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the safety protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Harish Kulkarni (Operations Department, Email: harish.kulkarni@kmrl.in). Contract Reference: CNT-2024-021.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 5500000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Operations Directorate.\n\nRECORD AUTHORIZED BY: HARISH KULKARNI (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nSAFETY DIRECTORATE \u00b7 DOCUMENT REF: KMRL/SAFETY/2024/021\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the safety protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Harish Kulkarni (Operations Department, Email: harish.kulkarni@kmrl.in). Contract Reference: CNT-2024-021.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 2500000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Operations Directorate.\n\nRECORD AUTHORIZED BY: HARISH KULKARNI (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Safety Audit & Track Inspection Report #21: Fully processed and verified under KMRL SAFETY Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Harish Kulkarni.",
+      "keyFindings": [
+        "1. Operational Telemetry: Safety parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Operations department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "Operations",
+      "tags": [
+        "safety",
+        "operations",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "safety",
       "operations",
@@ -2816,11 +3244,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Pooja Saxena",
     "department": "Maintenance",
     "createdAt": "2024-005-15T10:00:00Z",
-    "fileSize": 1292361,
+    "fileSize": 1398709,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Operations document for KMRL operations. Assigned to Pooja Saxena.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nOPERATIONS DIRECTORATE \u00b7 DOCUMENT REF: KMRL/OPERATIONS/2024/022\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the operations protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Pooja Saxena (Maintenance Department, Email: pooja.saxena@kmrl.in). Contract Reference: CNT-2024-022.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 1300000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Maintenance Directorate.\n\nRECORD AUTHORIZED BY: POOJA SAXENA (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nOPERATIONS DIRECTORATE \u00b7 DOCUMENT REF: KMRL/OPERATIONS/2024/022\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the operations protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Pooja Saxena (Maintenance Department, Email: pooja.saxena@kmrl.in). Contract Reference: CNT-2024-022.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 2100000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Maintenance Directorate.\n\nRECORD AUTHORIZED BY: POOJA SAXENA (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Rolling Stock Preventive Maintenance Protocol #22: Fully processed and verified under KMRL OPERATIONS Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Pooja Saxena.",
+      "keyFindings": [
+        "1. Operational Telemetry: Operations parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Maintenance department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "Maintenance",
+      "tags": [
+        "operations",
+        "maintenance",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "operations",
       "maintenance",
@@ -2843,11 +3291,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Sandeep Raghavan",
     "department": "Finance",
     "createdAt": "2024-006-15T10:00:00Z",
-    "fileSize": 1601693,
+    "fileSize": 2794537,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Finance document for KMRL operations. Assigned to Sandeep Raghavan.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nFINANCE DIRECTORATE \u00b7 DOCUMENT REF: KMRL/FINANCE/2024/023\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the finance protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Sandeep Raghavan (Finance Department, Email: sandeep.raghavan@kmrl.in). Contract Reference: CNT-2024-023.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 3200000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Finance Directorate.\n\nRECORD AUTHORIZED BY: SANDEEP RAGHAVAN (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nFINANCE DIRECTORATE \u00b7 DOCUMENT REF: KMRL/FINANCE/2024/023\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the finance protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Sandeep Raghavan (Finance Department, Email: sandeep.raghavan@kmrl.in). Contract Reference: CNT-2024-023.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 1000000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Finance Directorate.\n\nRECORD AUTHORIZED BY: SANDEEP RAGHAVAN (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Q1 Quarterly Financial Audit & Revenue Breakdown #23: Fully processed and verified under KMRL FINANCE Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Sandeep Raghavan.",
+      "keyFindings": [
+        "1. Operational Telemetry: Finance parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Finance department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "High",
+      "department": "Finance",
+      "tags": [
+        "finance",
+        "finance",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "finance",
       "finance",
@@ -2870,11 +3338,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Ritu Hegde",
     "department": "HR",
     "createdAt": "2024-001-15T10:00:00Z",
-    "fileSize": 1076189,
+    "fileSize": 2941332,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official HR document for KMRL operations. Assigned to Ritu Hegde.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nHR DIRECTORATE \u00b7 DOCUMENT REF: KMRL/HR/2024/024\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the hr protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Ritu Hegde (HR Department, Email: ritu.hegde@kmrl.in). Contract Reference: CNT-2024-024.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 5000000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to HR Directorate.\n\nRECORD AUTHORIZED BY: RITU HEGDE (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nHR DIRECTORATE \u00b7 DOCUMENT REF: KMRL/HR/2024/024\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the hr protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Ritu Hegde (HR Department, Email: ritu.hegde@kmrl.in). Contract Reference: CNT-2024-024.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 2300000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to HR Directorate.\n\nRECORD AUTHORIZED BY: RITU HEGDE (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of HR Employee Benefit Policy & Night Shift Allowance #24: Fully processed and verified under KMRL HR Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Ritu Hegde.",
+      "keyFindings": [
+        "1. Operational Telemetry: HR parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for HR department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Critical",
+      "department": "HR",
+      "tags": [
+        "hr",
+        "hr",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "hr",
       "hr",
@@ -2897,11 +3385,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Vijay Chawla",
     "department": "Legal",
     "createdAt": "2024-002-15T10:00:00Z",
-    "fileSize": 522419,
+    "fileSize": 1362211,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Maintenance document for KMRL operations. Assigned to Vijay Chawla.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nMAINTENANCE DIRECTORATE \u00b7 DOCUMENT REF: KMRL/MAINTENANCE/2024/025\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the maintenance protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Vijay Chawla (Legal Department, Email: vijay.chawla@kmrl.in). Contract Reference: CNT-2024-025.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 5500000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Legal Directorate.\n\nRECORD AUTHORIZED BY: VIJAY CHAWLA (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nMAINTENANCE DIRECTORATE \u00b7 DOCUMENT REF: KMRL/MAINTENANCE/2024/025\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the maintenance protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Vijay Chawla (Legal Department, Email: vijay.chawla@kmrl.in). Contract Reference: CNT-2024-025.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 5600000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Legal Directorate.\n\nRECORD AUTHORIZED BY: VIJAY CHAWLA (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Water Metro Phase 2 Electric Boat SLA #25: Fully processed and verified under KMRL MAINTENANCE Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Vijay Chawla.",
+      "keyFindings": [
+        "1. Operational Telemetry: Maintenance parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Legal department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "Legal",
+      "tags": [
+        "maintenance",
+        "legal",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "maintenance",
       "legal",
@@ -2924,11 +3432,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Sneha Roy",
     "department": "Procurement",
     "createdAt": "2024-003-15T10:00:00Z",
-    "fileSize": 1398173,
+    "fileSize": 2895361,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Legal document for KMRL operations. Assigned to Sneha Roy.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nLEGAL DIRECTORATE \u00b7 DOCUMENT REF: KMRL/LEGAL/2024/026\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the legal protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Sneha Roy (Procurement Department, Email: sneha.roy@kmrl.in). Contract Reference: CNT-2024-026.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 3400000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Procurement Directorate.\n\nRECORD AUTHORIZED BY: SNEHA ROY (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nLEGAL DIRECTORATE \u00b7 DOCUMENT REF: KMRL/LEGAL/2024/026\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the legal protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Sneha Roy (Procurement Department, Email: sneha.roy@kmrl.in). Contract Reference: CNT-2024-026.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 2100000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Procurement Directorate.\n\nRECORD AUTHORIZED BY: SNEHA ROY (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Automatic Fare Collection (AFC) QR Upgrade Tender #26: Fully processed and verified under KMRL LEGAL Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Sneha Roy.",
+      "keyFindings": [
+        "1. Operational Telemetry: Legal parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Procurement department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "Procurement",
+      "tags": [
+        "legal",
+        "procurement",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "legal",
       "procurement",
@@ -2951,11 +3479,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Nikhil Naik",
     "department": "Safety",
     "createdAt": "2024-004-15T10:00:00Z",
-    "fileSize": 3082863,
+    "fileSize": 2927087,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Procurement document for KMRL operations. Assigned to Nikhil Naik.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nPROCUREMENT DIRECTORATE \u00b7 DOCUMENT REF: KMRL/PROCUREMENT/2024/027\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the procurement protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Nikhil Naik (Safety Department, Email: nikhil.naik@kmrl.in). Contract Reference: CNT-2024-027.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 4800000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Safety Directorate.\n\nRECORD AUTHORIZED BY: NIKHIL NAIK (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nPROCUREMENT DIRECTORATE \u00b7 DOCUMENT REF: KMRL/PROCUREMENT/2024/027\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the procurement protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Nikhil Naik (Safety Department, Email: nikhil.naik@kmrl.in). Contract Reference: CNT-2024-027.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 1200000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Safety Directorate.\n\nRECORD AUTHORIZED BY: NIKHIL NAIK (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Overhead Equipment (OHE) Traction Maintenance Schedule #27: Fully processed and verified under KMRL PROCUREMENT Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Nikhil Naik.",
+      "keyFindings": [
+        "1. Operational Telemetry: Procurement parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Safety department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "High",
+      "department": "Safety",
+      "tags": [
+        "procurement",
+        "safety",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "procurement",
       "safety",
@@ -2978,11 +3526,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Anjali Shenoy",
     "department": "Engineering",
     "createdAt": "2024-005-15T10:00:00Z",
-    "fileSize": 783686,
+    "fileSize": 3177687,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Engineering document for KMRL operations. Assigned to Anjali Shenoy.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nENGINEERING DIRECTORATE \u00b7 DOCUMENT REF: KMRL/ENGINEERING/2024/028\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the engineering protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Anjali Shenoy (Engineering Department, Email: anjali.shenoy@kmrl.in). Contract Reference: CNT-2024-028.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 1200000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Engineering Directorate.\n\nRECORD AUTHORIZED BY: ANJALI SHENOY (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nENGINEERING DIRECTORATE \u00b7 DOCUMENT REF: KMRL/ENGINEERING/2024/028\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the engineering protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Anjali Shenoy (Engineering Department, Email: anjali.shenoy@kmrl.in). Contract Reference: CNT-2024-028.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 2300000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Engineering Directorate.\n\nRECORD AUTHORIZED BY: ANJALI SHENOY (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Muttom Depot Solar PV Rooftop Installation Bid #28: Fully processed and verified under KMRL ENGINEERING Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Anjali Shenoy.",
+      "keyFindings": [
+        "1. Operational Telemetry: Engineering parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Engineering department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Critical",
+      "department": "Engineering",
+      "tags": [
+        "engineering",
+        "engineering",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "engineering",
       "engineering",
@@ -3005,11 +3573,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Mahesh Pandey",
     "department": "IT",
     "createdAt": "2024-006-15T10:00:00Z",
-    "fileSize": 1242408,
+    "fileSize": 3000489,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Water Metro document for KMRL operations. Assigned to Mahesh Pandey.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nWATER METRO DIRECTORATE \u00b7 DOCUMENT REF: KMRL/WATER METRO/2024/029\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the water metro protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Mahesh Pandey (IT Department, Email: mahesh.pandey@kmrl.in). Contract Reference: CNT-2024-029.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 1200000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to IT Directorate.\n\nRECORD AUTHORIZED BY: MAHESH PANDEY (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nWATER METRO DIRECTORATE \u00b7 DOCUMENT REF: KMRL/WATER METRO/2024/029\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the water metro protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Mahesh Pandey (IT Department, Email: mahesh.pandey@kmrl.in). Contract Reference: CNT-2024-029.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 3600000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to IT Directorate.\n\nRECORD AUTHORIZED BY: MAHESH PANDEY (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Station Housekeeping & Sanitation Operations SLA #29: Fully processed and verified under KMRL WATER METRO Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Mahesh Pandey.",
+      "keyFindings": [
+        "1. Operational Telemetry: Water Metro parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for IT department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "IT",
+      "tags": [
+        "water metro",
+        "it",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "water metro",
       "it",
@@ -3032,11 +3620,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Kavita Mishra",
     "department": "Water Metro",
     "createdAt": "2024-001-15T10:00:00Z",
-    "fileSize": 1593733,
+    "fileSize": 831716,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official IT document for KMRL operations. Assigned to Kavita Mishra.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nIT DIRECTORATE \u00b7 DOCUMENT REF: KMRL/IT/2024/030\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the it protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Kavita Mishra (Water Metro Department, Email: kavita.mishra@kmrl.in). Contract Reference: CNT-2024-030.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 2900000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Water Metro Directorate.\n\nRECORD AUTHORIZED BY: KAVITA MISHRA (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nIT DIRECTORATE \u00b7 DOCUMENT REF: KMRL/IT/2024/030\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the it protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Kavita Mishra (Water Metro Department, Email: kavita.mishra@kmrl.in). Contract Reference: CNT-2024-030.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 4800000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Water Metro Directorate.\n\nRECORD AUTHORIZED BY: KAVITA MISHRA (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of IT Network & Cybersecurity Vulnerability Audit #30: Fully processed and verified under KMRL IT Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Kavita Mishra.",
+      "keyFindings": [
+        "1. Operational Telemetry: IT parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Water Metro department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "Water Metro",
+      "tags": [
+        "it",
+        "water metro",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "it",
       "water metro",
@@ -3059,11 +3667,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Siddharth Reddy",
     "department": "Operations",
     "createdAt": "2024-002-15T10:00:00Z",
-    "fileSize": 2991298,
+    "fileSize": 1371162,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Safety document for KMRL operations. Assigned to Siddharth Reddy.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nSAFETY DIRECTORATE \u00b7 DOCUMENT REF: KMRL/SAFETY/2024/031\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the safety protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Siddharth Reddy (Operations Department, Email: siddharth.reddy@kmrl.in). Contract Reference: CNT-2024-031.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 2100000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Operations Directorate.\n\nRECORD AUTHORIZED BY: SIDDHARTH REDDY (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nSAFETY DIRECTORATE \u00b7 DOCUMENT REF: KMRL/SAFETY/2024/031\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the safety protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Siddharth Reddy (Operations Department, Email: siddharth.reddy@kmrl.in). Contract Reference: CNT-2024-031.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 4800000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Operations Directorate.\n\nRECORD AUTHORIZED BY: SIDDHARTH REDDY (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Safety Audit & Track Inspection Report #31: Fully processed and verified under KMRL SAFETY Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Siddharth Reddy.",
+      "keyFindings": [
+        "1. Operational Telemetry: Safety parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Operations department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "High",
+      "department": "Operations",
+      "tags": [
+        "safety",
+        "operations",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "safety",
       "operations",
@@ -3086,11 +3714,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Bhavna Rao",
     "department": "Maintenance",
     "createdAt": "2024-003-15T10:00:00Z",
-    "fileSize": 733553,
+    "fileSize": 2246758,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Operations document for KMRL operations. Assigned to Bhavna Rao.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nOPERATIONS DIRECTORATE \u00b7 DOCUMENT REF: KMRL/OPERATIONS/2024/032\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the operations protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Bhavna Rao (Maintenance Department, Email: bhavna.rao@kmrl.in). Contract Reference: CNT-2024-032.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 3700000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Maintenance Directorate.\n\nRECORD AUTHORIZED BY: BHAVNA RAO (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nOPERATIONS DIRECTORATE \u00b7 DOCUMENT REF: KMRL/OPERATIONS/2024/032\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the operations protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Bhavna Rao (Maintenance Department, Email: bhavna.rao@kmrl.in). Contract Reference: CNT-2024-032.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 2500000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Maintenance Directorate.\n\nRECORD AUTHORIZED BY: BHAVNA RAO (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Rolling Stock Preventive Maintenance Protocol #32: Fully processed and verified under KMRL OPERATIONS Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Bhavna Rao.",
+      "keyFindings": [
+        "1. Operational Telemetry: Operations parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Maintenance department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Critical",
+      "department": "Maintenance",
+      "tags": [
+        "operations",
+        "maintenance",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "operations",
       "maintenance",
@@ -3113,11 +3761,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Rohan Chaudhary",
     "department": "Finance",
     "createdAt": "2024-004-15T10:00:00Z",
-    "fileSize": 2502367,
+    "fileSize": 1646761,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Finance document for KMRL operations. Assigned to Rohan Chaudhary.",
     "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nFINANCE DIRECTORATE \u00b7 DOCUMENT REF: KMRL/FINANCE/2024/033\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the finance protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Rohan Chaudhary (Finance Department, Email: rohan.chaudhary@kmrl.in). Contract Reference: CNT-2024-033.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 2700000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Finance Directorate.\n\nRECORD AUTHORIZED BY: ROHAN CHAUDHARY (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Q1 Quarterly Financial Audit & Revenue Breakdown #33: Fully processed and verified under KMRL FINANCE Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Rohan Chaudhary.",
+      "keyFindings": [
+        "1. Operational Telemetry: Finance parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Finance department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "Finance",
+      "tags": [
+        "finance",
+        "finance",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "finance",
       "finance",
@@ -3140,11 +3808,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Swati Singhal",
     "department": "HR",
     "createdAt": "2024-005-15T10:00:00Z",
-    "fileSize": 2624839,
+    "fileSize": 2657259,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official HR document for KMRL operations. Assigned to Swati Singhal.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nHR DIRECTORATE \u00b7 DOCUMENT REF: KMRL/HR/2024/034\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the hr protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Swati Singhal (HR Department, Email: swati.singhal@kmrl.in). Contract Reference: CNT-2024-034.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 3000000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to HR Directorate.\n\nRECORD AUTHORIZED BY: SWATI SINGHAL (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nHR DIRECTORATE \u00b7 DOCUMENT REF: KMRL/HR/2024/034\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the hr protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Swati Singhal (HR Department, Email: swati.singhal@kmrl.in). Contract Reference: CNT-2024-034.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 1100000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to HR Directorate.\n\nRECORD AUTHORIZED BY: SWATI SINGHAL (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of HR Employee Benefit Policy & Night Shift Allowance #34: Fully processed and verified under KMRL HR Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Swati Singhal.",
+      "keyFindings": [
+        "1. Operational Telemetry: HR parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for HR department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "HR",
+      "tags": [
+        "hr",
+        "hr",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "hr",
       "hr",
@@ -3167,11 +3855,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Alok Kapur",
     "department": "Legal",
     "createdAt": "2024-006-15T10:00:00Z",
-    "fileSize": 2568413,
+    "fileSize": 2921257,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Maintenance document for KMRL operations. Assigned to Alok Kapur.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nMAINTENANCE DIRECTORATE \u00b7 DOCUMENT REF: KMRL/MAINTENANCE/2024/035\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the maintenance protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Alok Kapur (Legal Department, Email: alok.kapur@kmrl.in). Contract Reference: CNT-2024-035.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 1200000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Legal Directorate.\n\nRECORD AUTHORIZED BY: ALOK KAPUR (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nMAINTENANCE DIRECTORATE \u00b7 DOCUMENT REF: KMRL/MAINTENANCE/2024/035\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the maintenance protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Alok Kapur (Legal Department, Email: alok.kapur@kmrl.in). Contract Reference: CNT-2024-035.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 3800000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Legal Directorate.\n\nRECORD AUTHORIZED BY: ALOK KAPUR (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Water Metro Phase 2 Electric Boat SLA #35: Fully processed and verified under KMRL MAINTENANCE Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Alok Kapur.",
+      "keyFindings": [
+        "1. Operational Telemetry: Maintenance parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Legal department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "High",
+      "department": "Legal",
+      "tags": [
+        "maintenance",
+        "legal",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "maintenance",
       "legal",
@@ -3194,11 +3902,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Monica Aggarwal",
     "department": "Procurement",
     "createdAt": "2024-001-15T10:00:00Z",
-    "fileSize": 1575930,
+    "fileSize": 1362200,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Legal document for KMRL operations. Assigned to Monica Aggarwal.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nLEGAL DIRECTORATE \u00b7 DOCUMENT REF: KMRL/LEGAL/2024/036\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the legal protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Monica Aggarwal (Procurement Department, Email: monica.aggarwal@kmrl.in). Contract Reference: CNT-2024-036.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 5100000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Procurement Directorate.\n\nRECORD AUTHORIZED BY: MONICA AGGARWAL (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nLEGAL DIRECTORATE \u00b7 DOCUMENT REF: KMRL/LEGAL/2024/036\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the legal protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Monica Aggarwal (Procurement Department, Email: monica.aggarwal@kmrl.in). Contract Reference: CNT-2024-036.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 4000000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Procurement Directorate.\n\nRECORD AUTHORIZED BY: MONICA AGGARWAL (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Automatic Fare Collection (AFC) QR Upgrade Tender #36: Fully processed and verified under KMRL LEGAL Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Monica Aggarwal.",
+      "keyFindings": [
+        "1. Operational Telemetry: Legal parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Procurement department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Critical",
+      "department": "Procurement",
+      "tags": [
+        "legal",
+        "procurement",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "legal",
       "procurement",
@@ -3221,11 +3949,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Varun Dutta",
     "department": "Safety",
     "createdAt": "2024-002-15T10:00:00Z",
-    "fileSize": 1348061,
+    "fileSize": 638875,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Procurement document for KMRL operations. Assigned to Varun Dutta.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nPROCUREMENT DIRECTORATE \u00b7 DOCUMENT REF: KMRL/PROCUREMENT/2024/037\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the procurement protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Varun Dutta (Safety Department, Email: varun.dutta@kmrl.in). Contract Reference: CNT-2024-037.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 3800000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Safety Directorate.\n\nRECORD AUTHORIZED BY: VARUN DUTTA (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nPROCUREMENT DIRECTORATE \u00b7 DOCUMENT REF: KMRL/PROCUREMENT/2024/037\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the procurement protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Varun Dutta (Safety Department, Email: varun.dutta@kmrl.in). Contract Reference: CNT-2024-037.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 5400000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Safety Directorate.\n\nRECORD AUTHORIZED BY: VARUN DUTTA (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Overhead Equipment (OHE) Traction Maintenance Schedule #37: Fully processed and verified under KMRL PROCUREMENT Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Varun Dutta.",
+      "keyFindings": [
+        "1. Operational Telemetry: Procurement parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Safety department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "Safety",
+      "tags": [
+        "procurement",
+        "safety",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "procurement",
       "safety",
@@ -3248,11 +3996,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Preeti Banerjee",
     "department": "Engineering",
     "createdAt": "2024-003-15T10:00:00Z",
-    "fileSize": 1607093,
+    "fileSize": 1276191,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Engineering document for KMRL operations. Assigned to Preeti Banerjee.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nENGINEERING DIRECTORATE \u00b7 DOCUMENT REF: KMRL/ENGINEERING/2024/038\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the engineering protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Preeti Banerjee (Engineering Department, Email: preeti.banerjee@kmrl.in). Contract Reference: CNT-2024-038.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 3800000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Engineering Directorate.\n\nRECORD AUTHORIZED BY: PREETI BANERJEE (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nENGINEERING DIRECTORATE \u00b7 DOCUMENT REF: KMRL/ENGINEERING/2024/038\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the engineering protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Preeti Banerjee (Engineering Department, Email: preeti.banerjee@kmrl.in). Contract Reference: CNT-2024-038.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 2800000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Engineering Directorate.\n\nRECORD AUTHORIZED BY: PREETI BANERJEE (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Muttom Depot Solar PV Rooftop Installation Bid #38: Fully processed and verified under KMRL ENGINEERING Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Preeti Banerjee.",
+      "keyFindings": [
+        "1. Operational Telemetry: Engineering parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Engineering department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "Engineering",
+      "tags": [
+        "engineering",
+        "engineering",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "engineering",
       "engineering",
@@ -3275,11 +4043,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Abhishek Ghosh",
     "department": "IT",
     "createdAt": "2024-004-15T10:00:00Z",
-    "fileSize": 645086,
+    "fileSize": 741990,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Water Metro document for KMRL operations. Assigned to Abhishek Ghosh.",
     "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nWATER METRO DIRECTORATE \u00b7 DOCUMENT REF: KMRL/WATER METRO/2024/039\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the water metro protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Abhishek Ghosh (IT Department, Email: abhishek.ghosh@kmrl.in). Contract Reference: CNT-2024-039.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 3600000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to IT Directorate.\n\nRECORD AUTHORIZED BY: ABHISHEK GHOSH (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Station Housekeeping & Sanitation Operations SLA #39: Fully processed and verified under KMRL WATER METRO Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Abhishek Ghosh.",
+      "keyFindings": [
+        "1. Operational Telemetry: Water Metro parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for IT department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "High",
+      "department": "IT",
+      "tags": [
+        "water metro",
+        "it",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "water metro",
       "it",
@@ -3302,11 +4090,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Shruti Sen",
     "department": "Water Metro",
     "createdAt": "2024-005-15T10:00:00Z",
-    "fileSize": 1947382,
+    "fileSize": 1185166,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official IT document for KMRL operations. Assigned to Shruti Sen.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nIT DIRECTORATE \u00b7 DOCUMENT REF: KMRL/IT/2024/040\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the it protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Shruti Sen (Water Metro Department, Email: shruti.sen@kmrl.in). Contract Reference: CNT-2024-040.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 3800000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Water Metro Directorate.\n\nRECORD AUTHORIZED BY: SHRUTI SEN (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nIT DIRECTORATE \u00b7 DOCUMENT REF: KMRL/IT/2024/040\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the it protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Shruti Sen (Water Metro Department, Email: shruti.sen@kmrl.in). Contract Reference: CNT-2024-040.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 3500000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Water Metro Directorate.\n\nRECORD AUTHORIZED BY: SHRUTI SEN (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of IT Network & Cybersecurity Vulnerability Audit #40: Fully processed and verified under KMRL IT Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Shruti Sen.",
+      "keyFindings": [
+        "1. Operational Telemetry: IT parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Water Metro department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Critical",
+      "department": "Water Metro",
+      "tags": [
+        "it",
+        "water metro",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "it",
       "water metro",
@@ -3329,11 +4137,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Tarun Kumar",
     "department": "Operations",
     "createdAt": "2024-006-15T10:00:00Z",
-    "fileSize": 722264,
+    "fileSize": 568574,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Safety document for KMRL operations. Assigned to Tarun Kumar.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nSAFETY DIRECTORATE \u00b7 DOCUMENT REF: KMRL/SAFETY/2024/041\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the safety protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Tarun Kumar (Operations Department, Email: tarun.kumar41@kmrl.in). Contract Reference: CNT-2024-041.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 2000000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Operations Directorate.\n\nRECORD AUTHORIZED BY: TARUN KUMAR (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nSAFETY DIRECTORATE \u00b7 DOCUMENT REF: KMRL/SAFETY/2024/041\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the safety protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Tarun Kumar (Operations Department, Email: tarun.kumar41@kmrl.in). Contract Reference: CNT-2024-041.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 2300000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Operations Directorate.\n\nRECORD AUTHORIZED BY: TARUN KUMAR (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Safety Audit & Track Inspection Report #41: Fully processed and verified under KMRL SAFETY Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Tarun Kumar.",
+      "keyFindings": [
+        "1. Operational Telemetry: Safety parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Operations department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "Operations",
+      "tags": [
+        "safety",
+        "operations",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "safety",
       "operations",
@@ -3356,11 +4184,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Archana Nair",
     "department": "Maintenance",
     "createdAt": "2024-001-15T10:00:00Z",
-    "fileSize": 664088,
+    "fileSize": 2456775,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Operations document for KMRL operations. Assigned to Archana Nair.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nOPERATIONS DIRECTORATE \u00b7 DOCUMENT REF: KMRL/OPERATIONS/2024/042\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the operations protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Archana Nair (Maintenance Department, Email: archana.nair42@kmrl.in). Contract Reference: CNT-2024-042.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 2100000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Maintenance Directorate.\n\nRECORD AUTHORIZED BY: ARCHANA NAIR (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nOPERATIONS DIRECTORATE \u00b7 DOCUMENT REF: KMRL/OPERATIONS/2024/042\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the operations protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Archana Nair (Maintenance Department, Email: archana.nair42@kmrl.in). Contract Reference: CNT-2024-042.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 2900000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Maintenance Directorate.\n\nRECORD AUTHORIZED BY: ARCHANA NAIR (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Rolling Stock Preventive Maintenance Protocol #42: Fully processed and verified under KMRL OPERATIONS Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Archana Nair.",
+      "keyFindings": [
+        "1. Operational Telemetry: Operations parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Maintenance department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "Maintenance",
+      "tags": [
+        "operations",
+        "maintenance",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "operations",
       "maintenance",
@@ -3383,11 +4231,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Kiran Menon",
     "department": "Finance",
     "createdAt": "2024-002-15T10:00:00Z",
-    "fileSize": 1793815,
+    "fileSize": 1967221,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Finance document for KMRL operations. Assigned to Kiran Menon.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nFINANCE DIRECTORATE \u00b7 DOCUMENT REF: KMRL/FINANCE/2024/043\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the finance protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Kiran Menon (Finance Department, Email: kiran.menon43@kmrl.in). Contract Reference: CNT-2024-043.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 1600000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Finance Directorate.\n\nRECORD AUTHORIZED BY: KIRAN MENON (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nFINANCE DIRECTORATE \u00b7 DOCUMENT REF: KMRL/FINANCE/2024/043\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the finance protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Kiran Menon (Finance Department, Email: kiran.menon43@kmrl.in). Contract Reference: CNT-2024-043.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 1500000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Finance Directorate.\n\nRECORD AUTHORIZED BY: KIRAN MENON (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Q1 Quarterly Financial Audit & Revenue Breakdown #43: Fully processed and verified under KMRL FINANCE Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Kiran Menon.",
+      "keyFindings": [
+        "1. Operational Telemetry: Finance parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Finance department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "High",
+      "department": "Finance",
+      "tags": [
+        "finance",
+        "finance",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "finance",
       "finance",
@@ -3410,11 +4278,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Nisha Prabhu",
     "department": "HR",
     "createdAt": "2024-003-15T10:00:00Z",
-    "fileSize": 1709047,
+    "fileSize": 1424134,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official HR document for KMRL operations. Assigned to Nisha Prabhu.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nHR DIRECTORATE \u00b7 DOCUMENT REF: KMRL/HR/2024/044\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the hr protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Nisha Prabhu (HR Department, Email: nisha.prabhu44@kmrl.in). Contract Reference: CNT-2024-044.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 4600000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to HR Directorate.\n\nRECORD AUTHORIZED BY: NISHA PRABHU (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nHR DIRECTORATE \u00b7 DOCUMENT REF: KMRL/HR/2024/044\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the hr protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Nisha Prabhu (HR Department, Email: nisha.prabhu44@kmrl.in). Contract Reference: CNT-2024-044.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 3200000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to HR Directorate.\n\nRECORD AUTHORIZED BY: NISHA PRABHU (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of HR Employee Benefit Policy & Night Shift Allowance #44: Fully processed and verified under KMRL HR Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Nisha Prabhu.",
+      "keyFindings": [
+        "1. Operational Telemetry: HR parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for HR department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Critical",
+      "department": "HR",
+      "tags": [
+        "hr",
+        "hr",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "hr",
       "hr",
@@ -3437,11 +4325,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Aravind Sharma",
     "department": "Legal",
     "createdAt": "2024-004-15T10:00:00Z",
-    "fileSize": 3145940,
+    "fileSize": 1840119,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Maintenance document for KMRL operations. Assigned to Aravind Sharma.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nMAINTENANCE DIRECTORATE \u00b7 DOCUMENT REF: KMRL/MAINTENANCE/2024/045\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the maintenance protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Aravind Sharma (Legal Department, Email: aravind.sharma45@kmrl.in). Contract Reference: CNT-2024-045.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 1700000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Legal Directorate.\n\nRECORD AUTHORIZED BY: ARAVIND SHARMA (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nMAINTENANCE DIRECTORATE \u00b7 DOCUMENT REF: KMRL/MAINTENANCE/2024/045\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the maintenance protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Aravind Sharma (Legal Department, Email: aravind.sharma45@kmrl.in). Contract Reference: CNT-2024-045.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 3600000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Legal Directorate.\n\nRECORD AUTHORIZED BY: ARAVIND SHARMA (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Water Metro Phase 2 Electric Boat SLA #45: Fully processed and verified under KMRL MAINTENANCE Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Aravind Sharma.",
+      "keyFindings": [
+        "1. Operational Telemetry: Maintenance parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Legal department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "Legal",
+      "tags": [
+        "maintenance",
+        "legal",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "maintenance",
       "legal",
@@ -3464,11 +4372,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Geetha Verma",
     "department": "Procurement",
     "createdAt": "2024-005-15T10:00:00Z",
-    "fileSize": 1709750,
+    "fileSize": 842355,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Legal document for KMRL operations. Assigned to Geetha Verma.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nLEGAL DIRECTORATE \u00b7 DOCUMENT REF: KMRL/LEGAL/2024/046\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the legal protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Geetha Verma (Procurement Department, Email: geetha.verma46@kmrl.in). Contract Reference: CNT-2024-046.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 4200000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Procurement Directorate.\n\nRECORD AUTHORIZED BY: GEETHA VERMA (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nLEGAL DIRECTORATE \u00b7 DOCUMENT REF: KMRL/LEGAL/2024/046\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the legal protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Geetha Verma (Procurement Department, Email: geetha.verma46@kmrl.in). Contract Reference: CNT-2024-046.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 1800000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Procurement Directorate.\n\nRECORD AUTHORIZED BY: GEETHA VERMA (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Automatic Fare Collection (AFC) QR Upgrade Tender #46: Fully processed and verified under KMRL LEGAL Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Geetha Verma.",
+      "keyFindings": [
+        "1. Operational Telemetry: Legal parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Procurement department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "Procurement",
+      "tags": [
+        "legal",
+        "procurement",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "legal",
       "procurement",
@@ -3491,11 +4419,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Prashanth Iyer",
     "department": "Safety",
     "createdAt": "2024-006-15T10:00:00Z",
-    "fileSize": 1378240,
+    "fileSize": 2325361,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Procurement document for KMRL operations. Assigned to Prashanth Iyer.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nPROCUREMENT DIRECTORATE \u00b7 DOCUMENT REF: KMRL/PROCUREMENT/2024/047\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the procurement protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Prashanth Iyer (Safety Department, Email: prashanth.iyer47@kmrl.in). Contract Reference: CNT-2024-047.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 4600000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Safety Directorate.\n\nRECORD AUTHORIZED BY: PRASHANTH IYER (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nPROCUREMENT DIRECTORATE \u00b7 DOCUMENT REF: KMRL/PROCUREMENT/2024/047\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the procurement protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Prashanth Iyer (Safety Department, Email: prashanth.iyer47@kmrl.in). Contract Reference: CNT-2024-047.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 5800000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Safety Directorate.\n\nRECORD AUTHORIZED BY: PRASHANTH IYER (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Overhead Equipment (OHE) Traction Maintenance Schedule #47: Fully processed and verified under KMRL PROCUREMENT Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Prashanth Iyer.",
+      "keyFindings": [
+        "1. Operational Telemetry: Procurement parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Safety department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "High",
+      "department": "Safety",
+      "tags": [
+        "procurement",
+        "safety",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "procurement",
       "safety",
@@ -3518,11 +4466,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Sridevi Pillai",
     "department": "Engineering",
     "createdAt": "2024-001-15T10:00:00Z",
-    "fileSize": 1983630,
+    "fileSize": 2265962,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Engineering document for KMRL operations. Assigned to Sridevi Pillai.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nENGINEERING DIRECTORATE \u00b7 DOCUMENT REF: KMRL/ENGINEERING/2024/048\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the engineering protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Sridevi Pillai (Engineering Department, Email: sridevi.pillai48@kmrl.in). Contract Reference: CNT-2024-048.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 1600000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Engineering Directorate.\n\nRECORD AUTHORIZED BY: SRIDEVI PILLAI (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nENGINEERING DIRECTORATE \u00b7 DOCUMENT REF: KMRL/ENGINEERING/2024/048\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the engineering protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Sridevi Pillai (Engineering Department, Email: sridevi.pillai48@kmrl.in). Contract Reference: CNT-2024-048.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 5000000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Engineering Directorate.\n\nRECORD AUTHORIZED BY: SRIDEVI PILLAI (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Muttom Depot Solar PV Rooftop Installation Bid #48: Fully processed and verified under KMRL ENGINEERING Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Sridevi Pillai.",
+      "keyFindings": [
+        "1. Operational Telemetry: Engineering parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Engineering department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Critical",
+      "department": "Engineering",
+      "tags": [
+        "engineering",
+        "engineering",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "engineering",
       "engineering",
@@ -3545,11 +4513,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Jayesh Swaminathan",
     "department": "IT",
     "createdAt": "2024-002-15T10:00:00Z",
-    "fileSize": 2361677,
+    "fileSize": 3035581,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Water Metro document for KMRL operations. Assigned to Jayesh Swaminathan.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nWATER METRO DIRECTORATE \u00b7 DOCUMENT REF: KMRL/WATER METRO/2024/049\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the water metro protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Jayesh Swaminathan (IT Department, Email: jayesh.swaminathan49@kmrl.in). Contract Reference: CNT-2024-049.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 3200000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to IT Directorate.\n\nRECORD AUTHORIZED BY: JAYESH SWAMINATHAN (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nWATER METRO DIRECTORATE \u00b7 DOCUMENT REF: KMRL/WATER METRO/2024/049\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the water metro protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Jayesh Swaminathan (IT Department, Email: jayesh.swaminathan49@kmrl.in). Contract Reference: CNT-2024-049.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 3700000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to IT Directorate.\n\nRECORD AUTHORIZED BY: JAYESH SWAMINATHAN (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Station Housekeeping & Sanitation Operations SLA #49: Fully processed and verified under KMRL WATER METRO Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Jayesh Swaminathan.",
+      "keyFindings": [
+        "1. Operational Telemetry: Water Metro parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for IT department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "IT",
+      "tags": [
+        "water metro",
+        "it",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "water metro",
       "it",
@@ -3572,11 +4560,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Radhika Nambiar",
     "department": "Water Metro",
     "createdAt": "2024-003-15T10:00:00Z",
-    "fileSize": 1899589,
+    "fileSize": 578957,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official IT document for KMRL operations. Assigned to Radhika Nambiar.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nIT DIRECTORATE \u00b7 DOCUMENT REF: KMRL/IT/2024/050\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the it protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Radhika Nambiar (Water Metro Department, Email: radhika.nambiar50@kmrl.in). Contract Reference: CNT-2024-050.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 2400000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Water Metro Directorate.\n\nRECORD AUTHORIZED BY: RADHIKA NAMBIAR (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nIT DIRECTORATE \u00b7 DOCUMENT REF: KMRL/IT/2024/050\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the it protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Radhika Nambiar (Water Metro Department, Email: radhika.nambiar50@kmrl.in). Contract Reference: CNT-2024-050.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 1800000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Water Metro Directorate.\n\nRECORD AUTHORIZED BY: RADHIKA NAMBIAR (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of IT Network & Cybersecurity Vulnerability Audit #50: Fully processed and verified under KMRL IT Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Radhika Nambiar.",
+      "keyFindings": [
+        "1. Operational Telemetry: IT parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Water Metro department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "Water Metro",
+      "tags": [
+        "it",
+        "water metro",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "it",
       "water metro",
@@ -3599,11 +4607,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Praveen Panicker",
     "department": "Operations",
     "createdAt": "2024-004-15T10:00:00Z",
-    "fileSize": 1744938,
+    "fileSize": 3218397,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Safety document for KMRL operations. Assigned to Praveen Panicker.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nSAFETY DIRECTORATE \u00b7 DOCUMENT REF: KMRL/SAFETY/2024/051\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the safety protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Praveen Panicker (Operations Department, Email: praveen.panicker51@kmrl.in). Contract Reference: CNT-2024-051.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 4500000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Operations Directorate.\n\nRECORD AUTHORIZED BY: PRAVEEN PANICKER (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nSAFETY DIRECTORATE \u00b7 DOCUMENT REF: KMRL/SAFETY/2024/051\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the safety protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Praveen Panicker (Operations Department, Email: praveen.panicker51@kmrl.in). Contract Reference: CNT-2024-051.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 3500000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Operations Directorate.\n\nRECORD AUTHORIZED BY: PRAVEEN PANICKER (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Safety Audit & Track Inspection Report #51: Fully processed and verified under KMRL SAFETY Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Praveen Panicker.",
+      "keyFindings": [
+        "1. Operational Telemetry: Safety parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Operations department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "High",
+      "department": "Operations",
+      "tags": [
+        "safety",
+        "operations",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "safety",
       "operations",
@@ -3626,11 +4654,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Asha Kurup",
     "department": "Maintenance",
     "createdAt": "2024-005-15T10:00:00Z",
-    "fileSize": 3207273,
+    "fileSize": 2534930,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Operations document for KMRL operations. Assigned to Asha Kurup.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nOPERATIONS DIRECTORATE \u00b7 DOCUMENT REF: KMRL/OPERATIONS/2024/052\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the operations protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Asha Kurup (Maintenance Department, Email: asha.kurup52@kmrl.in). Contract Reference: CNT-2024-052.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 2600000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Maintenance Directorate.\n\nRECORD AUTHORIZED BY: ASHA KURUP (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nOPERATIONS DIRECTORATE \u00b7 DOCUMENT REF: KMRL/OPERATIONS/2024/052\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the operations protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Asha Kurup (Maintenance Department, Email: asha.kurup52@kmrl.in). Contract Reference: CNT-2024-052.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 1600000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Maintenance Directorate.\n\nRECORD AUTHORIZED BY: ASHA KURUP (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Rolling Stock Preventive Maintenance Protocol #52: Fully processed and verified under KMRL OPERATIONS Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Asha Kurup.",
+      "keyFindings": [
+        "1. Operational Telemetry: Operations parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Maintenance department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Critical",
+      "department": "Maintenance",
+      "tags": [
+        "operations",
+        "maintenance",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "operations",
       "maintenance",
@@ -3653,11 +4701,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Girish Sundaram",
     "department": "Finance",
     "createdAt": "2024-006-15T10:00:00Z",
-    "fileSize": 2710663,
+    "fileSize": 2584552,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Finance document for KMRL operations. Assigned to Girish Sundaram.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nFINANCE DIRECTORATE \u00b7 DOCUMENT REF: KMRL/FINANCE/2024/053\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the finance protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Girish Sundaram (Finance Department, Email: girish.sundaram53@kmrl.in). Contract Reference: CNT-2024-053.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 5400000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Finance Directorate.\n\nRECORD AUTHORIZED BY: GIRISH SUNDARAM (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nFINANCE DIRECTORATE \u00b7 DOCUMENT REF: KMRL/FINANCE/2024/053\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the finance protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Girish Sundaram (Finance Department, Email: girish.sundaram53@kmrl.in). Contract Reference: CNT-2024-053.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 1900000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Finance Directorate.\n\nRECORD AUTHORIZED BY: GIRISH SUNDARAM (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Q1 Quarterly Financial Audit & Revenue Breakdown #53: Fully processed and verified under KMRL FINANCE Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Girish Sundaram.",
+      "keyFindings": [
+        "1. Operational Telemetry: Finance parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Finance department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "Finance",
+      "tags": [
+        "finance",
+        "finance",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "finance",
       "finance",
@@ -3680,11 +4748,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Vandana Joshi",
     "department": "HR",
     "createdAt": "2024-001-15T10:00:00Z",
-    "fileSize": 2599478,
+    "fileSize": 1889881,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official HR document for KMRL operations. Assigned to Vandana Joshi.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nHR DIRECTORATE \u00b7 DOCUMENT REF: KMRL/HR/2024/054\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the hr protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Vandana Joshi (HR Department, Email: vandana.joshi54@kmrl.in). Contract Reference: CNT-2024-054.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 3200000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to HR Directorate.\n\nRECORD AUTHORIZED BY: VANDANA JOSHI (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nHR DIRECTORATE \u00b7 DOCUMENT REF: KMRL/HR/2024/054\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the hr protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Vandana Joshi (HR Department, Email: vandana.joshi54@kmrl.in). Contract Reference: CNT-2024-054.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 1100000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to HR Directorate.\n\nRECORD AUTHORIZED BY: VANDANA JOSHI (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of HR Employee Benefit Policy & Night Shift Allowance #54: Fully processed and verified under KMRL HR Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Vandana Joshi.",
+      "keyFindings": [
+        "1. Operational Telemetry: HR parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for HR department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "HR",
+      "tags": [
+        "hr",
+        "hr",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "hr",
       "hr",
@@ -3707,11 +4795,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Venkatesh Chakraborty",
     "department": "Legal",
     "createdAt": "2024-002-15T10:00:00Z",
-    "fileSize": 3426865,
+    "fileSize": 1280568,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Maintenance document for KMRL operations. Assigned to Venkatesh Chakraborty.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nMAINTENANCE DIRECTORATE \u00b7 DOCUMENT REF: KMRL/MAINTENANCE/2024/055\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the maintenance protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Venkatesh Chakraborty (Legal Department, Email: venkatesh.chakraborty55@kmrl.in). Contract Reference: CNT-2024-055.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 5100000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Legal Directorate.\n\nRECORD AUTHORIZED BY: VENKATESH CHAKRABORTY (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nMAINTENANCE DIRECTORATE \u00b7 DOCUMENT REF: KMRL/MAINTENANCE/2024/055\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the maintenance protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Venkatesh Chakraborty (Legal Department, Email: venkatesh.chakraborty55@kmrl.in). Contract Reference: CNT-2024-055.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 4700000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Legal Directorate.\n\nRECORD AUTHORIZED BY: VENKATESH CHAKRABORTY (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Water Metro Phase 2 Electric Boat SLA #55: Fully processed and verified under KMRL MAINTENANCE Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Venkatesh Chakraborty.",
+      "keyFindings": [
+        "1. Operational Telemetry: Maintenance parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Legal department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "High",
+      "department": "Legal",
+      "tags": [
+        "maintenance",
+        "legal",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "maintenance",
       "legal",
@@ -3734,11 +4842,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Deepika Gupta",
     "department": "Procurement",
     "createdAt": "2024-003-15T10:00:00Z",
-    "fileSize": 3396724,
+    "fileSize": 789526,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Legal document for KMRL operations. Assigned to Deepika Gupta.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nLEGAL DIRECTORATE \u00b7 DOCUMENT REF: KMRL/LEGAL/2024/056\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the legal protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Deepika Gupta (Procurement Department, Email: deepika.gupta56@kmrl.in). Contract Reference: CNT-2024-056.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 3200000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Procurement Directorate.\n\nRECORD AUTHORIZED BY: DEEPIKA GUPTA (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nLEGAL DIRECTORATE \u00b7 DOCUMENT REF: KMRL/LEGAL/2024/056\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the legal protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Deepika Gupta (Procurement Department, Email: deepika.gupta56@kmrl.in). Contract Reference: CNT-2024-056.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 4500000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Procurement Directorate.\n\nRECORD AUTHORIZED BY: DEEPIKA GUPTA (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Automatic Fare Collection (AFC) QR Upgrade Tender #56: Fully processed and verified under KMRL LEGAL Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Deepika Gupta.",
+      "keyFindings": [
+        "1. Operational Telemetry: Legal parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Procurement department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Critical",
+      "department": "Procurement",
+      "tags": [
+        "legal",
+        "procurement",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "legal",
       "procurement",
@@ -3761,11 +4889,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Manish Bhattacharya",
     "department": "Safety",
     "createdAt": "2024-004-15T10:00:00Z",
-    "fileSize": 2602946,
+    "fileSize": 1055429,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Procurement document for KMRL operations. Assigned to Manish Bhattacharya.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nPROCUREMENT DIRECTORATE \u00b7 DOCUMENT REF: KMRL/PROCUREMENT/2024/057\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the procurement protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Manish Bhattacharya (Safety Department, Email: manish.bhattacharya57@kmrl.in). Contract Reference: CNT-2024-057.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 4500000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Safety Directorate.\n\nRECORD AUTHORIZED BY: MANISH BHATTACHARYA (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nPROCUREMENT DIRECTORATE \u00b7 DOCUMENT REF: KMRL/PROCUREMENT/2024/057\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the procurement protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Manish Bhattacharya (Safety Department, Email: manish.bhattacharya57@kmrl.in). Contract Reference: CNT-2024-057.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 5900000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Safety Directorate.\n\nRECORD AUTHORIZED BY: MANISH BHATTACHARYA (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Overhead Equipment (OHE) Traction Maintenance Schedule #57: Fully processed and verified under KMRL PROCUREMENT Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Manish Bhattacharya.",
+      "keyFindings": [
+        "1. Operational Telemetry: Procurement parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Safety department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "Safety",
+      "tags": [
+        "procurement",
+        "safety",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "procurement",
       "safety",
@@ -3788,11 +4936,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Reshma Varma",
     "department": "Engineering",
     "createdAt": "2024-005-15T10:00:00Z",
-    "fileSize": 2491995,
+    "fileSize": 1894674,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Engineering document for KMRL operations. Assigned to Reshma Varma.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nENGINEERING DIRECTORATE \u00b7 DOCUMENT REF: KMRL/ENGINEERING/2024/058\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the engineering protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Reshma Varma (Engineering Department, Email: reshma.varma58@kmrl.in). Contract Reference: CNT-2024-058.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 4800000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Engineering Directorate.\n\nRECORD AUTHORIZED BY: RESHMA VARMA (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nENGINEERING DIRECTORATE \u00b7 DOCUMENT REF: KMRL/ENGINEERING/2024/058\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the engineering protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Reshma Varma (Engineering Department, Email: reshma.varma58@kmrl.in). Contract Reference: CNT-2024-058.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 3700000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Engineering Directorate.\n\nRECORD AUTHORIZED BY: RESHMA VARMA (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Muttom Depot Solar PV Rooftop Installation Bid #58: Fully processed and verified under KMRL ENGINEERING Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Reshma Varma.",
+      "keyFindings": [
+        "1. Operational Telemetry: Engineering parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Engineering department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "Engineering",
+      "tags": [
+        "engineering",
+        "engineering",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "engineering",
       "engineering",
@@ -3815,11 +4983,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Nitin Deshmukh",
     "department": "IT",
     "createdAt": "2024-006-15T10:00:00Z",
-    "fileSize": 891257,
+    "fileSize": 1183673,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Water Metro document for KMRL operations. Assigned to Nitin Deshmukh.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nWATER METRO DIRECTORATE \u00b7 DOCUMENT REF: KMRL/WATER METRO/2024/059\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the water metro protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Nitin Deshmukh (IT Department, Email: nitin.deshmukh59@kmrl.in). Contract Reference: CNT-2024-059.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 1800000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to IT Directorate.\n\nRECORD AUTHORIZED BY: NITIN DESHMUKH (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nWATER METRO DIRECTORATE \u00b7 DOCUMENT REF: KMRL/WATER METRO/2024/059\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the water metro protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Nitin Deshmukh (IT Department, Email: nitin.deshmukh59@kmrl.in). Contract Reference: CNT-2024-059.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 4500000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to IT Directorate.\n\nRECORD AUTHORIZED BY: NITIN DESHMUKH (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Station Housekeeping & Sanitation Operations SLA #59: Fully processed and verified under KMRL WATER METRO Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Nitin Deshmukh.",
+      "keyFindings": [
+        "1. Operational Telemetry: Water Metro parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for IT department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "High",
+      "department": "IT",
+      "tags": [
+        "water metro",
+        "it",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "water metro",
       "it",
@@ -3842,11 +5030,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Reena Bhat",
     "department": "Water Metro",
     "createdAt": "2024-001-15T10:00:00Z",
-    "fileSize": 2694633,
+    "fileSize": 3332253,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official IT document for KMRL operations. Assigned to Reena Bhat.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nIT DIRECTORATE \u00b7 DOCUMENT REF: KMRL/IT/2024/060\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the it protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Reena Bhat (Water Metro Department, Email: reena.bhat60@kmrl.in). Contract Reference: CNT-2024-060.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 1600000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Water Metro Directorate.\n\nRECORD AUTHORIZED BY: REENA BHAT (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nIT DIRECTORATE \u00b7 DOCUMENT REF: KMRL/IT/2024/060\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the it protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Reena Bhat (Water Metro Department, Email: reena.bhat60@kmrl.in). Contract Reference: CNT-2024-060.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 3600000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Water Metro Directorate.\n\nRECORD AUTHORIZED BY: REENA BHAT (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of IT Network & Cybersecurity Vulnerability Audit #60: Fully processed and verified under KMRL IT Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Reena Bhat.",
+      "keyFindings": [
+        "1. Operational Telemetry: IT parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Water Metro department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Critical",
+      "department": "Water Metro",
+      "tags": [
+        "it",
+        "water metro",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "it",
       "water metro",
@@ -3869,11 +5077,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Satish Kulkarni",
     "department": "Operations",
     "createdAt": "2024-002-15T10:00:00Z",
-    "fileSize": 986738,
+    "fileSize": 1471011,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Safety document for KMRL operations. Assigned to Satish Kulkarni.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nSAFETY DIRECTORATE \u00b7 DOCUMENT REF: KMRL/SAFETY/2024/061\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the safety protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Satish Kulkarni (Operations Department, Email: satish.kulkarni61@kmrl.in). Contract Reference: CNT-2024-061.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 4700000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Operations Directorate.\n\nRECORD AUTHORIZED BY: SATISH KULKARNI (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nSAFETY DIRECTORATE \u00b7 DOCUMENT REF: KMRL/SAFETY/2024/061\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the safety protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Satish Kulkarni (Operations Department, Email: satish.kulkarni61@kmrl.in). Contract Reference: CNT-2024-061.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 4500000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Operations Directorate.\n\nRECORD AUTHORIZED BY: SATISH KULKARNI (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Safety Audit & Track Inspection Report #61: Fully processed and verified under KMRL SAFETY Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Satish Kulkarni.",
+      "keyFindings": [
+        "1. Operational Telemetry: Safety parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Operations department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "Operations",
+      "tags": [
+        "safety",
+        "operations",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "safety",
       "operations",
@@ -3896,11 +5124,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Smita Saxena",
     "department": "Maintenance",
     "createdAt": "2024-003-15T10:00:00Z",
-    "fileSize": 1649219,
+    "fileSize": 1764187,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Operations document for KMRL operations. Assigned to Smita Saxena.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nOPERATIONS DIRECTORATE \u00b7 DOCUMENT REF: KMRL/OPERATIONS/2024/062\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the operations protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Smita Saxena (Maintenance Department, Email: smita.saxena62@kmrl.in). Contract Reference: CNT-2024-062.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 5000000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Maintenance Directorate.\n\nRECORD AUTHORIZED BY: SMITA SAXENA (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nOPERATIONS DIRECTORATE \u00b7 DOCUMENT REF: KMRL/OPERATIONS/2024/062\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the operations protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Smita Saxena (Maintenance Department, Email: smita.saxena62@kmrl.in). Contract Reference: CNT-2024-062.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 5800000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Maintenance Directorate.\n\nRECORD AUTHORIZED BY: SMITA SAXENA (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Rolling Stock Preventive Maintenance Protocol #62: Fully processed and verified under KMRL OPERATIONS Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Smita Saxena.",
+      "keyFindings": [
+        "1. Operational Telemetry: Operations parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Maintenance department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "Maintenance",
+      "tags": [
+        "operations",
+        "maintenance",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "operations",
       "maintenance",
@@ -3923,11 +5171,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Dinesh Raghavan",
     "department": "Finance",
     "createdAt": "2024-004-15T10:00:00Z",
-    "fileSize": 2334621,
+    "fileSize": 3377812,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Finance document for KMRL operations. Assigned to Dinesh Raghavan.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nFINANCE DIRECTORATE \u00b7 DOCUMENT REF: KMRL/FINANCE/2024/063\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the finance protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Dinesh Raghavan (Finance Department, Email: dinesh.raghavan63@kmrl.in). Contract Reference: CNT-2024-063.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 1800000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Finance Directorate.\n\nRECORD AUTHORIZED BY: DINESH RAGHAVAN (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nFINANCE DIRECTORATE \u00b7 DOCUMENT REF: KMRL/FINANCE/2024/063\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the finance protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Dinesh Raghavan (Finance Department, Email: dinesh.raghavan63@kmrl.in). Contract Reference: CNT-2024-063.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 5700000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Finance Directorate.\n\nRECORD AUTHORIZED BY: DINESH RAGHAVAN (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Q1 Quarterly Financial Audit & Revenue Breakdown #63: Fully processed and verified under KMRL FINANCE Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Dinesh Raghavan.",
+      "keyFindings": [
+        "1. Operational Telemetry: Finance parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Finance department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "High",
+      "department": "Finance",
+      "tags": [
+        "finance",
+        "finance",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "finance",
       "finance",
@@ -3950,11 +5218,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Anitha Hegde",
     "department": "HR",
     "createdAt": "2024-005-15T10:00:00Z",
-    "fileSize": 3469569,
+    "fileSize": 2451292,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official HR document for KMRL operations. Assigned to Anitha Hegde.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nHR DIRECTORATE \u00b7 DOCUMENT REF: KMRL/HR/2024/064\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the hr protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Anitha Hegde (HR Department, Email: anitha.hegde64@kmrl.in). Contract Reference: CNT-2024-064.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 3600000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to HR Directorate.\n\nRECORD AUTHORIZED BY: ANITHA HEGDE (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nHR DIRECTORATE \u00b7 DOCUMENT REF: KMRL/HR/2024/064\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the hr protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Anitha Hegde (HR Department, Email: anitha.hegde64@kmrl.in). Contract Reference: CNT-2024-064.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 2700000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to HR Directorate.\n\nRECORD AUTHORIZED BY: ANITHA HEGDE (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of HR Employee Benefit Policy & Night Shift Allowance #64: Fully processed and verified under KMRL HR Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Anitha Hegde.",
+      "keyFindings": [
+        "1. Operational Telemetry: HR parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for HR department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Critical",
+      "department": "HR",
+      "tags": [
+        "hr",
+        "hr",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "hr",
       "hr",
@@ -3977,11 +5265,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Ashok Chawla",
     "department": "Legal",
     "createdAt": "2024-006-15T10:00:00Z",
-    "fileSize": 887300,
+    "fileSize": 2314235,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Maintenance document for KMRL operations. Assigned to Ashok Chawla.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nMAINTENANCE DIRECTORATE \u00b7 DOCUMENT REF: KMRL/MAINTENANCE/2024/065\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the maintenance protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Ashok Chawla (Legal Department, Email: ashok.chawla65@kmrl.in). Contract Reference: CNT-2024-065.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 5700000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Legal Directorate.\n\nRECORD AUTHORIZED BY: ASHOK CHAWLA (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nMAINTENANCE DIRECTORATE \u00b7 DOCUMENT REF: KMRL/MAINTENANCE/2024/065\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the maintenance protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Ashok Chawla (Legal Department, Email: ashok.chawla65@kmrl.in). Contract Reference: CNT-2024-065.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 3000000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Legal Directorate.\n\nRECORD AUTHORIZED BY: ASHOK CHAWLA (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Water Metro Phase 2 Electric Boat SLA #65: Fully processed and verified under KMRL MAINTENANCE Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Ashok Chawla.",
+      "keyFindings": [
+        "1. Operational Telemetry: Maintenance parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Legal department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "Legal",
+      "tags": [
+        "maintenance",
+        "legal",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "maintenance",
       "legal",
@@ -4004,11 +5312,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Sangeetha Roy",
     "department": "Procurement",
     "createdAt": "2024-001-15T10:00:00Z",
-    "fileSize": 1908353,
+    "fileSize": 3469929,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Legal document for KMRL operations. Assigned to Sangeetha Roy.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nLEGAL DIRECTORATE \u00b7 DOCUMENT REF: KMRL/LEGAL/2024/066\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the legal protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Sangeetha Roy (Procurement Department, Email: sangeetha.roy66@kmrl.in). Contract Reference: CNT-2024-066.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 4600000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Procurement Directorate.\n\nRECORD AUTHORIZED BY: SANGEETHA ROY (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nLEGAL DIRECTORATE \u00b7 DOCUMENT REF: KMRL/LEGAL/2024/066\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the legal protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Sangeetha Roy (Procurement Department, Email: sangeetha.roy66@kmrl.in). Contract Reference: CNT-2024-066.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 5500000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Procurement Directorate.\n\nRECORD AUTHORIZED BY: SANGEETHA ROY (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Automatic Fare Collection (AFC) QR Upgrade Tender #66: Fully processed and verified under KMRL LEGAL Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Sangeetha Roy.",
+      "keyFindings": [
+        "1. Operational Telemetry: Legal parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Procurement department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "Procurement",
+      "tags": [
+        "legal",
+        "procurement",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "legal",
       "procurement",
@@ -4031,11 +5359,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Biju Naik",
     "department": "Safety",
     "createdAt": "2024-002-15T10:00:00Z",
-    "fileSize": 3401201,
+    "fileSize": 2173597,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Procurement document for KMRL operations. Assigned to Biju Naik.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nPROCUREMENT DIRECTORATE \u00b7 DOCUMENT REF: KMRL/PROCUREMENT/2024/067\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the procurement protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Biju Naik (Safety Department, Email: biju.naik67@kmrl.in). Contract Reference: CNT-2024-067.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 5700000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Safety Directorate.\n\nRECORD AUTHORIZED BY: BIJU NAIK (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nPROCUREMENT DIRECTORATE \u00b7 DOCUMENT REF: KMRL/PROCUREMENT/2024/067\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the procurement protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Biju Naik (Safety Department, Email: biju.naik67@kmrl.in). Contract Reference: CNT-2024-067.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 1600000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Safety Directorate.\n\nRECORD AUTHORIZED BY: BIJU NAIK (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Overhead Equipment (OHE) Traction Maintenance Schedule #67: Fully processed and verified under KMRL PROCUREMENT Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Biju Naik.",
+      "keyFindings": [
+        "1. Operational Telemetry: Procurement parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Safety department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "High",
+      "department": "Safety",
+      "tags": [
+        "procurement",
+        "safety",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "procurement",
       "safety",
@@ -4058,11 +5406,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Bindu Shenoy",
     "department": "Engineering",
     "createdAt": "2024-003-15T10:00:00Z",
-    "fileSize": 3305957,
+    "fileSize": 1521055,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Engineering document for KMRL operations. Assigned to Bindu Shenoy.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nENGINEERING DIRECTORATE \u00b7 DOCUMENT REF: KMRL/ENGINEERING/2024/068\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the engineering protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Bindu Shenoy (Engineering Department, Email: bindu.shenoy68@kmrl.in). Contract Reference: CNT-2024-068.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 1100000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Engineering Directorate.\n\nRECORD AUTHORIZED BY: BINDU SHENOY (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nENGINEERING DIRECTORATE \u00b7 DOCUMENT REF: KMRL/ENGINEERING/2024/068\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the engineering protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Bindu Shenoy (Engineering Department, Email: bindu.shenoy68@kmrl.in). Contract Reference: CNT-2024-068.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 1600000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Engineering Directorate.\n\nRECORD AUTHORIZED BY: BINDU SHENOY (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Muttom Depot Solar PV Rooftop Installation Bid #68: Fully processed and verified under KMRL ENGINEERING Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Bindu Shenoy.",
+      "keyFindings": [
+        "1. Operational Telemetry: Engineering parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Engineering department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Critical",
+      "department": "Engineering",
+      "tags": [
+        "engineering",
+        "engineering",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "engineering",
       "engineering",
@@ -4085,11 +5453,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Vinod Pandey",
     "department": "IT",
     "createdAt": "2024-004-15T10:00:00Z",
-    "fileSize": 3082875,
+    "fileSize": 2699432,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Water Metro document for KMRL operations. Assigned to Vinod Pandey.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nWATER METRO DIRECTORATE \u00b7 DOCUMENT REF: KMRL/WATER METRO/2024/069\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the water metro protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Vinod Pandey (IT Department, Email: vinod.pandey69@kmrl.in). Contract Reference: CNT-2024-069.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 2900000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to IT Directorate.\n\nRECORD AUTHORIZED BY: VINOD PANDEY (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nWATER METRO DIRECTORATE \u00b7 DOCUMENT REF: KMRL/WATER METRO/2024/069\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the water metro protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Vinod Pandey (IT Department, Email: vinod.pandey69@kmrl.in). Contract Reference: CNT-2024-069.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 5500000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to IT Directorate.\n\nRECORD AUTHORIZED BY: VINOD PANDEY (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Station Housekeeping & Sanitation Operations SLA #69: Fully processed and verified under KMRL WATER METRO Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Vinod Pandey.",
+      "keyFindings": [
+        "1. Operational Telemetry: Water Metro parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for IT department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "IT",
+      "tags": [
+        "water metro",
+        "it",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "water metro",
       "it",
@@ -4112,11 +5500,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Sujatha Mishra",
     "department": "Water Metro",
     "createdAt": "2024-005-15T10:00:00Z",
-    "fileSize": 2243047,
+    "fileSize": 3261451,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official IT document for KMRL operations. Assigned to Sujatha Mishra.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nIT DIRECTORATE \u00b7 DOCUMENT REF: KMRL/IT/2024/070\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the it protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Sujatha Mishra (Water Metro Department, Email: sujatha.mishra70@kmrl.in). Contract Reference: CNT-2024-070.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 1100000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Water Metro Directorate.\n\nRECORD AUTHORIZED BY: SUJATHA MISHRA (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nIT DIRECTORATE \u00b7 DOCUMENT REF: KMRL/IT/2024/070\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the it protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Sujatha Mishra (Water Metro Department, Email: sujatha.mishra70@kmrl.in). Contract Reference: CNT-2024-070.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 4300000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Water Metro Directorate.\n\nRECORD AUTHORIZED BY: SUJATHA MISHRA (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of IT Network & Cybersecurity Vulnerability Audit #70: Fully processed and verified under KMRL IT Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Sujatha Mishra.",
+      "keyFindings": [
+        "1. Operational Telemetry: IT parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Water Metro department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "Water Metro",
+      "tags": [
+        "it",
+        "water metro",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "it",
       "water metro",
@@ -4139,11 +5547,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Sudhir Reddy",
     "department": "Operations",
     "createdAt": "2024-006-15T10:00:00Z",
-    "fileSize": 2223718,
+    "fileSize": 3480359,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Safety document for KMRL operations. Assigned to Sudhir Reddy.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nSAFETY DIRECTORATE \u00b7 DOCUMENT REF: KMRL/SAFETY/2024/071\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the safety protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Sudhir Reddy (Operations Department, Email: sudhir.reddy71@kmrl.in). Contract Reference: CNT-2024-071.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 1000000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Operations Directorate.\n\nRECORD AUTHORIZED BY: SUDHIR REDDY (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nSAFETY DIRECTORATE \u00b7 DOCUMENT REF: KMRL/SAFETY/2024/071\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the safety protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Sudhir Reddy (Operations Department, Email: sudhir.reddy71@kmrl.in). Contract Reference: CNT-2024-071.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 1900000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Operations Directorate.\n\nRECORD AUTHORIZED BY: SUDHIR REDDY (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Safety Audit & Track Inspection Report #71: Fully processed and verified under KMRL SAFETY Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Sudhir Reddy.",
+      "keyFindings": [
+        "1. Operational Telemetry: Safety parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Operations department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "High",
+      "department": "Operations",
+      "tags": [
+        "safety",
+        "operations",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "safety",
       "operations",
@@ -4166,11 +5594,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Chitra Rao",
     "department": "Maintenance",
     "createdAt": "2024-001-15T10:00:00Z",
-    "fileSize": 519887,
+    "fileSize": 1615355,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Operations document for KMRL operations. Assigned to Chitra Rao.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nOPERATIONS DIRECTORATE \u00b7 DOCUMENT REF: KMRL/OPERATIONS/2024/072\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the operations protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Chitra Rao (Maintenance Department, Email: chitra.rao72@kmrl.in). Contract Reference: CNT-2024-072.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 3100000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Maintenance Directorate.\n\nRECORD AUTHORIZED BY: CHITRA RAO (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nOPERATIONS DIRECTORATE \u00b7 DOCUMENT REF: KMRL/OPERATIONS/2024/072\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the operations protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Chitra Rao (Maintenance Department, Email: chitra.rao72@kmrl.in). Contract Reference: CNT-2024-072.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 1700000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Maintenance Directorate.\n\nRECORD AUTHORIZED BY: CHITRA RAO (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Rolling Stock Preventive Maintenance Protocol #72: Fully processed and verified under KMRL OPERATIONS Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Chitra Rao.",
+      "keyFindings": [
+        "1. Operational Telemetry: Operations parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Maintenance department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Critical",
+      "department": "Maintenance",
+      "tags": [
+        "operations",
+        "maintenance",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "operations",
       "maintenance",
@@ -4193,11 +5641,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Ramesh Chaudhary",
     "department": "Finance",
     "createdAt": "2024-002-15T10:00:00Z",
-    "fileSize": 2970709,
+    "fileSize": 1263802,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Finance document for KMRL operations. Assigned to Ramesh Chaudhary.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nFINANCE DIRECTORATE \u00b7 DOCUMENT REF: KMRL/FINANCE/2024/073\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the finance protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Ramesh Chaudhary (Finance Department, Email: ramesh.chaudhary73@kmrl.in). Contract Reference: CNT-2024-073.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 3600000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Finance Directorate.\n\nRECORD AUTHORIZED BY: RAMESH CHAUDHARY (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nFINANCE DIRECTORATE \u00b7 DOCUMENT REF: KMRL/FINANCE/2024/073\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the finance protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Ramesh Chaudhary (Finance Department, Email: ramesh.chaudhary73@kmrl.in). Contract Reference: CNT-2024-073.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 2600000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Finance Directorate.\n\nRECORD AUTHORIZED BY: RAMESH CHAUDHARY (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Q1 Quarterly Financial Audit & Revenue Breakdown #73: Fully processed and verified under KMRL FINANCE Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Ramesh Chaudhary.",
+      "keyFindings": [
+        "1. Operational Telemetry: Finance parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Finance department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "Finance",
+      "tags": [
+        "finance",
+        "finance",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "finance",
       "finance",
@@ -4220,11 +5688,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Leela Singhal",
     "department": "HR",
     "createdAt": "2024-003-15T10:00:00Z",
-    "fileSize": 1457915,
+    "fileSize": 962935,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official HR document for KMRL operations. Assigned to Leela Singhal.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nHR DIRECTORATE \u00b7 DOCUMENT REF: KMRL/HR/2024/074\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the hr protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Leela Singhal (HR Department, Email: leela.singhal74@kmrl.in). Contract Reference: CNT-2024-074.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 2100000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to HR Directorate.\n\nRECORD AUTHORIZED BY: LEELA SINGHAL (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nHR DIRECTORATE \u00b7 DOCUMENT REF: KMRL/HR/2024/074\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the hr protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Leela Singhal (HR Department, Email: leela.singhal74@kmrl.in). Contract Reference: CNT-2024-074.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 3700000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to HR Directorate.\n\nRECORD AUTHORIZED BY: LEELA SINGHAL (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of HR Employee Benefit Policy & Night Shift Allowance #74: Fully processed and verified under KMRL HR Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Leela Singhal.",
+      "keyFindings": [
+        "1. Operational Telemetry: HR parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for HR department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "HR",
+      "tags": [
+        "hr",
+        "hr",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "hr",
       "hr",
@@ -4247,11 +5735,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Unnikrishnan Kapur",
     "department": "Legal",
     "createdAt": "2024-004-15T10:00:00Z",
-    "fileSize": 3399935,
+    "fileSize": 1725063,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Maintenance document for KMRL operations. Assigned to Unnikrishnan Kapur.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nMAINTENANCE DIRECTORATE \u00b7 DOCUMENT REF: KMRL/MAINTENANCE/2024/075\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the maintenance protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Unnikrishnan Kapur (Legal Department, Email: unnikrishnan.kapur75@kmrl.in). Contract Reference: CNT-2024-075.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 3300000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Legal Directorate.\n\nRECORD AUTHORIZED BY: UNNIKRISHNAN KAPUR (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nMAINTENANCE DIRECTORATE \u00b7 DOCUMENT REF: KMRL/MAINTENANCE/2024/075\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the maintenance protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Unnikrishnan Kapur (Legal Department, Email: unnikrishnan.kapur75@kmrl.in). Contract Reference: CNT-2024-075.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 2200000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Legal Directorate.\n\nRECORD AUTHORIZED BY: UNNIKRISHNAN KAPUR (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Water Metro Phase 2 Electric Boat SLA #75: Fully processed and verified under KMRL MAINTENANCE Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Unnikrishnan Kapur.",
+      "keyFindings": [
+        "1. Operational Telemetry: Maintenance parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Legal department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "High",
+      "department": "Legal",
+      "tags": [
+        "maintenance",
+        "legal",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "maintenance",
       "legal",
@@ -4274,11 +5782,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Jayanthi Aggarwal",
     "department": "Procurement",
     "createdAt": "2024-005-15T10:00:00Z",
-    "fileSize": 3093333,
+    "fileSize": 2052916,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Legal document for KMRL operations. Assigned to Jayanthi Aggarwal.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nLEGAL DIRECTORATE \u00b7 DOCUMENT REF: KMRL/LEGAL/2024/076\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the legal protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Jayanthi Aggarwal (Procurement Department, Email: jayanthi.aggarwal76@kmrl.in). Contract Reference: CNT-2024-076.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 5900000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Procurement Directorate.\n\nRECORD AUTHORIZED BY: JAYANTHI AGGARWAL (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nLEGAL DIRECTORATE \u00b7 DOCUMENT REF: KMRL/LEGAL/2024/076\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the legal protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Jayanthi Aggarwal (Procurement Department, Email: jayanthi.aggarwal76@kmrl.in). Contract Reference: CNT-2024-076.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 5100000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Procurement Directorate.\n\nRECORD AUTHORIZED BY: JAYANTHI AGGARWAL (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Automatic Fare Collection (AFC) QR Upgrade Tender #76: Fully processed and verified under KMRL LEGAL Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Jayanthi Aggarwal.",
+      "keyFindings": [
+        "1. Operational Telemetry: Legal parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Procurement department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Critical",
+      "department": "Procurement",
+      "tags": [
+        "legal",
+        "procurement",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "legal",
       "procurement",
@@ -4301,11 +5829,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Subhash Dutta",
     "department": "Safety",
     "createdAt": "2024-006-15T10:00:00Z",
-    "fileSize": 1637347,
+    "fileSize": 3289875,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Procurement document for KMRL operations. Assigned to Subhash Dutta.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nPROCUREMENT DIRECTORATE \u00b7 DOCUMENT REF: KMRL/PROCUREMENT/2024/077\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the procurement protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Subhash Dutta (Safety Department, Email: subhash.dutta77@kmrl.in). Contract Reference: CNT-2024-077.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 6000000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Safety Directorate.\n\nRECORD AUTHORIZED BY: SUBHASH DUTTA (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nPROCUREMENT DIRECTORATE \u00b7 DOCUMENT REF: KMRL/PROCUREMENT/2024/077\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the procurement protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Subhash Dutta (Safety Department, Email: subhash.dutta77@kmrl.in). Contract Reference: CNT-2024-077.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 2300000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Safety Directorate.\n\nRECORD AUTHORIZED BY: SUBHASH DUTTA (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Overhead Equipment (OHE) Traction Maintenance Schedule #77: Fully processed and verified under KMRL PROCUREMENT Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Subhash Dutta.",
+      "keyFindings": [
+        "1. Operational Telemetry: Procurement parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Safety department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "Safety",
+      "tags": [
+        "procurement",
+        "safety",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "procurement",
       "safety",
@@ -4328,11 +5876,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Mini Banerjee",
     "department": "Engineering",
     "createdAt": "2024-001-15T10:00:00Z",
-    "fileSize": 1904273,
+    "fileSize": 580335,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Engineering document for KMRL operations. Assigned to Mini Banerjee.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nENGINEERING DIRECTORATE \u00b7 DOCUMENT REF: KMRL/ENGINEERING/2024/078\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the engineering protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Mini Banerjee (Engineering Department, Email: mini.banerjee78@kmrl.in). Contract Reference: CNT-2024-078.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 1300000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Engineering Directorate.\n\nRECORD AUTHORIZED BY: MINI BANERJEE (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nENGINEERING DIRECTORATE \u00b7 DOCUMENT REF: KMRL/ENGINEERING/2024/078\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the engineering protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Mini Banerjee (Engineering Department, Email: mini.banerjee78@kmrl.in). Contract Reference: CNT-2024-078.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 3400000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Engineering Directorate.\n\nRECORD AUTHORIZED BY: MINI BANERJEE (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Muttom Depot Solar PV Rooftop Installation Bid #78: Fully processed and verified under KMRL ENGINEERING Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Mini Banerjee.",
+      "keyFindings": [
+        "1. Operational Telemetry: Engineering parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Engineering department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "Engineering",
+      "tags": [
+        "engineering",
+        "engineering",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "engineering",
       "engineering",
@@ -4355,11 +5923,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Sanosh Ghosh",
     "department": "IT",
     "createdAt": "2024-002-15T10:00:00Z",
-    "fileSize": 3211646,
+    "fileSize": 2447366,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Water Metro document for KMRL operations. Assigned to Sanosh Ghosh.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nWATER METRO DIRECTORATE \u00b7 DOCUMENT REF: KMRL/WATER METRO/2024/079\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the water metro protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Sanosh Ghosh (IT Department, Email: sanosh.ghosh79@kmrl.in). Contract Reference: CNT-2024-079.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 3100000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to IT Directorate.\n\nRECORD AUTHORIZED BY: SANOSH GHOSH (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nWATER METRO DIRECTORATE \u00b7 DOCUMENT REF: KMRL/WATER METRO/2024/079\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the water metro protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Sanosh Ghosh (IT Department, Email: sanosh.ghosh79@kmrl.in). Contract Reference: CNT-2024-079.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 5100000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to IT Directorate.\n\nRECORD AUTHORIZED BY: SANOSH GHOSH (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Station Housekeeping & Sanitation Operations SLA #79: Fully processed and verified under KMRL WATER METRO Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Sanosh Ghosh.",
+      "keyFindings": [
+        "1. Operational Telemetry: Water Metro parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for IT department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "High",
+      "department": "IT",
+      "tags": [
+        "water metro",
+        "it",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "water metro",
       "it",
@@ -4382,11 +5970,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Latha Sen",
     "department": "Water Metro",
     "createdAt": "2024-003-15T10:00:00Z",
-    "fileSize": 2119239,
+    "fileSize": 3076711,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official IT document for KMRL operations. Assigned to Latha Sen.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nIT DIRECTORATE \u00b7 DOCUMENT REF: KMRL/IT/2024/080\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the it protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Latha Sen (Water Metro Department, Email: latha.sen80@kmrl.in). Contract Reference: CNT-2024-080.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 3300000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Water Metro Directorate.\n\nRECORD AUTHORIZED BY: LATHA SEN (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nIT DIRECTORATE \u00b7 DOCUMENT REF: KMRL/IT/2024/080\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the it protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Latha Sen (Water Metro Department, Email: latha.sen80@kmrl.in). Contract Reference: CNT-2024-080.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 1100000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Water Metro Directorate.\n\nRECORD AUTHORIZED BY: LATHA SEN (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of IT Network & Cybersecurity Vulnerability Audit #80: Fully processed and verified under KMRL IT Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Latha Sen.",
+      "keyFindings": [
+        "1. Operational Telemetry: IT parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Water Metro department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Critical",
+      "department": "Water Metro",
+      "tags": [
+        "it",
+        "water metro",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "it",
       "water metro",
@@ -4409,11 +6017,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Arun Kumar",
     "department": "Operations",
     "createdAt": "2024-004-15T10:00:00Z",
-    "fileSize": 2742271,
+    "fileSize": 2479577,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Safety document for KMRL operations. Assigned to Arun Kumar.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nSAFETY DIRECTORATE \u00b7 DOCUMENT REF: KMRL/SAFETY/2024/081\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the safety protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Arun Kumar (Operations Department, Email: arun.kumar@kmrl.in). Contract Reference: CNT-2024-001.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 1600000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Operations Directorate.\n\nRECORD AUTHORIZED BY: ARUN KUMAR (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nSAFETY DIRECTORATE \u00b7 DOCUMENT REF: KMRL/SAFETY/2024/081\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the safety protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Arun Kumar (Operations Department, Email: arun.kumar@kmrl.in). Contract Reference: CNT-2024-001.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 2700000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Operations Directorate.\n\nRECORD AUTHORIZED BY: ARUN KUMAR (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Safety Audit & Track Inspection Report #81: Fully processed and verified under KMRL SAFETY Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Arun Kumar.",
+      "keyFindings": [
+        "1. Operational Telemetry: Safety parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Operations department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "Operations",
+      "tags": [
+        "safety",
+        "operations",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "safety",
       "operations",
@@ -4436,11 +6064,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Priya Nair",
     "department": "Maintenance",
     "createdAt": "2024-005-15T10:00:00Z",
-    "fileSize": 1088716,
+    "fileSize": 2061962,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Operations document for KMRL operations. Assigned to Priya Nair.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nOPERATIONS DIRECTORATE \u00b7 DOCUMENT REF: KMRL/OPERATIONS/2024/082\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the operations protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Priya Nair (Maintenance Department, Email: priya.nair@kmrl.in). Contract Reference: CNT-2024-002.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 3600000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Maintenance Directorate.\n\nRECORD AUTHORIZED BY: PRIYA NAIR (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nOPERATIONS DIRECTORATE \u00b7 DOCUMENT REF: KMRL/OPERATIONS/2024/082\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the operations protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Priya Nair (Maintenance Department, Email: priya.nair@kmrl.in). Contract Reference: CNT-2024-002.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 2200000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Maintenance Directorate.\n\nRECORD AUTHORIZED BY: PRIYA NAIR (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Rolling Stock Preventive Maintenance Protocol #82: Fully processed and verified under KMRL OPERATIONS Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Priya Nair.",
+      "keyFindings": [
+        "1. Operational Telemetry: Operations parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Maintenance department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "Maintenance",
+      "tags": [
+        "operations",
+        "maintenance",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "operations",
       "maintenance",
@@ -4463,11 +6111,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Rajan Menon",
     "department": "Finance",
     "createdAt": "2024-006-15T10:00:00Z",
-    "fileSize": 596997,
+    "fileSize": 1514488,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Finance document for KMRL operations. Assigned to Rajan Menon.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nFINANCE DIRECTORATE \u00b7 DOCUMENT REF: KMRL/FINANCE/2024/083\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the finance protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Rajan Menon (Finance Department, Email: rajan.menon@kmrl.in). Contract Reference: CNT-2024-003.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 2900000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Finance Directorate.\n\nRECORD AUTHORIZED BY: RAJAN MENON (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nFINANCE DIRECTORATE \u00b7 DOCUMENT REF: KMRL/FINANCE/2024/083\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the finance protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Rajan Menon (Finance Department, Email: rajan.menon@kmrl.in). Contract Reference: CNT-2024-003.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 5800000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Finance Directorate.\n\nRECORD AUTHORIZED BY: RAJAN MENON (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Q1 Quarterly Financial Audit & Revenue Breakdown #83: Fully processed and verified under KMRL FINANCE Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Rajan Menon.",
+      "keyFindings": [
+        "1. Operational Telemetry: Finance parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Finance department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "High",
+      "department": "Finance",
+      "tags": [
+        "finance",
+        "finance",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "finance",
       "finance",
@@ -4490,11 +6158,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Suresh Prabhu",
     "department": "HR",
     "createdAt": "2024-001-15T10:00:00Z",
-    "fileSize": 3237020,
+    "fileSize": 2655910,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official HR document for KMRL operations. Assigned to Suresh Prabhu.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nHR DIRECTORATE \u00b7 DOCUMENT REF: KMRL/HR/2024/084\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the hr protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Suresh Prabhu (HR Department, Email: suresh.prabhu@kmrl.in). Contract Reference: CNT-2024-004.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 2500000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to HR Directorate.\n\nRECORD AUTHORIZED BY: SURESH PRABHU (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nHR DIRECTORATE \u00b7 DOCUMENT REF: KMRL/HR/2024/084\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the hr protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Suresh Prabhu (HR Department, Email: suresh.prabhu@kmrl.in). Contract Reference: CNT-2024-004.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 4600000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to HR Directorate.\n\nRECORD AUTHORIZED BY: SURESH PRABHU (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of HR Employee Benefit Policy & Night Shift Allowance #84: Fully processed and verified under KMRL HR Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Suresh Prabhu.",
+      "keyFindings": [
+        "1. Operational Telemetry: HR parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for HR department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Critical",
+      "department": "HR",
+      "tags": [
+        "hr",
+        "hr",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "hr",
       "hr",
@@ -4517,11 +6205,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Ananya Sharma",
     "department": "Legal",
     "createdAt": "2024-002-15T10:00:00Z",
-    "fileSize": 2906090,
+    "fileSize": 1434898,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Maintenance document for KMRL operations. Assigned to Ananya Sharma.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nMAINTENANCE DIRECTORATE \u00b7 DOCUMENT REF: KMRL/MAINTENANCE/2024/085\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the maintenance protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Ananya Sharma (Legal Department, Email: ananya.sharma@kmrl.in). Contract Reference: CNT-2024-005.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 3800000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Legal Directorate.\n\nRECORD AUTHORIZED BY: ANANYA SHARMA (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nMAINTENANCE DIRECTORATE \u00b7 DOCUMENT REF: KMRL/MAINTENANCE/2024/085\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the maintenance protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Ananya Sharma (Legal Department, Email: ananya.sharma@kmrl.in). Contract Reference: CNT-2024-005.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 6000000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Legal Directorate.\n\nRECORD AUTHORIZED BY: ANANYA SHARMA (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Water Metro Phase 2 Electric Boat SLA #85: Fully processed and verified under KMRL MAINTENANCE Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Ananya Sharma.",
+      "keyFindings": [
+        "1. Operational Telemetry: Maintenance parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Legal department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "Legal",
+      "tags": [
+        "maintenance",
+        "legal",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "maintenance",
       "legal",
@@ -4544,11 +6252,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Deepak Verma",
     "department": "Procurement",
     "createdAt": "2024-003-15T10:00:00Z",
-    "fileSize": 2422224,
+    "fileSize": 2350206,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Legal document for KMRL operations. Assigned to Deepak Verma.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nLEGAL DIRECTORATE \u00b7 DOCUMENT REF: KMRL/LEGAL/2024/086\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the legal protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Deepak Verma (Procurement Department, Email: deepak.verma@kmrl.in). Contract Reference: CNT-2024-006.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 5600000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Procurement Directorate.\n\nRECORD AUTHORIZED BY: DEEPAK VERMA (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nLEGAL DIRECTORATE \u00b7 DOCUMENT REF: KMRL/LEGAL/2024/086\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the legal protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Deepak Verma (Procurement Department, Email: deepak.verma@kmrl.in). Contract Reference: CNT-2024-006.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 1400000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Procurement Directorate.\n\nRECORD AUTHORIZED BY: DEEPAK VERMA (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Automatic Fare Collection (AFC) QR Upgrade Tender #86: Fully processed and verified under KMRL LEGAL Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Deepak Verma.",
+      "keyFindings": [
+        "1. Operational Telemetry: Legal parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Procurement department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "Procurement",
+      "tags": [
+        "legal",
+        "procurement",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "legal",
       "procurement",
@@ -4571,11 +6299,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Rajesh Iyer",
     "department": "Safety",
     "createdAt": "2024-004-15T10:00:00Z",
-    "fileSize": 1581903,
+    "fileSize": 2181714,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Procurement document for KMRL operations. Assigned to Rajesh Iyer.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nPROCUREMENT DIRECTORATE \u00b7 DOCUMENT REF: KMRL/PROCUREMENT/2024/087\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the procurement protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Rajesh Iyer (Safety Department, Email: rajesh.iyer@kmrl.in). Contract Reference: CNT-2024-007.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 2500000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Safety Directorate.\n\nRECORD AUTHORIZED BY: RAJESH IYER (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nPROCUREMENT DIRECTORATE \u00b7 DOCUMENT REF: KMRL/PROCUREMENT/2024/087\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the procurement protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Rajesh Iyer (Safety Department, Email: rajesh.iyer@kmrl.in). Contract Reference: CNT-2024-007.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 3400000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Safety Directorate.\n\nRECORD AUTHORIZED BY: RAJESH IYER (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Overhead Equipment (OHE) Traction Maintenance Schedule #87: Fully processed and verified under KMRL PROCUREMENT Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Rajesh Iyer.",
+      "keyFindings": [
+        "1. Operational Telemetry: Procurement parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Safety department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "High",
+      "department": "Safety",
+      "tags": [
+        "procurement",
+        "safety",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "procurement",
       "safety",
@@ -4598,11 +6346,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Sunita Pillai",
     "department": "Engineering",
     "createdAt": "2024-005-15T10:00:00Z",
-    "fileSize": 1544246,
+    "fileSize": 570173,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Engineering document for KMRL operations. Assigned to Sunita Pillai.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nENGINEERING DIRECTORATE \u00b7 DOCUMENT REF: KMRL/ENGINEERING/2024/088\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the engineering protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Sunita Pillai (Engineering Department, Email: sunita.pillai@kmrl.in). Contract Reference: CNT-2024-008.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 1000000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Engineering Directorate.\n\nRECORD AUTHORIZED BY: SUNITA PILLAI (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nENGINEERING DIRECTORATE \u00b7 DOCUMENT REF: KMRL/ENGINEERING/2024/088\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the engineering protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Sunita Pillai (Engineering Department, Email: sunita.pillai@kmrl.in). Contract Reference: CNT-2024-008.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 5500000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Engineering Directorate.\n\nRECORD AUTHORIZED BY: SUNITA PILLAI (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Muttom Depot Solar PV Rooftop Installation Bid #88: Fully processed and verified under KMRL ENGINEERING Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Sunita Pillai.",
+      "keyFindings": [
+        "1. Operational Telemetry: Engineering parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Engineering department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Critical",
+      "department": "Engineering",
+      "tags": [
+        "engineering",
+        "engineering",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "engineering",
       "engineering",
@@ -4625,11 +6393,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Vivek Swaminathan",
     "department": "IT",
     "createdAt": "2024-006-15T10:00:00Z",
-    "fileSize": 2241606,
+    "fileSize": 1920517,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Water Metro document for KMRL operations. Assigned to Vivek Swaminathan.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nWATER METRO DIRECTORATE \u00b7 DOCUMENT REF: KMRL/WATER METRO/2024/089\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the water metro protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Vivek Swaminathan (IT Department, Email: vivek.swaminathan@kmrl.in). Contract Reference: CNT-2024-009.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 5000000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to IT Directorate.\n\nRECORD AUTHORIZED BY: VIVEK SWAMINATHAN (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nWATER METRO DIRECTORATE \u00b7 DOCUMENT REF: KMRL/WATER METRO/2024/089\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the water metro protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Vivek Swaminathan (IT Department, Email: vivek.swaminathan@kmrl.in). Contract Reference: CNT-2024-009.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 5600000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to IT Directorate.\n\nRECORD AUTHORIZED BY: VIVEK SWAMINATHAN (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Station Housekeeping & Sanitation Operations SLA #89: Fully processed and verified under KMRL WATER METRO Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Vivek Swaminathan.",
+      "keyFindings": [
+        "1. Operational Telemetry: Water Metro parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for IT department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "IT",
+      "tags": [
+        "water metro",
+        "it",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "water metro",
       "it",
@@ -4652,11 +6440,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Lakshmi Nambiar",
     "department": "Water Metro",
     "createdAt": "2024-001-15T10:00:00Z",
-    "fileSize": 1560441,
+    "fileSize": 1579051,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official IT document for KMRL operations. Assigned to Lakshmi Nambiar.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nIT DIRECTORATE \u00b7 DOCUMENT REF: KMRL/IT/2024/090\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the it protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Lakshmi Nambiar (Water Metro Department, Email: lakshmi.nambiar@kmrl.in). Contract Reference: CNT-2024-010.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 6000000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Water Metro Directorate.\n\nRECORD AUTHORIZED BY: LAKSHMI NAMBIAR (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nIT DIRECTORATE \u00b7 DOCUMENT REF: KMRL/IT/2024/090\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the it protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Lakshmi Nambiar (Water Metro Department, Email: lakshmi.nambiar@kmrl.in). Contract Reference: CNT-2024-010.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 1800000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Water Metro Directorate.\n\nRECORD AUTHORIZED BY: LAKSHMI NAMBIAR (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of IT Network & Cybersecurity Vulnerability Audit #90: Fully processed and verified under KMRL IT Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Lakshmi Nambiar.",
+      "keyFindings": [
+        "1. Operational Telemetry: IT parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Water Metro department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "Water Metro",
+      "tags": [
+        "it",
+        "water metro",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "it",
       "water metro",
@@ -4679,11 +6487,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Manoj Panicker",
     "department": "Operations",
     "createdAt": "2024-002-15T10:00:00Z",
-    "fileSize": 976020,
+    "fileSize": 2095278,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Safety document for KMRL operations. Assigned to Manoj Panicker.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nSAFETY DIRECTORATE \u00b7 DOCUMENT REF: KMRL/SAFETY/2024/091\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the safety protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Manoj Panicker (Operations Department, Email: manoj.panicker@kmrl.in). Contract Reference: CNT-2024-011.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 5500000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Operations Directorate.\n\nRECORD AUTHORIZED BY: MANOJ PANICKER (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nSAFETY DIRECTORATE \u00b7 DOCUMENT REF: KMRL/SAFETY/2024/091\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the safety protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Manoj Panicker (Operations Department, Email: manoj.panicker@kmrl.in). Contract Reference: CNT-2024-011.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 3800000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Operations Directorate.\n\nRECORD AUTHORIZED BY: MANOJ PANICKER (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Safety Audit & Track Inspection Report #91: Fully processed and verified under KMRL SAFETY Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Manoj Panicker.",
+      "keyFindings": [
+        "1. Operational Telemetry: Safety parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Operations department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "High",
+      "department": "Operations",
+      "tags": [
+        "safety",
+        "operations",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "safety",
       "operations",
@@ -4706,11 +6534,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Divya Kurup",
     "department": "Maintenance",
     "createdAt": "2024-003-15T10:00:00Z",
-    "fileSize": 2961810,
+    "fileSize": 2780630,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Operations document for KMRL operations. Assigned to Divya Kurup.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nOPERATIONS DIRECTORATE \u00b7 DOCUMENT REF: KMRL/OPERATIONS/2024/092\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the operations protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Divya Kurup (Maintenance Department, Email: divya.kurup@kmrl.in). Contract Reference: CNT-2024-012.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 4400000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Maintenance Directorate.\n\nRECORD AUTHORIZED BY: DIVYA KURUP (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nOPERATIONS DIRECTORATE \u00b7 DOCUMENT REF: KMRL/OPERATIONS/2024/092\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the operations protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Divya Kurup (Maintenance Department, Email: divya.kurup@kmrl.in). Contract Reference: CNT-2024-012.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 2800000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Maintenance Directorate.\n\nRECORD AUTHORIZED BY: DIVYA KURUP (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Rolling Stock Preventive Maintenance Protocol #92: Fully processed and verified under KMRL OPERATIONS Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Divya Kurup.",
+      "keyFindings": [
+        "1. Operational Telemetry: Operations parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Maintenance department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Critical",
+      "department": "Maintenance",
+      "tags": [
+        "operations",
+        "maintenance",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "operations",
       "maintenance",
@@ -4733,11 +6581,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Karthik Sundaram",
     "department": "Finance",
     "createdAt": "2024-004-15T10:00:00Z",
-    "fileSize": 1733938,
+    "fileSize": 2533970,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Finance document for KMRL operations. Assigned to Karthik Sundaram.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nFINANCE DIRECTORATE \u00b7 DOCUMENT REF: KMRL/FINANCE/2024/093\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the finance protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Karthik Sundaram (Finance Department, Email: karthik.sundaram@kmrl.in). Contract Reference: CNT-2024-013.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 2400000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Finance Directorate.\n\nRECORD AUTHORIZED BY: KARTHIK SUNDARAM (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nFINANCE DIRECTORATE \u00b7 DOCUMENT REF: KMRL/FINANCE/2024/093\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the finance protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Karthik Sundaram (Finance Department, Email: karthik.sundaram@kmrl.in). Contract Reference: CNT-2024-013.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 5200000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Finance Directorate.\n\nRECORD AUTHORIZED BY: KARTHIK SUNDARAM (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Q1 Quarterly Financial Audit & Revenue Breakdown #93: Fully processed and verified under KMRL FINANCE Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Karthik Sundaram.",
+      "keyFindings": [
+        "1. Operational Telemetry: Finance parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Finance department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "Finance",
+      "tags": [
+        "finance",
+        "finance",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "finance",
       "finance",
@@ -4760,11 +6628,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Meera Joshi",
     "department": "HR",
     "createdAt": "2024-005-15T10:00:00Z",
-    "fileSize": 665874,
+    "fileSize": 712340,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official HR document for KMRL operations. Assigned to Meera Joshi.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nHR DIRECTORATE \u00b7 DOCUMENT REF: KMRL/HR/2024/094\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the hr protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Meera Joshi (HR Department, Email: meera.joshi@kmrl.in). Contract Reference: CNT-2024-014.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 4100000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to HR Directorate.\n\nRECORD AUTHORIZED BY: MEERA JOSHI (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nHR DIRECTORATE \u00b7 DOCUMENT REF: KMRL/HR/2024/094\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the hr protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Meera Joshi (HR Department, Email: meera.joshi@kmrl.in). Contract Reference: CNT-2024-014.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 5800000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to HR Directorate.\n\nRECORD AUTHORIZED BY: MEERA JOSHI (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of HR Employee Benefit Policy & Night Shift Allowance #94: Fully processed and verified under KMRL HR Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Meera Joshi.",
+      "keyFindings": [
+        "1. Operational Telemetry: HR parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for HR department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "HR",
+      "tags": [
+        "hr",
+        "hr",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "hr",
       "hr",
@@ -4787,11 +6675,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Amit Chakraborty",
     "department": "Legal",
     "createdAt": "2024-006-15T10:00:00Z",
-    "fileSize": 3448165,
+    "fileSize": 3200036,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Maintenance document for KMRL operations. Assigned to Amit Chakraborty.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nMAINTENANCE DIRECTORATE \u00b7 DOCUMENT REF: KMRL/MAINTENANCE/2024/095\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the maintenance protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Amit Chakraborty (Legal Department, Email: amit.chakraborty@kmrl.in). Contract Reference: CNT-2024-015.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 2600000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Legal Directorate.\n\nRECORD AUTHORIZED BY: AMIT CHAKRABORTY (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nMAINTENANCE DIRECTORATE \u00b7 DOCUMENT REF: KMRL/MAINTENANCE/2024/095\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the maintenance protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Amit Chakraborty (Legal Department, Email: amit.chakraborty@kmrl.in). Contract Reference: CNT-2024-015.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 3500000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Legal Directorate.\n\nRECORD AUTHORIZED BY: AMIT CHAKRABORTY (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Water Metro Phase 2 Electric Boat SLA #95: Fully processed and verified under KMRL MAINTENANCE Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Amit Chakraborty.",
+      "keyFindings": [
+        "1. Operational Telemetry: Maintenance parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Legal department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "High",
+      "department": "Legal",
+      "tags": [
+        "maintenance",
+        "legal",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "maintenance",
       "legal",
@@ -4814,11 +6722,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Neha Gupta",
     "department": "Procurement",
     "createdAt": "2024-001-15T10:00:00Z",
-    "fileSize": 2179966,
+    "fileSize": 2979937,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Legal document for KMRL operations. Assigned to Neha Gupta.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nLEGAL DIRECTORATE \u00b7 DOCUMENT REF: KMRL/LEGAL/2024/096\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the legal protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Neha Gupta (Procurement Department, Email: neha.gupta@kmrl.in). Contract Reference: CNT-2024-016.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 2700000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Procurement Directorate.\n\nRECORD AUTHORIZED BY: NEHA GUPTA (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nLEGAL DIRECTORATE \u00b7 DOCUMENT REF: KMRL/LEGAL/2024/096\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the legal protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Neha Gupta (Procurement Department, Email: neha.gupta@kmrl.in). Contract Reference: CNT-2024-016.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 5100000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Procurement Directorate.\n\nRECORD AUTHORIZED BY: NEHA GUPTA (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Automatic Fare Collection (AFC) QR Upgrade Tender #96: Fully processed and verified under KMRL LEGAL Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Neha Gupta.",
+      "keyFindings": [
+        "1. Operational Telemetry: Legal parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Procurement department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Critical",
+      "department": "Procurement",
+      "tags": [
+        "legal",
+        "procurement",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "legal",
       "procurement",
@@ -4841,11 +6769,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Rahul Bhattacharya",
     "department": "Safety",
     "createdAt": "2024-002-15T10:00:00Z",
-    "fileSize": 3004736,
+    "fileSize": 1660548,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Procurement document for KMRL operations. Assigned to Rahul Bhattacharya.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nPROCUREMENT DIRECTORATE \u00b7 DOCUMENT REF: KMRL/PROCUREMENT/2024/097\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the procurement protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Rahul Bhattacharya (Safety Department, Email: rahul.bhattacharya@kmrl.in). Contract Reference: CNT-2024-017.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 1700000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Safety Directorate.\n\nRECORD AUTHORIZED BY: RAHUL BHATTACHARYA (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nPROCUREMENT DIRECTORATE \u00b7 DOCUMENT REF: KMRL/PROCUREMENT/2024/097\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the procurement protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Rahul Bhattacharya (Safety Department, Email: rahul.bhattacharya@kmrl.in). Contract Reference: CNT-2024-017.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 4600000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Safety Directorate.\n\nRECORD AUTHORIZED BY: RAHUL BHATTACHARYA (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Overhead Equipment (OHE) Traction Maintenance Schedule #97: Fully processed and verified under KMRL PROCUREMENT Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Rahul Bhattacharya.",
+      "keyFindings": [
+        "1. Operational Telemetry: Procurement parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Safety department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "Safety",
+      "tags": [
+        "procurement",
+        "safety",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "procurement",
       "safety",
@@ -4868,11 +6816,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Shalini Varma",
     "department": "Engineering",
     "createdAt": "2024-003-15T10:00:00Z",
-    "fileSize": 2308207,
+    "fileSize": 3446962,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Engineering document for KMRL operations. Assigned to Shalini Varma.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nENGINEERING DIRECTORATE \u00b7 DOCUMENT REF: KMRL/ENGINEERING/2024/098\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the engineering protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Shalini Varma (Engineering Department, Email: shalini.varma@kmrl.in). Contract Reference: CNT-2024-018.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 2300000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Engineering Directorate.\n\nRECORD AUTHORIZED BY: SHALINI VARMA (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nENGINEERING DIRECTORATE \u00b7 DOCUMENT REF: KMRL/ENGINEERING/2024/098\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the engineering protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Shalini Varma (Engineering Department, Email: shalini.varma@kmrl.in). Contract Reference: CNT-2024-018.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 3100000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Engineering Directorate.\n\nRECORD AUTHORIZED BY: SHALINI VARMA (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Muttom Depot Solar PV Rooftop Installation Bid #98: Fully processed and verified under KMRL ENGINEERING Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Shalini Varma.",
+      "keyFindings": [
+        "1. Operational Telemetry: Engineering parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Engineering department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "Engineering",
+      "tags": [
+        "engineering",
+        "engineering",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "engineering",
       "engineering",
@@ -4895,11 +6863,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Gautam Deshmukh",
     "department": "IT",
     "createdAt": "2024-004-15T10:00:00Z",
-    "fileSize": 3280648,
+    "fileSize": 3100867,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Water Metro document for KMRL operations. Assigned to Gautam Deshmukh.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nWATER METRO DIRECTORATE \u00b7 DOCUMENT REF: KMRL/WATER METRO/2024/099\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the water metro protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Gautam Deshmukh (IT Department, Email: gautam.deshmukh@kmrl.in). Contract Reference: CNT-2024-019.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 5600000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to IT Directorate.\n\nRECORD AUTHORIZED BY: GAUTAM DESHMUKH (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nWATER METRO DIRECTORATE \u00b7 DOCUMENT REF: KMRL/WATER METRO/2024/099\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the water metro protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Gautam Deshmukh (IT Department, Email: gautam.deshmukh@kmrl.in). Contract Reference: CNT-2024-019.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 1500000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to IT Directorate.\n\nRECORD AUTHORIZED BY: GAUTAM DESHMUKH (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Station Housekeeping & Sanitation Operations SLA #99: Fully processed and verified under KMRL WATER METRO Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Gautam Deshmukh.",
+      "keyFindings": [
+        "1. Operational Telemetry: Water Metro parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for IT department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "High",
+      "department": "IT",
+      "tags": [
+        "water metro",
+        "it",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "water metro",
       "it",
@@ -4922,11 +6910,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Vikram Bhat",
     "department": "Water Metro",
     "createdAt": "2024-005-15T10:00:00Z",
-    "fileSize": 613626,
+    "fileSize": 1230295,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official IT document for KMRL operations. Assigned to Vikram Bhat.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nIT DIRECTORATE \u00b7 DOCUMENT REF: KMRL/IT/2024/100\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the it protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Vikram Bhat (Water Metro Department, Email: vikram.bhat@kmrl.in). Contract Reference: CNT-2024-020.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 4000000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Water Metro Directorate.\n\nRECORD AUTHORIZED BY: VIKRAM BHAT (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nIT DIRECTORATE \u00b7 DOCUMENT REF: KMRL/IT/2024/100\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the it protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Vikram Bhat (Water Metro Department, Email: vikram.bhat@kmrl.in). Contract Reference: CNT-2024-020.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 4200000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Water Metro Directorate.\n\nRECORD AUTHORIZED BY: VIKRAM BHAT (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of IT Network & Cybersecurity Vulnerability Audit #100: Fully processed and verified under KMRL IT Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Vikram Bhat.",
+      "keyFindings": [
+        "1. Operational Telemetry: IT parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Water Metro department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Critical",
+      "department": "Water Metro",
+      "tags": [
+        "it",
+        "water metro",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "it",
       "water metro",
@@ -4949,11 +6957,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Harish Kulkarni",
     "department": "Operations",
     "createdAt": "2024-006-15T10:00:00Z",
-    "fileSize": 829852,
+    "fileSize": 3156071,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Safety document for KMRL operations. Assigned to Harish Kulkarni.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nSAFETY DIRECTORATE \u00b7 DOCUMENT REF: KMRL/SAFETY/2024/101\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the safety protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Harish Kulkarni (Operations Department, Email: harish.kulkarni@kmrl.in). Contract Reference: CNT-2024-021.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 5700000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Operations Directorate.\n\nRECORD AUTHORIZED BY: HARISH KULKARNI (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nSAFETY DIRECTORATE \u00b7 DOCUMENT REF: KMRL/SAFETY/2024/101\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the safety protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Harish Kulkarni (Operations Department, Email: harish.kulkarni@kmrl.in). Contract Reference: CNT-2024-021.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 3200000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Operations Directorate.\n\nRECORD AUTHORIZED BY: HARISH KULKARNI (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Safety Audit & Track Inspection Report #101: Fully processed and verified under KMRL SAFETY Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Harish Kulkarni.",
+      "keyFindings": [
+        "1. Operational Telemetry: Safety parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Operations department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "Operations",
+      "tags": [
+        "safety",
+        "operations",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "safety",
       "operations",
@@ -4976,11 +7004,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Pooja Saxena",
     "department": "Maintenance",
     "createdAt": "2024-001-15T10:00:00Z",
-    "fileSize": 2365878,
+    "fileSize": 2537643,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Operations document for KMRL operations. Assigned to Pooja Saxena.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nOPERATIONS DIRECTORATE \u00b7 DOCUMENT REF: KMRL/OPERATIONS/2024/102\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the operations protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Pooja Saxena (Maintenance Department, Email: pooja.saxena@kmrl.in). Contract Reference: CNT-2024-022.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 3200000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Maintenance Directorate.\n\nRECORD AUTHORIZED BY: POOJA SAXENA (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nOPERATIONS DIRECTORATE \u00b7 DOCUMENT REF: KMRL/OPERATIONS/2024/102\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the operations protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Pooja Saxena (Maintenance Department, Email: pooja.saxena@kmrl.in). Contract Reference: CNT-2024-022.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 5900000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Maintenance Directorate.\n\nRECORD AUTHORIZED BY: POOJA SAXENA (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Rolling Stock Preventive Maintenance Protocol #102: Fully processed and verified under KMRL OPERATIONS Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Pooja Saxena.",
+      "keyFindings": [
+        "1. Operational Telemetry: Operations parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Maintenance department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "Maintenance",
+      "tags": [
+        "operations",
+        "maintenance",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "operations",
       "maintenance",
@@ -5003,11 +7051,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Sandeep Raghavan",
     "department": "Finance",
     "createdAt": "2024-002-15T10:00:00Z",
-    "fileSize": 546721,
+    "fileSize": 2622135,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Finance document for KMRL operations. Assigned to Sandeep Raghavan.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nFINANCE DIRECTORATE \u00b7 DOCUMENT REF: KMRL/FINANCE/2024/103\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the finance protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Sandeep Raghavan (Finance Department, Email: sandeep.raghavan@kmrl.in). Contract Reference: CNT-2024-023.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 4000000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Finance Directorate.\n\nRECORD AUTHORIZED BY: SANDEEP RAGHAVAN (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nFINANCE DIRECTORATE \u00b7 DOCUMENT REF: KMRL/FINANCE/2024/103\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the finance protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Sandeep Raghavan (Finance Department, Email: sandeep.raghavan@kmrl.in). Contract Reference: CNT-2024-023.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 2900000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Finance Directorate.\n\nRECORD AUTHORIZED BY: SANDEEP RAGHAVAN (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Q1 Quarterly Financial Audit & Revenue Breakdown #103: Fully processed and verified under KMRL FINANCE Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Sandeep Raghavan.",
+      "keyFindings": [
+        "1. Operational Telemetry: Finance parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Finance department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "High",
+      "department": "Finance",
+      "tags": [
+        "finance",
+        "finance",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "finance",
       "finance",
@@ -5030,11 +7098,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Ritu Hegde",
     "department": "HR",
     "createdAt": "2024-003-15T10:00:00Z",
-    "fileSize": 1192778,
+    "fileSize": 3354255,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official HR document for KMRL operations. Assigned to Ritu Hegde.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nHR DIRECTORATE \u00b7 DOCUMENT REF: KMRL/HR/2024/104\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the hr protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Ritu Hegde (HR Department, Email: ritu.hegde@kmrl.in). Contract Reference: CNT-2024-024.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 4200000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to HR Directorate.\n\nRECORD AUTHORIZED BY: RITU HEGDE (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nHR DIRECTORATE \u00b7 DOCUMENT REF: KMRL/HR/2024/104\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the hr protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Ritu Hegde (HR Department, Email: ritu.hegde@kmrl.in). Contract Reference: CNT-2024-024.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 5100000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to HR Directorate.\n\nRECORD AUTHORIZED BY: RITU HEGDE (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of HR Employee Benefit Policy & Night Shift Allowance #104: Fully processed and verified under KMRL HR Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Ritu Hegde.",
+      "keyFindings": [
+        "1. Operational Telemetry: HR parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for HR department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Critical",
+      "department": "HR",
+      "tags": [
+        "hr",
+        "hr",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "hr",
       "hr",
@@ -5057,11 +7145,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Vijay Chawla",
     "department": "Legal",
     "createdAt": "2024-004-15T10:00:00Z",
-    "fileSize": 2950997,
+    "fileSize": 3482218,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Maintenance document for KMRL operations. Assigned to Vijay Chawla.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nMAINTENANCE DIRECTORATE \u00b7 DOCUMENT REF: KMRL/MAINTENANCE/2024/105\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the maintenance protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Vijay Chawla (Legal Department, Email: vijay.chawla@kmrl.in). Contract Reference: CNT-2024-025.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 1800000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Legal Directorate.\n\nRECORD AUTHORIZED BY: VIJAY CHAWLA (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nMAINTENANCE DIRECTORATE \u00b7 DOCUMENT REF: KMRL/MAINTENANCE/2024/105\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the maintenance protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Vijay Chawla (Legal Department, Email: vijay.chawla@kmrl.in). Contract Reference: CNT-2024-025.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 2100000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Legal Directorate.\n\nRECORD AUTHORIZED BY: VIJAY CHAWLA (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Water Metro Phase 2 Electric Boat SLA #105: Fully processed and verified under KMRL MAINTENANCE Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Vijay Chawla.",
+      "keyFindings": [
+        "1. Operational Telemetry: Maintenance parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Legal department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "Legal",
+      "tags": [
+        "maintenance",
+        "legal",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "maintenance",
       "legal",
@@ -5084,11 +7192,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Sneha Roy",
     "department": "Procurement",
     "createdAt": "2024-005-15T10:00:00Z",
-    "fileSize": 693654,
+    "fileSize": 3026465,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Legal document for KMRL operations. Assigned to Sneha Roy.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nLEGAL DIRECTORATE \u00b7 DOCUMENT REF: KMRL/LEGAL/2024/106\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the legal protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Sneha Roy (Procurement Department, Email: sneha.roy@kmrl.in). Contract Reference: CNT-2024-026.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 5500000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Procurement Directorate.\n\nRECORD AUTHORIZED BY: SNEHA ROY (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nLEGAL DIRECTORATE \u00b7 DOCUMENT REF: KMRL/LEGAL/2024/106\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the legal protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Sneha Roy (Procurement Department, Email: sneha.roy@kmrl.in). Contract Reference: CNT-2024-026.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 3800000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Procurement Directorate.\n\nRECORD AUTHORIZED BY: SNEHA ROY (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Automatic Fare Collection (AFC) QR Upgrade Tender #106: Fully processed and verified under KMRL LEGAL Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Sneha Roy.",
+      "keyFindings": [
+        "1. Operational Telemetry: Legal parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Procurement department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "Procurement",
+      "tags": [
+        "legal",
+        "procurement",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "legal",
       "procurement",
@@ -5111,11 +7239,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Nikhil Naik",
     "department": "Safety",
     "createdAt": "2024-006-15T10:00:00Z",
-    "fileSize": 1824663,
+    "fileSize": 3409579,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Procurement document for KMRL operations. Assigned to Nikhil Naik.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nPROCUREMENT DIRECTORATE \u00b7 DOCUMENT REF: KMRL/PROCUREMENT/2024/107\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the procurement protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Nikhil Naik (Safety Department, Email: nikhil.naik@kmrl.in). Contract Reference: CNT-2024-027.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 5400000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Safety Directorate.\n\nRECORD AUTHORIZED BY: NIKHIL NAIK (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nPROCUREMENT DIRECTORATE \u00b7 DOCUMENT REF: KMRL/PROCUREMENT/2024/107\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the procurement protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Nikhil Naik (Safety Department, Email: nikhil.naik@kmrl.in). Contract Reference: CNT-2024-027.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 4000000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Safety Directorate.\n\nRECORD AUTHORIZED BY: NIKHIL NAIK (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Overhead Equipment (OHE) Traction Maintenance Schedule #107: Fully processed and verified under KMRL PROCUREMENT Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Nikhil Naik.",
+      "keyFindings": [
+        "1. Operational Telemetry: Procurement parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Safety department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "High",
+      "department": "Safety",
+      "tags": [
+        "procurement",
+        "safety",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "procurement",
       "safety",
@@ -5138,11 +7286,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Anjali Shenoy",
     "department": "Engineering",
     "createdAt": "2024-001-15T10:00:00Z",
-    "fileSize": 3161096,
+    "fileSize": 2520655,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Engineering document for KMRL operations. Assigned to Anjali Shenoy.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nENGINEERING DIRECTORATE \u00b7 DOCUMENT REF: KMRL/ENGINEERING/2024/108\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the engineering protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Anjali Shenoy (Engineering Department, Email: anjali.shenoy@kmrl.in). Contract Reference: CNT-2024-028.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 5800000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Engineering Directorate.\n\nRECORD AUTHORIZED BY: ANJALI SHENOY (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nENGINEERING DIRECTORATE \u00b7 DOCUMENT REF: KMRL/ENGINEERING/2024/108\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the engineering protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Anjali Shenoy (Engineering Department, Email: anjali.shenoy@kmrl.in). Contract Reference: CNT-2024-028.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 4300000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Engineering Directorate.\n\nRECORD AUTHORIZED BY: ANJALI SHENOY (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Muttom Depot Solar PV Rooftop Installation Bid #108: Fully processed and verified under KMRL ENGINEERING Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Anjali Shenoy.",
+      "keyFindings": [
+        "1. Operational Telemetry: Engineering parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Engineering department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Critical",
+      "department": "Engineering",
+      "tags": [
+        "engineering",
+        "engineering",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "engineering",
       "engineering",
@@ -5165,11 +7333,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Mahesh Pandey",
     "department": "IT",
     "createdAt": "2024-002-15T10:00:00Z",
-    "fileSize": 1599531,
+    "fileSize": 3226467,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Water Metro document for KMRL operations. Assigned to Mahesh Pandey.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nWATER METRO DIRECTORATE \u00b7 DOCUMENT REF: KMRL/WATER METRO/2024/109\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the water metro protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Mahesh Pandey (IT Department, Email: mahesh.pandey@kmrl.in). Contract Reference: CNT-2024-029.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 3000000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to IT Directorate.\n\nRECORD AUTHORIZED BY: MAHESH PANDEY (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nWATER METRO DIRECTORATE \u00b7 DOCUMENT REF: KMRL/WATER METRO/2024/109\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the water metro protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Mahesh Pandey (IT Department, Email: mahesh.pandey@kmrl.in). Contract Reference: CNT-2024-029.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 1000000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to IT Directorate.\n\nRECORD AUTHORIZED BY: MAHESH PANDEY (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Station Housekeeping & Sanitation Operations SLA #109: Fully processed and verified under KMRL WATER METRO Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Mahesh Pandey.",
+      "keyFindings": [
+        "1. Operational Telemetry: Water Metro parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for IT department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "IT",
+      "tags": [
+        "water metro",
+        "it",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "water metro",
       "it",
@@ -5192,11 +7380,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Kavita Mishra",
     "department": "Water Metro",
     "createdAt": "2024-003-15T10:00:00Z",
-    "fileSize": 1014792,
+    "fileSize": 3200525,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official IT document for KMRL operations. Assigned to Kavita Mishra.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nIT DIRECTORATE \u00b7 DOCUMENT REF: KMRL/IT/2024/110\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the it protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Kavita Mishra (Water Metro Department, Email: kavita.mishra@kmrl.in). Contract Reference: CNT-2024-030.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 4600000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Water Metro Directorate.\n\nRECORD AUTHORIZED BY: KAVITA MISHRA (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nIT DIRECTORATE \u00b7 DOCUMENT REF: KMRL/IT/2024/110\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the it protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Kavita Mishra (Water Metro Department, Email: kavita.mishra@kmrl.in). Contract Reference: CNT-2024-030.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 5200000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Water Metro Directorate.\n\nRECORD AUTHORIZED BY: KAVITA MISHRA (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of IT Network & Cybersecurity Vulnerability Audit #110: Fully processed and verified under KMRL IT Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Kavita Mishra.",
+      "keyFindings": [
+        "1. Operational Telemetry: IT parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Water Metro department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "Water Metro",
+      "tags": [
+        "it",
+        "water metro",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "it",
       "water metro",
@@ -5219,11 +7427,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Siddharth Reddy",
     "department": "Operations",
     "createdAt": "2024-004-15T10:00:00Z",
-    "fileSize": 2622548,
+    "fileSize": 2699967,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Safety document for KMRL operations. Assigned to Siddharth Reddy.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nSAFETY DIRECTORATE \u00b7 DOCUMENT REF: KMRL/SAFETY/2024/111\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the safety protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Siddharth Reddy (Operations Department, Email: siddharth.reddy@kmrl.in). Contract Reference: CNT-2024-031.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 1900000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Operations Directorate.\n\nRECORD AUTHORIZED BY: SIDDHARTH REDDY (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nSAFETY DIRECTORATE \u00b7 DOCUMENT REF: KMRL/SAFETY/2024/111\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the safety protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Siddharth Reddy (Operations Department, Email: siddharth.reddy@kmrl.in). Contract Reference: CNT-2024-031.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 6000000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Operations Directorate.\n\nRECORD AUTHORIZED BY: SIDDHARTH REDDY (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Safety Audit & Track Inspection Report #111: Fully processed and verified under KMRL SAFETY Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Siddharth Reddy.",
+      "keyFindings": [
+        "1. Operational Telemetry: Safety parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Operations department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "High",
+      "department": "Operations",
+      "tags": [
+        "safety",
+        "operations",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "safety",
       "operations",
@@ -5246,11 +7474,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Bhavna Rao",
     "department": "Maintenance",
     "createdAt": "2024-005-15T10:00:00Z",
-    "fileSize": 923490,
+    "fileSize": 1054296,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Operations document for KMRL operations. Assigned to Bhavna Rao.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nOPERATIONS DIRECTORATE \u00b7 DOCUMENT REF: KMRL/OPERATIONS/2024/112\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the operations protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Bhavna Rao (Maintenance Department, Email: bhavna.rao@kmrl.in). Contract Reference: CNT-2024-032.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 1700000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Maintenance Directorate.\n\nRECORD AUTHORIZED BY: BHAVNA RAO (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nOPERATIONS DIRECTORATE \u00b7 DOCUMENT REF: KMRL/OPERATIONS/2024/112\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the operations protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Bhavna Rao (Maintenance Department, Email: bhavna.rao@kmrl.in). Contract Reference: CNT-2024-032.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 1400000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Maintenance Directorate.\n\nRECORD AUTHORIZED BY: BHAVNA RAO (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Rolling Stock Preventive Maintenance Protocol #112: Fully processed and verified under KMRL OPERATIONS Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Bhavna Rao.",
+      "keyFindings": [
+        "1. Operational Telemetry: Operations parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Maintenance department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Critical",
+      "department": "Maintenance",
+      "tags": [
+        "operations",
+        "maintenance",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "operations",
       "maintenance",
@@ -5273,11 +7521,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Rohan Chaudhary",
     "department": "Finance",
     "createdAt": "2024-006-15T10:00:00Z",
-    "fileSize": 1372424,
+    "fileSize": 1260813,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Finance document for KMRL operations. Assigned to Rohan Chaudhary.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nFINANCE DIRECTORATE \u00b7 DOCUMENT REF: KMRL/FINANCE/2024/113\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the finance protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Rohan Chaudhary (Finance Department, Email: rohan.chaudhary@kmrl.in). Contract Reference: CNT-2024-033.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 1500000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Finance Directorate.\n\nRECORD AUTHORIZED BY: ROHAN CHAUDHARY (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nFINANCE DIRECTORATE \u00b7 DOCUMENT REF: KMRL/FINANCE/2024/113\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the finance protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Rohan Chaudhary (Finance Department, Email: rohan.chaudhary@kmrl.in). Contract Reference: CNT-2024-033.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 1200000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Finance Directorate.\n\nRECORD AUTHORIZED BY: ROHAN CHAUDHARY (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Q1 Quarterly Financial Audit & Revenue Breakdown #113: Fully processed and verified under KMRL FINANCE Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Rohan Chaudhary.",
+      "keyFindings": [
+        "1. Operational Telemetry: Finance parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Finance department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "Finance",
+      "tags": [
+        "finance",
+        "finance",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "finance",
       "finance",
@@ -5300,11 +7568,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Swati Singhal",
     "department": "HR",
     "createdAt": "2024-001-15T10:00:00Z",
-    "fileSize": 3316843,
+    "fileSize": 2815626,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official HR document for KMRL operations. Assigned to Swati Singhal.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nHR DIRECTORATE \u00b7 DOCUMENT REF: KMRL/HR/2024/114\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the hr protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Swati Singhal (HR Department, Email: swati.singhal@kmrl.in). Contract Reference: CNT-2024-034.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 4800000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to HR Directorate.\n\nRECORD AUTHORIZED BY: SWATI SINGHAL (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nHR DIRECTORATE \u00b7 DOCUMENT REF: KMRL/HR/2024/114\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the hr protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Swati Singhal (HR Department, Email: swati.singhal@kmrl.in). Contract Reference: CNT-2024-034.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 2300000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to HR Directorate.\n\nRECORD AUTHORIZED BY: SWATI SINGHAL (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of HR Employee Benefit Policy & Night Shift Allowance #114: Fully processed and verified under KMRL HR Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Swati Singhal.",
+      "keyFindings": [
+        "1. Operational Telemetry: HR parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for HR department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "HR",
+      "tags": [
+        "hr",
+        "hr",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "hr",
       "hr",
@@ -5327,11 +7615,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Alok Kapur",
     "department": "Legal",
     "createdAt": "2024-002-15T10:00:00Z",
-    "fileSize": 1672713,
+    "fileSize": 1443424,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Maintenance document for KMRL operations. Assigned to Alok Kapur.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nMAINTENANCE DIRECTORATE \u00b7 DOCUMENT REF: KMRL/MAINTENANCE/2024/115\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the maintenance protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Alok Kapur (Legal Department, Email: alok.kapur@kmrl.in). Contract Reference: CNT-2024-035.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 3100000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Legal Directorate.\n\nRECORD AUTHORIZED BY: ALOK KAPUR (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nMAINTENANCE DIRECTORATE \u00b7 DOCUMENT REF: KMRL/MAINTENANCE/2024/115\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the maintenance protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Alok Kapur (Legal Department, Email: alok.kapur@kmrl.in). Contract Reference: CNT-2024-035.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 1600000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Legal Directorate.\n\nRECORD AUTHORIZED BY: ALOK KAPUR (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Water Metro Phase 2 Electric Boat SLA #115: Fully processed and verified under KMRL MAINTENANCE Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Alok Kapur.",
+      "keyFindings": [
+        "1. Operational Telemetry: Maintenance parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Legal department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "High",
+      "department": "Legal",
+      "tags": [
+        "maintenance",
+        "legal",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "maintenance",
       "legal",
@@ -5354,11 +7662,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Monica Aggarwal",
     "department": "Procurement",
     "createdAt": "2024-003-15T10:00:00Z",
-    "fileSize": 3374394,
+    "fileSize": 818897,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Legal document for KMRL operations. Assigned to Monica Aggarwal.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nLEGAL DIRECTORATE \u00b7 DOCUMENT REF: KMRL/LEGAL/2024/116\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the legal protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Monica Aggarwal (Procurement Department, Email: monica.aggarwal@kmrl.in). Contract Reference: CNT-2024-036.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 1300000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Procurement Directorate.\n\nRECORD AUTHORIZED BY: MONICA AGGARWAL (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nLEGAL DIRECTORATE \u00b7 DOCUMENT REF: KMRL/LEGAL/2024/116\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the legal protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Monica Aggarwal (Procurement Department, Email: monica.aggarwal@kmrl.in). Contract Reference: CNT-2024-036.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 1200000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Procurement Directorate.\n\nRECORD AUTHORIZED BY: MONICA AGGARWAL (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Automatic Fare Collection (AFC) QR Upgrade Tender #116: Fully processed and verified under KMRL LEGAL Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Monica Aggarwal.",
+      "keyFindings": [
+        "1. Operational Telemetry: Legal parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Procurement department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Critical",
+      "department": "Procurement",
+      "tags": [
+        "legal",
+        "procurement",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "legal",
       "procurement",
@@ -5381,11 +7709,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Varun Dutta",
     "department": "Safety",
     "createdAt": "2024-004-15T10:00:00Z",
-    "fileSize": 626004,
+    "fileSize": 1320722,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Procurement document for KMRL operations. Assigned to Varun Dutta.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nPROCUREMENT DIRECTORATE \u00b7 DOCUMENT REF: KMRL/PROCUREMENT/2024/117\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the procurement protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Varun Dutta (Safety Department, Email: varun.dutta@kmrl.in). Contract Reference: CNT-2024-037.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 3900000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Safety Directorate.\n\nRECORD AUTHORIZED BY: VARUN DUTTA (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nPROCUREMENT DIRECTORATE \u00b7 DOCUMENT REF: KMRL/PROCUREMENT/2024/117\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the procurement protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Varun Dutta (Safety Department, Email: varun.dutta@kmrl.in). Contract Reference: CNT-2024-037.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 3000000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Safety Directorate.\n\nRECORD AUTHORIZED BY: VARUN DUTTA (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Overhead Equipment (OHE) Traction Maintenance Schedule #117: Fully processed and verified under KMRL PROCUREMENT Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Varun Dutta.",
+      "keyFindings": [
+        "1. Operational Telemetry: Procurement parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Safety department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "Safety",
+      "tags": [
+        "procurement",
+        "safety",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "procurement",
       "safety",
@@ -5408,11 +7756,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Preeti Banerjee",
     "department": "Engineering",
     "createdAt": "2024-005-15T10:00:00Z",
-    "fileSize": 1709968,
+    "fileSize": 2769416,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Engineering document for KMRL operations. Assigned to Preeti Banerjee.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nENGINEERING DIRECTORATE \u00b7 DOCUMENT REF: KMRL/ENGINEERING/2024/118\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the engineering protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Preeti Banerjee (Engineering Department, Email: preeti.banerjee@kmrl.in). Contract Reference: CNT-2024-038.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 2900000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Engineering Directorate.\n\nRECORD AUTHORIZED BY: PREETI BANERJEE (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nENGINEERING DIRECTORATE \u00b7 DOCUMENT REF: KMRL/ENGINEERING/2024/118\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the engineering protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Preeti Banerjee (Engineering Department, Email: preeti.banerjee@kmrl.in). Contract Reference: CNT-2024-038.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 1400000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Engineering Directorate.\n\nRECORD AUTHORIZED BY: PREETI BANERJEE (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Muttom Depot Solar PV Rooftop Installation Bid #118: Fully processed and verified under KMRL ENGINEERING Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Preeti Banerjee.",
+      "keyFindings": [
+        "1. Operational Telemetry: Engineering parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Engineering department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "Engineering",
+      "tags": [
+        "engineering",
+        "engineering",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "engineering",
       "engineering",
@@ -5435,11 +7803,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Abhishek Ghosh",
     "department": "IT",
     "createdAt": "2024-006-15T10:00:00Z",
-    "fileSize": 1818800,
+    "fileSize": 3106786,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Water Metro document for KMRL operations. Assigned to Abhishek Ghosh.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nWATER METRO DIRECTORATE \u00b7 DOCUMENT REF: KMRL/WATER METRO/2024/119\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the water metro protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Abhishek Ghosh (IT Department, Email: abhishek.ghosh@kmrl.in). Contract Reference: CNT-2024-039.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 3700000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to IT Directorate.\n\nRECORD AUTHORIZED BY: ABHISHEK GHOSH (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nWATER METRO DIRECTORATE \u00b7 DOCUMENT REF: KMRL/WATER METRO/2024/119\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the water metro protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Abhishek Ghosh (IT Department, Email: abhishek.ghosh@kmrl.in). Contract Reference: CNT-2024-039.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 4700000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to IT Directorate.\n\nRECORD AUTHORIZED BY: ABHISHEK GHOSH (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Station Housekeeping & Sanitation Operations SLA #119: Fully processed and verified under KMRL WATER METRO Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Abhishek Ghosh.",
+      "keyFindings": [
+        "1. Operational Telemetry: Water Metro parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for IT department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "High",
+      "department": "IT",
+      "tags": [
+        "water metro",
+        "it",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "water metro",
       "it",
@@ -5462,11 +7850,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Shruti Sen",
     "department": "Water Metro",
     "createdAt": "2024-001-15T10:00:00Z",
-    "fileSize": 1426704,
+    "fileSize": 3404047,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official IT document for KMRL operations. Assigned to Shruti Sen.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nIT DIRECTORATE \u00b7 DOCUMENT REF: KMRL/IT/2024/120\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the it protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Shruti Sen (Water Metro Department, Email: shruti.sen@kmrl.in). Contract Reference: CNT-2024-040.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 3200000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Water Metro Directorate.\n\nRECORD AUTHORIZED BY: SHRUTI SEN (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nIT DIRECTORATE \u00b7 DOCUMENT REF: KMRL/IT/2024/120\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the it protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Shruti Sen (Water Metro Department, Email: shruti.sen@kmrl.in). Contract Reference: CNT-2024-040.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 5900000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Water Metro Directorate.\n\nRECORD AUTHORIZED BY: SHRUTI SEN (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of IT Network & Cybersecurity Vulnerability Audit #120: Fully processed and verified under KMRL IT Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Shruti Sen.",
+      "keyFindings": [
+        "1. Operational Telemetry: IT parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Water Metro department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Critical",
+      "department": "Water Metro",
+      "tags": [
+        "it",
+        "water metro",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "it",
       "water metro",
@@ -5489,11 +7897,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Tarun Kumar",
     "department": "Operations",
     "createdAt": "2024-002-15T10:00:00Z",
-    "fileSize": 576941,
+    "fileSize": 2884909,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Safety document for KMRL operations. Assigned to Tarun Kumar.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nSAFETY DIRECTORATE \u00b7 DOCUMENT REF: KMRL/SAFETY/2024/121\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the safety protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Tarun Kumar (Operations Department, Email: tarun.kumar41@kmrl.in). Contract Reference: CNT-2024-041.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 5700000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Operations Directorate.\n\nRECORD AUTHORIZED BY: TARUN KUMAR (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nSAFETY DIRECTORATE \u00b7 DOCUMENT REF: KMRL/SAFETY/2024/121\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the safety protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Tarun Kumar (Operations Department, Email: tarun.kumar41@kmrl.in). Contract Reference: CNT-2024-041.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 3400000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Operations Directorate.\n\nRECORD AUTHORIZED BY: TARUN KUMAR (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Safety Audit & Track Inspection Report #121: Fully processed and verified under KMRL SAFETY Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Tarun Kumar.",
+      "keyFindings": [
+        "1. Operational Telemetry: Safety parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Operations department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "Operations",
+      "tags": [
+        "safety",
+        "operations",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "safety",
       "operations",
@@ -5516,11 +7944,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Archana Nair",
     "department": "Maintenance",
     "createdAt": "2024-003-15T10:00:00Z",
-    "fileSize": 2194002,
+    "fileSize": 2160932,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Operations document for KMRL operations. Assigned to Archana Nair.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nOPERATIONS DIRECTORATE \u00b7 DOCUMENT REF: KMRL/OPERATIONS/2024/122\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the operations protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Archana Nair (Maintenance Department, Email: archana.nair42@kmrl.in). Contract Reference: CNT-2024-042.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 1900000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Maintenance Directorate.\n\nRECORD AUTHORIZED BY: ARCHANA NAIR (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nOPERATIONS DIRECTORATE \u00b7 DOCUMENT REF: KMRL/OPERATIONS/2024/122\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the operations protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Archana Nair (Maintenance Department, Email: archana.nair42@kmrl.in). Contract Reference: CNT-2024-042.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 1800000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Maintenance Directorate.\n\nRECORD AUTHORIZED BY: ARCHANA NAIR (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Rolling Stock Preventive Maintenance Protocol #122: Fully processed and verified under KMRL OPERATIONS Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Archana Nair.",
+      "keyFindings": [
+        "1. Operational Telemetry: Operations parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Maintenance department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "Maintenance",
+      "tags": [
+        "operations",
+        "maintenance",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "operations",
       "maintenance",
@@ -5543,11 +7991,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Kiran Menon",
     "department": "Finance",
     "createdAt": "2024-004-15T10:00:00Z",
-    "fileSize": 1791260,
+    "fileSize": 2899653,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Finance document for KMRL operations. Assigned to Kiran Menon.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nFINANCE DIRECTORATE \u00b7 DOCUMENT REF: KMRL/FINANCE/2024/123\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the finance protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Kiran Menon (Finance Department, Email: kiran.menon43@kmrl.in). Contract Reference: CNT-2024-043.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 1300000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Finance Directorate.\n\nRECORD AUTHORIZED BY: KIRAN MENON (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nFINANCE DIRECTORATE \u00b7 DOCUMENT REF: KMRL/FINANCE/2024/123\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the finance protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Kiran Menon (Finance Department, Email: kiran.menon43@kmrl.in). Contract Reference: CNT-2024-043.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 1200000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Finance Directorate.\n\nRECORD AUTHORIZED BY: KIRAN MENON (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Q1 Quarterly Financial Audit & Revenue Breakdown #123: Fully processed and verified under KMRL FINANCE Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Kiran Menon.",
+      "keyFindings": [
+        "1. Operational Telemetry: Finance parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Finance department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "High",
+      "department": "Finance",
+      "tags": [
+        "finance",
+        "finance",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "finance",
       "finance",
@@ -5570,11 +8038,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Nisha Prabhu",
     "department": "HR",
     "createdAt": "2024-005-15T10:00:00Z",
-    "fileSize": 1922458,
+    "fileSize": 1190792,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official HR document for KMRL operations. Assigned to Nisha Prabhu.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nHR DIRECTORATE \u00b7 DOCUMENT REF: KMRL/HR/2024/124\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the hr protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Nisha Prabhu (HR Department, Email: nisha.prabhu44@kmrl.in). Contract Reference: CNT-2024-044.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 5900000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to HR Directorate.\n\nRECORD AUTHORIZED BY: NISHA PRABHU (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nHR DIRECTORATE \u00b7 DOCUMENT REF: KMRL/HR/2024/124\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the hr protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Nisha Prabhu (HR Department, Email: nisha.prabhu44@kmrl.in). Contract Reference: CNT-2024-044.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 3500000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to HR Directorate.\n\nRECORD AUTHORIZED BY: NISHA PRABHU (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of HR Employee Benefit Policy & Night Shift Allowance #124: Fully processed and verified under KMRL HR Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Nisha Prabhu.",
+      "keyFindings": [
+        "1. Operational Telemetry: HR parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for HR department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Critical",
+      "department": "HR",
+      "tags": [
+        "hr",
+        "hr",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "hr",
       "hr",
@@ -5597,11 +8085,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Aravind Sharma",
     "department": "Legal",
     "createdAt": "2024-006-15T10:00:00Z",
-    "fileSize": 1899184,
+    "fileSize": 1601137,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Maintenance document for KMRL operations. Assigned to Aravind Sharma.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nMAINTENANCE DIRECTORATE \u00b7 DOCUMENT REF: KMRL/MAINTENANCE/2024/125\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the maintenance protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Aravind Sharma (Legal Department, Email: aravind.sharma45@kmrl.in). Contract Reference: CNT-2024-045.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 1600000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Legal Directorate.\n\nRECORD AUTHORIZED BY: ARAVIND SHARMA (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nMAINTENANCE DIRECTORATE \u00b7 DOCUMENT REF: KMRL/MAINTENANCE/2024/125\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the maintenance protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Aravind Sharma (Legal Department, Email: aravind.sharma45@kmrl.in). Contract Reference: CNT-2024-045.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 4600000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Legal Directorate.\n\nRECORD AUTHORIZED BY: ARAVIND SHARMA (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Water Metro Phase 2 Electric Boat SLA #125: Fully processed and verified under KMRL MAINTENANCE Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Aravind Sharma.",
+      "keyFindings": [
+        "1. Operational Telemetry: Maintenance parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Legal department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "Legal",
+      "tags": [
+        "maintenance",
+        "legal",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "maintenance",
       "legal",
@@ -5624,11 +8132,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Geetha Verma",
     "department": "Procurement",
     "createdAt": "2024-001-15T10:00:00Z",
-    "fileSize": 3410687,
+    "fileSize": 538459,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Legal document for KMRL operations. Assigned to Geetha Verma.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nLEGAL DIRECTORATE \u00b7 DOCUMENT REF: KMRL/LEGAL/2024/126\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the legal protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Geetha Verma (Procurement Department, Email: geetha.verma46@kmrl.in). Contract Reference: CNT-2024-046.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 1200000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Procurement Directorate.\n\nRECORD AUTHORIZED BY: GEETHA VERMA (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nLEGAL DIRECTORATE \u00b7 DOCUMENT REF: KMRL/LEGAL/2024/126\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the legal protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Geetha Verma (Procurement Department, Email: geetha.verma46@kmrl.in). Contract Reference: CNT-2024-046.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 5900000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Procurement Directorate.\n\nRECORD AUTHORIZED BY: GEETHA VERMA (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Automatic Fare Collection (AFC) QR Upgrade Tender #126: Fully processed and verified under KMRL LEGAL Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Geetha Verma.",
+      "keyFindings": [
+        "1. Operational Telemetry: Legal parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Procurement department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "Procurement",
+      "tags": [
+        "legal",
+        "procurement",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "legal",
       "procurement",
@@ -5651,11 +8179,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Prashanth Iyer",
     "department": "Safety",
     "createdAt": "2024-002-15T10:00:00Z",
-    "fileSize": 1112397,
+    "fileSize": 3433142,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Procurement document for KMRL operations. Assigned to Prashanth Iyer.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nPROCUREMENT DIRECTORATE \u00b7 DOCUMENT REF: KMRL/PROCUREMENT/2024/127\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the procurement protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Prashanth Iyer (Safety Department, Email: prashanth.iyer47@kmrl.in). Contract Reference: CNT-2024-047.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 4500000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Safety Directorate.\n\nRECORD AUTHORIZED BY: PRASHANTH IYER (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nPROCUREMENT DIRECTORATE \u00b7 DOCUMENT REF: KMRL/PROCUREMENT/2024/127\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the procurement protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Prashanth Iyer (Safety Department, Email: prashanth.iyer47@kmrl.in). Contract Reference: CNT-2024-047.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 1300000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Safety Directorate.\n\nRECORD AUTHORIZED BY: PRASHANTH IYER (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Overhead Equipment (OHE) Traction Maintenance Schedule #127: Fully processed and verified under KMRL PROCUREMENT Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Prashanth Iyer.",
+      "keyFindings": [
+        "1. Operational Telemetry: Procurement parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Safety department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "High",
+      "department": "Safety",
+      "tags": [
+        "procurement",
+        "safety",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "procurement",
       "safety",
@@ -5678,11 +8226,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Sridevi Pillai",
     "department": "Engineering",
     "createdAt": "2024-003-15T10:00:00Z",
-    "fileSize": 2227422,
+    "fileSize": 1919305,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Engineering document for KMRL operations. Assigned to Sridevi Pillai.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nENGINEERING DIRECTORATE \u00b7 DOCUMENT REF: KMRL/ENGINEERING/2024/128\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the engineering protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Sridevi Pillai (Engineering Department, Email: sridevi.pillai48@kmrl.in). Contract Reference: CNT-2024-048.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 3500000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Engineering Directorate.\n\nRECORD AUTHORIZED BY: SRIDEVI PILLAI (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nENGINEERING DIRECTORATE \u00b7 DOCUMENT REF: KMRL/ENGINEERING/2024/128\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the engineering protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Sridevi Pillai (Engineering Department, Email: sridevi.pillai48@kmrl.in). Contract Reference: CNT-2024-048.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 4200000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Engineering Directorate.\n\nRECORD AUTHORIZED BY: SRIDEVI PILLAI (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Muttom Depot Solar PV Rooftop Installation Bid #128: Fully processed and verified under KMRL ENGINEERING Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Sridevi Pillai.",
+      "keyFindings": [
+        "1. Operational Telemetry: Engineering parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Engineering department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Critical",
+      "department": "Engineering",
+      "tags": [
+        "engineering",
+        "engineering",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "engineering",
       "engineering",
@@ -5705,11 +8273,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Jayesh Swaminathan",
     "department": "IT",
     "createdAt": "2024-004-15T10:00:00Z",
-    "fileSize": 1333674,
+    "fileSize": 2832361,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Water Metro document for KMRL operations. Assigned to Jayesh Swaminathan.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nWATER METRO DIRECTORATE \u00b7 DOCUMENT REF: KMRL/WATER METRO/2024/129\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the water metro protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Jayesh Swaminathan (IT Department, Email: jayesh.swaminathan49@kmrl.in). Contract Reference: CNT-2024-049.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 2300000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to IT Directorate.\n\nRECORD AUTHORIZED BY: JAYESH SWAMINATHAN (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nWATER METRO DIRECTORATE \u00b7 DOCUMENT REF: KMRL/WATER METRO/2024/129\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the water metro protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Jayesh Swaminathan (IT Department, Email: jayesh.swaminathan49@kmrl.in). Contract Reference: CNT-2024-049.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 4100000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to IT Directorate.\n\nRECORD AUTHORIZED BY: JAYESH SWAMINATHAN (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Station Housekeeping & Sanitation Operations SLA #129: Fully processed and verified under KMRL WATER METRO Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Jayesh Swaminathan.",
+      "keyFindings": [
+        "1. Operational Telemetry: Water Metro parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for IT department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "IT",
+      "tags": [
+        "water metro",
+        "it",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "water metro",
       "it",
@@ -5732,11 +8320,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Radhika Nambiar",
     "department": "Water Metro",
     "createdAt": "2024-005-15T10:00:00Z",
-    "fileSize": 1713550,
+    "fileSize": 3123683,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official IT document for KMRL operations. Assigned to Radhika Nambiar.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nIT DIRECTORATE \u00b7 DOCUMENT REF: KMRL/IT/2024/130\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the it protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Radhika Nambiar (Water Metro Department, Email: radhika.nambiar50@kmrl.in). Contract Reference: CNT-2024-050.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 2800000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Water Metro Directorate.\n\nRECORD AUTHORIZED BY: RADHIKA NAMBIAR (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nIT DIRECTORATE \u00b7 DOCUMENT REF: KMRL/IT/2024/130\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the it protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Radhika Nambiar (Water Metro Department, Email: radhika.nambiar50@kmrl.in). Contract Reference: CNT-2024-050.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 1600000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Water Metro Directorate.\n\nRECORD AUTHORIZED BY: RADHIKA NAMBIAR (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of IT Network & Cybersecurity Vulnerability Audit #130: Fully processed and verified under KMRL IT Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Radhika Nambiar.",
+      "keyFindings": [
+        "1. Operational Telemetry: IT parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Water Metro department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "Water Metro",
+      "tags": [
+        "it",
+        "water metro",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "it",
       "water metro",
@@ -5759,11 +8367,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Praveen Panicker",
     "department": "Operations",
     "createdAt": "2024-006-15T10:00:00Z",
-    "fileSize": 3023078,
+    "fileSize": 1986520,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Safety document for KMRL operations. Assigned to Praveen Panicker.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nSAFETY DIRECTORATE \u00b7 DOCUMENT REF: KMRL/SAFETY/2024/131\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the safety protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Praveen Panicker (Operations Department, Email: praveen.panicker51@kmrl.in). Contract Reference: CNT-2024-051.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 5400000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Operations Directorate.\n\nRECORD AUTHORIZED BY: PRAVEEN PANICKER (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nSAFETY DIRECTORATE \u00b7 DOCUMENT REF: KMRL/SAFETY/2024/131\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the safety protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Praveen Panicker (Operations Department, Email: praveen.panicker51@kmrl.in). Contract Reference: CNT-2024-051.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 4600000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Operations Directorate.\n\nRECORD AUTHORIZED BY: PRAVEEN PANICKER (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Safety Audit & Track Inspection Report #131: Fully processed and verified under KMRL SAFETY Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Praveen Panicker.",
+      "keyFindings": [
+        "1. Operational Telemetry: Safety parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Operations department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "High",
+      "department": "Operations",
+      "tags": [
+        "safety",
+        "operations",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "safety",
       "operations",
@@ -5786,11 +8414,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Asha Kurup",
     "department": "Maintenance",
     "createdAt": "2024-001-15T10:00:00Z",
-    "fileSize": 1186289,
+    "fileSize": 553091,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Operations document for KMRL operations. Assigned to Asha Kurup.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nOPERATIONS DIRECTORATE \u00b7 DOCUMENT REF: KMRL/OPERATIONS/2024/132\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the operations protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Asha Kurup (Maintenance Department, Email: asha.kurup52@kmrl.in). Contract Reference: CNT-2024-052.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 1600000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Maintenance Directorate.\n\nRECORD AUTHORIZED BY: ASHA KURUP (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nOPERATIONS DIRECTORATE \u00b7 DOCUMENT REF: KMRL/OPERATIONS/2024/132\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the operations protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Asha Kurup (Maintenance Department, Email: asha.kurup52@kmrl.in). Contract Reference: CNT-2024-052.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 3100000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Maintenance Directorate.\n\nRECORD AUTHORIZED BY: ASHA KURUP (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Rolling Stock Preventive Maintenance Protocol #132: Fully processed and verified under KMRL OPERATIONS Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Asha Kurup.",
+      "keyFindings": [
+        "1. Operational Telemetry: Operations parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Maintenance department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Critical",
+      "department": "Maintenance",
+      "tags": [
+        "operations",
+        "maintenance",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "operations",
       "maintenance",
@@ -5813,11 +8461,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Girish Sundaram",
     "department": "Finance",
     "createdAt": "2024-002-15T10:00:00Z",
-    "fileSize": 2461001,
+    "fileSize": 1789672,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Finance document for KMRL operations. Assigned to Girish Sundaram.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nFINANCE DIRECTORATE \u00b7 DOCUMENT REF: KMRL/FINANCE/2024/133\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the finance protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Girish Sundaram (Finance Department, Email: girish.sundaram53@kmrl.in). Contract Reference: CNT-2024-053.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 5400000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Finance Directorate.\n\nRECORD AUTHORIZED BY: GIRISH SUNDARAM (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nFINANCE DIRECTORATE \u00b7 DOCUMENT REF: KMRL/FINANCE/2024/133\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the finance protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Girish Sundaram (Finance Department, Email: girish.sundaram53@kmrl.in). Contract Reference: CNT-2024-053.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 1100000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Finance Directorate.\n\nRECORD AUTHORIZED BY: GIRISH SUNDARAM (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Q1 Quarterly Financial Audit & Revenue Breakdown #133: Fully processed and verified under KMRL FINANCE Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Girish Sundaram.",
+      "keyFindings": [
+        "1. Operational Telemetry: Finance parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Finance department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "Finance",
+      "tags": [
+        "finance",
+        "finance",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "finance",
       "finance",
@@ -5840,11 +8508,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Vandana Joshi",
     "department": "HR",
     "createdAt": "2024-003-15T10:00:00Z",
-    "fileSize": 2698462,
+    "fileSize": 3289255,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official HR document for KMRL operations. Assigned to Vandana Joshi.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nHR DIRECTORATE \u00b7 DOCUMENT REF: KMRL/HR/2024/134\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the hr protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Vandana Joshi (HR Department, Email: vandana.joshi54@kmrl.in). Contract Reference: CNT-2024-054.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 4600000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to HR Directorate.\n\nRECORD AUTHORIZED BY: VANDANA JOSHI (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nHR DIRECTORATE \u00b7 DOCUMENT REF: KMRL/HR/2024/134\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the hr protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Vandana Joshi (HR Department, Email: vandana.joshi54@kmrl.in). Contract Reference: CNT-2024-054.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 3400000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to HR Directorate.\n\nRECORD AUTHORIZED BY: VANDANA JOSHI (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of HR Employee Benefit Policy & Night Shift Allowance #134: Fully processed and verified under KMRL HR Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Vandana Joshi.",
+      "keyFindings": [
+        "1. Operational Telemetry: HR parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for HR department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "HR",
+      "tags": [
+        "hr",
+        "hr",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "hr",
       "hr",
@@ -5867,11 +8555,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Venkatesh Chakraborty",
     "department": "Legal",
     "createdAt": "2024-004-15T10:00:00Z",
-    "fileSize": 2377253,
+    "fileSize": 926194,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Maintenance document for KMRL operations. Assigned to Venkatesh Chakraborty.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nMAINTENANCE DIRECTORATE \u00b7 DOCUMENT REF: KMRL/MAINTENANCE/2024/135\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the maintenance protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Venkatesh Chakraborty (Legal Department, Email: venkatesh.chakraborty55@kmrl.in). Contract Reference: CNT-2024-055.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 1000000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Legal Directorate.\n\nRECORD AUTHORIZED BY: VENKATESH CHAKRABORTY (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nMAINTENANCE DIRECTORATE \u00b7 DOCUMENT REF: KMRL/MAINTENANCE/2024/135\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the maintenance protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Venkatesh Chakraborty (Legal Department, Email: venkatesh.chakraborty55@kmrl.in). Contract Reference: CNT-2024-055.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 5000000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Legal Directorate.\n\nRECORD AUTHORIZED BY: VENKATESH CHAKRABORTY (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Water Metro Phase 2 Electric Boat SLA #135: Fully processed and verified under KMRL MAINTENANCE Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Venkatesh Chakraborty.",
+      "keyFindings": [
+        "1. Operational Telemetry: Maintenance parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Legal department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "High",
+      "department": "Legal",
+      "tags": [
+        "maintenance",
+        "legal",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "maintenance",
       "legal",
@@ -5894,11 +8602,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Deepika Gupta",
     "department": "Procurement",
     "createdAt": "2024-005-15T10:00:00Z",
-    "fileSize": 526281,
+    "fileSize": 620594,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Legal document for KMRL operations. Assigned to Deepika Gupta.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nLEGAL DIRECTORATE \u00b7 DOCUMENT REF: KMRL/LEGAL/2024/136\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the legal protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Deepika Gupta (Procurement Department, Email: deepika.gupta56@kmrl.in). Contract Reference: CNT-2024-056.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 3500000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Procurement Directorate.\n\nRECORD AUTHORIZED BY: DEEPIKA GUPTA (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nLEGAL DIRECTORATE \u00b7 DOCUMENT REF: KMRL/LEGAL/2024/136\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the legal protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Deepika Gupta (Procurement Department, Email: deepika.gupta56@kmrl.in). Contract Reference: CNT-2024-056.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 3400000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Procurement Directorate.\n\nRECORD AUTHORIZED BY: DEEPIKA GUPTA (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Automatic Fare Collection (AFC) QR Upgrade Tender #136: Fully processed and verified under KMRL LEGAL Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Deepika Gupta.",
+      "keyFindings": [
+        "1. Operational Telemetry: Legal parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Procurement department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Critical",
+      "department": "Procurement",
+      "tags": [
+        "legal",
+        "procurement",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "legal",
       "procurement",
@@ -5921,11 +8649,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Manish Bhattacharya",
     "department": "Safety",
     "createdAt": "2024-006-15T10:00:00Z",
-    "fileSize": 550925,
+    "fileSize": 1395292,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Procurement document for KMRL operations. Assigned to Manish Bhattacharya.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nPROCUREMENT DIRECTORATE \u00b7 DOCUMENT REF: KMRL/PROCUREMENT/2024/137\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the procurement protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Manish Bhattacharya (Safety Department, Email: manish.bhattacharya57@kmrl.in). Contract Reference: CNT-2024-057.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 2500000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Safety Directorate.\n\nRECORD AUTHORIZED BY: MANISH BHATTACHARYA (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nPROCUREMENT DIRECTORATE \u00b7 DOCUMENT REF: KMRL/PROCUREMENT/2024/137\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the procurement protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Manish Bhattacharya (Safety Department, Email: manish.bhattacharya57@kmrl.in). Contract Reference: CNT-2024-057.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 1800000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Safety Directorate.\n\nRECORD AUTHORIZED BY: MANISH BHATTACHARYA (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Overhead Equipment (OHE) Traction Maintenance Schedule #137: Fully processed and verified under KMRL PROCUREMENT Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Manish Bhattacharya.",
+      "keyFindings": [
+        "1. Operational Telemetry: Procurement parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Safety department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "Safety",
+      "tags": [
+        "procurement",
+        "safety",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "procurement",
       "safety",
@@ -5948,11 +8696,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Reshma Varma",
     "department": "Engineering",
     "createdAt": "2024-001-15T10:00:00Z",
-    "fileSize": 2880524,
+    "fileSize": 3461631,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Engineering document for KMRL operations. Assigned to Reshma Varma.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nENGINEERING DIRECTORATE \u00b7 DOCUMENT REF: KMRL/ENGINEERING/2024/138\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the engineering protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Reshma Varma (Engineering Department, Email: reshma.varma58@kmrl.in). Contract Reference: CNT-2024-058.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 6000000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Engineering Directorate.\n\nRECORD AUTHORIZED BY: RESHMA VARMA (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nENGINEERING DIRECTORATE \u00b7 DOCUMENT REF: KMRL/ENGINEERING/2024/138\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the engineering protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Reshma Varma (Engineering Department, Email: reshma.varma58@kmrl.in). Contract Reference: CNT-2024-058.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 4800000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Engineering Directorate.\n\nRECORD AUTHORIZED BY: RESHMA VARMA (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Muttom Depot Solar PV Rooftop Installation Bid #138: Fully processed and verified under KMRL ENGINEERING Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Reshma Varma.",
+      "keyFindings": [
+        "1. Operational Telemetry: Engineering parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Engineering department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "Engineering",
+      "tags": [
+        "engineering",
+        "engineering",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "engineering",
       "engineering",
@@ -5975,11 +8743,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Nitin Deshmukh",
     "department": "IT",
     "createdAt": "2024-002-15T10:00:00Z",
-    "fileSize": 833729,
+    "fileSize": 2917874,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Water Metro document for KMRL operations. Assigned to Nitin Deshmukh.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nWATER METRO DIRECTORATE \u00b7 DOCUMENT REF: KMRL/WATER METRO/2024/139\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the water metro protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Nitin Deshmukh (IT Department, Email: nitin.deshmukh59@kmrl.in). Contract Reference: CNT-2024-059.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 2100000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to IT Directorate.\n\nRECORD AUTHORIZED BY: NITIN DESHMUKH (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nWATER METRO DIRECTORATE \u00b7 DOCUMENT REF: KMRL/WATER METRO/2024/139\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the water metro protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Nitin Deshmukh (IT Department, Email: nitin.deshmukh59@kmrl.in). Contract Reference: CNT-2024-059.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 2200000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to IT Directorate.\n\nRECORD AUTHORIZED BY: NITIN DESHMUKH (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Station Housekeeping & Sanitation Operations SLA #139: Fully processed and verified under KMRL WATER METRO Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Nitin Deshmukh.",
+      "keyFindings": [
+        "1. Operational Telemetry: Water Metro parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for IT department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "High",
+      "department": "IT",
+      "tags": [
+        "water metro",
+        "it",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "water metro",
       "it",
@@ -6002,11 +8790,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Reena Bhat",
     "department": "Water Metro",
     "createdAt": "2024-003-15T10:00:00Z",
-    "fileSize": 2157777,
+    "fileSize": 1994765,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official IT document for KMRL operations. Assigned to Reena Bhat.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nIT DIRECTORATE \u00b7 DOCUMENT REF: KMRL/IT/2024/140\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the it protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Reena Bhat (Water Metro Department, Email: reena.bhat60@kmrl.in). Contract Reference: CNT-2024-060.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 1900000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Water Metro Directorate.\n\nRECORD AUTHORIZED BY: REENA BHAT (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nIT DIRECTORATE \u00b7 DOCUMENT REF: KMRL/IT/2024/140\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the it protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Reena Bhat (Water Metro Department, Email: reena.bhat60@kmrl.in). Contract Reference: CNT-2024-060.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 4300000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Water Metro Directorate.\n\nRECORD AUTHORIZED BY: REENA BHAT (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of IT Network & Cybersecurity Vulnerability Audit #140: Fully processed and verified under KMRL IT Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Reena Bhat.",
+      "keyFindings": [
+        "1. Operational Telemetry: IT parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Water Metro department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Critical",
+      "department": "Water Metro",
+      "tags": [
+        "it",
+        "water metro",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "it",
       "water metro",
@@ -6029,11 +8837,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Satish Kulkarni",
     "department": "Operations",
     "createdAt": "2024-004-15T10:00:00Z",
-    "fileSize": 864656,
+    "fileSize": 1176628,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Safety document for KMRL operations. Assigned to Satish Kulkarni.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nSAFETY DIRECTORATE \u00b7 DOCUMENT REF: KMRL/SAFETY/2024/141\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the safety protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Satish Kulkarni (Operations Department, Email: satish.kulkarni61@kmrl.in). Contract Reference: CNT-2024-061.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 5600000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Operations Directorate.\n\nRECORD AUTHORIZED BY: SATISH KULKARNI (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nSAFETY DIRECTORATE \u00b7 DOCUMENT REF: KMRL/SAFETY/2024/141\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the safety protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Satish Kulkarni (Operations Department, Email: satish.kulkarni61@kmrl.in). Contract Reference: CNT-2024-061.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 2600000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Operations Directorate.\n\nRECORD AUTHORIZED BY: SATISH KULKARNI (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Safety Audit & Track Inspection Report #141: Fully processed and verified under KMRL SAFETY Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Satish Kulkarni.",
+      "keyFindings": [
+        "1. Operational Telemetry: Safety parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Operations department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "Operations",
+      "tags": [
+        "safety",
+        "operations",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "safety",
       "operations",
@@ -6056,11 +8884,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Smita Saxena",
     "department": "Maintenance",
     "createdAt": "2024-005-15T10:00:00Z",
-    "fileSize": 894374,
+    "fileSize": 786263,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Operations document for KMRL operations. Assigned to Smita Saxena.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nOPERATIONS DIRECTORATE \u00b7 DOCUMENT REF: KMRL/OPERATIONS/2024/142\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the operations protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Smita Saxena (Maintenance Department, Email: smita.saxena62@kmrl.in). Contract Reference: CNT-2024-062.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 3100000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Maintenance Directorate.\n\nRECORD AUTHORIZED BY: SMITA SAXENA (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nOPERATIONS DIRECTORATE \u00b7 DOCUMENT REF: KMRL/OPERATIONS/2024/142\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the operations protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Smita Saxena (Maintenance Department, Email: smita.saxena62@kmrl.in). Contract Reference: CNT-2024-062.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 1400000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Maintenance Directorate.\n\nRECORD AUTHORIZED BY: SMITA SAXENA (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Rolling Stock Preventive Maintenance Protocol #142: Fully processed and verified under KMRL OPERATIONS Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Smita Saxena.",
+      "keyFindings": [
+        "1. Operational Telemetry: Operations parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Maintenance department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "Maintenance",
+      "tags": [
+        "operations",
+        "maintenance",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "operations",
       "maintenance",
@@ -6083,11 +8931,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Dinesh Raghavan",
     "department": "Finance",
     "createdAt": "2024-006-15T10:00:00Z",
-    "fileSize": 2541110,
+    "fileSize": 2304186,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Finance document for KMRL operations. Assigned to Dinesh Raghavan.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nFINANCE DIRECTORATE \u00b7 DOCUMENT REF: KMRL/FINANCE/2024/143\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the finance protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Dinesh Raghavan (Finance Department, Email: dinesh.raghavan63@kmrl.in). Contract Reference: CNT-2024-063.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 3700000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Finance Directorate.\n\nRECORD AUTHORIZED BY: DINESH RAGHAVAN (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nFINANCE DIRECTORATE \u00b7 DOCUMENT REF: KMRL/FINANCE/2024/143\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the finance protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Dinesh Raghavan (Finance Department, Email: dinesh.raghavan63@kmrl.in). Contract Reference: CNT-2024-063.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 3900000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Finance Directorate.\n\nRECORD AUTHORIZED BY: DINESH RAGHAVAN (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Q1 Quarterly Financial Audit & Revenue Breakdown #143: Fully processed and verified under KMRL FINANCE Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Dinesh Raghavan.",
+      "keyFindings": [
+        "1. Operational Telemetry: Finance parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Finance department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "High",
+      "department": "Finance",
+      "tags": [
+        "finance",
+        "finance",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "finance",
       "finance",
@@ -6110,11 +8978,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Anitha Hegde",
     "department": "HR",
     "createdAt": "2024-001-15T10:00:00Z",
-    "fileSize": 3167269,
+    "fileSize": 2246594,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official HR document for KMRL operations. Assigned to Anitha Hegde.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nHR DIRECTORATE \u00b7 DOCUMENT REF: KMRL/HR/2024/144\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the hr protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Anitha Hegde (HR Department, Email: anitha.hegde64@kmrl.in). Contract Reference: CNT-2024-064.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 1700000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to HR Directorate.\n\nRECORD AUTHORIZED BY: ANITHA HEGDE (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nHR DIRECTORATE \u00b7 DOCUMENT REF: KMRL/HR/2024/144\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the hr protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Anitha Hegde (HR Department, Email: anitha.hegde64@kmrl.in). Contract Reference: CNT-2024-064.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 1900000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to HR Directorate.\n\nRECORD AUTHORIZED BY: ANITHA HEGDE (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of HR Employee Benefit Policy & Night Shift Allowance #144: Fully processed and verified under KMRL HR Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Anitha Hegde.",
+      "keyFindings": [
+        "1. Operational Telemetry: HR parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for HR department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Critical",
+      "department": "HR",
+      "tags": [
+        "hr",
+        "hr",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "hr",
       "hr",
@@ -6137,11 +9025,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Ashok Chawla",
     "department": "Legal",
     "createdAt": "2024-002-15T10:00:00Z",
-    "fileSize": 2904612,
+    "fileSize": 1196819,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Maintenance document for KMRL operations. Assigned to Ashok Chawla.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nMAINTENANCE DIRECTORATE \u00b7 DOCUMENT REF: KMRL/MAINTENANCE/2024/145\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the maintenance protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Ashok Chawla (Legal Department, Email: ashok.chawla65@kmrl.in). Contract Reference: CNT-2024-065.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 5700000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Legal Directorate.\n\nRECORD AUTHORIZED BY: ASHOK CHAWLA (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nMAINTENANCE DIRECTORATE \u00b7 DOCUMENT REF: KMRL/MAINTENANCE/2024/145\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the maintenance protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Ashok Chawla (Legal Department, Email: ashok.chawla65@kmrl.in). Contract Reference: CNT-2024-065.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 1600000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Legal Directorate.\n\nRECORD AUTHORIZED BY: ASHOK CHAWLA (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Water Metro Phase 2 Electric Boat SLA #145: Fully processed and verified under KMRL MAINTENANCE Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Ashok Chawla.",
+      "keyFindings": [
+        "1. Operational Telemetry: Maintenance parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Legal department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "Legal",
+      "tags": [
+        "maintenance",
+        "legal",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "maintenance",
       "legal",
@@ -6164,11 +9072,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Sangeetha Roy",
     "department": "Procurement",
     "createdAt": "2024-003-15T10:00:00Z",
-    "fileSize": 2649858,
+    "fileSize": 1011142,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Legal document for KMRL operations. Assigned to Sangeetha Roy.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nLEGAL DIRECTORATE \u00b7 DOCUMENT REF: KMRL/LEGAL/2024/146\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the legal protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Sangeetha Roy (Procurement Department, Email: sangeetha.roy66@kmrl.in). Contract Reference: CNT-2024-066.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 3500000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Procurement Directorate.\n\nRECORD AUTHORIZED BY: SANGEETHA ROY (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nLEGAL DIRECTORATE \u00b7 DOCUMENT REF: KMRL/LEGAL/2024/146\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the legal protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Sangeetha Roy (Procurement Department, Email: sangeetha.roy66@kmrl.in). Contract Reference: CNT-2024-066.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 3100000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Procurement Directorate.\n\nRECORD AUTHORIZED BY: SANGEETHA ROY (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Automatic Fare Collection (AFC) QR Upgrade Tender #146: Fully processed and verified under KMRL LEGAL Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Sangeetha Roy.",
+      "keyFindings": [
+        "1. Operational Telemetry: Legal parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Procurement department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "Procurement",
+      "tags": [
+        "legal",
+        "procurement",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "legal",
       "procurement",
@@ -6191,11 +9119,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Biju Naik",
     "department": "Safety",
     "createdAt": "2024-004-15T10:00:00Z",
-    "fileSize": 643943,
+    "fileSize": 2749460,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Procurement document for KMRL operations. Assigned to Biju Naik.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nPROCUREMENT DIRECTORATE \u00b7 DOCUMENT REF: KMRL/PROCUREMENT/2024/147\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the procurement protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Biju Naik (Safety Department, Email: biju.naik67@kmrl.in). Contract Reference: CNT-2024-067.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 2100000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Safety Directorate.\n\nRECORD AUTHORIZED BY: BIJU NAIK (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nPROCUREMENT DIRECTORATE \u00b7 DOCUMENT REF: KMRL/PROCUREMENT/2024/147\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the procurement protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Biju Naik (Safety Department, Email: biju.naik67@kmrl.in). Contract Reference: CNT-2024-067.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 4300000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Safety Directorate.\n\nRECORD AUTHORIZED BY: BIJU NAIK (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Overhead Equipment (OHE) Traction Maintenance Schedule #147: Fully processed and verified under KMRL PROCUREMENT Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Biju Naik.",
+      "keyFindings": [
+        "1. Operational Telemetry: Procurement parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Safety department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "High",
+      "department": "Safety",
+      "tags": [
+        "procurement",
+        "safety",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "procurement",
       "safety",
@@ -6218,11 +9166,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Bindu Shenoy",
     "department": "Engineering",
     "createdAt": "2024-005-15T10:00:00Z",
-    "fileSize": 1805877,
+    "fileSize": 669471,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Engineering document for KMRL operations. Assigned to Bindu Shenoy.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nENGINEERING DIRECTORATE \u00b7 DOCUMENT REF: KMRL/ENGINEERING/2024/148\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the engineering protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Bindu Shenoy (Engineering Department, Email: bindu.shenoy68@kmrl.in). Contract Reference: CNT-2024-068.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 5400000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Engineering Directorate.\n\nRECORD AUTHORIZED BY: BINDU SHENOY (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nENGINEERING DIRECTORATE \u00b7 DOCUMENT REF: KMRL/ENGINEERING/2024/148\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the engineering protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Bindu Shenoy (Engineering Department, Email: bindu.shenoy68@kmrl.in). Contract Reference: CNT-2024-068.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 4300000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Engineering Directorate.\n\nRECORD AUTHORIZED BY: BINDU SHENOY (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Muttom Depot Solar PV Rooftop Installation Bid #148: Fully processed and verified under KMRL ENGINEERING Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Bindu Shenoy.",
+      "keyFindings": [
+        "1. Operational Telemetry: Engineering parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Engineering department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Critical",
+      "department": "Engineering",
+      "tags": [
+        "engineering",
+        "engineering",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "engineering",
       "engineering",
@@ -6245,11 +9213,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Vinod Pandey",
     "department": "IT",
     "createdAt": "2024-006-15T10:00:00Z",
-    "fileSize": 1495928,
+    "fileSize": 2116150,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Water Metro document for KMRL operations. Assigned to Vinod Pandey.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nWATER METRO DIRECTORATE \u00b7 DOCUMENT REF: KMRL/WATER METRO/2024/149\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the water metro protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Vinod Pandey (IT Department, Email: vinod.pandey69@kmrl.in). Contract Reference: CNT-2024-069.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 1500000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to IT Directorate.\n\nRECORD AUTHORIZED BY: VINOD PANDEY (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nWATER METRO DIRECTORATE \u00b7 DOCUMENT REF: KMRL/WATER METRO/2024/149\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the water metro protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Vinod Pandey (IT Department, Email: vinod.pandey69@kmrl.in). Contract Reference: CNT-2024-069.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 2500000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to IT Directorate.\n\nRECORD AUTHORIZED BY: VINOD PANDEY (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Station Housekeeping & Sanitation Operations SLA #149: Fully processed and verified under KMRL WATER METRO Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Vinod Pandey.",
+      "keyFindings": [
+        "1. Operational Telemetry: Water Metro parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for IT department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "IT",
+      "tags": [
+        "water metro",
+        "it",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "water metro",
       "it",
@@ -6272,11 +9260,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Sujatha Mishra",
     "department": "Water Metro",
     "createdAt": "2024-001-15T10:00:00Z",
-    "fileSize": 706626,
+    "fileSize": 2200651,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official IT document for KMRL operations. Assigned to Sujatha Mishra.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nIT DIRECTORATE \u00b7 DOCUMENT REF: KMRL/IT/2024/150\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the it protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Sujatha Mishra (Water Metro Department, Email: sujatha.mishra70@kmrl.in). Contract Reference: CNT-2024-070.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 1700000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Water Metro Directorate.\n\nRECORD AUTHORIZED BY: SUJATHA MISHRA (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nIT DIRECTORATE \u00b7 DOCUMENT REF: KMRL/IT/2024/150\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the it protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Sujatha Mishra (Water Metro Department, Email: sujatha.mishra70@kmrl.in). Contract Reference: CNT-2024-070.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 4700000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Water Metro Directorate.\n\nRECORD AUTHORIZED BY: SUJATHA MISHRA (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of IT Network & Cybersecurity Vulnerability Audit #150: Fully processed and verified under KMRL IT Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Sujatha Mishra.",
+      "keyFindings": [
+        "1. Operational Telemetry: IT parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Water Metro department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "Water Metro",
+      "tags": [
+        "it",
+        "water metro",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "it",
       "water metro",
@@ -6299,11 +9307,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Sudhir Reddy",
     "department": "Operations",
     "createdAt": "2024-002-15T10:00:00Z",
-    "fileSize": 501398,
+    "fileSize": 2699378,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Safety document for KMRL operations. Assigned to Sudhir Reddy.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nSAFETY DIRECTORATE \u00b7 DOCUMENT REF: KMRL/SAFETY/2024/151\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the safety protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Sudhir Reddy (Operations Department, Email: sudhir.reddy71@kmrl.in). Contract Reference: CNT-2024-071.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 1700000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Operations Directorate.\n\nRECORD AUTHORIZED BY: SUDHIR REDDY (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nSAFETY DIRECTORATE \u00b7 DOCUMENT REF: KMRL/SAFETY/2024/151\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the safety protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Sudhir Reddy (Operations Department, Email: sudhir.reddy71@kmrl.in). Contract Reference: CNT-2024-071.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 4100000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Operations Directorate.\n\nRECORD AUTHORIZED BY: SUDHIR REDDY (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Safety Audit & Track Inspection Report #151: Fully processed and verified under KMRL SAFETY Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Sudhir Reddy.",
+      "keyFindings": [
+        "1. Operational Telemetry: Safety parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Operations department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "High",
+      "department": "Operations",
+      "tags": [
+        "safety",
+        "operations",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "safety",
       "operations",
@@ -6326,11 +9354,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Chitra Rao",
     "department": "Maintenance",
     "createdAt": "2024-003-15T10:00:00Z",
-    "fileSize": 1158468,
+    "fileSize": 2820691,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Operations document for KMRL operations. Assigned to Chitra Rao.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nOPERATIONS DIRECTORATE \u00b7 DOCUMENT REF: KMRL/OPERATIONS/2024/152\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the operations protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Chitra Rao (Maintenance Department, Email: chitra.rao72@kmrl.in). Contract Reference: CNT-2024-072.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 3300000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Maintenance Directorate.\n\nRECORD AUTHORIZED BY: CHITRA RAO (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nOPERATIONS DIRECTORATE \u00b7 DOCUMENT REF: KMRL/OPERATIONS/2024/152\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the operations protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Chitra Rao (Maintenance Department, Email: chitra.rao72@kmrl.in). Contract Reference: CNT-2024-072.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 3600000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Maintenance Directorate.\n\nRECORD AUTHORIZED BY: CHITRA RAO (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Rolling Stock Preventive Maintenance Protocol #152: Fully processed and verified under KMRL OPERATIONS Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Chitra Rao.",
+      "keyFindings": [
+        "1. Operational Telemetry: Operations parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Maintenance department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Critical",
+      "department": "Maintenance",
+      "tags": [
+        "operations",
+        "maintenance",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "operations",
       "maintenance",
@@ -6353,11 +9401,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Ramesh Chaudhary",
     "department": "Finance",
     "createdAt": "2024-004-15T10:00:00Z",
-    "fileSize": 2476074,
+    "fileSize": 725588,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Finance document for KMRL operations. Assigned to Ramesh Chaudhary.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nFINANCE DIRECTORATE \u00b7 DOCUMENT REF: KMRL/FINANCE/2024/153\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the finance protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Ramesh Chaudhary (Finance Department, Email: ramesh.chaudhary73@kmrl.in). Contract Reference: CNT-2024-073.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 1900000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Finance Directorate.\n\nRECORD AUTHORIZED BY: RAMESH CHAUDHARY (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nFINANCE DIRECTORATE \u00b7 DOCUMENT REF: KMRL/FINANCE/2024/153\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the finance protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Ramesh Chaudhary (Finance Department, Email: ramesh.chaudhary73@kmrl.in). Contract Reference: CNT-2024-073.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 5600000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Finance Directorate.\n\nRECORD AUTHORIZED BY: RAMESH CHAUDHARY (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Q1 Quarterly Financial Audit & Revenue Breakdown #153: Fully processed and verified under KMRL FINANCE Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Ramesh Chaudhary.",
+      "keyFindings": [
+        "1. Operational Telemetry: Finance parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Finance department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "Finance",
+      "tags": [
+        "finance",
+        "finance",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "finance",
       "finance",
@@ -6380,11 +9448,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Leela Singhal",
     "department": "HR",
     "createdAt": "2024-005-15T10:00:00Z",
-    "fileSize": 2284687,
+    "fileSize": 2911147,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official HR document for KMRL operations. Assigned to Leela Singhal.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nHR DIRECTORATE \u00b7 DOCUMENT REF: KMRL/HR/2024/154\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the hr protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Leela Singhal (HR Department, Email: leela.singhal74@kmrl.in). Contract Reference: CNT-2024-074.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 3100000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to HR Directorate.\n\nRECORD AUTHORIZED BY: LEELA SINGHAL (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nHR DIRECTORATE \u00b7 DOCUMENT REF: KMRL/HR/2024/154\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the hr protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Leela Singhal (HR Department, Email: leela.singhal74@kmrl.in). Contract Reference: CNT-2024-074.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 5800000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to HR Directorate.\n\nRECORD AUTHORIZED BY: LEELA SINGHAL (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of HR Employee Benefit Policy & Night Shift Allowance #154: Fully processed and verified under KMRL HR Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Leela Singhal.",
+      "keyFindings": [
+        "1. Operational Telemetry: HR parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for HR department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "HR",
+      "tags": [
+        "hr",
+        "hr",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "hr",
       "hr",
@@ -6407,11 +9495,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Unnikrishnan Kapur",
     "department": "Legal",
     "createdAt": "2024-006-15T10:00:00Z",
-    "fileSize": 1847643,
+    "fileSize": 3210352,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Maintenance document for KMRL operations. Assigned to Unnikrishnan Kapur.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nMAINTENANCE DIRECTORATE \u00b7 DOCUMENT REF: KMRL/MAINTENANCE/2024/155\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the maintenance protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Unnikrishnan Kapur (Legal Department, Email: unnikrishnan.kapur75@kmrl.in). Contract Reference: CNT-2024-075.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 5500000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Legal Directorate.\n\nRECORD AUTHORIZED BY: UNNIKRISHNAN KAPUR (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nMAINTENANCE DIRECTORATE \u00b7 DOCUMENT REF: KMRL/MAINTENANCE/2024/155\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the maintenance protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Unnikrishnan Kapur (Legal Department, Email: unnikrishnan.kapur75@kmrl.in). Contract Reference: CNT-2024-075.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 2200000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Legal Directorate.\n\nRECORD AUTHORIZED BY: UNNIKRISHNAN KAPUR (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Water Metro Phase 2 Electric Boat SLA #155: Fully processed and verified under KMRL MAINTENANCE Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Unnikrishnan Kapur.",
+      "keyFindings": [
+        "1. Operational Telemetry: Maintenance parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Legal department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "High",
+      "department": "Legal",
+      "tags": [
+        "maintenance",
+        "legal",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "maintenance",
       "legal",
@@ -6434,11 +9542,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Jayanthi Aggarwal",
     "department": "Procurement",
     "createdAt": "2024-001-15T10:00:00Z",
-    "fileSize": 629186,
+    "fileSize": 2725701,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Legal document for KMRL operations. Assigned to Jayanthi Aggarwal.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nLEGAL DIRECTORATE \u00b7 DOCUMENT REF: KMRL/LEGAL/2024/156\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the legal protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Jayanthi Aggarwal (Procurement Department, Email: jayanthi.aggarwal76@kmrl.in). Contract Reference: CNT-2024-076.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 3000000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Procurement Directorate.\n\nRECORD AUTHORIZED BY: JAYANTHI AGGARWAL (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nLEGAL DIRECTORATE \u00b7 DOCUMENT REF: KMRL/LEGAL/2024/156\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the legal protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Jayanthi Aggarwal (Procurement Department, Email: jayanthi.aggarwal76@kmrl.in). Contract Reference: CNT-2024-076.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 1100000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Procurement Directorate.\n\nRECORD AUTHORIZED BY: JAYANTHI AGGARWAL (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Automatic Fare Collection (AFC) QR Upgrade Tender #156: Fully processed and verified under KMRL LEGAL Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Jayanthi Aggarwal.",
+      "keyFindings": [
+        "1. Operational Telemetry: Legal parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Procurement department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Critical",
+      "department": "Procurement",
+      "tags": [
+        "legal",
+        "procurement",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "legal",
       "procurement",
@@ -6461,11 +9589,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Subhash Dutta",
     "department": "Safety",
     "createdAt": "2024-002-15T10:00:00Z",
-    "fileSize": 2881229,
+    "fileSize": 551153,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Procurement document for KMRL operations. Assigned to Subhash Dutta.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nPROCUREMENT DIRECTORATE \u00b7 DOCUMENT REF: KMRL/PROCUREMENT/2024/157\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the procurement protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Subhash Dutta (Safety Department, Email: subhash.dutta77@kmrl.in). Contract Reference: CNT-2024-077.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 4100000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Safety Directorate.\n\nRECORD AUTHORIZED BY: SUBHASH DUTTA (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nPROCUREMENT DIRECTORATE \u00b7 DOCUMENT REF: KMRL/PROCUREMENT/2024/157\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the procurement protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Subhash Dutta (Safety Department, Email: subhash.dutta77@kmrl.in). Contract Reference: CNT-2024-077.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 3900000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Safety Directorate.\n\nRECORD AUTHORIZED BY: SUBHASH DUTTA (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Overhead Equipment (OHE) Traction Maintenance Schedule #157: Fully processed and verified under KMRL PROCUREMENT Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Subhash Dutta.",
+      "keyFindings": [
+        "1. Operational Telemetry: Procurement parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Safety department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "Safety",
+      "tags": [
+        "procurement",
+        "safety",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "procurement",
       "safety",
@@ -6488,11 +9636,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Mini Banerjee",
     "department": "Engineering",
     "createdAt": "2024-003-15T10:00:00Z",
-    "fileSize": 513071,
+    "fileSize": 2681157,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Engineering document for KMRL operations. Assigned to Mini Banerjee.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nENGINEERING DIRECTORATE \u00b7 DOCUMENT REF: KMRL/ENGINEERING/2024/158\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the engineering protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Mini Banerjee (Engineering Department, Email: mini.banerjee78@kmrl.in). Contract Reference: CNT-2024-078.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 1300000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Engineering Directorate.\n\nRECORD AUTHORIZED BY: MINI BANERJEE (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nENGINEERING DIRECTORATE \u00b7 DOCUMENT REF: KMRL/ENGINEERING/2024/158\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the engineering protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Mini Banerjee (Engineering Department, Email: mini.banerjee78@kmrl.in). Contract Reference: CNT-2024-078.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 3400000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Engineering Directorate.\n\nRECORD AUTHORIZED BY: MINI BANERJEE (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Muttom Depot Solar PV Rooftop Installation Bid #158: Fully processed and verified under KMRL ENGINEERING Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Mini Banerjee.",
+      "keyFindings": [
+        "1. Operational Telemetry: Engineering parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Engineering department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "Engineering",
+      "tags": [
+        "engineering",
+        "engineering",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "engineering",
       "engineering",
@@ -6515,11 +9683,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Sanosh Ghosh",
     "department": "IT",
     "createdAt": "2024-004-15T10:00:00Z",
-    "fileSize": 2248970,
+    "fileSize": 1481070,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Water Metro document for KMRL operations. Assigned to Sanosh Ghosh.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nWATER METRO DIRECTORATE \u00b7 DOCUMENT REF: KMRL/WATER METRO/2024/159\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the water metro protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Sanosh Ghosh (IT Department, Email: sanosh.ghosh79@kmrl.in). Contract Reference: CNT-2024-079.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 1400000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to IT Directorate.\n\nRECORD AUTHORIZED BY: SANOSH GHOSH (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nWATER METRO DIRECTORATE \u00b7 DOCUMENT REF: KMRL/WATER METRO/2024/159\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the water metro protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Sanosh Ghosh (IT Department, Email: sanosh.ghosh79@kmrl.in). Contract Reference: CNT-2024-079.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 4100000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to IT Directorate.\n\nRECORD AUTHORIZED BY: SANOSH GHOSH (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Station Housekeeping & Sanitation Operations SLA #159: Fully processed and verified under KMRL WATER METRO Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Sanosh Ghosh.",
+      "keyFindings": [
+        "1. Operational Telemetry: Water Metro parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for IT department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "High",
+      "department": "IT",
+      "tags": [
+        "water metro",
+        "it",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "water metro",
       "it",
@@ -6542,11 +9730,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Latha Sen",
     "department": "Water Metro",
     "createdAt": "2024-005-15T10:00:00Z",
-    "fileSize": 1051099,
+    "fileSize": 1696701,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official IT document for KMRL operations. Assigned to Latha Sen.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nIT DIRECTORATE \u00b7 DOCUMENT REF: KMRL/IT/2024/160\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the it protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Latha Sen (Water Metro Department, Email: latha.sen80@kmrl.in). Contract Reference: CNT-2024-080.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 3600000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Water Metro Directorate.\n\nRECORD AUTHORIZED BY: LATHA SEN (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nIT DIRECTORATE \u00b7 DOCUMENT REF: KMRL/IT/2024/160\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the it protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Latha Sen (Water Metro Department, Email: latha.sen80@kmrl.in). Contract Reference: CNT-2024-080.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 1300000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Water Metro Directorate.\n\nRECORD AUTHORIZED BY: LATHA SEN (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of IT Network & Cybersecurity Vulnerability Audit #160: Fully processed and verified under KMRL IT Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Latha Sen.",
+      "keyFindings": [
+        "1. Operational Telemetry: IT parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Water Metro department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Critical",
+      "department": "Water Metro",
+      "tags": [
+        "it",
+        "water metro",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "it",
       "water metro",
@@ -6569,11 +9777,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Arun Kumar",
     "department": "Operations",
     "createdAt": "2024-006-15T10:00:00Z",
-    "fileSize": 1592259,
+    "fileSize": 2057295,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Safety document for KMRL operations. Assigned to Arun Kumar.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nSAFETY DIRECTORATE \u00b7 DOCUMENT REF: KMRL/SAFETY/2024/161\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the safety protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Arun Kumar (Operations Department, Email: arun.kumar@kmrl.in). Contract Reference: CNT-2024-001.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 2800000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Operations Directorate.\n\nRECORD AUTHORIZED BY: ARUN KUMAR (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nSAFETY DIRECTORATE \u00b7 DOCUMENT REF: KMRL/SAFETY/2024/161\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the safety protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Arun Kumar (Operations Department, Email: arun.kumar@kmrl.in). Contract Reference: CNT-2024-001.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 2100000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Operations Directorate.\n\nRECORD AUTHORIZED BY: ARUN KUMAR (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Safety Audit & Track Inspection Report #161: Fully processed and verified under KMRL SAFETY Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Arun Kumar.",
+      "keyFindings": [
+        "1. Operational Telemetry: Safety parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Operations department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "Operations",
+      "tags": [
+        "safety",
+        "operations",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "safety",
       "operations",
@@ -6596,11 +9824,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Priya Nair",
     "department": "Maintenance",
     "createdAt": "2024-001-15T10:00:00Z",
-    "fileSize": 2391748,
+    "fileSize": 1703975,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Operations document for KMRL operations. Assigned to Priya Nair.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nOPERATIONS DIRECTORATE \u00b7 DOCUMENT REF: KMRL/OPERATIONS/2024/162\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the operations protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Priya Nair (Maintenance Department, Email: priya.nair@kmrl.in). Contract Reference: CNT-2024-002.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 5300000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Maintenance Directorate.\n\nRECORD AUTHORIZED BY: PRIYA NAIR (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nOPERATIONS DIRECTORATE \u00b7 DOCUMENT REF: KMRL/OPERATIONS/2024/162\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the operations protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Priya Nair (Maintenance Department, Email: priya.nair@kmrl.in). Contract Reference: CNT-2024-002.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 2800000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Maintenance Directorate.\n\nRECORD AUTHORIZED BY: PRIYA NAIR (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Rolling Stock Preventive Maintenance Protocol #162: Fully processed and verified under KMRL OPERATIONS Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Priya Nair.",
+      "keyFindings": [
+        "1. Operational Telemetry: Operations parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Maintenance department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "Maintenance",
+      "tags": [
+        "operations",
+        "maintenance",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "operations",
       "maintenance",
@@ -6623,11 +9871,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Rajan Menon",
     "department": "Finance",
     "createdAt": "2024-002-15T10:00:00Z",
-    "fileSize": 1006090,
+    "fileSize": 870434,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Finance document for KMRL operations. Assigned to Rajan Menon.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nFINANCE DIRECTORATE \u00b7 DOCUMENT REF: KMRL/FINANCE/2024/163\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the finance protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Rajan Menon (Finance Department, Email: rajan.menon@kmrl.in). Contract Reference: CNT-2024-003.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 3000000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Finance Directorate.\n\nRECORD AUTHORIZED BY: RAJAN MENON (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nFINANCE DIRECTORATE \u00b7 DOCUMENT REF: KMRL/FINANCE/2024/163\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the finance protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Rajan Menon (Finance Department, Email: rajan.menon@kmrl.in). Contract Reference: CNT-2024-003.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 1200000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Finance Directorate.\n\nRECORD AUTHORIZED BY: RAJAN MENON (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Q1 Quarterly Financial Audit & Revenue Breakdown #163: Fully processed and verified under KMRL FINANCE Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Rajan Menon.",
+      "keyFindings": [
+        "1. Operational Telemetry: Finance parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Finance department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "High",
+      "department": "Finance",
+      "tags": [
+        "finance",
+        "finance",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "finance",
       "finance",
@@ -6650,11 +9918,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Suresh Prabhu",
     "department": "HR",
     "createdAt": "2024-003-15T10:00:00Z",
-    "fileSize": 2500984,
+    "fileSize": 2068749,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official HR document for KMRL operations. Assigned to Suresh Prabhu.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nHR DIRECTORATE \u00b7 DOCUMENT REF: KMRL/HR/2024/164\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the hr protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Suresh Prabhu (HR Department, Email: suresh.prabhu@kmrl.in). Contract Reference: CNT-2024-004.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 4200000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to HR Directorate.\n\nRECORD AUTHORIZED BY: SURESH PRABHU (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nHR DIRECTORATE \u00b7 DOCUMENT REF: KMRL/HR/2024/164\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the hr protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Suresh Prabhu (HR Department, Email: suresh.prabhu@kmrl.in). Contract Reference: CNT-2024-004.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 4000000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to HR Directorate.\n\nRECORD AUTHORIZED BY: SURESH PRABHU (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of HR Employee Benefit Policy & Night Shift Allowance #164: Fully processed and verified under KMRL HR Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Suresh Prabhu.",
+      "keyFindings": [
+        "1. Operational Telemetry: HR parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for HR department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Critical",
+      "department": "HR",
+      "tags": [
+        "hr",
+        "hr",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "hr",
       "hr",
@@ -6677,11 +9965,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Ananya Sharma",
     "department": "Legal",
     "createdAt": "2024-004-15T10:00:00Z",
-    "fileSize": 1164542,
+    "fileSize": 3182887,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Maintenance document for KMRL operations. Assigned to Ananya Sharma.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nMAINTENANCE DIRECTORATE \u00b7 DOCUMENT REF: KMRL/MAINTENANCE/2024/165\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the maintenance protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Ananya Sharma (Legal Department, Email: ananya.sharma@kmrl.in). Contract Reference: CNT-2024-005.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 1700000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Legal Directorate.\n\nRECORD AUTHORIZED BY: ANANYA SHARMA (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nMAINTENANCE DIRECTORATE \u00b7 DOCUMENT REF: KMRL/MAINTENANCE/2024/165\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the maintenance protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Ananya Sharma (Legal Department, Email: ananya.sharma@kmrl.in). Contract Reference: CNT-2024-005.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 2100000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Legal Directorate.\n\nRECORD AUTHORIZED BY: ANANYA SHARMA (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Water Metro Phase 2 Electric Boat SLA #165: Fully processed and verified under KMRL MAINTENANCE Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Ananya Sharma.",
+      "keyFindings": [
+        "1. Operational Telemetry: Maintenance parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Legal department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "Legal",
+      "tags": [
+        "maintenance",
+        "legal",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "maintenance",
       "legal",
@@ -6704,11 +10012,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Deepak Verma",
     "department": "Procurement",
     "createdAt": "2024-005-15T10:00:00Z",
-    "fileSize": 3146247,
+    "fileSize": 972568,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Legal document for KMRL operations. Assigned to Deepak Verma.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nLEGAL DIRECTORATE \u00b7 DOCUMENT REF: KMRL/LEGAL/2024/166\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the legal protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Deepak Verma (Procurement Department, Email: deepak.verma@kmrl.in). Contract Reference: CNT-2024-006.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 1400000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Procurement Directorate.\n\nRECORD AUTHORIZED BY: DEEPAK VERMA (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nLEGAL DIRECTORATE \u00b7 DOCUMENT REF: KMRL/LEGAL/2024/166\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the legal protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Deepak Verma (Procurement Department, Email: deepak.verma@kmrl.in). Contract Reference: CNT-2024-006.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 3700000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Procurement Directorate.\n\nRECORD AUTHORIZED BY: DEEPAK VERMA (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Automatic Fare Collection (AFC) QR Upgrade Tender #166: Fully processed and verified under KMRL LEGAL Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Deepak Verma.",
+      "keyFindings": [
+        "1. Operational Telemetry: Legal parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Procurement department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "Procurement",
+      "tags": [
+        "legal",
+        "procurement",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "legal",
       "procurement",
@@ -6731,11 +10059,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Rajesh Iyer",
     "department": "Safety",
     "createdAt": "2024-006-15T10:00:00Z",
-    "fileSize": 2210293,
+    "fileSize": 2019844,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Procurement document for KMRL operations. Assigned to Rajesh Iyer.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nPROCUREMENT DIRECTORATE \u00b7 DOCUMENT REF: KMRL/PROCUREMENT/2024/167\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the procurement protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Rajesh Iyer (Safety Department, Email: rajesh.iyer@kmrl.in). Contract Reference: CNT-2024-007.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 3100000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Safety Directorate.\n\nRECORD AUTHORIZED BY: RAJESH IYER (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nPROCUREMENT DIRECTORATE \u00b7 DOCUMENT REF: KMRL/PROCUREMENT/2024/167\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the procurement protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Rajesh Iyer (Safety Department, Email: rajesh.iyer@kmrl.in). Contract Reference: CNT-2024-007.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 5100000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Safety Directorate.\n\nRECORD AUTHORIZED BY: RAJESH IYER (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Overhead Equipment (OHE) Traction Maintenance Schedule #167: Fully processed and verified under KMRL PROCUREMENT Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Rajesh Iyer.",
+      "keyFindings": [
+        "1. Operational Telemetry: Procurement parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Safety department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "High",
+      "department": "Safety",
+      "tags": [
+        "procurement",
+        "safety",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "procurement",
       "safety",
@@ -6758,11 +10106,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Sunita Pillai",
     "department": "Engineering",
     "createdAt": "2024-001-15T10:00:00Z",
-    "fileSize": 2574137,
+    "fileSize": 3191013,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Engineering document for KMRL operations. Assigned to Sunita Pillai.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nENGINEERING DIRECTORATE \u00b7 DOCUMENT REF: KMRL/ENGINEERING/2024/168\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the engineering protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Sunita Pillai (Engineering Department, Email: sunita.pillai@kmrl.in). Contract Reference: CNT-2024-008.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 5300000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Engineering Directorate.\n\nRECORD AUTHORIZED BY: SUNITA PILLAI (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nENGINEERING DIRECTORATE \u00b7 DOCUMENT REF: KMRL/ENGINEERING/2024/168\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the engineering protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Sunita Pillai (Engineering Department, Email: sunita.pillai@kmrl.in). Contract Reference: CNT-2024-008.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 5500000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Engineering Directorate.\n\nRECORD AUTHORIZED BY: SUNITA PILLAI (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Muttom Depot Solar PV Rooftop Installation Bid #168: Fully processed and verified under KMRL ENGINEERING Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Sunita Pillai.",
+      "keyFindings": [
+        "1. Operational Telemetry: Engineering parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Engineering department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Critical",
+      "department": "Engineering",
+      "tags": [
+        "engineering",
+        "engineering",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "engineering",
       "engineering",
@@ -6785,11 +10153,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Vivek Swaminathan",
     "department": "IT",
     "createdAt": "2024-002-15T10:00:00Z",
-    "fileSize": 2899659,
+    "fileSize": 1316256,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Water Metro document for KMRL operations. Assigned to Vivek Swaminathan.",
     "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nWATER METRO DIRECTORATE \u00b7 DOCUMENT REF: KMRL/WATER METRO/2024/169\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the water metro protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Vivek Swaminathan (IT Department, Email: vivek.swaminathan@kmrl.in). Contract Reference: CNT-2024-009.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 3000000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to IT Directorate.\n\nRECORD AUTHORIZED BY: VIVEK SWAMINATHAN (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Station Housekeeping & Sanitation Operations SLA #169: Fully processed and verified under KMRL WATER METRO Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Vivek Swaminathan.",
+      "keyFindings": [
+        "1. Operational Telemetry: Water Metro parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for IT department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "IT",
+      "tags": [
+        "water metro",
+        "it",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "water metro",
       "it",
@@ -6812,11 +10200,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Lakshmi Nambiar",
     "department": "Water Metro",
     "createdAt": "2024-003-15T10:00:00Z",
-    "fileSize": 3190572,
+    "fileSize": 2003410,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official IT document for KMRL operations. Assigned to Lakshmi Nambiar.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nIT DIRECTORATE \u00b7 DOCUMENT REF: KMRL/IT/2024/170\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the it protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Lakshmi Nambiar (Water Metro Department, Email: lakshmi.nambiar@kmrl.in). Contract Reference: CNT-2024-010.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 4900000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Water Metro Directorate.\n\nRECORD AUTHORIZED BY: LAKSHMI NAMBIAR (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nIT DIRECTORATE \u00b7 DOCUMENT REF: KMRL/IT/2024/170\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the it protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Lakshmi Nambiar (Water Metro Department, Email: lakshmi.nambiar@kmrl.in). Contract Reference: CNT-2024-010.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 5700000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Water Metro Directorate.\n\nRECORD AUTHORIZED BY: LAKSHMI NAMBIAR (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of IT Network & Cybersecurity Vulnerability Audit #170: Fully processed and verified under KMRL IT Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Lakshmi Nambiar.",
+      "keyFindings": [
+        "1. Operational Telemetry: IT parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Water Metro department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "Water Metro",
+      "tags": [
+        "it",
+        "water metro",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "it",
       "water metro",
@@ -6839,11 +10247,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Manoj Panicker",
     "department": "Operations",
     "createdAt": "2024-004-15T10:00:00Z",
-    "fileSize": 3239048,
+    "fileSize": 2311858,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Safety document for KMRL operations. Assigned to Manoj Panicker.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nSAFETY DIRECTORATE \u00b7 DOCUMENT REF: KMRL/SAFETY/2024/171\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the safety protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Manoj Panicker (Operations Department, Email: manoj.panicker@kmrl.in). Contract Reference: CNT-2024-011.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 1000000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Operations Directorate.\n\nRECORD AUTHORIZED BY: MANOJ PANICKER (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nSAFETY DIRECTORATE \u00b7 DOCUMENT REF: KMRL/SAFETY/2024/171\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the safety protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Manoj Panicker (Operations Department, Email: manoj.panicker@kmrl.in). Contract Reference: CNT-2024-011.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 3400000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Operations Directorate.\n\nRECORD AUTHORIZED BY: MANOJ PANICKER (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Safety Audit & Track Inspection Report #171: Fully processed and verified under KMRL SAFETY Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Manoj Panicker.",
+      "keyFindings": [
+        "1. Operational Telemetry: Safety parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Operations department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "High",
+      "department": "Operations",
+      "tags": [
+        "safety",
+        "operations",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "safety",
       "operations",
@@ -6866,11 +10294,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Divya Kurup",
     "department": "Maintenance",
     "createdAt": "2024-005-15T10:00:00Z",
-    "fileSize": 1500088,
+    "fileSize": 2627259,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Operations document for KMRL operations. Assigned to Divya Kurup.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nOPERATIONS DIRECTORATE \u00b7 DOCUMENT REF: KMRL/OPERATIONS/2024/172\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the operations protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Divya Kurup (Maintenance Department, Email: divya.kurup@kmrl.in). Contract Reference: CNT-2024-012.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 5100000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Maintenance Directorate.\n\nRECORD AUTHORIZED BY: DIVYA KURUP (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nOPERATIONS DIRECTORATE \u00b7 DOCUMENT REF: KMRL/OPERATIONS/2024/172\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the operations protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Divya Kurup (Maintenance Department, Email: divya.kurup@kmrl.in). Contract Reference: CNT-2024-012.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 2900000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Maintenance Directorate.\n\nRECORD AUTHORIZED BY: DIVYA KURUP (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Rolling Stock Preventive Maintenance Protocol #172: Fully processed and verified under KMRL OPERATIONS Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Divya Kurup.",
+      "keyFindings": [
+        "1. Operational Telemetry: Operations parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Maintenance department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Critical",
+      "department": "Maintenance",
+      "tags": [
+        "operations",
+        "maintenance",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "operations",
       "maintenance",
@@ -6893,11 +10341,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Karthik Sundaram",
     "department": "Finance",
     "createdAt": "2024-006-15T10:00:00Z",
-    "fileSize": 3484519,
+    "fileSize": 1813388,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Finance document for KMRL operations. Assigned to Karthik Sundaram.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nFINANCE DIRECTORATE \u00b7 DOCUMENT REF: KMRL/FINANCE/2024/173\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the finance protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Karthik Sundaram (Finance Department, Email: karthik.sundaram@kmrl.in). Contract Reference: CNT-2024-013.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 4500000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Finance Directorate.\n\nRECORD AUTHORIZED BY: KARTHIK SUNDARAM (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nFINANCE DIRECTORATE \u00b7 DOCUMENT REF: KMRL/FINANCE/2024/173\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the finance protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Karthik Sundaram (Finance Department, Email: karthik.sundaram@kmrl.in). Contract Reference: CNT-2024-013.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 1200000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Finance Directorate.\n\nRECORD AUTHORIZED BY: KARTHIK SUNDARAM (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Q1 Quarterly Financial Audit & Revenue Breakdown #173: Fully processed and verified under KMRL FINANCE Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Karthik Sundaram.",
+      "keyFindings": [
+        "1. Operational Telemetry: Finance parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Finance department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "Finance",
+      "tags": [
+        "finance",
+        "finance",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "finance",
       "finance",
@@ -6920,11 +10388,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Meera Joshi",
     "department": "HR",
     "createdAt": "2024-001-15T10:00:00Z",
-    "fileSize": 2973560,
+    "fileSize": 1702058,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official HR document for KMRL operations. Assigned to Meera Joshi.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nHR DIRECTORATE \u00b7 DOCUMENT REF: KMRL/HR/2024/174\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the hr protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Meera Joshi (HR Department, Email: meera.joshi@kmrl.in). Contract Reference: CNT-2024-014.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 4000000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to HR Directorate.\n\nRECORD AUTHORIZED BY: MEERA JOSHI (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nHR DIRECTORATE \u00b7 DOCUMENT REF: KMRL/HR/2024/174\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the hr protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Meera Joshi (HR Department, Email: meera.joshi@kmrl.in). Contract Reference: CNT-2024-014.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 5200000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to HR Directorate.\n\nRECORD AUTHORIZED BY: MEERA JOSHI (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of HR Employee Benefit Policy & Night Shift Allowance #174: Fully processed and verified under KMRL HR Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Meera Joshi.",
+      "keyFindings": [
+        "1. Operational Telemetry: HR parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for HR department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "HR",
+      "tags": [
+        "hr",
+        "hr",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "hr",
       "hr",
@@ -6947,11 +10435,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Amit Chakraborty",
     "department": "Legal",
     "createdAt": "2024-002-15T10:00:00Z",
-    "fileSize": 1381514,
+    "fileSize": 2367832,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Maintenance document for KMRL operations. Assigned to Amit Chakraborty.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nMAINTENANCE DIRECTORATE \u00b7 DOCUMENT REF: KMRL/MAINTENANCE/2024/175\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the maintenance protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Amit Chakraborty (Legal Department, Email: amit.chakraborty@kmrl.in). Contract Reference: CNT-2024-015.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 5000000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Legal Directorate.\n\nRECORD AUTHORIZED BY: AMIT CHAKRABORTY (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nMAINTENANCE DIRECTORATE \u00b7 DOCUMENT REF: KMRL/MAINTENANCE/2024/175\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the maintenance protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Amit Chakraborty (Legal Department, Email: amit.chakraborty@kmrl.in). Contract Reference: CNT-2024-015.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 1400000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Legal Directorate.\n\nRECORD AUTHORIZED BY: AMIT CHAKRABORTY (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Water Metro Phase 2 Electric Boat SLA #175: Fully processed and verified under KMRL MAINTENANCE Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Amit Chakraborty.",
+      "keyFindings": [
+        "1. Operational Telemetry: Maintenance parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Legal department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "High",
+      "department": "Legal",
+      "tags": [
+        "maintenance",
+        "legal",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "maintenance",
       "legal",
@@ -6974,11 +10482,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Neha Gupta",
     "department": "Procurement",
     "createdAt": "2024-003-15T10:00:00Z",
-    "fileSize": 2068156,
+    "fileSize": 624764,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Legal document for KMRL operations. Assigned to Neha Gupta.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nLEGAL DIRECTORATE \u00b7 DOCUMENT REF: KMRL/LEGAL/2024/176\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the legal protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Neha Gupta (Procurement Department, Email: neha.gupta@kmrl.in). Contract Reference: CNT-2024-016.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 4600000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Procurement Directorate.\n\nRECORD AUTHORIZED BY: NEHA GUPTA (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nLEGAL DIRECTORATE \u00b7 DOCUMENT REF: KMRL/LEGAL/2024/176\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the legal protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Neha Gupta (Procurement Department, Email: neha.gupta@kmrl.in). Contract Reference: CNT-2024-016.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 2900000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Procurement Directorate.\n\nRECORD AUTHORIZED BY: NEHA GUPTA (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Automatic Fare Collection (AFC) QR Upgrade Tender #176: Fully processed and verified under KMRL LEGAL Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Neha Gupta.",
+      "keyFindings": [
+        "1. Operational Telemetry: Legal parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Procurement department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Critical",
+      "department": "Procurement",
+      "tags": [
+        "legal",
+        "procurement",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "legal",
       "procurement",
@@ -7001,11 +10529,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Rahul Bhattacharya",
     "department": "Safety",
     "createdAt": "2024-004-15T10:00:00Z",
-    "fileSize": 1609297,
+    "fileSize": 3075012,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Procurement document for KMRL operations. Assigned to Rahul Bhattacharya.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nPROCUREMENT DIRECTORATE \u00b7 DOCUMENT REF: KMRL/PROCUREMENT/2024/177\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the procurement protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Rahul Bhattacharya (Safety Department, Email: rahul.bhattacharya@kmrl.in). Contract Reference: CNT-2024-017.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 3600000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Safety Directorate.\n\nRECORD AUTHORIZED BY: RAHUL BHATTACHARYA (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nPROCUREMENT DIRECTORATE \u00b7 DOCUMENT REF: KMRL/PROCUREMENT/2024/177\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the procurement protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Rahul Bhattacharya (Safety Department, Email: rahul.bhattacharya@kmrl.in). Contract Reference: CNT-2024-017.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 2700000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Safety Directorate.\n\nRECORD AUTHORIZED BY: RAHUL BHATTACHARYA (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Overhead Equipment (OHE) Traction Maintenance Schedule #177: Fully processed and verified under KMRL PROCUREMENT Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Rahul Bhattacharya.",
+      "keyFindings": [
+        "1. Operational Telemetry: Procurement parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Safety department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "Safety",
+      "tags": [
+        "procurement",
+        "safety",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "procurement",
       "safety",
@@ -7028,11 +10576,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Shalini Varma",
     "department": "Engineering",
     "createdAt": "2024-005-15T10:00:00Z",
-    "fileSize": 1470090,
+    "fileSize": 3050814,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Engineering document for KMRL operations. Assigned to Shalini Varma.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nENGINEERING DIRECTORATE \u00b7 DOCUMENT REF: KMRL/ENGINEERING/2024/178\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the engineering protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Shalini Varma (Engineering Department, Email: shalini.varma@kmrl.in). Contract Reference: CNT-2024-018.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 6000000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Engineering Directorate.\n\nRECORD AUTHORIZED BY: SHALINI VARMA (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nENGINEERING DIRECTORATE \u00b7 DOCUMENT REF: KMRL/ENGINEERING/2024/178\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the engineering protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Shalini Varma (Engineering Department, Email: shalini.varma@kmrl.in). Contract Reference: CNT-2024-018.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 2300000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Engineering Directorate.\n\nRECORD AUTHORIZED BY: SHALINI VARMA (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Muttom Depot Solar PV Rooftop Installation Bid #178: Fully processed and verified under KMRL ENGINEERING Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Shalini Varma.",
+      "keyFindings": [
+        "1. Operational Telemetry: Engineering parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Engineering department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "Engineering",
+      "tags": [
+        "engineering",
+        "engineering",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "engineering",
       "engineering",
@@ -7055,11 +10623,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Gautam Deshmukh",
     "department": "IT",
     "createdAt": "2024-006-15T10:00:00Z",
-    "fileSize": 3469271,
+    "fileSize": 1743075,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Water Metro document for KMRL operations. Assigned to Gautam Deshmukh.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nWATER METRO DIRECTORATE \u00b7 DOCUMENT REF: KMRL/WATER METRO/2024/179\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the water metro protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Gautam Deshmukh (IT Department, Email: gautam.deshmukh@kmrl.in). Contract Reference: CNT-2024-019.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 5500000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to IT Directorate.\n\nRECORD AUTHORIZED BY: GAUTAM DESHMUKH (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nWATER METRO DIRECTORATE \u00b7 DOCUMENT REF: KMRL/WATER METRO/2024/179\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the water metro protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Gautam Deshmukh (IT Department, Email: gautam.deshmukh@kmrl.in). Contract Reference: CNT-2024-019.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 4200000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to IT Directorate.\n\nRECORD AUTHORIZED BY: GAUTAM DESHMUKH (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Station Housekeeping & Sanitation Operations SLA #179: Fully processed and verified under KMRL WATER METRO Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Gautam Deshmukh.",
+      "keyFindings": [
+        "1. Operational Telemetry: Water Metro parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for IT department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "High",
+      "department": "IT",
+      "tags": [
+        "water metro",
+        "it",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "water metro",
       "it",
@@ -7082,11 +10670,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Vikram Bhat",
     "department": "Water Metro",
     "createdAt": "2024-001-15T10:00:00Z",
-    "fileSize": 1135628,
+    "fileSize": 981802,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official IT document for KMRL operations. Assigned to Vikram Bhat.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nIT DIRECTORATE \u00b7 DOCUMENT REF: KMRL/IT/2024/180\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the it protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Vikram Bhat (Water Metro Department, Email: vikram.bhat@kmrl.in). Contract Reference: CNT-2024-020.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 5700000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Water Metro Directorate.\n\nRECORD AUTHORIZED BY: VIKRAM BHAT (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nIT DIRECTORATE \u00b7 DOCUMENT REF: KMRL/IT/2024/180\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the it protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Vikram Bhat (Water Metro Department, Email: vikram.bhat@kmrl.in). Contract Reference: CNT-2024-020.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 1800000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Water Metro Directorate.\n\nRECORD AUTHORIZED BY: VIKRAM BHAT (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of IT Network & Cybersecurity Vulnerability Audit #180: Fully processed and verified under KMRL IT Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Vikram Bhat.",
+      "keyFindings": [
+        "1. Operational Telemetry: IT parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Water Metro department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Critical",
+      "department": "Water Metro",
+      "tags": [
+        "it",
+        "water metro",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "it",
       "water metro",
@@ -7109,11 +10717,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Harish Kulkarni",
     "department": "Operations",
     "createdAt": "2024-002-15T10:00:00Z",
-    "fileSize": 2562950,
+    "fileSize": 2250504,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Safety document for KMRL operations. Assigned to Harish Kulkarni.",
     "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nSAFETY DIRECTORATE \u00b7 DOCUMENT REF: KMRL/SAFETY/2024/181\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the safety protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Harish Kulkarni (Operations Department, Email: harish.kulkarni@kmrl.in). Contract Reference: CNT-2024-021.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 1900000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Operations Directorate.\n\nRECORD AUTHORIZED BY: HARISH KULKARNI (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Safety Audit & Track Inspection Report (DUPLICATE REVISION #1): Fully processed and verified under KMRL SAFETY Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Harish Kulkarni.",
+      "keyFindings": [
+        "1. Operational Telemetry: Safety parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Operations department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "Operations",
+      "tags": [
+        "safety",
+        "operations",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "safety",
       "operations",
@@ -7123,7 +10751,7 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "isDuplicate": true,
     "duplicateOfId": "doc-001",
     "duplicateOfTitle": "Safety Audit & Track Inspection Report #1 (ORIGINAL)",
-    "similarityScore": 93.1,
+    "similarityScore": 91.9,
     "assignedToUser": "Harish Kulkarni",
     "assignedContractId": "CNT-2024-021"
   },
@@ -7136,11 +10764,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Pooja Saxena",
     "department": "Maintenance",
     "createdAt": "2024-003-15T10:00:00Z",
-    "fileSize": 3216204,
+    "fileSize": 1635865,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Operations document for KMRL operations. Assigned to Pooja Saxena.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nOPERATIONS DIRECTORATE \u00b7 DOCUMENT REF: KMRL/OPERATIONS/2024/182\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the operations protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Pooja Saxena (Maintenance Department, Email: pooja.saxena@kmrl.in). Contract Reference: CNT-2024-022.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 3800000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Maintenance Directorate.\n\nRECORD AUTHORIZED BY: POOJA SAXENA (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nOPERATIONS DIRECTORATE \u00b7 DOCUMENT REF: KMRL/OPERATIONS/2024/182\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the operations protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Pooja Saxena (Maintenance Department, Email: pooja.saxena@kmrl.in). Contract Reference: CNT-2024-022.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 4100000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Maintenance Directorate.\n\nRECORD AUTHORIZED BY: POOJA SAXENA (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Rolling Stock Preventive Maintenance Protocol (DUPLICATE REVISION #2): Fully processed and verified under KMRL OPERATIONS Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Pooja Saxena.",
+      "keyFindings": [
+        "1. Operational Telemetry: Operations parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Maintenance department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "Maintenance",
+      "tags": [
+        "operations",
+        "maintenance",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "operations",
       "maintenance",
@@ -7150,7 +10798,7 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "isDuplicate": true,
     "duplicateOfId": "doc-002",
     "duplicateOfTitle": "Rolling Stock Preventive Maintenance Protocol #2 (ORIGINAL)",
-    "similarityScore": 92.7,
+    "similarityScore": 93.6,
     "assignedToUser": "Pooja Saxena",
     "assignedContractId": "CNT-2024-022"
   },
@@ -7163,11 +10811,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Sandeep Raghavan",
     "department": "Finance",
     "createdAt": "2024-004-15T10:00:00Z",
-    "fileSize": 3472915,
+    "fileSize": 2780292,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Finance document for KMRL operations. Assigned to Sandeep Raghavan.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nFINANCE DIRECTORATE \u00b7 DOCUMENT REF: KMRL/FINANCE/2024/183\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the finance protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Sandeep Raghavan (Finance Department, Email: sandeep.raghavan@kmrl.in). Contract Reference: CNT-2024-023.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 2700000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Finance Directorate.\n\nRECORD AUTHORIZED BY: SANDEEP RAGHAVAN (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nFINANCE DIRECTORATE \u00b7 DOCUMENT REF: KMRL/FINANCE/2024/183\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the finance protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Sandeep Raghavan (Finance Department, Email: sandeep.raghavan@kmrl.in). Contract Reference: CNT-2024-023.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 1800000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Finance Directorate.\n\nRECORD AUTHORIZED BY: SANDEEP RAGHAVAN (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Q1 Quarterly Financial Audit & Revenue Breakdown (DUPLICATE REVISION #3): Fully processed and verified under KMRL FINANCE Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Sandeep Raghavan.",
+      "keyFindings": [
+        "1. Operational Telemetry: Finance parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Finance department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "High",
+      "department": "Finance",
+      "tags": [
+        "finance",
+        "finance",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "finance",
       "finance",
@@ -7177,7 +10845,7 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "isDuplicate": true,
     "duplicateOfId": "doc-003",
     "duplicateOfTitle": "Q1 Quarterly Financial Audit & Revenue Breakdown #3 (ORIGINAL)",
-    "similarityScore": 91.4,
+    "similarityScore": 98.7,
     "assignedToUser": "Sandeep Raghavan",
     "assignedContractId": "CNT-2024-023"
   },
@@ -7190,11 +10858,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Ritu Hegde",
     "department": "HR",
     "createdAt": "2024-005-15T10:00:00Z",
-    "fileSize": 2519724,
+    "fileSize": 2915356,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official HR document for KMRL operations. Assigned to Ritu Hegde.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nHR DIRECTORATE \u00b7 DOCUMENT REF: KMRL/HR/2024/184\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the hr protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Ritu Hegde (HR Department, Email: ritu.hegde@kmrl.in). Contract Reference: CNT-2024-024.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 3200000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to HR Directorate.\n\nRECORD AUTHORIZED BY: RITU HEGDE (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nHR DIRECTORATE \u00b7 DOCUMENT REF: KMRL/HR/2024/184\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the hr protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Ritu Hegde (HR Department, Email: ritu.hegde@kmrl.in). Contract Reference: CNT-2024-024.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 2900000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to HR Directorate.\n\nRECORD AUTHORIZED BY: RITU HEGDE (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of HR Employee Benefit Policy & Night Shift Allowance (DUPLICATE REVISION #4): Fully processed and verified under KMRL HR Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Ritu Hegde.",
+      "keyFindings": [
+        "1. Operational Telemetry: HR parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for HR department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Critical",
+      "department": "HR",
+      "tags": [
+        "hr",
+        "hr",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "hr",
       "hr",
@@ -7204,7 +10892,7 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "isDuplicate": true,
     "duplicateOfId": "doc-004",
     "duplicateOfTitle": "HR Employee Benefit Policy & Night Shift Allowance #4 (ORIGINAL)",
-    "similarityScore": 95.8,
+    "similarityScore": 92.0,
     "assignedToUser": "Ritu Hegde",
     "assignedContractId": "CNT-2024-024"
   },
@@ -7217,11 +10905,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Vijay Chawla",
     "department": "Legal",
     "createdAt": "2024-006-15T10:00:00Z",
-    "fileSize": 3039729,
+    "fileSize": 1522526,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Maintenance document for KMRL operations. Assigned to Vijay Chawla.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nMAINTENANCE DIRECTORATE \u00b7 DOCUMENT REF: KMRL/MAINTENANCE/2024/185\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the maintenance protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Vijay Chawla (Legal Department, Email: vijay.chawla@kmrl.in). Contract Reference: CNT-2024-025.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 2500000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Legal Directorate.\n\nRECORD AUTHORIZED BY: VIJAY CHAWLA (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nMAINTENANCE DIRECTORATE \u00b7 DOCUMENT REF: KMRL/MAINTENANCE/2024/185\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the maintenance protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Vijay Chawla (Legal Department, Email: vijay.chawla@kmrl.in). Contract Reference: CNT-2024-025.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 3700000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Legal Directorate.\n\nRECORD AUTHORIZED BY: VIJAY CHAWLA (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Water Metro Phase 2 Electric Boat SLA (DUPLICATE REVISION #5): Fully processed and verified under KMRL MAINTENANCE Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Vijay Chawla.",
+      "keyFindings": [
+        "1. Operational Telemetry: Maintenance parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Legal department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "Legal",
+      "tags": [
+        "maintenance",
+        "legal",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "maintenance",
       "legal",
@@ -7231,7 +10939,7 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "isDuplicate": true,
     "duplicateOfId": "doc-005",
     "duplicateOfTitle": "Water Metro Phase 2 Electric Boat SLA #5 (ORIGINAL)",
-    "similarityScore": 91.9,
+    "similarityScore": 93.6,
     "assignedToUser": "Vijay Chawla",
     "assignedContractId": "CNT-2024-025"
   },
@@ -7244,11 +10952,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Sneha Roy",
     "department": "Procurement",
     "createdAt": "2024-001-15T10:00:00Z",
-    "fileSize": 980686,
+    "fileSize": 1363715,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Legal document for KMRL operations. Assigned to Sneha Roy.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nLEGAL DIRECTORATE \u00b7 DOCUMENT REF: KMRL/LEGAL/2024/186\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the legal protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Sneha Roy (Procurement Department, Email: sneha.roy@kmrl.in). Contract Reference: CNT-2024-026.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 1200000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Procurement Directorate.\n\nRECORD AUTHORIZED BY: SNEHA ROY (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nLEGAL DIRECTORATE \u00b7 DOCUMENT REF: KMRL/LEGAL/2024/186\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the legal protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Sneha Roy (Procurement Department, Email: sneha.roy@kmrl.in). Contract Reference: CNT-2024-026.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 5000000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Procurement Directorate.\n\nRECORD AUTHORIZED BY: SNEHA ROY (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Automatic Fare Collection (AFC) QR Upgrade Tender (DUPLICATE REVISION #6): Fully processed and verified under KMRL LEGAL Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Sneha Roy.",
+      "keyFindings": [
+        "1. Operational Telemetry: Legal parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Procurement department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "Procurement",
+      "tags": [
+        "legal",
+        "procurement",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "legal",
       "procurement",
@@ -7258,7 +10986,7 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "isDuplicate": true,
     "duplicateOfId": "doc-006",
     "duplicateOfTitle": "Automatic Fare Collection (AFC) QR Upgrade Tender #6 (ORIGINAL)",
-    "similarityScore": 92.6,
+    "similarityScore": 95.9,
     "assignedToUser": "Sneha Roy",
     "assignedContractId": "CNT-2024-026"
   },
@@ -7271,11 +10999,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Nikhil Naik",
     "department": "Safety",
     "createdAt": "2024-002-15T10:00:00Z",
-    "fileSize": 1658504,
+    "fileSize": 3122239,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Procurement document for KMRL operations. Assigned to Nikhil Naik.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nPROCUREMENT DIRECTORATE \u00b7 DOCUMENT REF: KMRL/PROCUREMENT/2024/187\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the procurement protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Nikhil Naik (Safety Department, Email: nikhil.naik@kmrl.in). Contract Reference: CNT-2024-027.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 4500000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Safety Directorate.\n\nRECORD AUTHORIZED BY: NIKHIL NAIK (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nPROCUREMENT DIRECTORATE \u00b7 DOCUMENT REF: KMRL/PROCUREMENT/2024/187\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the procurement protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Nikhil Naik (Safety Department, Email: nikhil.naik@kmrl.in). Contract Reference: CNT-2024-027.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 3400000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Safety Directorate.\n\nRECORD AUTHORIZED BY: NIKHIL NAIK (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Overhead Equipment (OHE) Traction Maintenance Schedule (DUPLICATE REVISION #7): Fully processed and verified under KMRL PROCUREMENT Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Nikhil Naik.",
+      "keyFindings": [
+        "1. Operational Telemetry: Procurement parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Safety department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "High",
+      "department": "Safety",
+      "tags": [
+        "procurement",
+        "safety",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "procurement",
       "safety",
@@ -7285,7 +11033,7 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "isDuplicate": true,
     "duplicateOfId": "doc-007",
     "duplicateOfTitle": "Overhead Equipment (OHE) Traction Maintenance Schedule #7 (ORIGINAL)",
-    "similarityScore": 97.2,
+    "similarityScore": 97.5,
     "assignedToUser": "Nikhil Naik",
     "assignedContractId": "CNT-2024-027"
   },
@@ -7298,11 +11046,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Anjali Shenoy",
     "department": "Engineering",
     "createdAt": "2024-003-15T10:00:00Z",
-    "fileSize": 3001833,
+    "fileSize": 590071,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Engineering document for KMRL operations. Assigned to Anjali Shenoy.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nENGINEERING DIRECTORATE \u00b7 DOCUMENT REF: KMRL/ENGINEERING/2024/188\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the engineering protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Anjali Shenoy (Engineering Department, Email: anjali.shenoy@kmrl.in). Contract Reference: CNT-2024-028.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 2000000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Engineering Directorate.\n\nRECORD AUTHORIZED BY: ANJALI SHENOY (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nENGINEERING DIRECTORATE \u00b7 DOCUMENT REF: KMRL/ENGINEERING/2024/188\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the engineering protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Anjali Shenoy (Engineering Department, Email: anjali.shenoy@kmrl.in). Contract Reference: CNT-2024-028.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 1300000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Engineering Directorate.\n\nRECORD AUTHORIZED BY: ANJALI SHENOY (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Muttom Depot Solar PV Rooftop Installation Bid (DUPLICATE REVISION #8): Fully processed and verified under KMRL ENGINEERING Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Anjali Shenoy.",
+      "keyFindings": [
+        "1. Operational Telemetry: Engineering parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Engineering department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Critical",
+      "department": "Engineering",
+      "tags": [
+        "engineering",
+        "engineering",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "engineering",
       "engineering",
@@ -7312,7 +11080,7 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "isDuplicate": true,
     "duplicateOfId": "doc-008",
     "duplicateOfTitle": "Muttom Depot Solar PV Rooftop Installation Bid #8 (ORIGINAL)",
-    "similarityScore": 95.6,
+    "similarityScore": 90.8,
     "assignedToUser": "Anjali Shenoy",
     "assignedContractId": "CNT-2024-028"
   },
@@ -7325,11 +11093,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Mahesh Pandey",
     "department": "IT",
     "createdAt": "2024-004-15T10:00:00Z",
-    "fileSize": 2528814,
+    "fileSize": 3314515,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Water Metro document for KMRL operations. Assigned to Mahesh Pandey.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nWATER METRO DIRECTORATE \u00b7 DOCUMENT REF: KMRL/WATER METRO/2024/189\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the water metro protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Mahesh Pandey (IT Department, Email: mahesh.pandey@kmrl.in). Contract Reference: CNT-2024-029.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 4500000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to IT Directorate.\n\nRECORD AUTHORIZED BY: MAHESH PANDEY (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nWATER METRO DIRECTORATE \u00b7 DOCUMENT REF: KMRL/WATER METRO/2024/189\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the water metro protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Mahesh Pandey (IT Department, Email: mahesh.pandey@kmrl.in). Contract Reference: CNT-2024-029.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 5900000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to IT Directorate.\n\nRECORD AUTHORIZED BY: MAHESH PANDEY (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Station Housekeeping & Sanitation Operations SLA (DUPLICATE REVISION #9): Fully processed and verified under KMRL WATER METRO Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Mahesh Pandey.",
+      "keyFindings": [
+        "1. Operational Telemetry: Water Metro parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for IT department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "IT",
+      "tags": [
+        "water metro",
+        "it",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "water metro",
       "it",
@@ -7339,7 +11127,7 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "isDuplicate": true,
     "duplicateOfId": "doc-009",
     "duplicateOfTitle": "Station Housekeeping & Sanitation Operations SLA #9 (ORIGINAL)",
-    "similarityScore": 90.6,
+    "similarityScore": 98.1,
     "assignedToUser": "Mahesh Pandey",
     "assignedContractId": "CNT-2024-029"
   },
@@ -7352,11 +11140,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Kavita Mishra",
     "department": "Water Metro",
     "createdAt": "2024-005-15T10:00:00Z",
-    "fileSize": 1138131,
+    "fileSize": 3160491,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official IT document for KMRL operations. Assigned to Kavita Mishra.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nIT DIRECTORATE \u00b7 DOCUMENT REF: KMRL/IT/2024/190\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the it protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Kavita Mishra (Water Metro Department, Email: kavita.mishra@kmrl.in). Contract Reference: CNT-2024-030.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 1600000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Water Metro Directorate.\n\nRECORD AUTHORIZED BY: KAVITA MISHRA (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nIT DIRECTORATE \u00b7 DOCUMENT REF: KMRL/IT/2024/190\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the it protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Kavita Mishra (Water Metro Department, Email: kavita.mishra@kmrl.in). Contract Reference: CNT-2024-030.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 1900000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Water Metro Directorate.\n\nRECORD AUTHORIZED BY: KAVITA MISHRA (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of IT Network & Cybersecurity Vulnerability Audit (DUPLICATE REVISION #10): Fully processed and verified under KMRL IT Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Kavita Mishra.",
+      "keyFindings": [
+        "1. Operational Telemetry: IT parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Water Metro department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "Water Metro",
+      "tags": [
+        "it",
+        "water metro",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "it",
       "water metro",
@@ -7366,7 +11174,7 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "isDuplicate": true,
     "duplicateOfId": "doc-010",
     "duplicateOfTitle": "IT Network & Cybersecurity Vulnerability Audit #10 (ORIGINAL)",
-    "similarityScore": 94.2,
+    "similarityScore": 95.3,
     "assignedToUser": "Kavita Mishra",
     "assignedContractId": "CNT-2024-030"
   },
@@ -7379,11 +11187,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Siddharth Reddy",
     "department": "Operations",
     "createdAt": "2024-006-15T10:00:00Z",
-    "fileSize": 2187697,
+    "fileSize": 3007834,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Safety document for KMRL operations. Assigned to Siddharth Reddy.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nSAFETY DIRECTORATE \u00b7 DOCUMENT REF: KMRL/SAFETY/2024/191\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the safety protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Siddharth Reddy (Operations Department, Email: siddharth.reddy@kmrl.in). Contract Reference: CNT-2024-031.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 4500000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Operations Directorate.\n\nRECORD AUTHORIZED BY: SIDDHARTH REDDY (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nSAFETY DIRECTORATE \u00b7 DOCUMENT REF: KMRL/SAFETY/2024/191\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the safety protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Siddharth Reddy (Operations Department, Email: siddharth.reddy@kmrl.in). Contract Reference: CNT-2024-031.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 1700000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Operations Directorate.\n\nRECORD AUTHORIZED BY: SIDDHARTH REDDY (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Safety Audit & Track Inspection Report (DUPLICATE REVISION #11): Fully processed and verified under KMRL SAFETY Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Siddharth Reddy.",
+      "keyFindings": [
+        "1. Operational Telemetry: Safety parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Operations department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "High",
+      "department": "Operations",
+      "tags": [
+        "safety",
+        "operations",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "safety",
       "operations",
@@ -7393,7 +11221,7 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "isDuplicate": true,
     "duplicateOfId": "doc-011",
     "duplicateOfTitle": "Safety Audit & Track Inspection Report #11 (ORIGINAL)",
-    "similarityScore": 97.6,
+    "similarityScore": 93.6,
     "assignedToUser": "Siddharth Reddy",
     "assignedContractId": "CNT-2024-031"
   },
@@ -7406,11 +11234,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Bhavna Rao",
     "department": "Maintenance",
     "createdAt": "2024-001-15T10:00:00Z",
-    "fileSize": 2993742,
+    "fileSize": 2215545,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Operations document for KMRL operations. Assigned to Bhavna Rao.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nOPERATIONS DIRECTORATE \u00b7 DOCUMENT REF: KMRL/OPERATIONS/2024/192\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the operations protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Bhavna Rao (Maintenance Department, Email: bhavna.rao@kmrl.in). Contract Reference: CNT-2024-032.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 5400000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Maintenance Directorate.\n\nRECORD AUTHORIZED BY: BHAVNA RAO (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nOPERATIONS DIRECTORATE \u00b7 DOCUMENT REF: KMRL/OPERATIONS/2024/192\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the operations protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Bhavna Rao (Maintenance Department, Email: bhavna.rao@kmrl.in). Contract Reference: CNT-2024-032.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 2700000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Maintenance Directorate.\n\nRECORD AUTHORIZED BY: BHAVNA RAO (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Rolling Stock Preventive Maintenance Protocol (DUPLICATE REVISION #12): Fully processed and verified under KMRL OPERATIONS Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Bhavna Rao.",
+      "keyFindings": [
+        "1. Operational Telemetry: Operations parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Maintenance department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Critical",
+      "department": "Maintenance",
+      "tags": [
+        "operations",
+        "maintenance",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "operations",
       "maintenance",
@@ -7420,7 +11268,7 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "isDuplicate": true,
     "duplicateOfId": "doc-012",
     "duplicateOfTitle": "Rolling Stock Preventive Maintenance Protocol #12 (ORIGINAL)",
-    "similarityScore": 90.5,
+    "similarityScore": 97.2,
     "assignedToUser": "Bhavna Rao",
     "assignedContractId": "CNT-2024-032"
   },
@@ -7433,11 +11281,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Rohan Chaudhary",
     "department": "Finance",
     "createdAt": "2024-002-15T10:00:00Z",
-    "fileSize": 1210403,
+    "fileSize": 937737,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Finance document for KMRL operations. Assigned to Rohan Chaudhary.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nFINANCE DIRECTORATE \u00b7 DOCUMENT REF: KMRL/FINANCE/2024/193\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the finance protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Rohan Chaudhary (Finance Department, Email: rohan.chaudhary@kmrl.in). Contract Reference: CNT-2024-033.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 2200000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Finance Directorate.\n\nRECORD AUTHORIZED BY: ROHAN CHAUDHARY (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nFINANCE DIRECTORATE \u00b7 DOCUMENT REF: KMRL/FINANCE/2024/193\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the finance protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Rohan Chaudhary (Finance Department, Email: rohan.chaudhary@kmrl.in). Contract Reference: CNT-2024-033.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 4400000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Finance Directorate.\n\nRECORD AUTHORIZED BY: ROHAN CHAUDHARY (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Q1 Quarterly Financial Audit & Revenue Breakdown (DUPLICATE REVISION #13): Fully processed and verified under KMRL FINANCE Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Rohan Chaudhary.",
+      "keyFindings": [
+        "1. Operational Telemetry: Finance parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Finance department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "Finance",
+      "tags": [
+        "finance",
+        "finance",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "finance",
       "finance",
@@ -7447,7 +11315,7 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "isDuplicate": true,
     "duplicateOfId": "doc-013",
     "duplicateOfTitle": "Q1 Quarterly Financial Audit & Revenue Breakdown #13 (ORIGINAL)",
-    "similarityScore": 95.6,
+    "similarityScore": 91.7,
     "assignedToUser": "Rohan Chaudhary",
     "assignedContractId": "CNT-2024-033"
   },
@@ -7460,11 +11328,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Swati Singhal",
     "department": "HR",
     "createdAt": "2024-003-15T10:00:00Z",
-    "fileSize": 1238663,
+    "fileSize": 3301837,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official HR document for KMRL operations. Assigned to Swati Singhal.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nHR DIRECTORATE \u00b7 DOCUMENT REF: KMRL/HR/2024/194\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the hr protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Swati Singhal (HR Department, Email: swati.singhal@kmrl.in). Contract Reference: CNT-2024-034.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 2400000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to HR Directorate.\n\nRECORD AUTHORIZED BY: SWATI SINGHAL (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nHR DIRECTORATE \u00b7 DOCUMENT REF: KMRL/HR/2024/194\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the hr protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Swati Singhal (HR Department, Email: swati.singhal@kmrl.in). Contract Reference: CNT-2024-034.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 3500000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to HR Directorate.\n\nRECORD AUTHORIZED BY: SWATI SINGHAL (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of HR Employee Benefit Policy & Night Shift Allowance (DUPLICATE REVISION #14): Fully processed and verified under KMRL HR Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Swati Singhal.",
+      "keyFindings": [
+        "1. Operational Telemetry: HR parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for HR department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "HR",
+      "tags": [
+        "hr",
+        "hr",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "hr",
       "hr",
@@ -7474,7 +11362,7 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "isDuplicate": true,
     "duplicateOfId": "doc-014",
     "duplicateOfTitle": "HR Employee Benefit Policy & Night Shift Allowance #14 (ORIGINAL)",
-    "similarityScore": 96.4,
+    "similarityScore": 92.5,
     "assignedToUser": "Swati Singhal",
     "assignedContractId": "CNT-2024-034"
   },
@@ -7487,11 +11375,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Alok Kapur",
     "department": "Legal",
     "createdAt": "2024-004-15T10:00:00Z",
-    "fileSize": 2329833,
+    "fileSize": 1656021,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Maintenance document for KMRL operations. Assigned to Alok Kapur.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nMAINTENANCE DIRECTORATE \u00b7 DOCUMENT REF: KMRL/MAINTENANCE/2024/195\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the maintenance protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Alok Kapur (Legal Department, Email: alok.kapur@kmrl.in). Contract Reference: CNT-2024-035.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 5700000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Legal Directorate.\n\nRECORD AUTHORIZED BY: ALOK KAPUR (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nMAINTENANCE DIRECTORATE \u00b7 DOCUMENT REF: KMRL/MAINTENANCE/2024/195\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the maintenance protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Alok Kapur (Legal Department, Email: alok.kapur@kmrl.in). Contract Reference: CNT-2024-035.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 3000000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Legal Directorate.\n\nRECORD AUTHORIZED BY: ALOK KAPUR (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Water Metro Phase 2 Electric Boat SLA (DUPLICATE REVISION #15): Fully processed and verified under KMRL MAINTENANCE Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Alok Kapur.",
+      "keyFindings": [
+        "1. Operational Telemetry: Maintenance parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Legal department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "High",
+      "department": "Legal",
+      "tags": [
+        "maintenance",
+        "legal",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "maintenance",
       "legal",
@@ -7501,7 +11409,7 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "isDuplicate": true,
     "duplicateOfId": "doc-015",
     "duplicateOfTitle": "Water Metro Phase 2 Electric Boat SLA #15 (ORIGINAL)",
-    "similarityScore": 90.7,
+    "similarityScore": 92.4,
     "assignedToUser": "Alok Kapur",
     "assignedContractId": "CNT-2024-035"
   },
@@ -7514,11 +11422,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Monica Aggarwal",
     "department": "Procurement",
     "createdAt": "2024-005-15T10:00:00Z",
-    "fileSize": 627167,
+    "fileSize": 2248779,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Legal document for KMRL operations. Assigned to Monica Aggarwal.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nLEGAL DIRECTORATE \u00b7 DOCUMENT REF: KMRL/LEGAL/2024/196\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the legal protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Monica Aggarwal (Procurement Department, Email: monica.aggarwal@kmrl.in). Contract Reference: CNT-2024-036.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 3700000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Procurement Directorate.\n\nRECORD AUTHORIZED BY: MONICA AGGARWAL (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nLEGAL DIRECTORATE \u00b7 DOCUMENT REF: KMRL/LEGAL/2024/196\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the legal protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Monica Aggarwal (Procurement Department, Email: monica.aggarwal@kmrl.in). Contract Reference: CNT-2024-036.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 4600000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Procurement Directorate.\n\nRECORD AUTHORIZED BY: MONICA AGGARWAL (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Automatic Fare Collection (AFC) QR Upgrade Tender (DUPLICATE REVISION #16): Fully processed and verified under KMRL LEGAL Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Monica Aggarwal.",
+      "keyFindings": [
+        "1. Operational Telemetry: Legal parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Procurement department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Critical",
+      "department": "Procurement",
+      "tags": [
+        "legal",
+        "procurement",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "legal",
       "procurement",
@@ -7528,7 +11456,7 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "isDuplicate": true,
     "duplicateOfId": "doc-016",
     "duplicateOfTitle": "Automatic Fare Collection (AFC) QR Upgrade Tender #16 (ORIGINAL)",
-    "similarityScore": 97.9,
+    "similarityScore": 90.0,
     "assignedToUser": "Monica Aggarwal",
     "assignedContractId": "CNT-2024-036"
   },
@@ -7541,11 +11469,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Varun Dutta",
     "department": "Safety",
     "createdAt": "2024-006-15T10:00:00Z",
-    "fileSize": 2131888,
+    "fileSize": 2761835,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Procurement document for KMRL operations. Assigned to Varun Dutta.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nPROCUREMENT DIRECTORATE \u00b7 DOCUMENT REF: KMRL/PROCUREMENT/2024/197\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the procurement protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Varun Dutta (Safety Department, Email: varun.dutta@kmrl.in). Contract Reference: CNT-2024-037.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 2200000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Safety Directorate.\n\nRECORD AUTHORIZED BY: VARUN DUTTA (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nPROCUREMENT DIRECTORATE \u00b7 DOCUMENT REF: KMRL/PROCUREMENT/2024/197\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the procurement protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Varun Dutta (Safety Department, Email: varun.dutta@kmrl.in). Contract Reference: CNT-2024-037.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 1400000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Safety Directorate.\n\nRECORD AUTHORIZED BY: VARUN DUTTA (KMRL INTELLIDOCS)\nSTATUS: APPROVED \u00b7 PRIORITY: LOW",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Overhead Equipment (OHE) Traction Maintenance Schedule (DUPLICATE REVISION #17): Fully processed and verified under KMRL PROCUREMENT Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Varun Dutta.",
+      "keyFindings": [
+        "1. Operational Telemetry: Procurement parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Safety department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "Safety",
+      "tags": [
+        "procurement",
+        "safety",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "procurement",
       "safety",
@@ -7555,7 +11503,7 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "isDuplicate": true,
     "duplicateOfId": "doc-017",
     "duplicateOfTitle": "Overhead Equipment (OHE) Traction Maintenance Schedule #17 (ORIGINAL)",
-    "similarityScore": 93.1,
+    "similarityScore": 99.4,
     "assignedToUser": "Varun Dutta",
     "assignedContractId": "CNT-2024-037"
   },
@@ -7568,11 +11516,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Preeti Banerjee",
     "department": "Engineering",
     "createdAt": "2024-001-15T10:00:00Z",
-    "fileSize": 1167635,
+    "fileSize": 531804,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Engineering document for KMRL operations. Assigned to Preeti Banerjee.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nENGINEERING DIRECTORATE \u00b7 DOCUMENT REF: KMRL/ENGINEERING/2024/198\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the engineering protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Preeti Banerjee (Engineering Department, Email: preeti.banerjee@kmrl.in). Contract Reference: CNT-2024-038.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 2900000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Engineering Directorate.\n\nRECORD AUTHORIZED BY: PREETI BANERJEE (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nENGINEERING DIRECTORATE \u00b7 DOCUMENT REF: KMRL/ENGINEERING/2024/198\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the engineering protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Preeti Banerjee (Engineering Department, Email: preeti.banerjee@kmrl.in). Contract Reference: CNT-2024-038.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 4200000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Engineering Directorate.\n\nRECORD AUTHORIZED BY: PREETI BANERJEE (KMRL INTELLIDOCS)\nSTATUS: PENDING \u00b7 PRIORITY: MEDIUM",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Muttom Depot Solar PV Rooftop Installation Bid (DUPLICATE REVISION #18): Fully processed and verified under KMRL ENGINEERING Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Preeti Banerjee.",
+      "keyFindings": [
+        "1. Operational Telemetry: Engineering parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Engineering department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Low",
+      "department": "Engineering",
+      "tags": [
+        "engineering",
+        "engineering",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "engineering",
       "engineering",
@@ -7582,7 +11550,7 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "isDuplicate": true,
     "duplicateOfId": "doc-018",
     "duplicateOfTitle": "Muttom Depot Solar PV Rooftop Installation Bid #18 (ORIGINAL)",
-    "similarityScore": 97.2,
+    "similarityScore": 93.7,
     "assignedToUser": "Preeti Banerjee",
     "assignedContractId": "CNT-2024-038"
   },
@@ -7595,11 +11563,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Abhishek Ghosh",
     "department": "IT",
     "createdAt": "2024-002-15T10:00:00Z",
-    "fileSize": 2504941,
+    "fileSize": 3232719,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official Water Metro document for KMRL operations. Assigned to Abhishek Ghosh.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nWATER METRO DIRECTORATE \u00b7 DOCUMENT REF: KMRL/WATER METRO/2024/199\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the water metro protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Abhishek Ghosh (IT Department, Email: abhishek.ghosh@kmrl.in). Contract Reference: CNT-2024-039.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 1600000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to IT Directorate.\n\nRECORD AUTHORIZED BY: ABHISHEK GHOSH (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nWATER METRO DIRECTORATE \u00b7 DOCUMENT REF: KMRL/WATER METRO/2024/199\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the water metro protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Abhishek Ghosh (IT Department, Email: abhishek.ghosh@kmrl.in). Contract Reference: CNT-2024-039.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 2200000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to IT Directorate.\n\nRECORD AUTHORIZED BY: ABHISHEK GHOSH (KMRL INTELLIDOCS)\nSTATUS: DRAFT \u00b7 PRIORITY: HIGH",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of Station Housekeeping & Sanitation Operations SLA (DUPLICATE REVISION #19): Fully processed and verified under KMRL WATER METRO Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Abhishek Ghosh.",
+      "keyFindings": [
+        "1. Operational Telemetry: Water Metro parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for IT department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "High",
+      "department": "IT",
+      "tags": [
+        "water metro",
+        "it",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "water metro",
       "it",
@@ -7609,7 +11597,7 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "isDuplicate": true,
     "duplicateOfId": "doc-019",
     "duplicateOfTitle": "Station Housekeeping & Sanitation Operations SLA #19 (ORIGINAL)",
-    "similarityScore": 91.0,
+    "similarityScore": 91.6,
     "assignedToUser": "Abhishek Ghosh",
     "assignedContractId": "CNT-2024-039"
   },
@@ -7622,11 +11610,31 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "uploadedBy": "Shruti Sen",
     "department": "Water Metro",
     "createdAt": "2024-003-15T10:00:00Z",
-    "fileSize": 641803,
+    "fileSize": 2538023,
     "mimeType": "application/pdf",
     "ocrStatus": "Completed",
     "description": "Official IT document for KMRL operations. Assigned to Shruti Sen.",
-    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nIT DIRECTORATE \u00b7 DOCUMENT REF: KMRL/IT/2024/200\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the it protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Shruti Sen (Water Metro Department, Email: shruti.sen@kmrl.in). Contract Reference: CNT-2024-040.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 5800000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Water Metro Directorate.\n\nRECORD AUTHORIZED BY: SHRUTI SEN (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "extractedText": "KOCHI METRO RAIL LIMITED (KMRL)\nCORPORATE OFFICE: METRO BHAVAN, ERNAKULAM, KOCHI - 682017\nIT DIRECTORATE \u00b7 DOCUMENT REF: KMRL/IT/2024/200\n\n1. EXECUTIVE SUMMARY & BACKGROUND\nThis official document details the it protocols, compliance checks, and operational telemetry for Kochi Metro Rail Limited. Assigned officer: Shruti Sen (Water Metro Department, Email: shruti.sen@kmrl.in). Contract Reference: CNT-2024-040.\n\n2. TECHNICAL SPECIFICATIONS & OPERATIONAL AUDIT\n- Infrastructure Monitoring: All relevant track infrastructure, station equipment, and rolling stock rakes were subjected to rigorous diagnostic evaluation.\n- Compliance Verification: Operating parameters met 100% compliance standards specified by RDSO, Ministry of Housing and Urban Affairs (MoHUA), and KMRL Executive Board directives.\n- Performance Metrics: Overall equipment effectiveness (OEE) recorded at 98.4%, with sensor latency under 2.1 milliseconds.\n\n3. FINANCIAL & CONTRACTUAL IMPLICATIONS\n- Budget Allocation: Projected annual outlay for this operational activity is estimated at \u20b9 2400000.\n- Vendor Responsibilities: Service Level Agreements (SLAs) mandate a maximum 60-minute emergency response window with liquidated damages of \u20b9 50,000 per violation.\n\n4. ACTIONABLE DIRECTIVES & APPROVAL STATUS\n- Directive 1: Execute scheduled maintenance window during non-revenue hours (01:00 AM - 04:00 AM).\n- Directive 2: Submit bi-weekly compliance telemetry logs to Water Metro Directorate.\n\nRECORD AUTHORIZED BY: SHRUTI SEN (KMRL INTELLIDOCS)\nSTATUS: REJECTED \u00b7 PRIORITY: CRITICAL",
+    "aiSummary": {
+      "executiveSummary": "Executive Overview of IT Network & Cybersecurity Vulnerability Audit (DUPLICATE REVISION #20): Fully processed and verified under KMRL IT Protocols. Overall operational compliance recorded at 98.4%. Assigned officer: Shruti Sen.",
+      "keyFindings": [
+        "1. Operational Telemetry: IT parameters verified compliant with RDSO standards.",
+        "2. Infrastructure Health: Inspection completed across 25 stations with 99.2% sensor accuracy.",
+        "3. Risk Audit: No critical safety hazards detected during Q3 audit cycle."
+      ],
+      "actionItems": [
+        "Complete preventative maintenance window for Water Metro department by end of month.",
+        "Submit bi-weekly telemetry compliance logs to KMRL Executive Directorate."
+      ],
+      "riskLevel": "Critical",
+      "department": "Water Metro",
+      "tags": [
+        "it",
+        "water metro",
+        "kmrl",
+        "2024"
+      ]
+    },
     "tags": [
       "it",
       "water metro",
@@ -7636,7 +11644,7 @@ export const MOCK_DOCUMENTS: MockDocument[] = [
     "isDuplicate": true,
     "duplicateOfId": "doc-020",
     "duplicateOfTitle": "IT Network & Cybersecurity Vulnerability Audit #20 (ORIGINAL)",
-    "similarityScore": 94.7,
+    "similarityScore": 99.1,
     "assignedToUser": "Shruti Sen",
     "assignedContractId": "CNT-2024-040"
   }
@@ -8125,3 +12133,49 @@ export const MOCK_NOTIFICATIONS: MockNotification[] = [
     "link": "/documents/doc-020"
   }
 ];
+
+export const MOCK_ANALYTICS = {
+  total_documents: 200,
+  uploads_today: 23,
+  pending_approvals: 18,
+  duplicate_documents: 20,
+  ocr_processed: 194,
+  ai_processed: 188,
+  storage_used_bytes: 52_428_800_000,
+  storage_total_bytes: 107_374_182_400,
+  active_users: 80,
+  monthly_uploads: [
+    { month: 'Mar', count: 24 },
+    { month: 'Apr', count: 32 },
+    { month: 'May', count: 41 },
+    { month: 'Jun', count: 52 },
+    { month: 'Jul', count: 68 },
+    { month: 'Aug', count: 200 },
+  ],
+  category_distribution: [
+    { category: 'Finance', count: 20 },
+    { category: 'Operations', count: 20 },
+    { category: 'HR', count: 20 },
+    { category: 'Safety', count: 20 },
+    { category: 'Legal', count: 20 },
+    { category: 'Procurement', count: 20 },
+    { category: 'Maintenance', count: 20 },
+    { category: 'Engineering', count: 20 },
+    { category: 'Water Metro', count: 20 },
+    { category: 'IT', count: 20 },
+  ],
+  department_activity: [
+    { department: 'Operations', documents: 20, storage_gb: 12.3 },
+    { department: 'Finance', documents: 20, storage_gb: 8.7 },
+    { department: 'HR', documents: 20, storage_gb: 5.2 },
+    { department: 'Maintenance', documents: 20, storage_gb: 7.1 },
+    { department: 'Legal', documents: 20, storage_gb: 4.5 },
+    { department: 'Procurement', documents: 20, storage_gb: 14.8 },
+  ],
+  approval_stats: { total: 25, approved: 15, rejected: 3, pending: 7, avg_decision_hours: 4.2 },
+  recent_activity: [
+    { user: 'Rajan Menon', action: 'Approved', document: 'Financial Statement Q2', time: '2 min ago' },
+    { user: 'Priya Nair', action: 'Uploaded', document: 'HR Policy Update', time: '15 min ago' },
+    { user: 'Arun Kumar', action: 'Commented on', document: 'Maintenance Schedule', time: '1 hr ago' },
+  ],
+};

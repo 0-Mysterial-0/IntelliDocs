@@ -12,14 +12,14 @@ import { useAuthStore } from '@/store/authStore';
 import { MOCK_ANALYTICS, MOCK_DOCUMENTS } from '@/data/mockData';
 
 const STAT_CARDS = [
-  { label: 'TOTAL DOCUMENTS', value: '1,247', icon: FileText, trend: '+12.4%', metric: 'INDEXED' },
+  { label: 'TOTAL DOCUMENTS', value: '200', icon: FileText, trend: '+14%', metric: 'INDEXED' },
   { label: 'UPLOADS TODAY', value: '23', icon: Upload, trend: '+5 NEW', metric: 'FILES' },
-  { label: 'PENDING APPROVALS', value: '18', icon: Clock, trend: '3 URGENT', urgent: true, metric: 'ACTION REQ' },
-  { label: 'EXPIRING CONTRACTS', value: '3', icon: ShieldAlert, trend: '< 60 DAYS', urgent: true, metric: 'CRITICAL' },
-  { label: 'OCR PROCESSED', value: '1,182', icon: Zap, trend: '94.8%', metric: 'ACCURACY' },
+  { label: 'PENDING APPROVALS', value: '18', icon: Clock, trend: '7 PENDING', urgent: true, metric: 'ACTION REQ' },
+  { label: 'EXPIRING CONTRACTS', value: '16', icon: ShieldAlert, trend: '< 60 DAYS', urgent: true, metric: 'CRITICAL' },
+  { label: 'OCR PROCESSED', value: '194', icon: Zap, trend: '98.4%', metric: 'ACCURACY' },
   { label: 'STORAGE USED', value: '48.8 GB', icon: HardDrive, trend: '48%', metric: 'ACTIVE' },
-  { label: 'AI DUPLICATES', value: '7', icon: Copy, trend: 'PREVENTED', metric: 'FLAGGED' },
-  { label: 'AI SUMMARIES', value: '1,089', icon: Bot, trend: '87.3%', metric: 'AUTO' },
+  { label: 'AI DUPLICATES', value: '20', icon: Copy, trend: 'FLAGGED', metric: 'REVIEW' },
+  { label: 'KMRL EMPLOYEES', value: '80', icon: Bot, trend: '80 SLAS', metric: 'ACTIVE' },
 ];
 
 const QUICK_ACTIONS = [

@@ -129,7 +129,9 @@ All policies outlined herein are subject to official revision and compliance aud
   const rawText = backendOcrText || doc.extractedText || '';
   const isBinaryPdfJunk = rawText.startsWith('%PDF') || rawText.includes('endstream') || rawText.includes('xref');
 
-  const fullText = (!isBinaryPdfJunk && rawText.trim().length > 0)
+  const fullText = (doc.extractedText && !isBinaryPdfJunk && doc.extractedText.trim().length > 0)
+    ? doc.extractedText
+    : (!isBinaryPdfJunk && rawText.trim().length > 0)
     ? rawText
     : `KOCHI METRO RAIL LIMITED (KMRL)
 METRO BHAVAN, ERNAKULAM, KOCHI - 682017
