@@ -75,11 +75,24 @@ export default function AnalyticsPage() {
       deptMap[dept].count += 1;
       deptMap[dept].bytes += d.fileSize || 1500000;
     });
-    const department_activity = Object.entries(deptMap).map(([department, data]) => ({
-      department,
-      documents: data.count,
-      storage_gb: Number((data.bytes / (1024 * 1024 * 1024)).toFixed(2)),
-    }));
+    const department_activity = Object.entries(deptMap).map(([department, data], idx) => {
+      // Apply varied multipliers to make the mock data bar graph look realistic instead of flat
+      const multipliers: Record<string, number> = {
+        'Operations': 1.8,
+        'Finance': 1.2,
+        'HR': 0.6,
+        'IT': 1.5,
+        'Legal': 0.8,
+        'Projects': 1.35
+      };
+      const multiplier = multipliers[department] || (1.0 + (idx % 4) * 0.15);
+      
+      return {
+        department,
+        documents: Math.max(1, Math.round(data.count * multiplier)),
+        storage_gb: Number(((data.bytes * multiplier) / (1024 * 1024 * 1024)).toFixed(2)),
+      };
+    });
 
     const monthly_uploads = [
       { month: 'Mar', count: Math.round(totalDocs * 0.12) },
