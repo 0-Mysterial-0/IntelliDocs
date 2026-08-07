@@ -5,15 +5,18 @@ import { CheckCircle, XCircle, Clock, MessageSquare, FileText, User, ChevronDown
 import { cn, formatDate, formatRelativeTime } from '@/lib/utils';
 import { approvalsApi } from '@/lib/api';
 import { toast } from 'sonner';
-import { useAuthStore } from '@/store/authStore';
+import { MOCK_APPROVALS as GENERATED_APPROVALS } from '@/data/mockData';
 
-const MOCK_APPROVALS = [
-  { id: '1', document_id: 'doc-1', document_title: 'Track Inspection Report - Blue Line', requester_name: 'Arun Kumar', requester_id: 'u3', status: 'pending', created_at: new Date(Date.now() - 2 * 86400000).toISOString(), comments: null },
-  { id: '2', document_id: 'doc-2', document_title: 'Contract Amendment - Civil Works', requester_name: 'Deepa Thomas', requester_id: 'u4', status: 'pending', created_at: new Date(Date.now() - 86400000).toISOString(), comments: null },
-  { id: '3', document_id: 'doc-3', document_title: 'Budget Allocation FY2024-25', requester_name: 'Mohan Das', requester_id: 'u7', status: 'pending', created_at: new Date(Date.now() - 3600000 * 6).toISOString(), comments: null },
-  { id: '4', document_id: 'doc-4', document_title: 'Safety Inspection Report Q1 2024', requester_name: 'Anjali Krishna', requester_id: 'u6', status: 'approved', created_at: new Date(Date.now() - 7 * 86400000).toISOString(), decided_at: new Date(Date.now() - 5 * 86400000).toISOString(), comments: 'Approved after review.' },
-  { id: '5', document_id: 'doc-5', document_title: 'IT Infrastructure Procurement RFP', requester_name: 'Suresh Pillai', requester_id: 'u5', status: 'rejected', created_at: new Date(Date.now() - 10 * 86400000).toISOString(), decided_at: new Date(Date.now() - 8 * 86400000).toISOString(), comments: 'Needs revision of technical specifications.' },
-];
+const INITIAL_APPROVALS = GENERATED_APPROVALS.map((a) => ({
+  id: a.id,
+  document_id: a.documentId,
+  document_title: a.documentTitle,
+  requester_name: a.requestedBy,
+  requester_id: `u-${a.id}`,
+  status: a.status,
+  created_at: a.dateRequested,
+  comments: a.status === 'approved' ? 'Approved after executive review.' : (a.status === 'rejected' ? 'Revision requested for section 2.4 compliance.' : null),
+}));
 
 function StatusIcon({ status }: { status: string }) {
   if (status === 'approved') return <CheckCircle className="w-5 h-5 text-[#6ee7b7] stroke-[2.5]" />;
@@ -27,7 +30,7 @@ export default function ApprovalsPage() {
   const [comment, setComment] = useState('');
   const { user } = useAuthStore();
 
-  const [approvalsList, setApprovalsList] = useState(MOCK_APPROVALS);
+  const [approvalsList, setApprovalsList] = useState(INITIAL_APPROVALS);
 
   const handleAction = async (id: string, action: 'approve' | 'reject') => {
     try {

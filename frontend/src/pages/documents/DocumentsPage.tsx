@@ -5,6 +5,7 @@ import { FileText, Search, Filter, Eye, Download, Star, CheckCircle, Clock, XCir
 import { cn, formatDate, formatBytes, truncate } from '@/lib/utils';
 import { MOCK_DOCUMENTS } from '@/data/mockData';
 import { useUploadedDocsStore } from '@/store/uploadedDocsStore';
+import { useDocumentsStore } from '@/store/documentsStore';
 
 const CATEGORIES = ['All', 'Finance', 'HR', 'Operations', 'Maintenance', 'Legal', 'Procurement', 'Safety'];
 const STATUSES = ['All', 'approved', 'pending', 'draft', 'rejected'];
@@ -41,8 +42,9 @@ export default function DocumentsPage() {
   const [category, setCategory] = useState('All');
   const [status, setStatus] = useState('All');
   const { uploadedDocs } = useUploadedDocsStore();
+  const { documents: storeDocs } = useDocumentsStore();
 
-  const allDocs = [...uploadedDocs, ...MOCK_DOCUMENTS];
+  const allDocs = [...uploadedDocs, ...storeDocs];
 
   const docs = allDocs.filter((d) => {
     const matchSearch = !search || d.title.toLowerCase().includes(search.toLowerCase()) || d.department.toLowerCase().includes(search.toLowerCase());
