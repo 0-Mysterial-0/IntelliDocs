@@ -1,33 +1,64 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
+import { MOCK_CONTRACTS, MockContract } from '@/data/mockData';
 
-export interface Contract {
-  id: string;
-  daysRemaining: number;
-  status: 'active' | 'expiring_soon' | 'expired' | 'under_renewal';
+export interface ExtendedMockContract extends MockContract {
+  reviewNotes?: string;
+  reviewedBy?: string;
+  reviewedAt?: string;
 }
 
 interface ContractsStore {
-  contracts: Contract[];
-  setContracts: (contracts: Contract[]) => void;
-  updateContract: (id: string, updates: Partial<Contract>) => void;
+  contracts: ExtendedMockContract[];
+  setContracts: (contracts: ExtendedMockContract[]) => void;
+  renewContract: (id: string) => void;
+  approveContract: (id: string, reviewerName: string, notes?: string) => void;
+  rejectContract: (id: string, reviewerName: string, notes?: string) => void;
+  updateContract: (id: string, updates: Partial<ExtendedMockContract>) => void;
   expiringCount: () => number;
 }
-
-const INITIAL_CONTRACTS: Contract[] = [
-  { id: 'cnt-01', daysRemaining: 23,  status: 'expiring_soon' },
-  { id: 'cnt-02', daysRemaining: 39,  status: 'expiring_soon' },
-  { id: 'cnt-03', daysRemaining: 146, status: 'active' },
-  { id: 'cnt-04', daysRemaining: 236, status: 'active' },
-  { id: 'cnt-05', daysRemaining: 3,   status: 'expiring_soon' },
-  { id: 'cnt-06', daysRemaining: 205, status: 'active' },
-];
 
 export const useContractsStore = create<ContractsStore>()(
   persist(
     (set, get) => ({
-      contracts: INITIAL_CONTRACTS,
+      contracts: MOCK_CONTRACTS,
       setContracts: (contracts) => set({ contracts }),
+      renewContract: (id) =>
+        set((state) => ({
+          contracts: state.contracts.map((c) =>
+            c.id === id ? { ...c, status: 'under_renewal', isExpiring: false } : c
+          ),
+        })),
+      approveContract: (id, reviewerName, notes) =>
+        set((state) => ({
+          contracts: state.contracts.map((c) =>
+            c.id === id
+              ? {
+                  ...c,
+                  status: 'active',
+                  isExpiring: false,
+                  reviewNotes: notes || 'Approved contract SLA compliance & vendor renewal',
+                  reviewedBy: reviewerName,
+                  reviewedAt: new Date().toISOString(),
+                }
+              : c
+          ),
+        })),
+      rejectContract: (id, reviewerName, notes) =>
+        set((state) => ({
+          contracts: state.contracts.map((c) =>
+            c.id === id
+              ? {
+                  ...c,
+                  status: 'rejected',
+                  isExpiring: false,
+                  reviewNotes: notes || 'Rejected contract SLA renewal after executive review',
+                  reviewedBy: reviewerName,
+                  reviewedAt: new Date().toISOString(),
+                }
+              : c
+          ),
+        })),
       updateContract: (id, updates) =>
         set((state) => ({
           contracts: state.contracts.map((c) =>
@@ -36,12 +67,11 @@ export const useContractsStore = create<ContractsStore>()(
         })),
       expiringCount: () => {
         const { contracts } = get();
-        // Only count those still in expiring_soon (not yet under renewal)
         return contracts.filter(
-          (c) => c.daysRemaining <= 60 && c.status !== 'under_renewal'
+          (c) => c.status === 'expiring_soon' || (c.isExpiring && c.status !== 'under_renewal' && c.status !== 'active')
         ).length;
       },
     }),
-    { name: 'kmrl-contracts-v1' }
+    { name: 'kmrl-full-contracts-v4' }
   )
 );
