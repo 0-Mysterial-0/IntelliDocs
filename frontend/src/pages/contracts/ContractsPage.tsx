@@ -117,6 +117,8 @@ export default function ContractsPage() {
   const [selectedContract, setSelectedContract] = useState<Contract | null>(null);
   const contractsStore = useContractsStore();
 
+  const isExpiring = (c: Contract) => (c.daysRemaining <= 60 || c.status === 'expiring_soon') && c.status !== 'under_renewal';
+
   const filteredContracts = contracts.filter((c) => {
     const matchSearch =
       !search ||
@@ -127,12 +129,12 @@ export default function ContractsPage() {
       filter === 'all'
         ? true
         : filter === 'expiring'
-        ? c.daysRemaining <= 60
-        : c.daysRemaining > 60;
+        ? isExpiring(c)
+        : !isExpiring(c);
     return matchSearch && matchFilter;
   });
 
-  const expiringCount = contracts.filter((c) => c.daysRemaining <= 60).length;
+  const expiringCount = contracts.filter(isExpiring).length;
 
   const handleRenew = (c: Contract) => {
     toast.success(`Renewal workflow initiated for "${c.title}"`);
@@ -216,7 +218,7 @@ export default function ContractsPage() {
           <p className="text-[10px] font-pixel-code text-zinc-400 mt-1 uppercase">ACTIVE VENDOR SLAS</p>
         </motion.div>
 
-        <motion.div whileHover={{ scale: 1.03, y: -4 }} className="pixel-box p-5 animate-pixel-float float-delay-1 cursor-pointer">
+        <motion.div onClick={() => setFilter('expiring')} whileHover={{ scale: 1.03, y: -4 }} className="pixel-box p-5 animate-pixel-float float-delay-1 cursor-pointer">
           <div className="flex items-center justify-between mb-3 font-pixel-code">
             <span className="text-xs font-bold text-[#fca5a5] uppercase">EXPIRING &lt; 60 DAYS</span>
             <AlertTriangle className="w-4 h-4 text-[#fca5a5] stroke-[2.5]" />
