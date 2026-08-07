@@ -466,9 +466,9 @@ Open the OCR viewer to see the extracted text once backend processing is complet
                 VIEW OCR RESULT
               </motion.button>
             )}
-            <a href="/documents" className="pixel-btn-dark">
+            <button onClick={() => navigate('/documents')} className="pixel-btn-dark">
               VIEW DOCUMENTS
-            </a>
+            </button>
           </div>
         </div>
       )}

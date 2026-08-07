@@ -216,7 +216,7 @@ CONFIDENTIALITY NOTICE: This document contains proprietary information of Kochi 
           </motion.button>
           <motion.button
             whileHover={{ scale: 1.03 }}
-            onClick={() => navigate(`/ocr/${id || doc.id}`)}
+            onClick={() => navigate(`/ocr/${id || doc?.id || 'doc-001'}`)}
             className="pixel-btn-dark text-xs flex items-center gap-1.5"
             title="Open full-screen OCR text viewer"
           >

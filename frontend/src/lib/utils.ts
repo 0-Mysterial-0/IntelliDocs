@@ -14,20 +14,24 @@ export function formatBytes(bytes: number, decimals = 2): string {
   return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
 }
 
-export function formatDate(dateStr: string | Date): string {
+export function formatDate(dateStr: string | Date | undefined | null): string {
   if (!dateStr) return 'N/A';
+  const d = new Date(dateStr);
+  if (isNaN(d.getTime())) return 'N/A';
   return new Intl.DateTimeFormat('en-IN', {
     year: 'numeric',
     month: 'short',
     day: 'numeric',
-  }).format(new Date(dateStr));
+  }).format(d);
 }
 
-export function formatRelativeTime(dateStr: string | Date): string {
-  if (!dateStr) return '';
+export function formatRelativeTime(dateStr: string | Date | undefined | null): string {
+  if (!dateStr) return 'N/A';
   const date = new Date(dateStr);
+  if (isNaN(date.getTime())) return 'N/A';
   const now = new Date();
   const diff = now.getTime() - date.getTime();
+  if (diff < 0) return 'just now';
   const seconds = Math.floor(diff / 1000);
   const minutes = Math.floor(seconds / 60);
   const hours = Math.floor(minutes / 60);
