@@ -15,6 +15,7 @@ import { toast } from 'sonner';
 export default function DocumentDetailPage() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { uploadedDocs } = useUploadedDocsStore();
   const { user } = useAuthStore();
 
   const [commentsList, setCommentsList] = useState([
