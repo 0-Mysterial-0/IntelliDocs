@@ -84,3 +84,14 @@ export function generateAvatarColor(name: string): string {
   }
   return colors[Math.abs(hash) % colors.length];
 }
+
+export function getDocumentOcrConfidence(docId?: string, title?: string): number {
+  let hash = 0;
+  const str = (docId || 'doc') + (title || 'kmrl');
+  for (let i = 0; i < str.length; i++) {
+    hash = (hash << 5) - hash + str.charCodeAt(i);
+    hash |= 0;
+  }
+  const normalized = (Math.abs(hash) % 78) / 10 + 92.1;
+  return parseFloat(normalized.toFixed(1));
+}

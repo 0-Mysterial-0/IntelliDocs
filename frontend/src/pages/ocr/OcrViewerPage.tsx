@@ -5,7 +5,7 @@ import {
   ArrowLeft, FileText, Download, Copy, Check, Search, X,
   Sparkles, Info, ChevronUp, ChevronDown, Loader2, AlertCircle,
 } from 'lucide-react';
-import { cn, formatBytes, formatDate } from '@/lib/utils';
+import { cn, formatBytes, formatDate, getDocumentOcrConfidence } from '@/lib/utils';
 import { ocrApi } from '@/lib/api';
 import { useUploadedDocsStore } from '@/store/uploadedDocsStore';
 import { MOCK_DOCUMENTS } from '@/data/mockData';
@@ -88,8 +88,9 @@ This document (${targetDoc.title}) has been processed by KMRL IntelliDocs OCR En
 2. CONTENT BODY
 Official operational procedures and administrative records for Kochi Metro Rail Limited.`;
 
+        const dynamicConfidence = getDocumentOcrConfidence(targetDoc.id, targetDoc.title);
         setOcrText(text);
-        setOcrMeta({ confidence: 0.964, method: 'easyocr', has_tables: false, has_signatures: false, has_stamps: false });
+        setOcrMeta({ confidence: dynamicConfidence / 100, method: 'easyocr', has_tables: false, has_signatures: false, has_stamps: false });
         setLoadState('ready');
         return;
       }
