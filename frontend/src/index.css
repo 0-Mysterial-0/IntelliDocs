@@ -20,6 +20,8 @@
 html {
   background-color: #000000;
   scroll-behavior: smooth;
+  width: 100%;
+  overflow-x: hidden;
 }
 
 body {
@@ -29,6 +31,8 @@ body {
   margin: 0;
   padding: 0;
   line-height: 1.5;
+  width: 100%;
+  overflow-x: hidden;
   -webkit-font-smoothing: none;
   -moz-osx-font-smoothing: unset;
   image-rendering: pixelated;
@@ -161,6 +165,7 @@ body {
   box-shadow: 3px 3px 0px 0px #71717a;
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   image-rendering: pixelated;
+  touch-action: manipulation;
 }
 .pixel-btn-white:hover {
   background-color: #f4f4f5;
@@ -179,6 +184,7 @@ body {
   box-shadow: 3px 3px 0px 0px #18181b;
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   image-rendering: pixelated;
+  touch-action: manipulation;
 }
 .pixel-btn-dark:hover {
   border-color: #ffffff;
@@ -209,6 +215,19 @@ body {
 .float-delay-2 { animation-delay: 1.2s; }
 .float-delay-3 { animation-delay: 1.8s; }
 .float-delay-4 { animation-delay: 2.4s; }
+
+/* Responsive Device Scalability */
+@media (max-width: 640px) {
+  .pixel-box:hover, .pixel-box-pink:hover {
+    transform: none !important;
+  }
+  .animate-pixel-float, .animate-pixel-float-slow {
+    animation: none !important;
+  }
+  button, input, select, textarea {
+    min-height: 40px;
+  }
+}
 
 /* Icon Pixelated */
 svg, img {
