@@ -234,7 +234,7 @@ export default function SearchPage() {
       <div>
         <div className="flex items-center gap-3">
           <Search className="w-6 h-6 text-white stroke-[2.5]" />
-          <h1 className="text-xl font-pixel-head font-bold text-white font-bloom">PIXEL VECTOR SEARCH</h1>
+          <h1 className="text-xl font-pixel-head font-bold text-white font-bloom">SEARCH</h1>
           <span className="text-xs font-pixel-code font-bold badge-muted-green px-2.5 py-0.5 uppercase">
             SEMANTIC, OCR & DUPLICATE DETECTION
           </span>
