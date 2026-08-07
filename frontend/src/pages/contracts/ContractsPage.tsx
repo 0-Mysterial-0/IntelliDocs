@@ -46,25 +46,26 @@ export default function ContractsPage() {
 
   const filteredContracts = contractList.filter((c) => {
     if (!c) return false;
+
+    // 1. Tab Filter check first
+    if (activeTab === 'expiring' && c.status !== 'expiring_soon' && !c.isExpiring) return false;
+    if (activeTab === 'pending' && c.status !== 'pending_approval') return false;
+    if (activeTab === 'renewal' && c.status !== 'under_renewal') return false;
+    if (activeTab === 'approved' && c.status !== 'active' && (c as any).status !== 'approved') return false;
+    if (activeTab === 'rejected' && c.status !== 'rejected') return false;
+
+    // 2. Search query check
     const term = (search || '').toLowerCase().trim();
     if (!term) return true;
 
-    const matchesSearch =
+    return (
       (c.title || '').toLowerCase().includes(term) ||
       (c.vendor || '').toLowerCase().includes(term) ||
       (c.assignedEmployeeName || '').toLowerCase().includes(term) ||
       (c.assignedEmployeeEmail || '').toLowerCase().includes(term) ||
       (c.id || '').toLowerCase().includes(term) ||
-      (c.department || '').toLowerCase().includes(term);
-
-    if (!matchesSearch) return false;
-
-    if (activeTab === 'expiring') return c.status === 'expiring_soon';
-    if (activeTab === 'pending') return c.status === 'pending_approval';
-    if (activeTab === 'renewal') return c.status === 'under_renewal';
-    if (activeTab === 'approved') return c.status === 'active' || (c as any).status === 'approved';
-    if (activeTab === 'rejected') return c.status === 'rejected';
-    return true;
+      (c.department || '').toLowerCase().includes(term)
+    );
   });
 
   const expiringCount = contractList.filter((c) => c.status === 'expiring_soon').length;
@@ -281,7 +282,7 @@ export default function ContractsPage() {
                 </button>
 
                 {/* Manager / Admin Executive Actions */}
-                {canApproveContract ? (
+                {canApproveContract && c.status !== 'active' && (c as any).status !== 'approved' && c.status !== 'rejected' ? (
                   <>
                     <button
                       onClick={() => handleApprove(c.id, c.title)}
@@ -298,6 +299,14 @@ export default function ContractsPage() {
                       <X className="w-3 h-3 text-white stroke-[3]" /> REJECT
                     </button>
                   </>
+                ) : (c.status === 'active' || (c as any).status === 'approved') ? (
+                  <span className="text-[10px] text-[#6ee7b7] font-bold bg-green-950/40 border border-green-500/40 px-2 py-0.5 uppercase flex items-center gap-1">
+                    <Check className="w-3 h-3 text-[#6ee7b7]" /> ACCEPTED
+                  </span>
+                ) : c.status === 'rejected' ? (
+                  <span className="text-[10px] text-red-300 font-bold bg-red-950/40 border border-red-500/40 px-2 py-0.5 uppercase flex items-center gap-1">
+                    <X className="w-3 h-3 text-red-400" /> REJECTED
+                  </span>
                 ) : (
                   c.status === 'expiring_soon' && (
                     <span className="text-[9px] text-amber-300 font-bold bg-amber-950/40 border border-amber-500/40 px-2 py-0.5 uppercase">
@@ -370,7 +379,15 @@ export default function ContractsPage() {
               </div>
 
               {/* Action Buttons inside modal */}
-              {canApproveContract ? (
+              {selectedContract.status === 'active' || (selectedContract as any).status === 'approved' ? (
+                <div className="p-3 bg-green-950/40 border border-green-500/50 text-[#6ee7b7] text-center font-bold text-[11px] uppercase flex items-center justify-center gap-2 font-bloom-green">
+                  <Check className="w-4 h-4 text-[#6ee7b7] stroke-[3]" /> CONTRACT ACCEPTED & APPROVED
+                </div>
+              ) : selectedContract.status === 'rejected' ? (
+                <div className="p-3 bg-red-950/40 border border-red-500/50 text-red-300 text-center font-bold text-[11px] uppercase flex items-center justify-center gap-2 font-bloom-red">
+                  <X className="w-4 h-4 text-red-400 stroke-[3]" /> CONTRACT TERMINATED / REJECTED
+                </div>
+              ) : canApproveContract ? (
                 <div className="flex gap-3 pt-2">
                   <button
                     onClick={() => handleApprove(selectedContract.id, selectedContract.title, reviewNoteInput)}
