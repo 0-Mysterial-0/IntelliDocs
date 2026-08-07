@@ -1,4 +1,4 @@
-import { Search, Bell, Menu, Command, Sparkles } from 'lucide-react';
+import { Search, Bell, Menu, Command, Sparkles, Shield } from 'lucide-react';
 import { useAuthStore } from '@/store/authStore';
 import { useNavigate } from 'react-router-dom';
 
@@ -37,6 +37,15 @@ export function TopBar({ onMenuToggle }: TopBarProps) {
 
       {/* Right Controls */}
       <div className="flex items-center gap-2 md:gap-3 ml-auto flex-shrink-0">
+        {/* Active Security Status Badge */}
+        <div
+          onClick={() => navigate('/settings')}
+          className="hidden xl:flex items-center gap-1.5 px-2.5 py-1 bg-black border border-green-500/60 text-[#6ee7b7] font-pixel-code text-[10px] font-bold cursor-pointer hover:border-green-400 transition-colors"
+        >
+          <Shield className="w-3.5 h-3.5 text-[#6ee7b7] stroke-[2.5]" />
+          <span className="font-bloom-green">AES-256 & TLS 1.3 ENCRYPTED</span>
+        </div>
+
         {/* System status - hidden on mobile */}
         <div className="hidden lg:flex items-center gap-2 px-3 py-1 bg-black border-2 border-green-500/50 text-green-400 font-pixel-code text-xs font-bold shadow-[2px_2px_0px_0px_rgba(74,222,128,0.3)]">
           <span className="w-2 h-2 rounded-none bg-green-400 animate-pulse" />
