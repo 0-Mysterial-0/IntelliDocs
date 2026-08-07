@@ -5,6 +5,7 @@ import { CheckCircle, XCircle, Clock, MessageSquare, FileText, User, ChevronDown
 import { cn, formatDate, formatRelativeTime } from '@/lib/utils';
 import { approvalsApi } from '@/lib/api';
 import { toast } from 'sonner';
+import { useAuthStore } from '@/store/authStore';
 import { MOCK_APPROVALS as GENERATED_APPROVALS } from '@/data/mockData';
 
 const INITIAL_APPROVALS = GENERATED_APPROVALS.map((a) => ({
