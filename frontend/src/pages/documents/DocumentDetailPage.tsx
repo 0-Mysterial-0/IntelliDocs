@@ -7,6 +7,7 @@ import {
 import { cn, formatDate, formatBytes, formatRelativeTime } from '@/lib/utils';
 import { MOCK_DOCUMENTS } from '@/data/mockData';
 import { useUploadedDocsStore } from '@/store/uploadedDocsStore';
+import { useAuthStore } from '@/store/authStore';
 import { ocrApi } from '@/lib/api';
 import api from '@/lib/api';
 import { toast } from 'sonner';
@@ -14,7 +15,47 @@ import { toast } from 'sonner';
 export default function DocumentDetailPage() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { uploadedDocs } = useUploadedDocsStore();
+  const { user } = useAuthStore();
+
+  const [commentsList, setCommentsList] = useState([
+    {
+      id: 'c1',
+      userName: 'Rajan Menon',
+      userRole: 'MANAGER',
+      content: 'Please verify section 4 compliance before finalizing approval.',
+      createdAt: new Date(Date.now() - 3600000 * 4).toISOString(),
+    },
+    {
+      id: 'c2',
+      userName: 'Priya Nair',
+      userRole: 'EMPLOYEE',
+      content: 'OCR text verified. All numbers match the original scanned document.',
+      createdAt: new Date(Date.now() - 3600000 * 2).toISOString(),
+    },
+  ]);
+  const [newCommentText, setNewCommentText] = useState('');
+
+  const handleAddComment = (e?: React.FormEvent) => {
+    if (e) e.preventDefault();
+    if (!newCommentText.trim()) {
+      toast.error('Please enter a comment');
+      return;
+    }
+    const text = newCommentText.trim();
+    const newEntry = {
+      id: `c-${Date.now()}`,
+      userName: user?.full_name || 'KMRL User',
+      userRole: user?.role ? user.role.toUpperCase() : 'EMPLOYEE',
+      content: text,
+      createdAt: new Date().toISOString(),
+    };
+    setCommentsList((prev) => [newEntry, ...prev]);
+    setNewCommentText('');
+    toast.success('Comment posted successfully!');
+    if (id) {
+      api.post(`/documents/${id}/comments`, { content: text }).catch(() => {});
+    }
+  };
 
   const allDocs = [...uploadedDocs, ...MOCK_DOCUMENTS];
   const doc = allDocs.find((d) => d.id === id) || allDocs[0];
@@ -376,19 +417,46 @@ CONFIDENTIALITY NOTICE: This document contains proprietary information of Kochi 
           {/* TAB 3: COMMENTS */}
           {activeTab === 'comments' && (
             <div className="pixel-box p-5 space-y-4 font-pixel-code">
-              <div className="flex items-center gap-2 mb-2 font-pixel-head">
-                <MessageSquare className="w-4 h-4 text-white stroke-[2.5]" />
-                <h3 className="font-bold text-white text-xs font-bloom-subtle">DISCUSSION & COMMENTS</h3>
+              <div className="flex items-center justify-between mb-2">
+                <div className="flex items-center gap-2 font-pixel-head">
+                  <MessageSquare className="w-4 h-4 text-white stroke-[2.5]" />
+                  <h3 className="font-bold text-white text-xs font-bloom-subtle">DISCUSSION & COMMENTS</h3>
+                </div>
+                <span className="text-[10px] text-zinc-400 font-bold uppercase">{commentsList.length} COMMENTS</span>
               </div>
-              <p className="text-xs text-zinc-400 uppercase">NO COMMENTS YET ON THIS DOCUMENT.</p>
-              <div className="flex gap-3 pt-2 font-pixel">
+
+              {/* Add Comment Form */}
+              <form onSubmit={handleAddComment} className="flex gap-2 font-pixel">
                 <input
+                  value={newCommentText}
+                  onChange={(e) => setNewCommentText(e.target.value)}
                   placeholder="ADD A COMMENT..."
                   className="flex-1 px-4 py-2 bg-black border-2 border-zinc-700 text-xs font-pixel text-white placeholder-zinc-500 focus:outline-none focus:border-white uppercase"
                 />
-                <button className="pixel-btn-white text-xs">
+                <button type="submit" className="pixel-btn-white text-xs flex-shrink-0">
                   POST
                 </button>
+              </form>
+
+              {/* Comments List */}
+              <div className="space-y-3 pt-2">
+                {commentsList.map((c) => (
+                  <div key={c.id} className="bg-black border border-zinc-700 p-3.5 space-y-2">
+                    <div className="flex items-center justify-between text-xs">
+                      <div className="flex items-center gap-2">
+                        <span className="w-5 h-5 bg-white text-black font-bold flex items-center justify-center text-[10px]">
+                          {c.userName.charAt(0)}
+                        </span>
+                        <span className="font-bold text-white uppercase">{c.userName}</span>
+                        <span className="text-[9px] bg-zinc-800 border border-zinc-700 px-1.5 py-0.5 text-zinc-400 font-bold uppercase">
+                          {c.userRole}
+                        </span>
+                      </div>
+                      <span className="text-[10px] text-zinc-500">{formatRelativeTime(c.createdAt)}</span>
+                    </div>
+                    <p className="text-xs text-zinc-300 leading-relaxed font-pixel-code pl-7">{c.content}</p>
+                  </div>
+                ))}
               </div>
             </div>
           )}
