@@ -19,6 +19,7 @@ import AIAssistantPage from '@/pages/ai-assistant/AIAssistantPage';
 import ApprovalsPage from '@/pages/approvals/ApprovalsPage';
 import AnalyticsPage from '@/pages/analytics/AnalyticsPage';
 import ContractsPage from '@/pages/contracts/ContractsPage';
+import RevokeContractsPage from '@/pages/contracts/RevokeContractsPage';
 import UsersPage from '@/pages/users/UsersPage';
 import DepartmentsPage from '@/pages/departments/DepartmentsPage';
 import NotificationsPage from '@/pages/notifications/NotificationsPage';
@@ -44,6 +45,7 @@ export default function AppRoutes() {
         <Route path="documents" element={<DocumentsPage />} />
         <Route path="documents/:id" element={<DocumentDetailPage />} />
         <Route path="contracts" element={<ContractsPage />} />
+        <Route path="contracts/revoke" element={<RevokeContractsPage />} />
         <Route path="upload" element={<UploadPage />} />
         <Route path="search" element={<SearchPage />} />
         <Route path="ai-assistant" element={<AIAssistantPage />} />

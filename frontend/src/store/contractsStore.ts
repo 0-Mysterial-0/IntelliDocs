@@ -6,6 +6,9 @@ export interface ExtendedMockContract extends MockContract {
   reviewNotes?: string;
   reviewedBy?: string;
   reviewedAt?: string;
+  revocationReason?: string;
+  revokedBy?: string;
+  revokedAt?: string;
 }
 
 interface ContractsStore {
@@ -14,6 +17,7 @@ interface ContractsStore {
   renewContract: (id: string) => void;
   approveContract: (id: string, reviewerName: string, notes?: string) => void;
   rejectContract: (id: string, reviewerName: string, notes?: string) => void;
+  revokeContract: (id: string, revokerName: string, reason?: string) => void;
   updateContract: (id: string, updates: Partial<ExtendedMockContract>) => void;
   expiringCount: () => number;
 }
@@ -59,6 +63,21 @@ export const useContractsStore = create<ContractsStore>()(
               : c
           ),
         })),
+      revokeContract: (id, revokerName, reason) =>
+        set((state) => ({
+          contracts: state.contracts.map((c) =>
+            c.id === id
+              ? {
+                  ...c,
+                  status: 'revoked' as any,
+                  isExpiring: false,
+                  revocationReason: reason || 'Contract SLA revoked & cancelled by executive manager authority',
+                  revokedBy: revokerName,
+                  revokedAt: new Date().toISOString(),
+                }
+              : c
+          ),
+        })),
       updateContract: (id, updates) =>
         set((state) => ({
           contracts: state.contracts.map((c) =>
@@ -72,6 +91,6 @@ export const useContractsStore = create<ContractsStore>()(
         ).length;
       },
     }),
-    { name: 'kmrl-full-contracts-v4' }
+    { name: 'kmrl-full-contracts-v5' }
   )
 );

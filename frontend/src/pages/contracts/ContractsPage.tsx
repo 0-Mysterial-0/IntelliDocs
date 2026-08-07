@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import {
   FileText, Clock, AlertTriangle, ShieldAlert,
   Building2, Search, Plus, User, CheckCircle2, RefreshCw,
-  Eye, Check, XCircle, CheckCircle, X, MessageSquare
+  Eye, Check, XCircle, CheckCircle, X, MessageSquare, Ban
 } from 'lucide-react';
 import { cn, formatDate } from '@/lib/utils';
 import { toast } from 'sonner';
@@ -17,7 +17,7 @@ export default function ContractsPage() {
   const canApproveContract = user?.role === 'manager' || user?.role === 'admin';
 
   const [search, setSearch] = useState('');
-  const [activeTab, setActiveTab] = useState<'all' | 'expiring' | 'pending' | 'renewal' | 'approved' | 'rejected'>('all');
+  const [activeTab, setActiveTab] = useState<'all' | 'expiring' | 'pending' | 'renewal' | 'approved' | 'cancelled' | 'rejected'>('all');
   const [selectedContract, setSelectedContract] = useState<ExtendedMockContract | null>(null);
   const [reviewNoteInput, setReviewNoteInput] = useState('');
 
@@ -52,6 +52,7 @@ export default function ContractsPage() {
     if (activeTab === 'pending' && c.status !== 'pending_approval') return false;
     if (activeTab === 'renewal' && c.status !== 'under_renewal') return false;
     if (activeTab === 'approved' && c.status !== 'active' && (c as any).status !== 'approved') return false;
+    if (activeTab === 'cancelled' && (c.status as string) !== 'revoked' && (c as any).status !== 'cancelled') return false;
     if (activeTab === 'rejected' && c.status !== 'rejected') return false;
 
     // 2. Search query check
@@ -72,6 +73,7 @@ export default function ContractsPage() {
   const pendingCount = contractList.filter((c) => c.status === 'pending_approval').length;
   const renewalCount = contractList.filter((c) => c.status === 'under_renewal').length;
   const approvedCount = contractList.filter((c) => c.status === 'active' || (c as any).status === 'approved').length;
+  const cancelledCount = contractList.filter((c) => (c.status as string) === 'revoked' || (c as any).status === 'cancelled').length;
   const rejectedCount = contractList.filter((c) => c.status === 'rejected').length;
 
   return (
@@ -97,8 +99,8 @@ export default function ContractsPage() {
         </div>
       </div>
 
-      {/* KPI Summary Cards */}
-      <div className="grid grid-cols-2 sm:grid-cols-5 gap-3 font-pixel-code">
+      {/* KPI Summary Cards Bar */}
+      <div className="grid grid-cols-2 sm:grid-cols-6 gap-2 sm:gap-3 font-pixel-code">
         <div
           onClick={() => setActiveTab('all')}
           className={cn(
@@ -153,17 +155,31 @@ export default function ContractsPage() {
         </div>
 
         <div
-          onClick={() => setActiveTab('rejected')}
+          onClick={() => setActiveTab('cancelled')}
           className={cn(
-            'pixel-box p-3 cursor-pointer transition-all border-red-500/60 bg-red-950/10',
-            activeTab === 'rejected' && 'border-red-400 bg-red-950/30 shadow-[3px_3px_0px_0px_#ef4444]'
+            'pixel-box p-3 cursor-pointer transition-all border-red-500/70 bg-red-950/20',
+            activeTab === 'cancelled' && 'border-red-400 bg-red-950/40 shadow-[3px_3px_0px_0px_#ef4444]'
           )}
         >
           <div className="flex items-center justify-between">
-            <p className="text-2xl font-pixel-head font-bold text-red-400 font-bloom">{rejectedCount}</p>
-            <XCircle className="w-4 h-4 text-red-400 stroke-[2.5]" />
+            <p className="text-2xl font-pixel-head font-bold text-red-400 font-bloom">{cancelledCount}</p>
+            <Ban className="w-4 h-4 text-red-400 stroke-[2.5]" />
           </div>
-          <p className="text-[10px] text-red-300 font-bold uppercase mt-1">REJECTED</p>
+          <p className="text-[10px] text-red-300 font-bold uppercase mt-1">CANCELLED CONTRACTS</p>
+        </div>
+
+        <div
+          onClick={() => setActiveTab('rejected')}
+          className={cn(
+            'pixel-box p-3 cursor-pointer transition-all border-zinc-700 bg-black',
+            activeTab === 'rejected' && 'border-zinc-400 bg-zinc-900 shadow-[3px_3px_0px_0px_#a1a1aa]'
+          )}
+        >
+          <div className="flex items-center justify-between">
+            <p className="text-2xl font-pixel-head font-bold text-zinc-300 font-bloom">{rejectedCount}</p>
+            <XCircle className="w-4 h-4 text-zinc-400 stroke-[2.5]" />
+          </div>
+          <p className="text-[10px] text-zinc-400 font-bold uppercase mt-1">REJECTED</p>
         </div>
       </div>
 
@@ -186,138 +202,158 @@ export default function ContractsPage() {
 
       {/* Contracts Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-        {filteredContracts.map((c, idx) => (
-          <div
-            key={c.id}
-            className={cn(
-              'pixel-box p-5 space-y-4 animate-pixel-float relative flex flex-col justify-between',
-              c.status === 'expiring_soon' && 'border-amber-500/60 bg-amber-950/10',
-              c.status === 'under_renewal' && 'border-blue-500/60 bg-blue-950/10',
-              c.status === 'rejected' && 'border-red-500/60 bg-red-950/10',
-              c.status === 'active' && 'border-green-500/40 bg-green-950/5'
-            )}
-          >
-            <div className="space-y-3">
-              <div className="flex items-start justify-between gap-3">
-                <div>
-                  <span className="text-[10px] font-pixel-code font-bold text-zinc-400 block mb-0.5">
-                    {c.id} · {c.department}
+        {filteredContracts.map((c, idx) => {
+          const isRevoked = (c.status as string) === 'revoked' || (c as any).status === 'cancelled';
+          const isApproved = c.status === 'active' || (c as any).status === 'approved';
+          const isRejected = c.status === 'rejected';
+
+          return (
+            <div
+              key={c.id}
+              className={cn(
+                'pixel-box p-5 space-y-4 animate-pixel-float relative flex flex-col justify-between',
+                c.status === 'expiring_soon' && 'border-amber-500/60 bg-amber-950/10',
+                c.status === 'under_renewal' && 'border-blue-500/60 bg-blue-950/10',
+                isRevoked && 'border-red-500/80 bg-red-950/20',
+                isRejected && 'border-zinc-700 bg-zinc-900/40',
+                isApproved && 'border-green-500/40 bg-green-950/5'
+              )}
+            >
+              <div className="space-y-3">
+                <div className="flex items-start justify-between gap-3">
+                  <div>
+                    <span className="text-[10px] font-pixel-code font-bold text-zinc-400 block mb-0.5">
+                      {c.id} · {c.department}
+                    </span>
+                    <h3 className="font-pixel-head font-bold text-white text-xs font-bloom-subtle line-clamp-2">
+                      {c.title}
+                    </h3>
+                  </div>
+
+                  <span
+                    className={cn(
+                      'text-[10px] font-pixel-code font-bold px-2 py-0.5 border uppercase flex-shrink-0',
+                      isRevoked && 'badge-muted-red font-bloom-red border-red-500 bg-red-950/40',
+                      c.status === 'expiring_soon' && 'badge-muted-amber font-bloom-amber',
+                      c.status === 'under_renewal' && 'badge-muted-blue',
+                      c.status === 'pending_approval' && 'badge-muted-blue',
+                      isRejected && 'badge-muted-red',
+                      isApproved && 'badge-muted-green font-bloom-green'
+                    )}
+                  >
+                    {isRevoked ? 'REVOKED' : c.status.replace('_', ' ')}
                   </span>
-                  <h3 className="font-pixel-head font-bold text-white text-xs font-bloom-subtle line-clamp-2">
-                    {c.title}
-                  </h3>
                 </div>
 
-                <span
-                  className={cn(
-                    'text-[10px] font-pixel-code font-bold px-2 py-0.5 border uppercase flex-shrink-0',
-                    c.status === 'expiring_soon' && 'badge-muted-amber font-bloom-amber',
-                    c.status === 'under_renewal' && 'badge-muted-blue',
-                    c.status === 'pending_approval' && 'badge-muted-blue',
-                    c.status === 'rejected' && 'badge-muted-red font-bloom-red',
-                    (c.status === 'active' || (c as any).status === 'approved') && 'badge-muted-green font-bloom-green'
-                  )}
-                >
-                  {c.status.replace('_', ' ')}
-                </span>
-              </div>
+                <div className="grid grid-cols-2 gap-2 text-xs pt-2 border-t border-zinc-800 font-pixel-code">
+                  <div>
+                    <p className="text-[10px] text-zinc-500 font-bold uppercase">VENDOR PARTNER</p>
+                    <p className="text-white font-bold truncate flex items-center gap-1">
+                      <Building2 className="w-3 h-3 text-zinc-400 flex-shrink-0" /> {c.vendor}
+                    </p>
+                  </div>
 
-              <div className="grid grid-cols-2 gap-2 text-xs pt-2 border-t border-zinc-800 font-pixel-code">
-                <div>
-                  <p className="text-[10px] text-zinc-500 font-bold uppercase">VENDOR PARTNER</p>
-                  <p className="text-white font-bold truncate flex items-center gap-1">
-                    <Building2 className="w-3 h-3 text-zinc-400 flex-shrink-0" /> {c.vendor}
-                  </p>
-                </div>
-
-                <div>
-                  <p className="text-[10px] text-zinc-500 font-bold uppercase">CONTRACT VALUE</p>
-                  <p className="text-[#6ee7b7] font-bold">₹ {(c.valueAmount / 100000).toFixed(2)} Lakhs</p>
-                </div>
-              </div>
-
-              {/* Assigned Employee Tag */}
-              <div className="bg-zinc-900/80 p-2.5 border border-zinc-800 flex items-center justify-between text-xs font-pixel-code">
-                <div className="flex items-center gap-2 min-w-0">
-                  <User className="w-3.5 h-3.5 text-white flex-shrink-0" />
-                  <div className="min-w-0">
-                    <p className="text-[10px] text-zinc-400 font-bold uppercase">ASSIGNED OFFICER</p>
-                    <p className="text-white font-bold truncate text-xs">{c.assignedEmployeeName}</p>
+                  <div>
+                    <p className="text-[10px] text-zinc-500 font-bold uppercase">CONTRACT VALUE</p>
+                    <p className="text-[#6ee7b7] font-bold">₹ {(c.valueAmount / 100000).toFixed(2)} Lakhs</p>
                   </div>
                 </div>
-                <span className="text-[10px] text-zinc-400 truncate max-w-[140px]">{c.assignedEmployeeEmail}</span>
-              </div>
 
-              {/* Reviewer Note Badge if reviewed */}
-              {c.reviewedBy && (
-                <div className="p-2 bg-black border border-zinc-800 text-[10px] font-pixel-code space-y-0.5">
-                  <p className="text-zinc-400 font-bold uppercase">REVIEWED BY: <span className="text-white">{c.reviewedBy}</span></p>
-                  {c.reviewNotes && <p className="text-zinc-300 italic">"{c.reviewNotes}"</p>}
+                {/* Assigned Employee Tag */}
+                <div className="bg-zinc-900/80 p-2.5 border border-zinc-800 flex items-center justify-between text-xs font-pixel-code">
+                  <div className="flex items-center gap-2 min-w-0">
+                    <User className="w-3.5 h-3.5 text-white flex-shrink-0" />
+                    <div className="min-w-0">
+                      <p className="text-[10px] text-zinc-400 font-bold uppercase">ASSIGNED OFFICER</p>
+                      <p className="text-white font-bold truncate text-xs">{c.assignedEmployeeName}</p>
+                    </div>
+                  </div>
+                  <span className="text-[10px] text-zinc-400 truncate max-w-[140px]">{c.assignedEmployeeEmail}</span>
                 </div>
-              )}
-            </div>
 
-            {/* Action Bar */}
-            <div className="pt-3 border-t border-zinc-800 font-pixel-code space-y-2">
-              <div className="flex items-center justify-between">
-                <span className="text-[10px] text-zinc-400 flex items-center gap-1 font-bold">
-                  <Clock className="w-3 h-3 text-zinc-400" /> EXPIRY: {formatDate(c.expiryDate)}
-                </span>
-                <span className="text-[10px] text-zinc-300 font-bold">
-                  SLA: {c.slaCoverage}%
-                </span>
-              </div>
+                {/* Revoked Tag notice */}
+                {isRevoked && (
+                  <div className="p-2 bg-red-950/40 border border-red-500/50 text-[10px] font-pixel-code space-y-0.5">
+                    <p className="text-red-400 font-bold uppercase flex items-center gap-1">
+                      <Ban className="w-3 h-3 text-red-400" /> REVOKED BY: <span className="text-white">{c.revokedBy || 'Executive Manager'}</span>
+                    </p>
+                    {c.revocationReason && <p className="text-zinc-300 italic">"{c.revocationReason}"</p>}
+                  </div>
+                )}
 
-              {/* Review & Accept / Reject Control Buttons */}
-              <div className="flex items-center gap-2 pt-1 flex-wrap">
-                {/* Review Button for everyone */}
-                <button
-                  onClick={() => {
-                    setSelectedContract(c);
-                    setReviewNoteInput(c.reviewNotes || '');
-                  }}
-                  className="pixel-btn-dark text-[10px] py-1 px-2.5 flex-1 flex items-center justify-center gap-1"
-                >
-                  <Eye className="w-3 h-3 text-white" /> REVIEW SLA
-                </button>
-
-                {/* Manager / Admin Executive Actions */}
-                {canApproveContract && c.status !== 'active' && (c as any).status !== 'approved' && c.status !== 'rejected' ? (
-                  <>
-                    <button
-                      onClick={() => handleApprove(c.id, c.title)}
-                      className="bg-green-600 hover:bg-green-700 text-white font-bold text-[10px] py-1 px-2.5 border border-green-400 flex items-center gap-1 shadow-[2px_2px_0px_0px_#14532d]"
-                      title="Approve Contract SLA"
-                    >
-                      <Check className="w-3 h-3 text-white stroke-[3]" /> ACCEPT
-                    </button>
-                    <button
-                      onClick={() => handleReject(c.id, c.title)}
-                      className="bg-red-600 hover:bg-red-700 text-white font-bold text-[10px] py-1 px-2.5 border border-red-400 flex items-center gap-1 shadow-[2px_2px_0px_0px_#7f1d1d]"
-                      title="Reject Contract SLA"
-                    >
-                      <X className="w-3 h-3 text-white stroke-[3]" /> REJECT
-                    </button>
-                  </>
-                ) : (c.status === 'active' || (c as any).status === 'approved') ? (
-                  <span className="text-[10px] text-[#6ee7b7] font-bold bg-green-950/40 border border-green-500/40 px-2 py-0.5 uppercase flex items-center gap-1">
-                    <Check className="w-3 h-3 text-[#6ee7b7]" /> ACCEPTED
-                  </span>
-                ) : c.status === 'rejected' ? (
-                  <span className="text-[10px] text-red-300 font-bold bg-red-950/40 border border-red-500/40 px-2 py-0.5 uppercase flex items-center gap-1">
-                    <X className="w-3 h-3 text-red-400" /> REJECTED
-                  </span>
-                ) : (
-                  c.status === 'expiring_soon' && (
-                    <span className="text-[9px] text-amber-300 font-bold bg-amber-950/40 border border-amber-500/40 px-2 py-0.5 uppercase">
-                      MANAGER DECISION REQ
-                    </span>
-                  )
+                {/* Reviewer Note Badge if reviewed */}
+                {c.reviewedBy && !isRevoked && (
+                  <div className="p-2 bg-black border border-zinc-800 text-[10px] font-pixel-code space-y-0.5">
+                    <p className="text-zinc-400 font-bold uppercase">REVIEWED BY: <span className="text-white">{c.reviewedBy}</span></p>
+                    {c.reviewNotes && <p className="text-zinc-300 italic">"{c.reviewNotes}"</p>}
+                  </div>
                 )}
               </div>
+
+              {/* Action Bar */}
+              <div className="pt-3 border-t border-zinc-800 font-pixel-code space-y-2">
+                <div className="flex items-center justify-between">
+                  <span className="text-[10px] text-zinc-400 flex items-center gap-1 font-bold">
+                    <Clock className="w-3 h-3 text-zinc-400" /> EXPIRY: {formatDate(c.expiryDate)}
+                  </span>
+                  <span className="text-[10px] text-zinc-300 font-bold">
+                    SLA: {c.slaCoverage}%
+                  </span>
+                </div>
+
+                {/* Review & Decision Controls */}
+                <div className="flex items-center gap-2 pt-1 flex-wrap">
+                  <button
+                    onClick={() => {
+                      setSelectedContract(c);
+                      setReviewNoteInput(c.reviewNotes || '');
+                    }}
+                    className="pixel-btn-dark text-[10px] py-1 px-2.5 flex-1 flex items-center justify-center gap-1"
+                  >
+                    <Eye className="w-3 h-3 text-white" /> REVIEW SLA
+                  </button>
+
+                  {isRevoked ? (
+                    <span className="text-[10px] text-red-400 font-bold bg-red-950/60 border border-red-500/60 px-2 py-0.5 uppercase flex items-center gap-1">
+                      <Ban className="w-3 h-3 text-red-400" /> REVOKED
+                    </span>
+                  ) : isApproved ? (
+                    <span className="text-[10px] text-[#6ee7b7] font-bold bg-green-950/40 border border-green-500/40 px-2 py-0.5 uppercase flex items-center gap-1">
+                      <Check className="w-3 h-3 text-[#6ee7b7]" /> ACCEPTED
+                    </span>
+                  ) : isRejected ? (
+                    <span className="text-[10px] text-zinc-400 font-bold bg-zinc-900 border border-zinc-700 px-2 py-0.5 uppercase flex items-center gap-1">
+                      <X className="w-3 h-3 text-zinc-400" /> REJECTED
+                    </span>
+                  ) : canApproveContract ? (
+                    <>
+                      <button
+                        onClick={() => handleApprove(c.id, c.title)}
+                        className="bg-green-600 hover:bg-green-700 text-white font-bold text-[10px] py-1 px-2.5 border border-green-400 flex items-center gap-1 shadow-[2px_2px_0px_0px_#14532d]"
+                        title="Approve Contract SLA"
+                      >
+                        <Check className="w-3 h-3 text-white stroke-[3]" /> ACCEPT
+                      </button>
+                      <button
+                        onClick={() => handleReject(c.id, c.title)}
+                        className="bg-red-600 hover:bg-red-700 text-white font-bold text-[10px] py-1 px-2.5 border border-red-400 flex items-center gap-1 shadow-[2px_2px_0px_0px_#7f1d1d]"
+                        title="Reject Contract SLA"
+                      >
+                        <X className="w-3 h-3 text-white stroke-[3]" /> REJECT
+                      </button>
+                    </>
+                  ) : (
+                    c.status === 'expiring_soon' && (
+                      <span className="text-[9px] text-amber-300 font-bold bg-amber-950/40 border border-amber-500/40 px-2 py-0.5 uppercase">
+                        MANAGER DECISION REQ
+                      </span>
+                    )
+                  )}
+                </div>
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
 
       {/* Contract Review & Decision Modal */}
@@ -364,44 +400,48 @@ export default function ContractsPage() {
                 </div>
               </div>
 
-              {/* Reviewer Note Input */}
-              <div className="space-y-2">
-                <label className="block text-[10px] text-zinc-400 font-bold uppercase flex items-center gap-1">
-                  <MessageSquare className="w-3 h-3 text-zinc-400" /> REVIEWER DECISION NOTES / JUSTIFICATION
-                </label>
-                <textarea
-                  rows={3}
-                  value={reviewNoteInput}
-                  onChange={(e) => setReviewNoteInput(e.target.value)}
-                  placeholder="Enter manager audit findings, approval justification, or termination reason..."
-                  className="w-full bg-black border-2 border-zinc-700 p-3 text-xs text-white placeholder-zinc-600 font-pixel focus:outline-none uppercase"
-                />
-              </div>
-
-              {/* Action Buttons inside modal */}
-              {selectedContract.status === 'active' || (selectedContract as any).status === 'approved' ? (
+              {(selectedContract.status as string) === 'revoked' || (selectedContract as any).status === 'cancelled' ? (
+                <div className="p-3 bg-red-950/40 border border-red-500/50 text-red-300 text-center font-bold text-[11px] uppercase flex items-center justify-center gap-2 font-bloom-red">
+                  <Ban className="w-4 h-4 text-red-400 stroke-[3]" /> CONTRACT REVOKED & CANCELLED
+                </div>
+              ) : selectedContract.status === 'active' || (selectedContract as any).status === 'approved' ? (
                 <div className="p-3 bg-green-950/40 border border-green-500/50 text-[#6ee7b7] text-center font-bold text-[11px] uppercase flex items-center justify-center gap-2 font-bloom-green">
                   <Check className="w-4 h-4 text-[#6ee7b7] stroke-[3]" /> CONTRACT ACCEPTED & APPROVED
                 </div>
               ) : selectedContract.status === 'rejected' ? (
-                <div className="p-3 bg-red-950/40 border border-red-500/50 text-red-300 text-center font-bold text-[11px] uppercase flex items-center justify-center gap-2 font-bloom-red">
-                  <X className="w-4 h-4 text-red-400 stroke-[3]" /> CONTRACT TERMINATED / REJECTED
+                <div className="p-3 bg-zinc-900 border border-zinc-700 text-zinc-300 text-center font-bold text-[11px] uppercase flex items-center justify-center gap-2">
+                  <X className="w-4 h-4 text-zinc-400 stroke-[3]" /> CONTRACT TERMINATED / REJECTED
                 </div>
               ) : canApproveContract ? (
-                <div className="flex gap-3 pt-2">
-                  <button
-                    onClick={() => handleApprove(selectedContract.id, selectedContract.title, reviewNoteInput)}
-                    className="flex-1 bg-green-600 hover:bg-green-700 text-white font-bold text-xs py-2.5 px-4 border-2 border-green-400 flex items-center justify-center gap-2 shadow-[3px_3px_0px_0px_#14532d]"
-                  >
-                    <Check className="w-4 h-4 stroke-[3]" /> APPROVE CONTRACT SLA
-                  </button>
-                  <button
-                    onClick={() => handleReject(selectedContract.id, selectedContract.title, reviewNoteInput)}
-                    className="flex-1 bg-red-600 hover:bg-red-700 text-white font-bold text-xs py-2.5 px-4 border-2 border-red-400 flex items-center justify-center gap-2 shadow-[3px_3px_0px_0px_#7f1d1d]"
-                  >
-                    <X className="w-4 h-4 stroke-[3]" /> REJECT CONTRACT SLA
-                  </button>
-                </div>
+                <>
+                  <div className="space-y-2">
+                    <label className="block text-[10px] text-zinc-400 font-bold uppercase flex items-center gap-1">
+                      <MessageSquare className="w-3.5 h-3.5 text-zinc-400" /> REVIEWER DECISION NOTES / JUSTIFICATION
+                    </label>
+                    <textarea
+                      rows={3}
+                      value={reviewNoteInput}
+                      onChange={(e) => setReviewNoteInput(e.target.value)}
+                      placeholder="Enter manager audit findings, approval justification, or termination reason..."
+                      className="w-full bg-black border-2 border-zinc-700 p-3 text-xs text-white placeholder-zinc-600 font-pixel focus:outline-none uppercase"
+                    />
+                  </div>
+
+                  <div className="flex gap-3 pt-2">
+                    <button
+                      onClick={() => handleApprove(selectedContract.id, selectedContract.title, reviewNoteInput)}
+                      className="flex-1 bg-green-600 hover:bg-green-700 text-white font-bold text-xs py-2.5 px-4 border-2 border-green-400 flex items-center justify-center gap-2 shadow-[3px_3px_0px_0px_#14532d]"
+                    >
+                      <Check className="w-4 h-4 stroke-[3]" /> APPROVE CONTRACT SLA
+                    </button>
+                    <button
+                      onClick={() => handleReject(selectedContract.id, selectedContract.title, reviewNoteInput)}
+                      className="flex-1 bg-red-600 hover:bg-red-700 text-white font-bold text-xs py-2.5 px-4 border-2 border-red-400 flex items-center justify-center gap-2 shadow-[3px_3px_0px_0px_#7f1d1d]"
+                    >
+                      <X className="w-4 h-4 stroke-[3]" /> REJECT CONTRACT SLA
+                    </button>
+                  </div>
+                </>
               ) : (
                 <div className="p-3 bg-amber-950/30 border border-amber-500/40 text-amber-300 text-center font-bold text-[11px] uppercase">
                   VIEW ONLY MODE · MANAGER OR ADMIN ROLE REQUIRED TO DECIDE CONTRACT

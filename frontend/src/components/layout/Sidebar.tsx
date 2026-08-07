@@ -5,7 +5,7 @@ import { useContractsStore } from '@/store/contractsStore';
 import {
   LayoutDashboard, FileText, Upload, Search, Bot, CheckSquare,
   BarChart3, Users, Building2, Bell, Settings, ChevronLeft, ChevronRight,
-  Train, LogOut, Shield, Sparkles
+  Train, LogOut, Shield, Sparkles, Ban
 } from 'lucide-react';
 
 interface SidebarProps {
@@ -18,6 +18,7 @@ const navItems = [
   { to: '/documents', icon: FileText, label: 'DOCUMENTS', roles: ['admin', 'manager', 'employee'] },
   { to: '/upload', icon: Upload, label: 'UPLOAD DOCUMENTS', roles: ['admin', 'manager', 'employee'] },
   { to: '/contracts', icon: Shield, label: 'CONTRACTS', roles: ['admin', 'manager', 'employee'], badge: null as null },
+  { to: '/contracts/revoke', icon: Ban, label: 'REVOKE CONTRACT', roles: ['admin', 'manager'] },
   { to: '/approvals', icon: CheckSquare, label: 'APPROVALS', roles: ['admin', 'manager', 'employee'] },
   { to: '/search', icon: Search, label: 'SEARCH', roles: ['admin', 'manager', 'employee'] },
   { to: '/ai-assistant', icon: Bot, label: 'AI ASSISTANT', roles: ['admin', 'manager', 'employee'], isAi: true },
