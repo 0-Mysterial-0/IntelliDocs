@@ -147,6 +147,9 @@ export default function DepartmentsPage() {
                     width: `${Math.min(100, Math.round((dept.documents / Math.max(...departments.map(d => d.documents), 1)) * 100))}%`,
                   }}
                 />
+              </div>
+            </div>
+
             {/* Admin Delete Action */}
             {isAdmin && (
               <div className="mt-3 pt-2 border-t border-zinc-800 flex justify-end">
