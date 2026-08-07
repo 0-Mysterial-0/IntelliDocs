@@ -1,6 +1,7 @@
 from pydantic_settings import BaseSettings
-from pydantic import Field
-from typing import List
+from pydantic import Field, field_validator
+from typing import List, Union
+import json
 
 
 class Settings(BaseSettings):
@@ -53,8 +54,25 @@ class Settings(BaseSettings):
     # Redis
     REDIS_URL: str = "redis://localhost:6379/0"
 
-    # CORS
-    CORS_ORIGINS: List[str] = ["http://localhost:5173", "http://localhost:3000"]
+    # CORS - Union[str, List[str]] prevents pydantic-settings from forcing JSON parsing errors
+    CORS_ORIGINS: Union[str, List[str]] = ["*"]
+
+    @property
+    def cors_origins_list(self) -> List[str]:
+        v = self.CORS_ORIGINS
+        if isinstance(v, str):
+            v = v.strip()
+            if not v or v == "*":
+                return ["*"]
+            if v.startswith("[") and v.endswith("]"):
+                try:
+                    return json.loads(v)
+                except Exception:
+                    pass
+            if "," in v:
+                return [i.strip() for i in v.split(",") if i.strip()]
+            return [v]
+        return v
 
     # Rate Limiting
     RATE_LIMIT_PER_MINUTE: int = 60
