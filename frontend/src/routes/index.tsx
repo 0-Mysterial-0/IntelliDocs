@@ -8,6 +8,7 @@ import { AppShell } from '@/components/layout/AppShell';
 
 // Pages
 import LoginPage from '@/pages/auth/LoginPage';
+import RegisterPage from '@/pages/auth/RegisterPage';
 import HomePage from '@/pages/home/HomePage';
 import DashboardPage from '@/pages/dashboard/DashboardPage';
 import DocumentsPage from '@/pages/documents/DocumentsPage';
@@ -33,6 +34,7 @@ export default function AppRoutes() {
   return (
     <Routes>
       <Route path={ROUTES.login} element={<LoginPage />} />
+      <Route path="/register" element={<RegisterPage />} />
 
       <Route path="/" element={<ProtectedRoute><AppShell /></ProtectedRoute>}>
         <Route index element={<HomePage />} />

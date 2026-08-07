@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useAuthStore } from '@/store/authStore';
 import { authApi } from '@/lib/api';
@@ -255,6 +255,15 @@ export default function LoginPage() {
                 </span>
               </motion.button>
             ))}
+          {/* Sign Up Link */}
+          <div className="mt-6 pt-4 border-t-2 border-zinc-800 text-center font-pixel-code">
+            <p className="text-xs text-zinc-400 uppercase">NEED AN ACCOUNT?</p>
+            <Link
+              to="/register"
+              className="inline-block text-xs font-bold text-white hover:text-[#6ee7b7] font-bloom-subtle mt-1 uppercase underline underline-offset-4"
+            >
+              CREATE ACCOUNT / SIGN UP →
+            </Link>
           </div>
 
           <p className="text-center text-[10px] font-pixel-code text-zinc-500 mt-6 uppercase">

@@ -23,4 +23,5 @@ export const ROUTES = {
   analytics: '/analytics',
   settings: '/settings',
   login: '/login',
+  register: '/register',
 } as const;
