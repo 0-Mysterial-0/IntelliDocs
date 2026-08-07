@@ -11,14 +11,19 @@ import { useAuthStore } from '@/store/authStore';
 import { ocrApi } from '@/lib/api';
 import api from '@/lib/api';
 import { toast } from 'sonner';
+import { useDocumentsStore } from '@/store/documentsStore';
 
 export default function DocumentDetailPage() {
-  const { id } = useParams();
+  const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { uploadedDocs } = useUploadedDocsStore();
+  const { documents: storeDocs } = useDocumentsStore();
   const { user } = useAuthStore();
 
-  const [commentsList, setCommentsList] = useState([
+  const allDocs = [...uploadedDocs, ...storeDocs, ...MOCK_DOCUMENTS];
+  const doc = allDocs.find((d) => d.id === id) || allDocs[0];
+
+  const [commentsList, setCommentsList] = useState(doc?.comments || [
     {
       id: 'c1',
       userName: 'Rajan Menon',
@@ -82,6 +87,12 @@ export default function DocumentDetailPage() {
     responsible_department: string;
     keywords: string[];
   } | null>(null);
+
+  useEffect(() => {
+    if (doc?.comments && doc.comments.length > 0) {
+      setCommentsList(doc.comments);
+    }
+  }, [doc?.id]);
 
   // Try to fetch real OCR text from backend & auto-complete pending status
   useEffect(() => {

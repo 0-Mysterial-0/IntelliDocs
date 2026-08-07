@@ -72,6 +72,109 @@ for i in range(1, 81):
         'isExpiring': is_exp
     })
 
+comment_templates = {
+  'Safety': [
+    "I have reviewed the acoustic track emission data on the Aluva to Petta line. Sensor readings on section {sec} are well within RDSO thresholds.",
+    "Fire suppression pressure testing at {station} Station passed verification. Please ensure shift supervisors update the monthly logbook.",
+    "Platform Screen Door (PSD) calibration on Gate {gate} was completed during non-revenue hours. System response is 100% nominal.",
+    "Traction power substation emergency cutoffs verified. Requesting Safety Directorate to sign off on the compliance certificate.",
+    "Escalator emergency brake distance tests passed. Recommending scheduling the next audit for early next quarter.",
+    "Acoustic noise levels during high-speed rake testing registered 64 dB, meeting urban transit acoustic compliance standards.",
+    "Emergency egress signage illumination verified along underground section. Secondary battery backup is fully functional.",
+    "Hazmat containment protocols for Muttom depot maintenance bays reviewed and approved by the Safety Committee."
+  ],
+  'Operations': [
+    "Headway scheduling during peak hours (08:00 AM - 10:00 AM) optimized. Passenger dwell time reduced to 22 seconds per station.",
+    "Automatic Train Control (ATC) signaling logs verified for Rake #{rake}. No communication dropouts recorded over 72 hours.",
+    "Intermodal transport connectivity metrics at Vytilla Mobility Hub show a 14% increase in feeder bus transfers.",
+    "Station master logs for Line 1 indicate 99.4% on-time departure rate across all 25 operational metro stations.",
+    "Crowd control barriers deployed at Edapally station during festive weekend handled passenger footfall smoothly.",
+    "Farebox collection telemetry synced across all gate arrays. Zero transaction dropouts reported.",
+    "Nightly non-revenue maintenance train movements coordinated with OCC. Track clearance confirmed by 04:15 AM.",
+    "Passenger info display system (PIDS) software patch applied across all stations. Real-time arrival accuracy improved."
+  ],
+  'Finance': [
+    "Non-farebox kiosk revenue for Q{q} reached ₹ {rev} Lakhs, exceeding budget projections by 8.4%.",
+    "Operating expenditure audit for vendor contract #{cid} completed. Invoice clearance approved by Accounts Division.",
+    "Passenger farebox collection accounts reconciled for Line 1 and Water Metro routes. Zero discrepancies found.",
+    "Capital outlay for automated fare collection card validator upgrade verified against approved tender estimate.",
+    "Tax compliance filing and GST input tax credit reconciliation submitted for the current audit cycle.",
+    "Station digital advertising screen lease revenue cleared for Q3. Next review scheduled prior to contract expiry.",
+    "Auxiliary power tariff consumption data analyzed. Rooftop solar offsets reduced grid power expenditure by 12.1%.",
+    "Internal audit report signed off by Financial Controller. All department budget allocations are balanced."
+  ],
+  'HR': [
+    "Revised night shift allowance of ₹ 450 per shift for track maintenance staff incorporated into payroll system.",
+    "Annual health insurance cover limit increased to ₹ 5 Lakhs for all permanent operational personnel.",
+    "Employee performance appraisal logs for {dept} department verified and uploaded to employee portal.",
+    "Technical training program on signaling maintenance completed for 18 junior engineers at Muttom Academy.",
+    "Paternity leave applications processed in accordance with the updated 2024 HR Policy Circular.",
+    "Staff attendance biometric logs reconciled with shift roster. Zero payroll discrepancies recorded.",
+    "Recruitment drive for station controllers and train operators successfully completed. Orientation starts Monday.",
+    "Workplace safety and ergonomic assessment carried out across all station control rooms."
+  ],
+  'Maintenance': [
+    "Bogie overhaul and wheel turning completed for Trainset RS-{rake} at Workshop Bay 2.",
+    "Traction Overhead Equipment (OHE) carbon strip wear gauge inspection passed. Replacement scheduled for 40,000 km.",
+    "HEPA air filters replaced across all 18 trainset passenger cars. Cabin CO2 sensors re-calibrated.",
+    "HVAC cooling unit pressure testing completed on Rake #{rake}. Compressor refrigerant topped up.",
+    "Track grinding along Kilometer {km} to {km2} completed during non-revenue hours. Rail profile verified.",
+    "Muttom workshop depot overhead crane inspection completed with load test certification.",
+    "Battery bank voltage check on emergency traction backup systems optimal across all sub-stations.",
+    "Hydraulic brake line pressure sensors tested under full simulation payload. Zero leakage observed."
+  ],
+  'Legal': [
+    "Service Level Agreement (SLA) clause 14.2 reviewed regarding vendor delay penalty terms. Document compliant.",
+    "Station commercial kiosk lease agreement draft vetted by Legal Counsel. Mandatory 60-day renewal notice included.",
+    "Land acquisition indemnity bond documents verified for Water Metro terminal expansion project.",
+    "Intellectual property and software license terms for Automatic Fare Collection system approved.",
+    "Regulatory compliance filing with Ministry of Housing and Urban Affairs (MoHUA) submitted on schedule.",
+    "Contractor safety liability coverage verified against statutory insurance requirements.",
+    "Dispute resolution clause updated in alignment with Indian Arbitration and Conciliation Act amendments.",
+    "Right of Way (RoW) clearance documentation verified for feeder corridor infrastructure."
+  ],
+  'Procurement': [
+    "Technical bid evaluation completed for Tender Ref KMRL/PROC/2024/{bid}. 4 qualified vendors selected.",
+    "Solar PV rooftop system procurement specifications verified by Electrical Engineering Directorate.",
+    "Station housekeeping and sanitation service tender specifications approved for executive publishing.",
+    "Spare parts inventory requisition for Alstom Metropolis rakes cleared for purchase order issuance.",
+    "Pre-bid conference queries answered and published on the KMRL E-Tendering portal.",
+    "Vendor performance evaluation matrix updated for annual vendor empalement review.",
+    "Price bid opening scheduled for Friday following technical qualification clearance.",
+    "Quality assurance audit of supplied track fasteners completed at vendor manufacturing facility."
+  ],
+  'Engineering': [
+    "Structural load testing on elevated viaduct pier P-{pier} completed. Deflection parameters well within safety limits.",
+    "Thermit welding inspection on rail joints along section {sec} verified via ultrasonic flaw detection.",
+    "Substation transformer oil insulation breakdown voltage test results recorded at 68 kV (Optimal).",
+    "Station building management system (BMS) telemetry integration verified across all 25 stations.",
+    "Drainage and stormwater management infrastructure around station underpasses inspected ahead of monsoons.",
+    "Vibration dampening pads under track bed evaluated. Dynamic rail deflection is nominal.",
+    "Elevated station canopy structural integrity check completed following monsoon storm inspection.",
+    "SCADA remote control telemetry for traction power substations tested with 100% command success rate."
+  ],
+  'Water Metro': [
+    "Electric hybrid boat Fleet #{boat} completed sea trials with 99.1% energy efficiency score.",
+    "Vytilla to Fort Kochi Water Metro route passenger ridership crossed 1.5 Million milestone.",
+    "Lithium-titanate battery fast-charging station at High Court terminal inspected and certified.",
+    "Floating pontoon walkway gangway automatic level adjustment sensors recalibrated.",
+    "Marine life-saving equipment and life raft deployment mechanisms inspected by Mercantile Marine Dept.",
+    "Water Metro automatic fare collection gates integrated with Kochi One NCMC smart card.",
+    "Feeder electric boat hull ultrasonic thickness testing confirmed zero hull corrosion.",
+    "Terminal passenger waiting lounges air conditioning and solar power integration verified."
+  ],
+  'IT': [
+    "ISO 27001 annual cybersecurity audit completed. Multi-Factor Authentication (MFA) enforced system-wide.",
+    "Automatic Fare Collection (AFC) QR code validator firmware update deployed to 120 station gates.",
+    "KMRL IntelliDocs RAG AI vector database index re-indexed with zero query latency degradation.",
+    "Local network firewall policy rules updated to block unauthorized external IP ranges.",
+    "Disaster recovery site data replication latency verified under 150 milliseconds.",
+    "Station Wi-Fi network bandwidth management policy updated for passenger connectivity.",
+    "Server room precision AC temperature monitoring alerts tested and functional.",
+    "Data backup retention policy executed. Offline cold storage backups verified."
+  ]
+}
+
 categories = ['Safety', 'Operations', 'Finance', 'HR', 'Maintenance', 'Legal', 'Procurement', 'Engineering', 'Water Metro', 'IT']
 documents = []
 
@@ -125,6 +228,43 @@ This official document details the {cat.lower()} protocols, compliance checks, a
 RECORD AUTHORIZED BY: {emp['fullName'].upper()} (KMRL INTELLIDOCS)
 STATUS: {st.upper()} · PRIORITY: {pr.upper()}"""
 
+    # Generate 5 to 10 unique comments for this specific document
+    doc_comments = []
+    num_comments = random.randint(5, 10)
+    cat_templates = comment_templates.get(cat, comment_templates['Operations'])
+    
+    for c_idx in range(num_comments):
+        commenter = employees[(i + c_idx * 7) % len(employees)]
+        tpl = cat_templates[c_idx % len(cat_templates)]
+        formatted_comment = tpl.format(
+            sec=f"{10 + (i % 15)}-{(i % 15) + 12}",
+            station=['Aluva', 'Edapally', 'Kalamassery', 'MG Road', 'Palarivattom', 'Vytilla', 'Petta'][c_idx % 7],
+            gate=(c_idx % 6) + 1,
+            rake=f"RS-0{((i + c_idx) % 9) + 1}",
+            q=((i % 4) + 1),
+            rev=(i * 3) + 40,
+            cid=emp['assignedContractId'],
+            dept=emp['department'],
+            km=f"{(i % 12) + 2}.4",
+            km2=f"{(i % 12) + 6}.8",
+            bid=f"{(i % 50) + 100}",
+            pier=f"{(i % 80) + 10}",
+            boat=f"0{((i + c_idx) % 6) + 1}"
+        )
+        
+        # Add document specific contextual suffix so every single comment is 100% unique to this doc
+        unique_text = f"{formatted_comment} (Ref: {doc_id} / Log #{c_idx + 1})"
+        
+        doc_comments.append({
+            'id': f"cmt-{doc_id}-{c_idx + 1}",
+            'documentId': doc_id,
+            'userName': commenter['fullName'],
+            'userRole': commenter['role'].upper(),
+            'userAvatar': commenter['avatarInitials'],
+            'content': unique_text,
+            'createdAt': f"2024-0{((i % 6) + 1):02d}-{min(28, c_idx + 2):02d}T{10 + c_idx}:15:00Z"
+        })
+
     doc_obj = {
         'id': doc_id,
         'title': title,
@@ -154,6 +294,7 @@ STATUS: {st.upper()} · PRIORITY: {pr.upper()}"""
             'department': emp['department'],
             'tags': [cat.lower(), emp['department'].lower(), 'kmrl', '2024']
         },
+        'comments': doc_comments,
         'tags': [cat.lower(), emp['department'].lower(), 'kmrl', '2024'],
         'isDuplicate': is_dup,
         'duplicateOfId': orig_id if is_dup else None,
@@ -195,7 +336,17 @@ for i in range(1, 21):
         'link': f"/documents/doc-{str(i).zfill(3)}"
     })
 
-mock_content = f"""// Realistic KMRL IntelliDocs mock data - 80 Employees, 200 Documents with OCR + AI Summaries, 80 Contracts, 25 Approvals, 20 Notifications
+mock_content = f"""// Realistic KMRL IntelliDocs mock data - 80 Employees, 200 Documents with 5-10 Unique Comments each, 80 Contracts, 25 Approvals, 20 Notifications
+
+export interface MockComment {{
+  id: string;
+  documentId: string;
+  userName: string;
+  userRole: string;
+  userAvatar: string;
+  content: string;
+  createdAt: string;
+}}
 
 export interface MockDocument {{
   id: string;
@@ -219,6 +370,7 @@ export interface MockDocument {{
     department: string;
     tags: string[];
   }};
+  comments?: MockComment[];
   tags?: string[];
   isDuplicate?: boolean;
   duplicateOfId?: string;
@@ -337,4 +489,4 @@ target_path = os.path.join(os.path.dirname(__file__), '../frontend/src/data/mock
 with open(target_path, 'w', encoding='utf-8') as f:
     f.write(mock_content)
 
-print("PYTHON GENERATED ALL 200 DOCUMENTS WITH OCR AND AI SUMMARY SUCCESSFULLY!")
+print("PYTHON GENERATED ALL 200 DOCUMENTS WITH 5-10 UNIQUE COMMENTS EACH!")
