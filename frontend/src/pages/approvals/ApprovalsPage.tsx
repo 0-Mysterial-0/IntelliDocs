@@ -178,7 +178,7 @@ export default function ApprovalsPage() {
                   </div>
                 ) : (
                   <div className="p-2 bg-amber-950/20 border border-amber-500/30 text-amber-300 font-pixel-code text-[11px] font-bold uppercase text-center">
-                    🔒 MANAGER / ADMIN APPROVAL AUTHORITY REQUIRED
+                    MANAGER / ADMIN APPROVAL AUTHORITY REQUIRED
                   </div>
                 )
               )}
