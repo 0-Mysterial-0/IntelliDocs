@@ -29,12 +29,17 @@ export default function ContractsPage() {
   };
 
   const filteredContracts = contractList.filter((c) => {
+    if (!c) return false;
+    const term = (search || '').toLowerCase().trim();
+    if (!term) return true;
+
     const matchesSearch =
-      !search ||
-      c.title.toLowerCase().includes(search.toLowerCase()) ||
-      c.vendor.toLowerCase().includes(search.toLowerCase()) ||
-      c.assignedEmployeeName.toLowerCase().includes(search.toLowerCase()) ||
-      c.id.toLowerCase().includes(search.toLowerCase());
+      (c.title || '').toLowerCase().includes(term) ||
+      (c.vendor || '').toLowerCase().includes(term) ||
+      (c.assignedEmployeeName || '').toLowerCase().includes(term) ||
+      (c.assignedEmployeeEmail || '').toLowerCase().includes(term) ||
+      (c.id || '').toLowerCase().includes(term) ||
+      (c.department || '').toLowerCase().includes(term);
 
     if (!matchesSearch) return false;
 
