@@ -57,15 +57,24 @@ body {
 /* Pixel Art Fonts */
 .font-pixel {
   font-family: 'Pixelify Sans', monospace;
+  font-weight: 400;
 }
 
 .font-pixel-head {
-  font-family: 'Silkscreen', cursive, monospace;
+  font-family: 'Silkscreen', 'Pixelify Sans', cursive, monospace;
+  font-weight: 400;
   letter-spacing: 0.04em;
 }
 
 .font-pixel-code {
   font-family: 'VT323', monospace;
+}
+
+/* Retain Pixel Art Font style on headings but force font-weight: 400 (normal) so 'W' and 'U' are distinct */
+h1, h2, h3, h4, h5, h6, .font-pixel-head {
+  font-family: 'Silkscreen', 'Pixelify Sans', cursive, monospace;
+  font-weight: 400 !important;
+  letter-spacing: 0.03em;
 }
 
 /* Reduced Bloom - Very Subtle Shiny Highlight */

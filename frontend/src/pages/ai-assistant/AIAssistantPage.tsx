@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Bot, Send, User, FileText, Plus, MessageSquare, ChevronRight } from 'lucide-react';
+import { Bot, Send, User, FileText, Plus, MessageSquare, ChevronRight, RefreshCw, Sparkles } from 'lucide-react';
 import { cn, formatRelativeTime } from '@/lib/utils';
 import { chatApi } from '@/lib/api';
 import { toast } from 'sonner';
@@ -21,7 +21,7 @@ interface ChatSession {
   active?: boolean;
 }
 
-const PAST_SESSIONS: ChatSession[] = [
+const INITIAL_SESSIONS: ChatSession[] = [
   { id: 's1', title: 'Metro Operations & Safety Inspection', date: '2 hours ago', active: true },
   { id: 's2', title: 'Rolling Stock Maintenance SLA Terms', date: 'Yesterday' },
   { id: 's3', title: 'Q1 Financial Audit Summary', date: '3 days ago' },
@@ -43,8 +43,8 @@ const SUGGESTED_QUESTIONS = [
   'SHOW ME THE MUTTOM DEPOT SOLAR POWER TENDER',
 ];
 
-// ── Unique Conversation Histories per Side Chat Session ───────────────────────
-const SESSION_MESSAGES: Record<string, Message[]> = {
+// Initial pre-loaded session conversations
+const SESSION_MESSAGES_STORE: Record<string, Message[]> = {
   s1: [
     {
       id: 's1-1',
@@ -141,7 +141,6 @@ const SESSION_MESSAGES: Record<string, Message[]> = {
   ],
 };
 
-// ── Expanded Hardcoded Q&A Responses ──────────────────────────────────────────
 const HARDCODED_ANSWERS: Record<string, { answer: string; citations: { title: string; document_id: string }[] }> = {
   'WHAT ARE THE LATEST SAFETY INSPECTION FINDINGS?': {
     answer: "Based on the Q2 2024 Safety Audit Report for Kochi Metro Rail Limited:\n\n1. **Track Infrastructure**: All 25.6 km of Line 1 (Aluva to Petta) passed acoustic emission testing with **99.4% track integrity**.\n2. **Emergency Braking Systems**: Automatic Train Control (ATC) brake distance tests met 100% compliance standards across Alstom Metropolis rakes.\n3. **Station Fire Safety**: Escalator emergency cutoffs and fire suppression systems at Edapally and Maharajas College stations verified compliant.\n4. **Action Item**: Scheduled preventative maintenance on traction power substation 3 by end of month.",
@@ -223,9 +222,9 @@ const HARDCODED_ANSWERS: Record<string, { answer: string; citations: { title: st
 };
 
 export default function AIAssistantPage() {
-  const [sessions, setSessions] = useState<ChatSession[]>(PAST_SESSIONS);
+  const [sessions, setSessions] = useState<ChatSession[]>(INITIAL_SESSIONS);
   const [activeSessionId, setActiveSessionId] = useState<string>('s1');
-  const [messages, setMessages] = useState<Message[]>(SESSION_MESSAGES['s1']);
+  const [messages, setMessages] = useState<Message[]>(SESSION_MESSAGES_STORE['s1'] || []);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
   const [sessionId, setSessionId] = useState<string | undefined>(undefined);
@@ -233,9 +232,9 @@ export default function AIAssistantPage() {
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages]);
+  }, [messages, loading]);
 
-  // Robust fuzzy matching for hardcoded answers
+  // Fuzzy search helper for hardcoded answers
   const findHardcodedQA = (query: string) => {
     const norm = query.toLowerCase().replace(/[^a-z0-9]/g, '');
     for (const [key, data] of Object.entries(HARDCODED_ANSWERS)) {
@@ -252,81 +251,95 @@ export default function AIAssistantPage() {
     const cleanText = text.trim();
 
     const userMsg: Message = {
-      id: Date.now().toString(),
+      id: `u-${Date.now()}-${Math.random()}`,
       role: 'user',
       content: cleanText,
       timestamp: new Date(),
     };
 
-    setMessages((m) => [...m, userMsg]);
+    // Append user message immediately and update store
+    setMessages((prev) => {
+      const updated = [...prev, userMsg];
+      SESSION_MESSAGES_STORE[activeSessionId] = updated;
+      return updated;
+    });
+
     setInput('');
     setLoading(true);
 
     try {
-      // ── 1. Check Hello Detection ─────────────────────────────────────────────
+      // 1. Hello Detection
       const isHello = /^(hello|hi|hey|hello sir|hi sir|good morning|good afternoon|good evening)/i.test(cleanText);
       if (isHello) {
-        await new Promise((r) => setTimeout(r, 350));
-        setMessages((m) => [
-          ...m,
-          {
-            id: Date.now().toString(),
-            role: 'assistant',
-            content: 'Hello sir, how can we help you?',
-            citations: [],
-            timestamp: new Date(),
-            showQuickQuestions: true, // Render quick question buttons underneath!
-          },
-        ]);
+        await new Promise((r) => setTimeout(r, 250));
+        const botMsg: Message = {
+          id: `b-${Date.now()}-${Math.random()}`,
+          role: 'assistant',
+          content: 'Hello sir, how can we help you?',
+          citations: [],
+          timestamp: new Date(),
+          showQuickQuestions: true,
+        };
+        setMessages((prev) => {
+          const updated = [...prev, botMsg];
+          SESSION_MESSAGES_STORE[activeSessionId] = updated;
+          return updated;
+        });
         return;
       }
 
-      // ── 2. Check Hardcoded Q&A Match ─────────────────────────────────────────
+      // 2. Hardcoded Q&A Match
       const matchedQA = findHardcodedQA(cleanText);
       if (matchedQA) {
-        await new Promise((r) => setTimeout(r, 450));
-        setMessages((m) => [
-          ...m,
-          {
-            id: Date.now().toString(),
-            role: 'assistant',
-            content: matchedQA.answer,
-            citations: matchedQA.citations,
-            timestamp: new Date(),
-          },
-        ]);
+        await new Promise((r) => setTimeout(r, 350));
+        const botMsg: Message = {
+          id: `b-${Date.now()}-${Math.random()}`,
+          role: 'assistant',
+          content: matchedQA.answer,
+          citations: matchedQA.citations,
+          timestamp: new Date(),
+        };
+        setMessages((prev) => {
+          const updated = [...prev, botMsg];
+          SESSION_MESSAGES_STORE[activeSessionId] = updated;
+          return updated;
+        });
         return;
       }
 
-      // ── 3. Fallback to API / RAG Engine ──────────────────────────────────────
+      // 3. Fallback backend or intelligent default
       try {
         const resp = await chatApi.sendMessage(cleanText, sessionId);
         const data = resp.data;
         setSessionId(data.session_id);
-        setMessages((m) => [
-          ...m,
-          {
-            id: data.message_id || Date.now().toString(),
-            role: 'assistant',
-            content: data.message,
-            citations: data.citations || [],
-            timestamp: new Date(data.created_at || Date.now()),
-          },
-        ]);
+        const botMsg: Message = {
+          id: data.message_id || `b-${Date.now()}`,
+          role: 'assistant',
+          content: data.message,
+          citations: data.citations || [],
+          timestamp: new Date(data.created_at || Date.now()),
+        };
+        setMessages((prev) => {
+          const updated = [...prev, botMsg];
+          SESSION_MESSAGES_STORE[activeSessionId] = updated;
+          return updated;
+        });
       } catch {
-        setMessages((m) => [
-          ...m,
-          {
-            id: Date.now().toString(),
-            role: 'assistant',
-            content: `BASED ON KMRL INTELLIDOCS, HERE'S WHAT I FOUND ABOUT "${cleanText.toUpperCase()}": THE SYSTEM CONTAINS EXTENSIVE DOCUMENTATION ACROSS OPERATIONS, FINANCE, HR, MAINTENANCE, LEGAL, AND PROCUREMENT DEPARTMENTS. ALL RECORDS ARE INDEXED AND RETRIEVABLE.`,
-            citations: [{ title: 'OPERATIONS MANUAL', document_id: 'demo-1' }, { title: 'SAFETY PROTOCOLS 2024', document_id: 'demo-2' }],
-            timestamp: new Date(),
-          },
-        ]);
+        const botMsg: Message = {
+          id: `b-${Date.now()}`,
+          role: 'assistant',
+          content: `BASED ON KMRL INTELLIDOCS, HERE'S WHAT I FOUND ABOUT "${cleanText.toUpperCase()}": THE SYSTEM CONTAINS EXTENSIVE DOCUMENTATION ACROSS OPERATIONS, FINANCE, HR, MAINTENANCE, LEGAL, AND PROCUREMENT DEPARTMENTS. ALL RECORDS ARE INDEXED AND RETRIEVABLE.`,
+          citations: [{ title: 'OPERATIONS MANUAL', document_id: 'doc-001' }, { title: 'SAFETY PROTOCOLS 2024', document_id: 'doc-002' }],
+          timestamp: new Date(),
+        };
+        setMessages((prev) => {
+          const updated = [...prev, botMsg];
+          SESSION_MESSAGES_STORE[activeSessionId] = updated;
+          return updated;
+        });
       }
     } finally {
-      // ALWAYS reset loading so user can click repeatedly without getting blocked!
+      // Unlocks loading state unconditionally so subsequent clicks ALWAYS work!
       setLoading(false);
     }
   };
@@ -341,16 +354,15 @@ export default function AIAssistantPage() {
     setSessions((prev) => [newSess, ...prev.map((s) => ({ ...s, active: false }))]);
     setActiveSessionId(newSessId);
 
-    const initMsgs: Message[] = [];
-    SESSION_MESSAGES[newSessId] = initMsgs;
-    setMessages(initMsgs);
+    SESSION_MESSAGES_STORE[newSessId] = [];
+    setMessages([]);
     toast.success('New chat session started');
   };
 
   const selectSession = (id: string) => {
     setActiveSessionId(id);
     setSessions((prev) => prev.map((s) => ({ ...s, active: s.id === id })));
-    const sessionMsgs = SESSION_MESSAGES[id] || [];
+    const sessionMsgs = SESSION_MESSAGES_STORE[id] || [];
     setMessages(sessionMsgs);
     toast.info('Loaded side chat conversation');
   };
@@ -368,86 +380,82 @@ export default function AIAssistantPage() {
     >
       {/* Header */}
       <div className="flex items-center justify-between mb-4 flex-shrink-0">
-        <div>
-          <div className="flex items-center gap-3">
-            <Bot className="w-6 h-6 text-white stroke-[2.5]" />
-            <h1 className="text-xl font-pixel-head font-bold text-white font-bloom">AI ASSISTANT</h1>
-            <span className="text-xs font-pixel-code font-bold badge-muted-green px-2.5 py-0.5 uppercase">RAG POWERED</span>
+        <div className="flex items-center gap-3">
+          <Bot className="w-6 h-6 text-white stroke-[2.5]" />
+          <div>
+            <div className="flex items-center gap-2">
+              <h1 className="text-xl font-pixel-head font-bold text-white font-bloom">KMRL INTELLIBOT (RAG AI)</h1>
+              <span className="text-[10px] font-pixel-code font-bold badge-muted-green font-bloom-green px-2 py-0.5 border">ONLINE</span>
+            </div>
+            <p className="text-zinc-400 text-xs font-pixel-code uppercase">AI ASSISTANT FOR KOCHI METRO RAIL LIMITED DOCUMENT INTELLIGENCE</p>
           </div>
-          <p className="text-zinc-400 text-xs font-pixel-code mt-1 uppercase">ASK QUESTIONS ABOUT KMRL DOCUMENTS USING NATURAL LANGUAGE</p>
         </div>
-        <motion.button
-          whileHover={{ scale: 1.03 }}
-          onClick={clearChat}
-          className="pixel-btn-white flex items-center gap-2 text-xs"
-        >
-          <Plus className="w-4 h-4 stroke-[3]" />
+
+        <button onClick={clearChat} className="pixel-btn-white text-xs flex items-center gap-2">
+          <Plus className="w-4 h-4 text-black stroke-[3]" />
           <span>NEW CHAT</span>
-        </motion.button>
+        </button>
       </div>
 
-      {/* Main Container with Left Side Chat Drawer */}
-      <div className="flex-1 flex gap-5 min-h-0 overflow-hidden">
-        {/* Left Side Chat History Drawer */}
-        <div className="hidden md:flex flex-col w-64 bg-[#09090b] border-2 border-[#27272a] p-3 space-y-3 flex-shrink-0 font-pixel-code">
+      {/* Main Layout */}
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 flex-1 min-h-0">
+        {/* Side Chat Conversations List */}
+        <div className="hidden md:flex flex-col pixel-box p-4 font-pixel-code space-y-3 overflow-hidden">
           <div className="flex items-center justify-between border-b border-zinc-800 pb-2">
-            <div className="flex items-center gap-2">
-              <MessageSquare className="w-4 h-4 text-white stroke-[2.5]" />
-              <span className="font-bold text-white text-xs font-bloom-subtle">SIDE CHATS</span>
-            </div>
-            <button onClick={clearChat} className="text-zinc-400 hover:text-white" title="New Chat">
-              <Plus className="w-4 h-4 stroke-[2.5]" />
-            </button>
+            <span className="text-xs font-bold text-white font-bloom-subtle">SIDE CHATS</span>
+            <span className="text-[10px] text-zinc-400 font-bold">{sessions.length} SESSIONS</span>
           </div>
 
           <div className="flex-1 overflow-y-auto space-y-2 pr-1">
             {sessions.map((s) => (
-              <button
+              <div
                 key={s.id}
                 onClick={() => selectSession(s.id)}
                 className={cn(
-                  'w-full text-left p-2.5 border transition-all text-xs font-pixel-code flex items-start gap-2 group',
-                  s.id === activeSessionId
-                    ? 'bg-zinc-900 border-white text-white shadow-[2px_2px_0px_0px_#ffffff]'
-                    : 'bg-black border-zinc-800 text-zinc-400 hover:border-zinc-500 hover:text-white'
+                  'p-3 border-2 cursor-pointer transition-all',
+                  s.active
+                    ? 'border-white bg-zinc-900 shadow-[2px_2px_0px_0px_#ffffff]'
+                    : 'border-zinc-800 bg-black hover:border-zinc-500'
                 )}
               >
-                <MessageSquare className="w-3.5 h-3.5 stroke-[2] text-white flex-shrink-0 mt-0.5" />
-                <div className="flex-1 min-w-0">
-                  <p className="font-bold truncate text-[11px] uppercase leading-tight">{s.title}</p>
-                  <p className="text-[9px] text-zinc-500 mt-1 uppercase">{s.date}</p>
+                <div className="flex items-center justify-between mb-1">
+                  <p className="text-xs font-bold text-white truncate max-w-[140px] uppercase">{s.title}</p>
+                  <span className="text-[9px] text-zinc-500">{s.date}</span>
                 </div>
-                {s.id === activeSessionId && <ChevronRight className="w-3.5 h-3.5 text-white flex-shrink-0" />}
-              </button>
+                <p className="text-[10px] text-zinc-400 truncate">
+                  {SESSION_MESSAGES_STORE[s.id]?.slice(-1)[0]?.content || 'Click to view conversation...'}
+                </p>
+              </div>
             ))}
           </div>
         </div>
 
-        {/* Right Active Chat Main View */}
-        <div className="flex-1 flex flex-col min-w-0 min-h-0 bg-[#000000]">
-          {/* Chat Messages Stream */}
-          <div className="flex-1 overflow-y-auto space-y-4 min-h-0 pr-1 flex flex-col">
+        {/* Chat Area */}
+        <div className="md:col-span-3 flex flex-col pixel-box p-4 font-pixel-code overflow-hidden relative">
+          {/* Scrollable Messages Area */}
+          <div className="flex-1 overflow-y-auto space-y-4 pr-2">
             {messages.length === 0 && (
-              <div className="flex-1 flex flex-col items-center justify-center p-8 text-center font-pixel-code space-y-3 my-auto">
-                <div className="w-10 h-10 border-2 border-white bg-black flex items-center justify-center">
-                  <Bot className="w-5 h-5 text-white stroke-[2.5]" />
-                </div>
-                <div className="space-y-1">
-                  <h3 className="font-pixel-head font-bold text-white text-xs font-bloom">NEW CHAT SESSION STARTED</h3>
-                  <p className="text-zinc-400 text-xs uppercase max-w-md">ASK A QUESTION OR CHOOSE FROM THE SUGGESTED QUESTIONS BELOW TO BEGIN.</p>
-                </div>
+              <div className="p-8 text-center space-y-3 my-auto">
+                <Bot className="w-12 h-12 text-white stroke-[1.5] mx-auto" />
+                <h3 className="text-sm font-pixel-head font-bold text-white uppercase font-bloom">KMRL INTELLIBOT IS READY</h3>
+                <p className="text-xs text-zinc-400 max-w-md mx-auto">
+                  SELECT ANY SUGGESTED QUESTION BUBBLE BELOW OR TYPE A CUSTOM INQUIRY TO RETRIEVE VERIFIED KMRL DOCUMENT CITATIONS.
+                </p>
               </div>
             )}
 
             {messages.map((msg) => (
-              <div key={msg.id} className={cn('flex gap-3', msg.role === 'user' ? 'justify-end' : 'justify-start')}>
+              <div
+                key={msg.id}
+                className={cn('flex items-start gap-3', msg.role === 'user' ? 'justify-end' : 'justify-start')}
+              >
                 {msg.role === 'assistant' && (
-                  <div className="w-8 h-8 border-2 border-white bg-white text-black flex items-center justify-center flex-shrink-0 font-bold">
-                    <Bot className="w-4 h-4 stroke-[2.5]" />
+                  <div className="w-8 h-8 border-2 border-white bg-black text-white flex items-center justify-center flex-shrink-0 font-bold">
+                    <Bot className="w-4 h-4 text-white stroke-[2.5]" />
                   </div>
                 )}
 
-                <div className={cn('max-w-[80%] space-y-2', msg.role === 'user' ? 'flex flex-col items-end' : '')}>
+                <div className={cn('max-w-[85%] space-y-2', msg.role === 'user' ? 'flex flex-col items-end' : '')}>
                   <div className={cn(
                     'p-4 text-xs leading-relaxed pixel-box font-pixel-code',
                     msg.role === 'assistant'
@@ -456,7 +464,7 @@ export default function AIAssistantPage() {
                   )}>
                     <p dangerouslySetInnerHTML={{ __html: renderContent(msg.content) }} />
 
-                    {/* Interactive Quick Questions underneath "Hello sir, how can we help you?" */}
+                    {/* Quick Question Buttons */}
                     {msg.showQuickQuestions && (
                       <div className="mt-3 pt-3 border-t border-zinc-800 space-y-2">
                         <p className="text-[10px] text-zinc-400 font-bold uppercase tracking-wider">SELECT A QUESTION BELOW:</p>
@@ -465,7 +473,8 @@ export default function AIAssistantPage() {
                             <button
                               key={q}
                               onClick={() => sendMessage(q)}
-                              className="text-left text-[11px] px-2.5 py-1.5 bg-zinc-900 border border-zinc-700 text-zinc-200 hover:text-white hover:border-white transition-all uppercase font-bold flex items-center justify-between group"
+                              disabled={loading}
+                              className="text-left text-[11px] px-2.5 py-1.5 bg-zinc-900 border border-zinc-700 text-zinc-200 hover:text-white hover:border-white transition-all uppercase font-bold flex items-center justify-between group disabled:opacity-50"
                             >
                               <span>{q}</span>
                               <ChevronRight className="w-3 h-3 text-zinc-500 group-hover:text-white flex-shrink-0" />
@@ -478,11 +487,11 @@ export default function AIAssistantPage() {
 
                   {msg.citations && msg.citations.length > 0 && (
                     <div className="space-y-1 font-pixel-code w-full">
-                      <p className="text-xs text-zinc-400 flex items-center gap-1 uppercase font-bold">
-                        <FileText className="w-3 h-3 stroke-[2]" /> SOURCES
+                      <p className="text-[10px] text-zinc-400 flex items-center gap-1 uppercase font-bold">
+                        <FileText className="w-3 h-3 stroke-[2]" /> SOURCES & CITATIONS
                       </p>
                       {msg.citations.map((c, i) => (
-                        <div key={i} className="flex items-center gap-2 px-3 py-1.5 bg-black border border-zinc-700 hover:border-white transition-colors cursor-pointer text-xs font-bold text-white uppercase">
+                        <div key={i} className="flex items-center gap-2 px-3 py-1 bg-black border border-zinc-700 hover:border-white transition-colors cursor-pointer text-[11px] font-bold text-white uppercase">
                           <FileText className="w-3.5 h-3.5 text-white flex-shrink-0" />
                           <span className="truncate">{c.title}</span>
                         </div>
@@ -500,29 +509,39 @@ export default function AIAssistantPage() {
               </div>
             ))}
 
+            {loading && (
+              <div className="flex items-center gap-2 text-zinc-400 text-xs font-bold uppercase p-2">
+                <RefreshCw className="w-4 h-4 animate-spin text-white" />
+                <span>INTELLIBOT IS ANALYZING DOCUMENT VECTOR INDEX...</span>
+              </div>
+            )}
+
             <div ref={bottomRef} />
           </div>
 
-          {/* Suggestions at bottom if conversation is brand new */}
-          {messages.length === 0 && (
-            <div className="flex-shrink-0 py-3 font-pixel-code">
-              <p className="text-xs text-zinc-400 mb-2 uppercase font-bold">SUGGESTED QUESTIONS:</p>
-              <div className="flex flex-wrap gap-2">
-                {SUGGESTED_QUESTIONS.map((q) => (
-                  <button
-                    key={q}
-                    onClick={() => sendMessage(q)}
-                    className="text-xs px-3 py-1.5 bg-black border border-zinc-700 text-zinc-300 hover:text-white hover:border-white transition-all uppercase font-bold"
-                  >
-                    {q}
-                  </button>
-                ))}
-              </div>
+          {/* ALWAYS VISIBLE SUGGESTION BUBBLES BAR ABOVE INPUT BOX */}
+          <div className="flex-shrink-0 py-2.5 border-t border-zinc-800 font-pixel-code">
+            <div className="flex items-center justify-between mb-1.5">
+              <span className="text-[10px] text-zinc-400 uppercase font-bold flex items-center gap-1">
+                <Sparkles className="w-3 h-3 text-[#6ee7b7]" /> QUICK QUESTION BUBBLES (CLICK ANY QUESTION AT ANY TIME):
+              </span>
             </div>
-          )}
+            <div className="flex items-center gap-2 overflow-x-auto pb-1 no-scrollbar scroll-smooth">
+              {SUGGESTED_QUESTIONS.map((q) => (
+                <button
+                  key={q}
+                  onClick={() => sendMessage(q)}
+                  disabled={loading}
+                  className="text-[10px] px-2.5 py-1 bg-black border border-zinc-700 text-zinc-300 hover:text-white hover:border-white transition-all uppercase font-bold whitespace-nowrap flex-shrink-0 disabled:opacity-50"
+                >
+                  {q}
+                </button>
+              ))}
+            </div>
+          </div>
 
           {/* Input Box */}
-          <div className="flex-shrink-0 pt-3">
+          <div className="flex-shrink-0">
             <div className="flex items-end gap-3 bg-black border-2 border-zinc-700 p-3 focus-within:border-white transition-colors shadow-[3px_3px_0px_0px_#18181b]">
               <textarea
                 value={input}
@@ -537,7 +556,7 @@ export default function AIAssistantPage() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => sendMessage(input)}
-                disabled={!input.trim()}
+                disabled={!input.trim() || loading}
                 className="pixel-btn-white p-2.5 flex items-center justify-center disabled:opacity-50 flex-shrink-0"
               >
                 <Send className="w-4 h-4 text-black stroke-[3]" />

@@ -55,7 +55,7 @@ export function Sidebar({ collapsed, onToggle }: SidebarProps) {
         {!collapsed && (
           <div className="overflow-hidden">
             <p className="text-sm font-bold text-white font-bloom tracking-wider group-hover:text-[#6ee7b7] transition-colors">INTELLIDOCS</p>
-            <p className="text-[10px] font-pixel-code text-[#a1a1aa] uppercase tracking-widest mt-0.5">KMRL METRO PIXEL v2</p>
+            <p className="text-[10px] font-pixel-code text-[#a1a1aa] uppercase tracking-widest mt-0.5">KMRL METRO INTELLIDOCS</p>
           </div>
         )}
       </NavLink>
