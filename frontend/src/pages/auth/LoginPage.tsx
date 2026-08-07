@@ -255,6 +255,7 @@ export default function LoginPage() {
                 </span>
               </motion.button>
             ))}
+          </div>
           {/* Sign Up Link */}
           <div className="mt-6 pt-4 border-t-2 border-zinc-800 text-center font-pixel-code">
             <p className="text-xs text-zinc-400 uppercase">NEED AN ACCOUNT?</p>
